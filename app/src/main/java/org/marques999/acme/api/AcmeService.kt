@@ -1,67 +1,73 @@
 package org.marques999.acme.api
 
 import com.squareup.moshi.Types
-
 import io.reactivex.Observable
-
 import org.marques999.acme.model.*
 
-class AcmeService(private val apiService: AcmeApi, private val crypto: CryptographyProvider) {
+class AcmeService(
+    private val apiService: AcmeApi,
+    private val username: String,
+    private val crypto: CryptographyService
+) {
 
-    fun insertCustoemr(
-        name: String,
-        username: String,
-        email: String,
-        address: String,
-        password: String,
-        nif: String,
-        country: String,
-        credit_card: CreditCard
-    ): Observable<Customer> = apiService.insertCustoemr(
-        CustomerPOST(name, email, username, password, address, nif, country, credit_card)
-    )
-
-    fun getCustomer(customerId: String): Observable<Customer> {
-        return apiService.getCustomer(customerId)
+    /**
+     */
+    fun getCustomer(): Observable<Customer> {
+        return apiService.getCustomer(username)
     }
 
-    fun updateCustomer(customerId: String, customer: CustomerPOST): Observable<Customer> {
-        return apiService.updateCustomer(customerId, customer)
+    /**
+     */
+    fun deleteCustomer(): Observable<Any> {
+        return apiService.deleteCustomer(username)
     }
 
+    /**
+     */
+    fun updateCustomer(customer: CustomerPOST): Observable<Customer> {
+        return apiService.updateCustomer(username, customer)
+    }
+
+    /**
+     */
     fun getProducts(): Observable<List<Product>> {
         return apiService.getProducts()
     }
 
-    fun getProduct(productId: String): Observable<Product> {
-        return apiService.getProduct(productId)
+    /**
+     */
+    fun getProduct(barcode: String): Observable<Product> {
+        return apiService.getProduct(barcode)
     }
 
-    fun getOrders(): Observable<List<Transaction>> {
+    /**
+     */
+    fun getOrders(): Observable<List<OrderJSON>> {
         return apiService.getOrders()
     }
 
-    fun getOrder(orderId: Int): Observable<Transaction> {
-        return apiService.getOrder(orderId)
+    /**
+     */
+    fun getOrder(token: String): Observable<OrderJSON> {
+        return apiService.getOrder(token)
     }
 
-    private fun productsToJson(products: List<String>): String {
+    /**
+     */
+    fun insertOrder(products: List<OrderProductPOST>): Observable<Order> {
 
-        return AcmeFactory.getMoshi().adapter<List<String>>(
-            Types.newParameterizedType(List::class.java, String::class.java)
+        val jsonPayload = AcmeFactory.getMoshi().adapter<List<OrderProductPOST>>(
+            Types.newParameterizedType(List::class.java, OrderProductPOST::class.java)
         ).toJson(products)
-    }
-
-    fun insertOrder(products: List<String>): Observable<Order> {
-
-        val jsonPayload = productsToJson(products)
 
         return apiService.insertOrder(
-            Order(crypto.base64Encode(jsonPayload), crypto.signPayload(jsonPayload))
+            OrderPOST(products, crypto.signPayload(jsonPayload))
         )
     }
 
-    fun deleteOrder(orderId: Int): Observable<Any> {
-        return apiService.deleteOrder(orderId)
+    /**
+     */
+    fun deleteOrder(token: String): Observable<Any> {
+        return apiService.deleteOrder(token)
     }
 }

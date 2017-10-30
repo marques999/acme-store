@@ -1,8 +1,3 @@
 package org.marques999.acme.model
 
-import java.util.Date
-
-data class Token(
-    val expire: Date,
-    val token: String
-)
+data class Token(val expire: java.util.Date, val token: String)

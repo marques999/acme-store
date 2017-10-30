@@ -4,15 +4,21 @@ import org.marques999.acme.common.ViewType
 
 import java.util.Date
 
-data class Product(
+class Product(
     val id: String,
-    val created: Date,
-    val modified: Date,
+    val created_at: Date,
+    val modified_at: Date,
     val name: String,
     val brand: String,
-    val description: String,
     val price: Double,
-    val barcode: String
+    val barcode: String,
+    var image_uri: String,
+    val description: String
 ) : ViewType {
+
     override fun getViewType(): Int = ViewType.PRODUCTS
+
+    override fun hashCode(): Int {
+        return barcode.hashCode()
+    }
 }

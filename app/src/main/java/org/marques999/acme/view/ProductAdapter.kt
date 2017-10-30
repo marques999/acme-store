@@ -53,12 +53,6 @@ class ProductAdapter(
         notifyItemRangeInserted(0, items.size)
     }
 
-    fun getNews(): List<Product> = items.filter {
-        it.getViewType() == ViewType.PRODUCTS
-    }.map {
-        it as Product
-    }
-
     private fun getLastPosition() = if (items.lastIndex == -1) {
         0
     } else {

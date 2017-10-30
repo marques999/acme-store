@@ -1,12 +1,12 @@
 package org.marques999.acme.model
 
 data class CustomerPOST(
-    val name: String,
-    val email: String,
-    val username: String,
-    val password: String,
-    val address: String,
-    val nif: String,
-    val country: String,
-    val credit_card: CreditCard
+    private val name: String,
+    private val email: String,
+    private val username: String,
+    private val password: String,
+    private val address: String,
+    private val nif: String,
+    private val country: String,
+    private val credit_card: CreditCard
 )

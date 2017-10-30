@@ -1,8 +1,6 @@
 package org.marques999.acme.view
 
-import android.app.AlertDialog
 import android.os.Bundle
-
 import android.support.v7.widget.LinearLayoutManager
 
 import android.view.LayoutInflater
@@ -59,30 +57,19 @@ class ProductFragment : RxBaseFragment(), ProductDelegateAdapter.OnViewSelectedL
         }
 
         initAdapter()
-        requestNews()
+
+        application.acmeApi.getProducts()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .subscribe(refreshProducts, HttpErrorHandler(context))
     }
 
     private val viewProduct = Consumer<Product> {
-        AlertDialog.Builder(context)
-            .setTitle(it.name)
-            .setMessage(it.description)
-            .setPositiveButton(android.R.string.ok, null)
-            .show()
+        application.alerts.showOk(it.name, it.description)
     }
 
     private val refreshProducts = Consumer<List<Product>> {
         (news_list.adapter as ProductAdapter).addNews(it)
-    }
-
-    private fun requestNews() {
-
-        val subscription = application.acmeApi
-            .getProducts()
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .subscribe(refreshProducts, HttpErrorHandler(context))
-
-        subscriptions.add(subscription)
     }
 
     private fun initAdapter() {

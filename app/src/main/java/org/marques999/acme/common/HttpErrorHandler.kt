@@ -21,7 +21,7 @@ class HttpErrorHandler(private val applicationContext: Context) : Consumer<Throw
             AcmeFactory.getMoshi().adapter(Response::class.java).fromJson(errorBody.source())?.let {
 
                 AlertDialog.Builder(applicationContext)
-                    .setTitle(throwable.message)
+                    .setTitle(throwable.javaClass.name)
                     .setMessage(it.error)
                     .setPositiveButton(android.R.string.ok, null)
                     .show()
@@ -29,8 +29,8 @@ class HttpErrorHandler(private val applicationContext: Context) : Consumer<Throw
         } else {
 
             AlertDialog.Builder(applicationContext)
-                .setTitle(throwable.message)
-                .setMessage(throwable.toString())
+                .setTitle(throwable.javaClass.name)
+                .setMessage(throwable.message)
                 .setPositiveButton(android.R.string.ok, null)
                 .show()
         }
