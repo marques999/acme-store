@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/acme-printer.iml" filepath="$PROJECT_DIR$/acme-printer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AcmePRINT.iml" filepath="$PROJECT_DIR$/AcmePRINT.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
