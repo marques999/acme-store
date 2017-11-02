@@ -1,0 +1,4 @@
+<resources>
+  <string name="app_name">Facturas</string>
+  <string name="title_activity_details">Detalhes da compra</string>
+</resources>
