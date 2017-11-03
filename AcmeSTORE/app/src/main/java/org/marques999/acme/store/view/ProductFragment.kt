@@ -1,4 +1,4 @@
-package org.marques999.acme.view
+package org.marques999.acme.store.view
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -13,31 +13,51 @@ import io.reactivex.schedulers.Schedulers
 
 import kotlinx.android.synthetic.main.products_fragment.*
 
-import org.marques999.acme.AcmeStore
-import org.marques999.acme.common.HttpErrorHandler
-import org.marques999.acme.R
-import org.marques999.acme.common.RxBaseFragment
-import org.marques999.acme.common.inflate
-import org.marques999.acme.model.Product
+import org.marques999.acme.store.AcmeStore
+import org.marques999.acme.store.common.AcmeDialogs
+import org.marques999.acme.store.common.HttpErrorHandler
+import org.marques999.acme.store.R
+
+import org.marques999.acme.store.common.inflate
+import org.marques999.acme.store.model.Product
 
 class ProductFragment : RxBaseFragment(), ProductDelegateAdapter.OnViewSelectedListener {
 
-    override fun onItemSelected(barcode: String) {
-
-        application.acmeApi
-            .getProduct(barcode)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .subscribe(viewProduct, HttpErrorHandler(context))
-    }
-
+    /**
+     */
     private lateinit var application: AcmeStore
 
+    /**
+     */
+    private val onView = Consumer<Product> {
+        AcmeDialogs.showOk(context, it.name, it.description)
+    }
+
+    /**
+     */
+    private val onRefresh = Consumer<List<Product>> {
+        (news_list.adapter as ProductAdapter).addNews(it)
+    }
+
+    /**
+     */
+    override fun onItemSelected(barcode: String) {
+
+        application.acmeApi.getProduct(barcode)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .subscribe(onView, HttpErrorHandler(context))
+    }
+
+    /**
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         application = activity.application as AcmeStore
     }
 
+    /**
+     */
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,6 +66,8 @@ class ProductFragment : RxBaseFragment(), ProductDelegateAdapter.OnViewSelectedL
         return container?.inflate(R.layout.products_fragment)
     }
 
+    /**
+     */
     override fun onActivityCreated(savedInstanceState: Bundle?) {
 
         super.onActivityCreated(savedInstanceState)
@@ -56,26 +78,13 @@ class ProductFragment : RxBaseFragment(), ProductDelegateAdapter.OnViewSelectedL
             clearOnScrollListeners()
         }
 
-        initAdapter()
+        if (news_list.adapter == null) {
+            news_list.adapter = ProductAdapter(this)
+        }
 
         application.acmeApi.getProducts()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
-            .subscribe(refreshProducts, HttpErrorHandler(context))
-    }
-
-    private val viewProduct = Consumer<Product> {
-        application.alerts.showOk(it.name, it.description)
-    }
-
-    private val refreshProducts = Consumer<List<Product>> {
-        (news_list.adapter as ProductAdapter).addNews(it)
-    }
-
-    private fun initAdapter() {
-
-        if (news_list.adapter == null) {
-            news_list.adapter = ProductAdapter(this)
-        }
+            .subscribe(onRefresh, HttpErrorHandler(context))
     }
 }

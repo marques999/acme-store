@@ -1,8 +1,8 @@
-package org.marques999.acme.model
+package org.marques999.acme.store.model
 
 import java.util.Date
 
-data class OrderJSON(
+class OrderJSON(
     val token: String,
     val count: Int,
     val total: Double,

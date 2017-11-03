@@ -1,4 +1,4 @@
-package org.marques999.acme.common
+package org.marques999.acme.store.view
 
 interface ViewType {
 

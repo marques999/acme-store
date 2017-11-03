@@ -1,4 +1,4 @@
-package org.marques999.acme.model
+package org.marques999.acme.store.model
 
 class CustomerCart {
 

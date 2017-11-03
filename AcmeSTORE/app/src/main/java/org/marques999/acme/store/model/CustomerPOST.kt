@@ -1,6 +1,6 @@
-package org.marques999.acme.model
+package org.marques999.acme.store.model
 
-data class CustomerPOST(
+class CustomerPOST(
     private val name: String,
     private val email: String,
     private val username: String,

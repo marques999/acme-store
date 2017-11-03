@@ -1,6 +1,7 @@
-package org.marques999.acme.common
+package org.marques999.acme.store.view
 
 import android.support.v7.widget.RecyclerView
+
 import android.view.ViewGroup
 
 interface ViewTypeAdapter {

@@ -1,11 +1,12 @@
-package org.marques999.acme.common
+package org.marques999.acme.store.view
 
 import android.app.Fragment
+
 import io.reactivex.disposables.CompositeDisposable
 
 open class RxBaseFragment : Fragment() {
 
-    protected var subscriptions = CompositeDisposable()
+    private var subscriptions = CompositeDisposable()
 
     override fun onResume() {
         super.onResume()

@@ -1,8 +1,6 @@
-package org.marques999.acme.model
+package org.marques999.acme.store.model
 
-import java.util.Date
-
-data class Customer(
+class Customer(
     private val name: String,
     private val username: String,
     private val address1: String,
@@ -10,6 +8,6 @@ data class Customer(
     private val country: String,
     private val tax_number: String,
     private val credit_card: CreditCard,
-    private val created_at: Date,
-    private val modified_at: Date
+    private val created_at: java.util.Date,
+    private val modified_at: java.util.Date
 )

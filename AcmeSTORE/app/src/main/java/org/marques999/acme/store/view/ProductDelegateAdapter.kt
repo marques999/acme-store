@@ -1,14 +1,12 @@
-package org.marques999.acme.view
+package org.marques999.acme.store.view
 
 import android.support.v7.widget.RecyclerView
 
 import android.view.ViewGroup
 
-import org.marques999.acme.R
-import org.marques999.acme.common.ViewType
-import org.marques999.acme.common.ViewTypeAdapter
-import org.marques999.acme.common.inflate
-import org.marques999.acme.model.Product
+import org.marques999.acme.store.common.inflate
+import org.marques999.acme.store.model.Product
+import org.marques999.acme.store.R
 
 import kotlinx.android.synthetic.main.item_product.view.*
 
