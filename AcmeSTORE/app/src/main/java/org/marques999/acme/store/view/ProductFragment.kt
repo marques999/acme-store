@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
+import org.marques999.acme.store.model.Product
+
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
@@ -19,8 +21,6 @@ import kotlinx.android.synthetic.main.products_fragment.*
 
 import org.marques999.acme.store.common.AcmeDialogs
 import org.marques999.acme.store.common.HttpErrorHandler
-
-import org.marques999.acme.store.model.Product
 
 class ProductFragment : Fragment(), ProductDelegateAdapter.OnViewSelectedListener {
 

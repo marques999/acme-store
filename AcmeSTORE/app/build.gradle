@@ -8,14 +8,14 @@ android {
     buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId 'org.marques999.acme.store'
-        minSdkVersion 22
+        minSdkVersion 23
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
