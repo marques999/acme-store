@@ -2,10 +2,10 @@ package org.marques999.acme.store.view
 
 import android.view.ViewGroup
 
-import android.support.v7.widget.RecyclerView
-
-import org.marques999.acme.store.orders.Product
 import org.marques999.acme.store.R
+import org.marques999.acme.store.orders.Product
+
+import android.support.v7.widget.RecyclerView
 
 import kotlinx.android.synthetic.main.item_product.view.*
 
