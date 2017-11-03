@@ -1,7 +1,7 @@
-package org.marques999.acme.api
+package org.marques999.acme.store.api
 
 import io.reactivex.Observable
-import org.marques999.acme.model.*
+import org.marques999.acme.store.model.*
 import retrofit2.http.*
 
 interface AcmeApi {

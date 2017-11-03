@@ -1,4 +1,4 @@
-package org.marques999.acme.common
+package org.marques999.acme.store.common
 
 import android.view.LayoutInflater
 import android.view.View

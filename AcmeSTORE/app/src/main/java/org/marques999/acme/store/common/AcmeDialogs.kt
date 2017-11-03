@@ -1,12 +1,15 @@
-package org.marques999.acme.common
+package org.marques999.acme.store.common
 
 import android.app.AlertDialog
 import android.content.Context
 
-class AcmeAlerts(private val context: Context) {
+object AcmeDialogs {
 
-    fun showOk(title: String, message: String) = AlertDialog.Builder(context)
+    fun showOk(
+        context: Context,
+        title: String, message: String
+    ): AlertDialog = AlertDialog.Builder(context)
         .setTitle(title)
         .setMessage(message)
-        .setPositiveButton(android.R.string.ok, null).show()!!
+        .setPositiveButton(android.R.string.ok, null).show()
 }
