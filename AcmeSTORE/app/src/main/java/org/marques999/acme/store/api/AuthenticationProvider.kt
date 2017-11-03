@@ -21,9 +21,9 @@ class AuthenticationProvider {
 
     /**
      */
-    private val serializer = Moshi.Builder().add(
+    private val serializer: Moshi = Moshi.Builder().add(
         Date::class.java, Rfc3339DateJsonAdapter().nullSafe()
-    ).build()!!
+    ).build()
 
     /**
      */
@@ -32,7 +32,7 @@ class AuthenticationProvider {
     ).addConverterFactory(
         MoshiConverterFactory.create(serializer)
     ).baseUrl(
-        "http://10.0.2.2:3333/"
+        "http://192.168.1.87:3333/"
     ).build().create(AuthenticationApi::class.java)
 
     /**
@@ -63,7 +63,5 @@ class AuthenticationProvider {
 
     /**
      */
-    fun login(username: String, password: String) = api.login(
-        Authentication(username, password)
-    )
+    fun login(authentication: Authentication) = api.login(authentication)
 }

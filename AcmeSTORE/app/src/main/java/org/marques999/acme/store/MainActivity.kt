@@ -3,8 +3,8 @@ package org.marques999.acme.store
 import android.os.Bundle
 
 import org.marques999.acme.store.common.AcmeDialogs
+import org.marques999.acme.store.common.Authentication
 import org.marques999.acme.store.common.HttpErrorHandler
-import org.marques999.acme.store.customers.Session
 
 import android.app.Fragment
 
@@ -12,6 +12,9 @@ import org.marques999.acme.store.api.AcmeProvider
 import org.marques999.acme.store.api.AuthenticationProvider
 
 import android.support.v7.app.AppCompatActivity
+
+import org.marques999.acme.store.customers.Session
+import org.marques999.acme.store.customers.Jwt
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
@@ -31,24 +34,24 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         application = getApplication() as AcmeStore
-        authenticateCustomer("admin", "admin")
+        authenticateCustomer(application.loadCustomer())
     }
 
     /**
      */
-    private fun onLogin(username: String) = Consumer<Session> {
-        AcmeDialogs.showOk(this, "Authorized", it.token)
-        application.acmeApi = AcmeProvider(it, application.cryptoApi)
+    private fun onLogin(username: String) = Consumer<Jwt> {
+        application.acmeApi = AcmeProvider(Session(it, username), application.cryptoApi)
+        AcmeDialogs.showOk(this, "Authorized", it.expire.toString())
         changeFragment(ProductFragment())
     }
 
     /**
      */
-    private fun authenticateCustomer(username: String, password: String) = AuthenticationProvider()
-        .login(username, password)
+    private fun authenticateCustomer(authentication: Authentication) = AuthenticationProvider()
+        .login(authentication)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.io())
-        .subscribe(onLogin(username), HttpErrorHandler(this))
+        .subscribe(onLogin(authentication.username), HttpErrorHandler(this))
 
     /**
      */

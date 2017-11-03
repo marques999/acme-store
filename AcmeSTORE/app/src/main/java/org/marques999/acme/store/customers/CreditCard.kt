@@ -1,7 +1,7 @@
 package org.marques999.acme.store.customers
 
 class CreditCard(
-    private val type: String,
-    private val number: String,
-    private val validity: java.util.Date
+    val type: String,
+    val number: String,
+    val validity: java.util.Date
 )

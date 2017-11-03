@@ -4,9 +4,12 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.Rfc3339DateJsonAdapter
 import com.squareup.moshi.Types
 
+import org.marques999.acme.store.AcmeStore
+
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 
+import org.marques999.acme.store.customers.CustomerPOST
 import org.marques999.acme.store.customers.Session
 
 import retrofit2.Retrofit
@@ -15,7 +18,6 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 import java.util.Date
 
-import org.marques999.acme.store.customers.CustomerPOST
 import org.marques999.acme.store.orders.OrderPOST
 import org.marques999.acme.store.orders.OrderProductPOST
 
@@ -26,7 +28,7 @@ class AcmeProvider(private val session: Session, private val crypto: Cryptograph
     private val interceptor = Interceptor {
         it.proceed(
             it.request().newBuilder().addHeader(
-                "Authorization", "Bearer " + session.token
+                "Authorization", session.wrapToken()
             ).build()
         )
     }
@@ -46,7 +48,7 @@ class AcmeProvider(private val session: Session, private val crypto: Cryptograph
     ).addConverterFactory(
         MoshiConverterFactory.create(serializer)
     ).baseUrl(
-        "http:/192.168.1.93:3333/"
+        AcmeStore.SERVER_BASEURL
     ).build().create(AcmeApi::class.java)
 
     /**

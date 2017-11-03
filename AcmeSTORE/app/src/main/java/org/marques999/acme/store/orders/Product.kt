@@ -2,7 +2,7 @@ package org.marques999.acme.store.orders
 
 import org.marques999.acme.store.view.ViewType
 
-class Product(
+class Product private constructor(
     val id: String,
     val created_at: java.util.Date,
     val modified_at: java.util.Date,

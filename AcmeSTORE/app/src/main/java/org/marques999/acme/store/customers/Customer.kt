@@ -1,6 +1,6 @@
 package org.marques999.acme.store.customers
 
-class Customer(
+class Customer private constructor(
     val name: String,
     val username: String,
     val address1: String,
@@ -9,5 +9,5 @@ class Customer(
     val tax_number: String,
     val credit_card: CreditCard,
     val created_at: java.util.Date,
-    val modified_at: java.util.Date
+    val updated_at: java.util.Date
 )
