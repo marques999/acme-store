@@ -3,9 +3,9 @@ package org.marques999.acme.store.view
 import android.support.v4.util.SparseArrayCompat
 import android.support.v7.widget.RecyclerView
 
-import android.view.ViewGroup
-
 import org.marques999.acme.store.model.Product
+
+import android.view.ViewGroup
 
 class ProductAdapter(
     listener: ProductDelegateAdapter.OnViewSelectedListener
@@ -35,7 +35,7 @@ class ProductAdapter(
 
     override fun getItemViewType(position: Int) = items[position].getViewType()
 
-    fun addNews(news: List<Product>) {
+    fun addProducts(news: List<Product>) {
         val initPosition = items.size - 1
         items.removeAt(initPosition)
         notifyItemRemoved(initPosition)
@@ -43,7 +43,7 @@ class ProductAdapter(
         notifyItemRangeChanged(initPosition, items.size)
     }
 
-    fun clearAndAddNews(news: List<Product>) {
+    fun clearAndAddProducts(news: List<Product>) {
         items.clear()
         notifyItemRangeRemoved(0, getLastPosition())
         items.addAll(news)

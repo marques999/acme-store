@@ -1,7 +1,5 @@
 package org.marques999.acme.store.model
 
-import java.util.Date
-
 class OrderJSON(
     val token: String,
     val count: Int,
@@ -9,6 +7,6 @@ class OrderJSON(
     val status: Int,
     val customer: String,
     val products: List<OrderProduct>,
-    val created_at: Date,
-    val updated_at: Date
+    val created_at: java.util.Date,
+    val updated_at: java.util.Date
 )

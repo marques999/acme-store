@@ -1,5 +1,6 @@
 package org.marques999.acme.store.view
 
+import android.app.Fragment
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 
@@ -11,17 +12,17 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 
+import org.marques999.acme.store.R
+import org.marques999.acme.store.AcmeStore
+
 import kotlinx.android.synthetic.main.products_fragment.*
 
-import org.marques999.acme.store.AcmeStore
 import org.marques999.acme.store.common.AcmeDialogs
 import org.marques999.acme.store.common.HttpErrorHandler
-import org.marques999.acme.store.R
 
-import org.marques999.acme.store.common.inflate
 import org.marques999.acme.store.model.Product
 
-class ProductFragment : RxBaseFragment(), ProductDelegateAdapter.OnViewSelectedListener {
+class ProductFragment : Fragment(), ProductDelegateAdapter.OnViewSelectedListener {
 
     /**
      */
@@ -36,7 +37,7 @@ class ProductFragment : RxBaseFragment(), ProductDelegateAdapter.OnViewSelectedL
     /**
      */
     private val onRefresh = Consumer<List<Product>> {
-        (news_list.adapter as ProductAdapter).addNews(it)
+        (news_list.adapter as ProductAdapter).addProducts(it)
     }
 
     /**
@@ -62,9 +63,9 @@ class ProductFragment : RxBaseFragment(), ProductDelegateAdapter.OnViewSelectedL
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return container?.inflate(R.layout.products_fragment)
-    }
+    ): View = LayoutInflater.from(
+        context
+    ).inflate(R.layout.products_fragment, container, false)
 
     /**
      */

@@ -1,16 +1,17 @@
 package org.marques999.acme.store.common
 
-import android.app.AlertDialog
+import java.util.Date
+
 import android.content.Context
+
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Rfc3339DateJsonAdapter
 
 import io.reactivex.functions.Consumer
 
 import retrofit2.HttpException
-import java.util.*
 
-class HttpErrorHandler(private val applicationContext: Context) : Consumer<Throwable> {
+class HttpErrorHandler(private val context: Context) : Consumer<Throwable> {
 
     private val serializer = Moshi.Builder().add(
         Date::class.java, Rfc3339DateJsonAdapter().nullSafe()
@@ -19,24 +20,11 @@ class HttpErrorHandler(private val applicationContext: Context) : Consumer<Throw
     override fun accept(throwable: Throwable) {
 
         if (throwable is HttpException) {
-
-            val errorBody = throwable.response()?.errorBody() ?: return
-
-            serializer.adapter(Response::class.java).fromJson(errorBody.source())?.let {
-
-                AlertDialog.Builder(applicationContext)
-                    .setTitle(throwable.javaClass.name)
-                    .setMessage(it.error)
-                    .setPositiveButton(android.R.string.ok, null)
-                    .show()
+            serializer.adapter(Response::class.java).fromJson((throwable.response().errorBody()!!).source())?.let {
+                AcmeDialogs.showOk(context, throwable.javaClass.name, it.error!!)
             }
         } else {
-
-            AlertDialog.Builder(applicationContext)
-                .setTitle(throwable.javaClass.name)
-                .setMessage(throwable.message)
-                .setPositiveButton(android.R.string.ok, null)
-                .show()
+            AcmeDialogs.showOk(context, throwable.javaClass.name, throwable.localizedMessage)
         }
     }
 }

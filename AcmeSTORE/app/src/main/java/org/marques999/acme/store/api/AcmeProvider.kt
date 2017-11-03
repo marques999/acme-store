@@ -8,24 +8,25 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 
 import org.marques999.acme.store.common.Session
-import org.marques999.acme.store.model.*
-
-import java.util.Date
 
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
+
+import java.util.Date
+
+import org.marques999.acme.store.model.CustomerPOST
+import org.marques999.acme.store.model.OrderPOST
+import org.marques999.acme.store.model.OrderProductPOST
 
 class AcmeProvider(private val session: Session, private val crypto: CryptographyProvider) {
 
     /**
      */
     private val interceptor = Interceptor {
-
-        return@Interceptor it.proceed(
+        it.proceed(
             it.request().newBuilder().addHeader(
-                "Authorization",
-                "Bearer " + session.token
+                "Authorization", "Bearer " + session.token
             ).build()
         )
     }
@@ -59,9 +60,12 @@ class AcmeProvider(private val session: Session, private val crypto: Cryptograph
     fun getOrders() = api.getOrders()
     fun getProducts() = api.getProducts()
     fun getOrder(token: String) = api.getOrder(token)
-    fun deleteOrder(token: String) = api.deleteOrder(token)
-    fun getProduct(barcode: String) = api.getProduct(barcode)
     fun getCustomer() = api.getCustomer(session.username)
+    fun getProduct(barcode: String) = api.getProduct(barcode)
+
+    /**
+     */
+    fun deleteOrder(token: String) = api.deleteOrder(token)
     fun deleteCustomer() = api.deleteCustomer(session.username)
 
     /**

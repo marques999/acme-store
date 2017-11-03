@@ -7,7 +7,8 @@ object AcmeDialogs {
 
     fun showOk(
         context: Context,
-        title: String, message: String
+        title: String,
+        message: String
     ): AlertDialog = AlertDialog.Builder(context)
         .setTitle(title)
         .setMessage(message)

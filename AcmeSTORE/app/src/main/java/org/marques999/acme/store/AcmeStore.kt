@@ -10,11 +10,11 @@ import java.security.PublicKey
 import android.content.Context
 import android.content.SharedPreferences
 
-import android.util.Base64
-
 import org.marques999.acme.store.common.Authentication
 import org.marques999.acme.store.api.AcmeProvider
 import org.marques999.acme.store.api.CryptographyProvider
+
+import android.util.Base64
 
 class AcmeStore : Application() {
 
@@ -26,9 +26,20 @@ class AcmeStore : Application() {
 
     /**
      */
+    private val defaultKey = """$BEGIN_PRIVATE
+MIIBAgIBADANBgkqhkiG9w0BAQEFAASB7TCB6gIBAAIvAL1L9h1N9xqNe0I4ddyjKD6lv0ArcEhB
+JbU550urvmvJqa1Rm8Zr+V0+VCp9swcCAwEAAQIuQMQ3rekaDaywqoSU1uu//kdJe1Qhc6a2yGVi
+IGzGWDohXDFi/BBaon6D5fJL6QIYAPlTZgR1+jRKpQ9SD687Y4+J+hzwtE+DAhgAwl0wx2zRyIuc
+cFySxq3/scDNwAF3Ey0CFybw+7IeqyGXtwgZjRGVeQtmRYZXohH5AhgAg3MJQWaMPqiFJczGC460
+BmCSBlA3WwUCGADa450Hyr7r45CqM8xJkERvv3ZuJonBVQ==
+$END_PRIVATE"""
+
+    /**
+     */
     override fun onCreate() {
         super.onCreate()
-        preferences = getSharedPreferences(getString(R.string.preferences), Context.MODE_PRIVATE)
+        preferences = getSharedPreferences(KEY_PREFERENCES, Context.MODE_PRIVATE)
+        cryptoApi = CryptographyProvider(preferences.getString(KEY_PRIVATE, defaultKey))
     }
 
     /**
@@ -44,17 +55,10 @@ class AcmeStore : Application() {
 
     /**
      */
-    fun loadCustomer(): Authentication {
-
-        cryptoApi = CryptographyProvider(
-            preferences.getString(KEY_PRIVATE, R.string.default_private)
-        )
-
-        return Authentication(
-            preferences.getString(KEY_USERNAME, R.string.default_username),
-            preferences.getString(KEY_PASSWORD, R.string.default_password)
-        )
-    }
+    fun loadCustomer() = Authentication(
+        preferences.getString(KEY_USERNAME, "marques999"),
+        preferences.getString(KEY_PASSWORD, "r0wsauce")
+    )
 
     /**
      */
@@ -65,6 +69,8 @@ class AcmeStore : Application() {
     /**
      */
     companion object {
+
+        private val KEY_PREFERENCES = "acmestore"
         private val KEY_PRIVATE = "private"
         private val KEY_USERNAME = "username"
         private val KEY_PASSWORD = "password"
