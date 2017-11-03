@@ -1,4 +1,4 @@
-package org.marques999.acme.store.model
+package org.marques999.acme.store.customers
 
 class CreditCard(
     private val type: String,

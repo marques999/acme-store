@@ -4,8 +4,7 @@ import android.os.Bundle
 
 import org.marques999.acme.store.common.AcmeDialogs
 import org.marques999.acme.store.common.HttpErrorHandler
-import org.marques999.acme.store.common.Session
-import org.marques999.acme.store.common.Token
+import org.marques999.acme.store.customers.Session
 
 import android.app.Fragment
 
@@ -37,9 +36,9 @@ class MainActivity : AppCompatActivity() {
 
     /**
      */
-    private fun onLogin(username: String) = Consumer<Token> {
+    private fun onLogin(username: String) = Consumer<Session> {
         AcmeDialogs.showOk(this, "Authorized", it.token)
-        application.acmeApi = AcmeProvider(Session(username, it.token), application.cryptoApi)
+        application.acmeApi = AcmeProvider(it, application.cryptoApi)
         changeFragment(ProductFragment())
     }
 

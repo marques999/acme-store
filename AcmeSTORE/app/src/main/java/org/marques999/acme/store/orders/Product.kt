@@ -1,4 +1,4 @@
-package org.marques999.acme.store.model
+package org.marques999.acme.store.orders
 
 import org.marques999.acme.store.view.ViewType
 

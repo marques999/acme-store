@@ -3,7 +3,7 @@ package org.marques999.acme.store.view
 import android.support.v4.util.SparseArrayCompat
 import android.support.v7.widget.RecyclerView
 
-import org.marques999.acme.store.model.Product
+import org.marques999.acme.store.orders.Product
 
 import android.view.ViewGroup
 

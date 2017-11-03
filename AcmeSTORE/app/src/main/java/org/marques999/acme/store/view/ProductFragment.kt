@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-import org.marques999.acme.store.model.Product
+import org.marques999.acme.store.orders.Product
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer

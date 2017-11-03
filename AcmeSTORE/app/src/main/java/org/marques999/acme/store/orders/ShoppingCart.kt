@@ -1,6 +1,6 @@
-package org.marques999.acme.store.model
+package org.marques999.acme.store.orders
 
-class CustomerCart {
+class ShoppingCart {
 
     private val products = HashMap<Product, Int>()
 
@@ -19,7 +19,7 @@ class CustomerCart {
         products.remove(product)
     }
 
-    fun toJSON(): List<OrderProductPOST> {
-        return products.map { OrderProductPOST(it.value, it.key.barcode) }
+    fun toJSON() = products.map {
+        OrderProductPOST(it.value, it.key.barcode)
     }
 }
