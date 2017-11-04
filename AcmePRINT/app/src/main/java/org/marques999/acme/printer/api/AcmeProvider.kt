@@ -1,39 +1,41 @@
 package org.marques999.acme.printer.api
 
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.Rfc3339DateJsonAdapter
-
-import io.reactivex.Observable
-
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 
-import org.marques999.acme.printer.orders.Order
-import org.marques999.acme.printer.common.Token
+import java.util.Date
+
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.Rfc3339DateJsonAdapter
+
+import org.marques999.acme.printer.AcmePrinter
 
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-import java.util.Date
+import org.marques999.acme.printer.common.Session
 
-class AcmeProvider(session: Token) {
+class AcmeProvider(session: Session) {
 
+    /**
+     */
     private val interceptor = Interceptor {
-
-        return@Interceptor it.proceed(
+        it.proceed(
             it.request().newBuilder().addHeader(
-                "Authorization",
-                "Bearer " + session.token
+                "Authorization", session.wrapToken()
             ).build()
         )
     }
 
+    /**
+     */
     private val serializer = Moshi.Builder().add(
-        Date::class.java,
-        Rfc3339DateJsonAdapter().nullSafe()
-    ).build()!!
+        Date::class.java, Rfc3339DateJsonAdapter().nullSafe()
+    ).build()
 
+    /**
+     */
     private val api = Retrofit.Builder().client(
         OkHttpClient.Builder().addInterceptor(interceptor).build()
     ).addCallAdapterFactory(
@@ -41,10 +43,10 @@ class AcmeProvider(session: Token) {
     ).addConverterFactory(
         MoshiConverterFactory.create(serializer)
     ).baseUrl(
-        "http:/192.168.1.93:3333/"
+        AcmePrinter.SERVER_URL
     ).build().create(AcmeApi::class.java)
 
-    fun getOrder(token: String): Observable<Order> {
-        return api.getOrder(token)
-    }
+    /**
+     */
+    fun getOrder(token: String) = api.getOrder(token)
 }

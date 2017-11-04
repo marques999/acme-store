@@ -1,3 +1,13 @@
 <resources>
-  <dimen name="text_margin">16dp</dimen>
+  <dimen name="cardView_imageDimensions">72dp</dimen>
+  <dimen name="cardView_halfElevation">2dp</dimen>
+  <dimen name="cardView_defaultElevation">4dp</dimen>
+  <dimen name="cardView_smallFont">12sp</dimen>
+  <dimen name="cardView_mediumFont">16sp</dimen>
+  <dimen name="cardView_largeFont">30sp</dimen>
+  <dimen name="cardView_defaultMargin">16dp</dimen>
+  <dimen name="cardView_halfMargin">8dp</dimen>
+  <dimen name="cardView_quarterMargin">4dp</dimen>
+  <dimen name="cardView_defaultSpacing">12dp</dimen>
+  <dimen name="cardView_tinyMargin">2dp</dimen>
 </resources>

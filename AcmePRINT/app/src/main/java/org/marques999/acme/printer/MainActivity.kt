@@ -18,54 +18,71 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 import org.marques999.acme.printer.common.AcmeDialogs
 import org.marques999.acme.printer.common.HttpErrorHandler
-import org.marques999.acme.printer.common.Token
+import org.marques999.acme.printer.common.Session
+import org.marques999.acme.printer.common.SessionJwt
 
 class MainActivity : Activity() {
 
+    /**
+     */
+    private val launchPlayStore = DialogInterface.OnClickListener { _, _ ->
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(AcmePrinter.ZXING_URL)))
+    }
+
+    /**
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        main_scan.setOnClickListener { scanQrCode() }
 
-        if (scan1.isEnabled && savedInstanceState != null) {
+        if (main_scan.isEnabled && savedInstanceState != null) {
             return
         }
 
-        scan1.isEnabled = false
-        scan1.setOnClickListener { scanQrCode() }
-        authenticateUser()
+        main_scan.isEnabled = false
+        authenticate("admin", "admin")
     }
 
-    private val onLogin = Consumer<Token> {
-        AcmeDialogs.showOk(this@MainActivity, ACTIVITY_NAME, "Authorized: ${it.token}")
-        (application as AcmePrinter).acmeApi = AcmeProvider(it)
-        scan1.isEnabled = true
+    /**
+     */
+    private fun authenticate(username: String, password: String) = AuthenticationProvider().login(
+        username, password
+    ).observeOn(
+        AndroidSchedulers.mainThread()
+    ).subscribeOn(
+        Schedulers.io()
+    ).subscribe(
+        onLogin(username), HttpErrorHandler(this)
+    )
+
+    /**
+     */
+    private fun onLogin(username: String) = Consumer<SessionJwt> {
+        AcmeDialogs.buildOk(this, R.string.main_connected).show()
+        (application as AcmePrinter).acmeApi = AcmeProvider(Session(it, username))
+        main_scan.isEnabled = true
     }
 
-    private fun authenticateUser() = AuthenticationProvider()
-        .login("admin", "admin")
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribeOn(Schedulers.io())
-        .subscribe(onLogin, HttpErrorHandler(this))
+    /**
+     */
+    private fun launchQrScanner() = startActivityForResult(Intent(
+        AcmePrinter.ZXING_ACTIVITY
+    ).putExtra(
+        "SCAN_MODE", "QR_CODE_MODE"
+    ), 0)
 
-    private fun scanQrCode() {
-
-        try {
-            startActivityForResult(
-                Intent(ACTION_SCAN).putExtra("SCAN_MODE", "QR_CODE_MODE"), 0
-            )
-        } catch (ex: ActivityNotFoundException) {
-            AcmeDialogs.showYesNo(
-                this,
-                ACTIVITY_NAME,
-                "Launch Play Store and install a QR code scanner activity?",
-                DialogInterface.OnClickListener { _, _ ->
-                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(MainActivity.ZXING_URL)))
-                }
-            )
-        }
+    /**
+     */
+    private fun scanQrCode() = try {
+        launchQrScanner()
+    } catch (ex: ActivityNotFoundException) {
+        AcmeDialogs.buildYesNo(this, R.string.main_promptInstall, launchPlayStore).show()
     }
 
+    /**
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
         if (data == null || requestCode != 0 || resultCode != Activity.RESULT_OK) {
@@ -74,29 +91,14 @@ class MainActivity : Activity() {
 
         val format = data.getStringExtra("SCAN_RESULT_FORMAT")
 
-        if (format == FORMAT_QR_CODE) {
-
-            startActivity(
-                Intent(this, DetailsActivity::class.java).putExtra(
-                    EXTRA_TOKEN, data.getStringExtra("SCAN_RESULT")
-                )
-            )
+        if (format == "QR_CODE") {
+            startActivity(Intent(
+                this, DetailsActivity::class.java
+            ).putExtra(
+                AcmePrinter.EXTRA_TOKEN, data.getStringExtra("SCAN_RESULT")
+            ))
         } else {
-            AcmeDialogs.showOk(
-                this,
-                ACTIVITY_NAME,
-                "The code you scanned was recognized as $format, expected \"$FORMAT_QR_CODE\"."
-            )
+            AcmeDialogs.buildOk(this, R.string.main_invalidQr, format).show()
         }
-    }
-
-    companion object {
-
-        private val FORMAT_QR_CODE = "QR_CODE"
-        private val ACTIVITY_NAME = "Barcode Scanner"
-        private val ACTION_SCAN = "com.google.zxing.client.android.SCAN"
-        private val ZXING_URL = "market://details?id=com.google.zxing.client.android"
-
-        val EXTRA_TOKEN = "org.marques999.acme.printer.TOKEN"
     }
 }

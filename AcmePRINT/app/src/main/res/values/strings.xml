@@ -1,4 +1,17 @@
 <resources>
-  <string name="app_name">Facturas</string>
-  <string name="title_activity_details">Detalhes da compra</string>
+  <string name="app_name">AcmePRINTER</string>
+  <string name="activity_details">Detalhes</string>
+  <string name="product_photo">TODO</string>
+  <string name="product_name">%1$s %2$s</string>
+  <string name="product_quantity">Quantidade: %1$d</string>
+  <string name="customer_nif">NIF: %1$s</string>
+  <string name="cc_validity">Validade:\u0020</string>
+  <string name="cc_type">Tipo:\u0020</string>
+  <string name="order_icon">TODO</string>
+  <string name="customer_icon">TODO</string>
+  <string name="cc_icon">TODO</string>
+  <string name="main_scan">QR Code</string>
+  <string name="main_invalidQr">The code you scanned was recognized as \"%1\$s\", expected \"QR_CODE\".</string>
+  <string name="main_promptInstall">Launch Play Store and install a QR code scanner activity?</string>
+  <string name="main_connected">Connection to the store server established successfully!</string>
 </resources>

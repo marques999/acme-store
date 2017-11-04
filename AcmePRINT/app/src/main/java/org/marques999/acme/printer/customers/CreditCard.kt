@@ -2,10 +2,10 @@ package org.marques999.acme.printer.customers
 
 import org.marques999.acme.printer.views.ViewType
 
-class CreditCard(
+class CreditCard private constructor(
     val type: String,
     val number: String,
     val validity: java.util.Date
-) : ViewType {
+) : java.io.Serializable, ViewType {
     override fun getViewType(): Int = ViewType.CREDIT_CARD
 }

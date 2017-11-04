@@ -24,10 +24,14 @@ class CustomerAdapter : ViewTypeAdapter {
     ) {
 
         fun bind(item: Customer) {
+
             itemView.customer_name.text = item.name
             itemView.customer_address1.text = item.address1
             itemView.customer_address2.text = item.address2
-            itemView.customer_nif.text = item.tax_number
+
+            itemView.customer_nif.text = itemView.context.getString(
+                R.string.customer_nif, item.tax_number
+            )
         }
     }
 }

@@ -2,7 +2,7 @@ package org.marques999.acme.printer.customers
 
 import org.marques999.acme.printer.views.ViewType
 
-data class Customer(
+class Customer private constructor(
     val name: String,
     val username: String,
     val address1: String,
@@ -12,6 +12,6 @@ data class Customer(
     val credit_card: CreditCard,
     val created_at: java.util.Date,
     val modified_at: java.util.Date
-) : ViewType {
+) : java.io.Serializable, ViewType {
     override fun getViewType(): Int = ViewType.CUSTOMER
 }

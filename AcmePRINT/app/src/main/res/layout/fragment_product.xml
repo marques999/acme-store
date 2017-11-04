@@ -2,47 +2,77 @@
   xmlns:card_view="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="wrap_content">
+
   <android.support.v7.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    card_view:cardElevation="4dp"
+    card_view:cardElevation="@dimen/cardView_halfElevation"
     card_view:cardUseCompatPadding="true">
-    <RelativeLayout
+
+    <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:padding="16dp">
-      <ImageView
-        android:id="@+id/product_photo"
+      android:padding="@dimen/cardView_defaultMargin">
+
+      <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="16dp" />
+        android:layout_marginEnd="@dimen/cardView_defaultMargin"
+        android:orientation="vertical">
+
+        <ImageView
+          android:id="@+id/product_photo"
+          android:layout_width="@dimen/cardView_imageDimensions"
+          android:layout_height="@dimen/cardView_imageDimensions"
+          android:layout_marginBottom="@dimen/cardView_defaultSpacing"
+          android:contentDescription="@string/product_photo" />
+
+        <TextView
+          android:id="@+id/product_price"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textAlignment="center" />
+      </LinearLayout>
+
+      <RelativeLayout
+        android:id="@+id/layout_heading"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+          android:id="@+id/product_name"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="@dimen/cardView_tinyMargin"
+          android:textSize="@dimen/cardView_mediumFont" />
+
+        <TextView
+          android:id="@+id/product_barcode"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/product_name"
+          android:layout_marginBottom="@dimen/cardView_halfMargin"
+          android:textSize="@dimen/cardView_smallFont"
+          android:textStyle="bold" />
+
+        <TextView
+          android:id="@+id/product_quantity"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/product_barcode" />
+      </RelativeLayout>
+
       <TextView
-        android:id="@+id/product_name"
+        android:id="@+id/product_total"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/product_photo"
-        android:textSize="30sp" />
-      <TextView
-        android:id="@+id/product_barcode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/product_name"
-        android:layout_toEndOf="@+id/product_photo" />
-      <TextView
-        android:id="@+id/product_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/product_barcode"
-        android:layout_toEndOf="@+id/product_photo" />
-      <TextView
-        android:id="@+id/product_quantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/product_quantity"
-        android:layout_toEndOf="@+id/product_photo" />
-    </RelativeLayout>
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/cardView_halfMargin"
+        android:textAlignment="textEnd"
+        android:textStyle="bold" />
+
+    </LinearLayout>
+
   </android.support.v7.widget.CardView>
 </LinearLayout>
