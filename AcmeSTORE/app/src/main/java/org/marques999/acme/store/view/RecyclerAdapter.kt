@@ -1,14 +1,17 @@
 package org.marques999.acme.store.view
 
-import android.view.ViewGroup
+import org.marques999.acme.store.orders.Product
 
 import android.support.v4.util.SparseArrayCompat
 import android.support.v7.widget.RecyclerView
 
-import org.marques999.acme.store.orders.Product
+import org.marques999.acme.store.products.ProductsAdapter
+import org.marques999.acme.store.products.ProductsLoadingAdapter
 
-class ProductAdapter(
-    listener: ProductDelegateAdapter.OnViewSelectedListener
+import android.view.ViewGroup
+
+class RecyclerAdapter(
+    listener: ProductsAdapter.OnViewSelectedListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val loadingItem = object : ViewType {
@@ -19,8 +22,8 @@ class ProductAdapter(
     private val items: ArrayList<ViewType> = arrayListOf(loadingItem)
 
     init {
-        delegateAdapters.put(ViewType.LOADING, LoadingDelegateAdapter())
-        delegateAdapters.put(ViewType.PRODUCTS, ProductDelegateAdapter(listener))
+        delegateAdapters.put(ViewType.LOADING, ProductsLoadingAdapter())
+        delegateAdapters.put(ViewType.PRODUCTS, ProductsAdapter(listener))
     }
 
     override fun getItemCount(): Int = items.size

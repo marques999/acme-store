@@ -21,10 +21,10 @@ class HttpErrorHandler(private val context: Context) : Consumer<Throwable> {
 
         if (throwable is HttpException) {
             serializer.adapter(Response::class.java).fromJson((throwable.response().errorBody()!!).source())?.let {
-                AcmeDialogs.showOk(context, throwable.javaClass.name, it.error!!)
+                AcmeDialogs.buildOk(context, throwable.javaClass.name, it.error!!).show()
             }
         } else {
-            AcmeDialogs.showOk(context, throwable.javaClass.name, throwable.localizedMessage)
+            AcmeDialogs.buildOk(context, throwable.javaClass.name, throwable.localizedMessage).show()
         }
     }
 }

@@ -2,7 +2,7 @@ package org.marques999.acme.store.customers
 
 import com.fasterxml.jackson.databind.ObjectMapper
 
-class Session(private val jwt: Jwt, username: String) {
+class Session(private val jwt: SessionJwt, username: String) {
 
     /**
      */

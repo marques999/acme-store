@@ -1,6 +1,10 @@
 <resources>
   <string name="app_name">AcmeSTORE</string>
-  <string name="preferences">acmestore</string>
   <string name="action_settings">Settings</string>
-  <string name="todo">TODO</string>
+  <string name="product_name">%1$s %2$s</string>
+  <string name="product_photo">TODO</string>
+  <string name="main_connected">Connection to the store server established successfully!</string>
+  <string name="bottomNavigation_schedules">Schedules</string>
+  <string name="bottomNavigation_favorites">Favorites</string>
+  <string name="bottomNavigation_music">Music</string>
 </resources>

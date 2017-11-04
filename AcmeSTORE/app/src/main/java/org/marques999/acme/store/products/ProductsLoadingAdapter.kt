@@ -1,11 +1,14 @@
-package org.marques999.acme.store.view
+package org.marques999.acme.store.products
 
-import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 
 import org.marques999.acme.store.R
+import org.marques999.acme.store.view.ViewType
+import org.marques999.acme.store.view.ViewTypeAdapter
 
-class LoadingDelegateAdapter : ViewTypeAdapter {
+import android.support.v7.widget.RecyclerView
+
+class ProductsLoadingAdapter : ViewTypeAdapter {
 
     override fun onCreateViewHolder(parent: ViewGroup) = LoadingViewHolder(parent)
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: ViewType) {}

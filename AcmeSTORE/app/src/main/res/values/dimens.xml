@@ -1,5 +1,9 @@
 <resources>
-  <dimen name="app_bar_height">180dp</dimen>
-  <dimen name="fab_margin">16dp</dimen>
-  <dimen name="text_margin">16dp</dimen>
+  <dimen name="cardView_imageDimensions">72dp</dimen>
+  <dimen name="cardView_smallFont">12sp</dimen>
+  <dimen name="cardView_mediumFont">16sp</dimen>
+  <dimen name="cardView_defaultMargin">16dp</dimen>
+  <dimen name="cardView_defaultSpacing">12dp</dimen>
+  <dimen name="progressBar_width">48dp</dimen>
+  <dimen name="progressBar_height">64dp</dimen>
 </resources>

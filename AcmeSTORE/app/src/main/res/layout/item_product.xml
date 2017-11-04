@@ -1,56 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="wrap_content"
   android:layout_height="wrap_content"
   android:orientation="horizontal"
-  android:padding="5dip">
+  android:padding="@dimen/cardView_defaultMargin">
+
   <ImageView
-    android:id="@+id/img_thumbnail"
-    android:layout_width="50dip"
-    android:layout_height="50dip"
-    android:layout_marginBottom="8dp"
-    android:layout_marginLeft="8dp"
-    android:layout_marginRight="8dp"
-    android:layout_marginTop="8dp"
-    android:contentDescription="@string/todo" />
+    android:id="@+id/product_photo"
+    android:layout_width="@dimen/cardView_imageDimensions"
+    android:layout_height="@dimen/cardView_imageDimensions"
+    android:layout_marginBottom="@dimen/cardView_defaultSpacing"
+    android:contentDescription="@string/product_photo" />
 
   <TextView
-    android:id="@+id/description"
+    android:id="@+id/product_name"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_alignTop="@+id/img_thumbnail"
-    android:layout_toEndOf="@+id/img_thumbnail"
+    android:layout_toEndOf="@+id/product_photo"
     android:textColor="#040404"
-    android:textSize="15sp"
-    android:textStyle="bold"
-    android:typeface="sans"
-    tools:text="This should be a long description like this example that I'm showing." />
+    android:textSize="@dimen/cardView_mediumFont"
+    android:textStyle="bold" />
 
   <TextView
-    android:id="@+id/barcode"
+    android:id="@+id/product_barcode"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_alignLeft="@+id/description"
-    android:layout_alignStart="@+id/description"
-    android:layout_below="@+id/description"
+    android:layout_alignStart="@+id/product_name"
+    android:layout_below="@+id/product_name"
     android:textColor="#343434"
-    android:textSize="10sp"
-    tools:ignore="SmallSp"
-    tools:text="Author 123" />
+    android:textSize="@dimen/cardView_smallFont" />
 
-  <!-- Time -->
 
   <TextView
-    android:id="@+id/price"
+    android:id="@+id/product_price"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_alignLeft="@+id/barcode"
-    android:layout_alignStart="@+id/barcode"
-    android:layout_below="@+id/barcode"
+    android:layout_alignStart="@+id/product_barcode"
+    android:layout_below="@+id/product_barcode"
     android:textColor="#343434"
-    android:textSize="10sp"
-    tools:ignore="SmallSp"
-    tools:text="12 hours ago" />
+    android:textSize="@dimen/cardView_smallFont" />
 
 </RelativeLayout>

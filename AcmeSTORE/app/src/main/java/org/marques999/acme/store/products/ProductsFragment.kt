@@ -1,26 +1,29 @@
-package org.marques999.acme.store.view
+package org.marques999.acme.store.products
 
-import android.app.Fragment
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-
-import kotlinx.android.synthetic.main.products_fragment.*
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
+import kotlinx.android.synthetic.main.fragment_products.*
+
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
+
+import android.app.Fragment
 
 import org.marques999.acme.store.R
 import org.marques999.acme.store.AcmeStore
 import org.marques999.acme.store.common.AcmeDialogs
 import org.marques999.acme.store.common.HttpErrorHandler
 import org.marques999.acme.store.orders.Product
+import org.marques999.acme.store.view.RecyclerAdapter
 
-class ProductFragment : Fragment(), ProductDelegateAdapter.OnViewSelectedListener {
+import android.support.v7.widget.LinearLayoutManager
+
+class ProductsFragment : Fragment(), ProductsAdapter.OnViewSelectedListener {
 
     /**
      */
@@ -29,13 +32,13 @@ class ProductFragment : Fragment(), ProductDelegateAdapter.OnViewSelectedListene
     /**
      */
     private val onView = Consumer<Product> {
-        AcmeDialogs.showOk(context, it.name, it.description)
+        AcmeDialogs.buildOk(context, it.name, it.description).show()
     }
 
     /**
      */
     private val onRefresh = Consumer<List<Product>> {
-        (news_list.adapter as ProductAdapter).addProducts(it)
+        (news_list.adapter as RecyclerAdapter).addProducts(it)
     }
 
     /**
@@ -63,7 +66,7 @@ class ProductFragment : Fragment(), ProductDelegateAdapter.OnViewSelectedListene
         savedInstanceState: Bundle?
     ): View = LayoutInflater.from(
         context
-    ).inflate(R.layout.products_fragment, container, false)
+    ).inflate(R.layout.fragment_products, container, false)
 
     /**
      */
@@ -78,7 +81,7 @@ class ProductFragment : Fragment(), ProductDelegateAdapter.OnViewSelectedListene
         }
 
         if (news_list.adapter == null) {
-            news_list.adapter = ProductAdapter(this)
+            news_list.adapter = RecyclerAdapter(this)
         }
 
         application.acmeApi.getProducts()

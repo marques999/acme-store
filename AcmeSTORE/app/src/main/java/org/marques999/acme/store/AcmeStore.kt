@@ -1,6 +1,6 @@
 package org.marques999.acme.store
 
-import android.app.Application
+import java.text.NumberFormat
 
 import org.marques999.acme.store.api.AcmeProvider
 import org.marques999.acme.store.api.CryptographyProvider
@@ -11,6 +11,11 @@ import android.content.Context
 import android.content.SharedPreferences
 
 import org.marques999.acme.store.common.Authentication
+
+import java.util.Currency
+import java.util.Locale
+
+import android.app.Application
 
 class AcmeStore : Application() {
 
@@ -63,6 +68,12 @@ class AcmeStore : Application() {
         val SERVER_BASEURL = "http://192.168.1.87:3333/"
         val DEFAULT_USERNAME = "marques999"
         val DEFAULT_PASSWORD = "r0wsauce"
+
+        fun formatCurrency(value: Double): String = NumberFormat.getCurrencyInstance(
+            Locale.getDefault()
+        ).apply {
+            currency = Currency.getInstance("EUR")
+        }.format(value)
 
         val DEFAULT_PRIVATE = """-----BEGIN PRIVATE KEY-----
 MIIBAgIBADANBgkqhkiG9w0BAQEFAASB7TCB6gIBAAIvAL1L9h1N9xqNe0I4ddyjKD6lv0ArcEhB
