@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_order.view.*
 
 import org.marques999.acme.printer.R
+import org.marques999.acme.printer.AcmePrinter
 import org.marques999.acme.printer.views.ViewType
 import org.marques999.acme.printer.views.ViewTypeAdapter
 
@@ -24,10 +25,9 @@ class OrderAdapter : ViewTypeAdapter {
     ) {
 
         fun bind(item: Order) {
-            itemView.order_token.text = item.token
-            itemView.order_total.text = item.total.toString()
-            itemView.order_status.text = item.status.toString()
-            itemView.order_date.text = item.created_at.toString()
+            itemView.order_count.text = item.count.toString()
+            itemView.order_total.text = AcmePrinter.formatCurrency(item.total)
+            itemView.order_date.text = AcmePrinter.formatDateTime(item.created_at)
         }
     }
 }

@@ -36,23 +36,12 @@
         android:textSize="@dimen/cardView_largeFont" />
 
       <TextView
-        android:id="@+id/label_type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/cc_number"
-        android:layout_marginBottom="@dimen/cardView_quarterMargin"
-        android:layout_toEndOf="@+id/cc_icon"
-        android:text="@string/cc_type"
-        android:textSize="@dimen/cardView_mediumFont"
-        android:textStyle="bold" />
-
-      <TextView
         android:id="@+id/cc_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/cc_number"
         android:layout_marginBottom="@dimen/cardView_quarterMargin"
-        android:layout_toEndOf="@+id/label_type"
+        android:layout_toEndOf="@+id/cc_icon"
         android:textSize="@dimen/cardView_mediumFont" />
 
       <TextView

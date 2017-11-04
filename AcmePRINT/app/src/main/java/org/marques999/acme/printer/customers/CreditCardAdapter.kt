@@ -26,9 +26,13 @@ class CreditCardAdapter : ViewTypeAdapter {
     ) {
 
         fun bind(item: CreditCard) {
+
             itemView.cc_type.text = item.type
             itemView.cc_number.text = item.number
-            itemView.cc_validity.text = AcmePrinter.formatDate(item.validity)
+
+            itemView.cc_validity.text = itemView.context.getString(
+                R.string.cc_date, AcmePrinter.formatDate(item.validity)
+            )
         }
     }
 }

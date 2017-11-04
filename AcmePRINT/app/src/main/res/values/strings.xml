@@ -5,8 +5,9 @@
   <string name="product_name">%1$s %2$s</string>
   <string name="product_quantity">Quantidade: %1$d</string>
   <string name="customer_nif">NIF: %1$s</string>
-  <string name="cc_validity">Validade:\u0020</string>
-  <string name="cc_type">Tipo:\u0020</string>
+  <string name="cc_validity">Válido\u0020</string>
+  <string name="cc_date">(%1$s)</string>
+  <string name="order_count">#Produtos:\u0020</string>
   <string name="order_icon">TODO</string>
   <string name="customer_icon">TODO</string>
   <string name="cc_icon">TODO</string>

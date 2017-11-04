@@ -1,9 +1,13 @@
 package org.marques999.acme.printer
 
+import java.util.Date
+import java.util.Locale
+import java.util.Currency
+
 import org.marques999.acme.printer.api.AcmeProvider
+
 import java.text.DateFormat
 import java.text.NumberFormat
-import java.util.*
 
 class AcmePrinter : android.app.Application() {
 
@@ -24,10 +28,14 @@ class AcmePrinter : android.app.Application() {
         val EXTRA_TOKEN = "org.marques999.acme.printer.TOKEN"
 
         fun formatDate(dateTime: Date): String = DateFormat.getDateInstance(
-            DateFormat.LONG, Locale("pt", "POR")
+            DateFormat.MEDIUM, Locale("pt", "PT")
         ).format(dateTime)
 
-        fun formatCurrency(value: Double) = NumberFormat.getCurrencyInstance(
+        fun formatDateTime(dateTime: Date): String = DateFormat.getDateTimeInstance(
+            DateFormat.MEDIUM, DateFormat.MEDIUM, Locale("pt", "PT")
+        ).format(dateTime)
+
+        fun formatCurrency(value: Double): String = NumberFormat.getCurrencyInstance(
             Locale.getDefault()
         ).apply {
             currency = Currency.getInstance("EUR")
