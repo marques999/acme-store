@@ -1,5 +1,7 @@
 package org.marques999.acme.store.orders
 
+import org.marques999.acme.store.products.Product
+
 class ShoppingCart {
 
     private val products = HashMap<Product, Int>()

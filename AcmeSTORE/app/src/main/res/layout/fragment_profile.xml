@@ -1,0 +1,24 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:layout_margin="?android:dialogPreferredPadding"
+  android:orientation="vertical"
+  tools:context=".customers.CustomerProfileFragment">
+
+  <ImageView
+    android:id="@+id/qrCode_imageView"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/qrCode_imageView"
+    android:layout_gravity="center"
+    android:padding="@dimen/cardView_margin" />
+
+  <TextView
+    android:id="@+id/qrCode_textView"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:text="Hello World!"
+    android:textAlignment="center" />
+
+</LinearLayout>

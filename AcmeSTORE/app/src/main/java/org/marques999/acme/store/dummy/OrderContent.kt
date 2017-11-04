@@ -3,7 +3,7 @@ package org.marques999.acme.store.dummy
 import java.util.ArrayList
 import java.util.HashMap
 
-object DummyContent {
+object OrderContent {
 
     val ITEMS: MutableList<DummyItem> = ArrayList<DummyItem>()
 

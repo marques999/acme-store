@@ -7,11 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 
 import org.marques999.acme.store.R
-import org.marques999.acme.store.dummy.DummyContent.DummyItem
+import org.marques999.acme.store.dummy.OrderContent.DummyItem
 
 import android.widget.TextView
 
-class DummyAdapter(private val mValues: List<DummyItem>) : RecyclerView.Adapter<DummyAdapter.ViewHolder>() {
+class OrderAdapter(private val mValues: List<DummyItem>) : RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
 
     /**
      */
@@ -20,7 +20,7 @@ class DummyAdapter(private val mValues: List<DummyItem>) : RecyclerView.Adapter<
     /**
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.item_dummy, parent, false)
+        LayoutInflater.from(parent.context).inflate(R.layout.item_order, parent, false)
     )
 
     /**

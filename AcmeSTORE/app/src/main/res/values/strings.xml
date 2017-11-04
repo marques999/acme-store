@@ -1,10 +1,50 @@
 <resources>
-  <string name="app_name">AcmeSTORE</string>
-  <string name="action_settings">Settings</string>
-  <string name="product_name">%1$s %2$s</string>
-  <string name="product_photo">TODO</string>
-  <string name="main_connected">Connection to the store server established successfully!</string>
-  <string name="bottomNavigation_schedules">Schedules</string>
-  <string name="bottomNavigation_favorites">Favorites</string>
-  <string name="bottomNavigation_music">Music</string>
+  <!-- MainActivity -->
+  <string name="main_activity">AcmeSTORE</string>
+  <string name="main_promptInstall">Launch Play Store and install a QR code scanner activity?</string>
+  <string name="main_connectionEstablished">Connection to the store server established successfully!</string>
+
+  <!-- BottomNavigation -->
+  <string name="bottomNavigation_cart">Cart</string>
+  <string name="bottomNavigation_catalog">Catalog</string>
+  <string name="bottomNavigation_history">History</string>
+  <string name="bottomNavigation_profile">Profile</string>
+
+  <!-- LoginActivity -->
+  <string name="loginActivity_password">Password</string>
+  <string name="loginActivity_username">Username</string>
+  <string name="loginActivity_register">Don\'t have an account yet? Register!</string>
+  <string name="loginActivity_login">Login</string>
+  <string name="loginActivity_icon">TODO</string>
+
+  <!-- ProductViewActivity -->
+  <string name="productView_activity">Product information</string>
+  <string name="productView_barcode">UPC</string>
+  <string name="productView_description">Description</string>
+  <string name="productView_photo">TODO</string>
+  <string name="productView_price">€000.00</string>
+
+  <!-- ShoppingCartFragment -->
+  <string name="shoppingCart_delete">Delete</string>
+  <string name="shoppingCart_minus">-</string>
+  <string name="shoppingCart_name">%1$s %2$s</string>
+  <string name="shoppingCart_photo">TODO</string>
+  <string name="shoppingCart_plus">+</string>
+  <string name="shoppingCart_quantity">10</string>
+  <string name="shoppingCart_scan">SCAN BARCODE</string>
+  <string name="title_activity_login">Login</string>
+
+  <!-- Strings related to login -->
+  <string name="prompt_email">Email</string>
+  <string name="prompt_password">Password (optional)</string>
+  <string name="action_sign_in">Sign in or register</string>
+  <string name="action_sign_in_short">Sign in</string>
+  <string name="error_invalid_email">This email address is invalid</string>
+  <string name="error_invalid_password">This password is too short</string>
+  <string name="error_incorrect_password">This password is incorrect</string>
+  <string name="error_field_required">This field is required</string>
+  <string name="permission_rationale">"Contacts permissions are needed for providing email
+    completions."
+  </string>
+
 </resources>

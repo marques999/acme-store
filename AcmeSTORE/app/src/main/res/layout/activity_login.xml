@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:fitsSystemWindows="true">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingEnd="@dimen/loginActivity_largeMargin"
+    android:paddingStart="@dimen/loginActivity_largeMargin"
+    android:paddingTop="56dp">
+
+    <ImageView
+      android:layout_width="wrap_content"
+      android:layout_height="128dp"
+      android:layout_gravity="center_horizontal"
+      android:layout_marginBottom="@dimen/loginActivity_largeMargin"
+      android:contentDescription="@string/loginActivity_icon"
+      android:src="@drawable/ic_landscape_128dp" />
+
+    <android.support.design.widget.TextInputLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/loginActivity_smallMargin"
+      android:layout_marginTop="@dimen/loginActivity_smallMargin">
+
+      <EditText
+        android:id="@+id/loginActivity_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/loginActivity_username"
+        android:inputType="textPersonName" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/loginActivity_smallMargin"
+      android:layout_marginTop="@dimen/loginActivity_smallMargin">
+
+      <EditText
+        android:id="@+id/loginActivity_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/loginActivity_password"
+        android:inputType="textPassword" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.v7.widget.AppCompatButton
+      android:id="@+id/loginActivity_login"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/loginActivity_largeMargin"
+      android:layout_marginTop="@dimen/loginActivity_largeMargin"
+      android:padding="@dimen/loginActivity_mediumMargin"
+      android:text="@string/loginActivity_login" />
+
+    <TextView
+      android:id="@+id/loginActivity_register"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/loginActivity_largeMargin"
+      android:gravity="center"
+      android:text="@string/loginActivity_register"
+      android:textSize="@dimen/cardView_mediumFont" />
+
+  </LinearLayout>
+</ScrollView>

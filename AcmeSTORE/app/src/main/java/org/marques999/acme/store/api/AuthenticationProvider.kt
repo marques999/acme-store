@@ -3,14 +3,14 @@ package org.marques999.acme.store.api
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Rfc3339DateJsonAdapter
 
-import org.marques999.acme.store.common.Authentication
-
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 import java.util.Date
 
+import org.marques999.acme.store.AcmeStore
+import org.marques999.acme.store.common.Authentication
 import org.marques999.acme.store.customers.CreditCard
 import org.marques999.acme.store.customers.Customer
 import org.marques999.acme.store.customers.CustomerPOST
@@ -32,7 +32,7 @@ class AuthenticationProvider {
     ).addConverterFactory(
         MoshiConverterFactory.create(serializer)
     ).baseUrl(
-        "http://192.168.1.87:3333/"
+        AcmeStore.SERVER_URL
     ).build().create(AuthenticationApi::class.java)
 
     /**

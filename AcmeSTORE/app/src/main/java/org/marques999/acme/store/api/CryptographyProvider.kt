@@ -44,9 +44,9 @@ class CryptographyProvider(privatePem: String) {
 
     /**
      */
-    private fun encodeBase64(payload: ByteArray): String {
-        return Base64.encodeToString(payload, Base64.DEFAULT)
-    }
+    private fun encodeBase64(payload: ByteArray) = Base64.encodeToString(
+        payload, Base64.DEFAULT
+    )
 
     /**
      */

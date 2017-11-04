@@ -16,24 +16,32 @@ import java.util.Currency
 import java.util.Locale
 
 import android.app.Application
+import org.marques999.acme.store.common.Session
+import org.marques999.acme.store.common.SessionJwt
 
 class AcmeStore : Application() {
 
     /**
      */
     lateinit var acmeApi: AcmeProvider
-    lateinit var cryptoApi: CryptographyProvider
 
     /**
      */
     private lateinit var preferences: SharedPreferences
+    private lateinit var cryptography: CryptographyProvider
 
     /**
      */
     override fun onCreate() {
         super.onCreate()
         preferences = getSharedPreferences(KEY_PREFERENCES, Context.MODE_PRIVATE)
-        cryptoApi = CryptographyProvider(preferences.getString(PREF_PRIVATE, DEFAULT_PRIVATE))
+        cryptography = CryptographyProvider(preferences.getString(PREF_PRIVATE, DEFAULT_PRIVATE))
+    }
+
+    /**
+     */
+    fun initializeApi(username: String, sessionJwt: SessionJwt) {
+        acmeApi = AcmeProvider(Session(sessionJwt, username), cryptography)
     }
 
     /**
@@ -44,7 +52,7 @@ class AcmeStore : Application() {
     ) = preferences.edit().apply {
         putString(PREF_USERNAME, credentials.username)
         putString(PREF_PASSWORD, credentials.password)
-        putString(PREF_PRIVATE, cryptoApi.encodePrivate(privateKey))
+        putString(PREF_PRIVATE, cryptography.encodePrivate(privateKey))
     }.apply()
 
     /**
@@ -58,16 +66,20 @@ class AcmeStore : Application() {
      */
     companion object {
 
-        private val KEY_PREFERENCES = "acmestore"
         private val PREF_PRIVATE = "private"
         private val PREF_USERNAME = "username"
         private val PREF_PASSWORD = "password"
+        private val KEY_PREFERENCES = "acmestore"
+        private val ZXING_PACKAGE = "com.google.zxing.client.android"
 
         val ALGORITHM_PKCS = "RSA"
         val ALGORITHM_HASH = "SHA1WithRSA"
-        val SERVER_BASEURL = "http://192.168.1.87:3333/"
+        val SERVER_URL = "http://192.168.1.87:3333/"
         val DEFAULT_USERNAME = "marques999"
         val DEFAULT_PASSWORD = "r0wsauce"
+        val ZXING_ACTIVITY = "$ZXING_PACKAGE.SCAN"
+        val RAMEN_RECIPE = "mieic@feup#2017".toByteArray()
+        val ZXING_URL = "market://details?id=$ZXING_PACKAGE"
 
         fun formatCurrency(value: Double): String = NumberFormat.getCurrencyInstance(
             Locale.getDefault()

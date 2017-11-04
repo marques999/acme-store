@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:id="@+id/cart_relativeLayout"
+  android:orientation="vertical"
+  tools:context="products.ShoppingCartFragment">
+  <Button
+    android:id="@+id/shoppingCart_scanButton"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:backgroundTint="@color/colorAccent"
+    android:drawablePadding="@dimen/cardView_margin"
+    android:drawableStart="@drawable/ic_camera_24dp"
+    android:textAlignment="textStart"
+    android:padding="?android:dialogPreferredPadding"
+    android:text="@string/shoppingCart_scan"
+    android:textColor="@android:color/primary_text_dark" />
+  <android.support.v7.widget.RecyclerView
+    android:id="@+id/news_list"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    tools:listitem="@layout/item_product" />
+
+
+</LinearLayout>

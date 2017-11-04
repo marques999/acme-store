@@ -10,7 +10,7 @@ import io.reactivex.Observable
 import org.marques999.acme.store.orders.Order
 import org.marques999.acme.store.orders.OrderJSON
 import org.marques999.acme.store.orders.OrderPOST
-import org.marques999.acme.store.orders.Product
+import org.marques999.acme.store.products.Product
 
 interface AcmeApi {
 

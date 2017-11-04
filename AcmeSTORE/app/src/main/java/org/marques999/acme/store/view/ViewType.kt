@@ -7,5 +7,6 @@ interface ViewType {
     companion object {
         val PRODUCTS = 1
         val LOADING = 2
+        val ORDER = 3
     }
 }

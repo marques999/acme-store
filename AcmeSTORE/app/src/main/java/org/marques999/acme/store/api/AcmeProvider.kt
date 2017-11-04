@@ -10,7 +10,7 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 
 import org.marques999.acme.store.customers.CustomerPOST
-import org.marques999.acme.store.customers.Session
+import org.marques999.acme.store.common.Session
 
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -48,7 +48,7 @@ class AcmeProvider(private val session: Session, private val crypto: Cryptograph
     ).addConverterFactory(
         MoshiConverterFactory.create(serializer)
     ).baseUrl(
-        AcmeStore.SERVER_BASEURL
+        AcmeStore.SERVER_URL
     ).build().create(AcmeApi::class.java)
 
     /**
