@@ -34,9 +34,6 @@ class BottomNavigationAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(f
     /**
      */
     override fun getCount(): Int = fragments.size
-
-    /**
-     */
     override fun getItem(position: Int) = fragments[position]
 
     /**

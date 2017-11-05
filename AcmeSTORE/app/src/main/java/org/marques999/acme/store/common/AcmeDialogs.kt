@@ -2,11 +2,13 @@ package org.marques999.acme.store.common
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.app.ProgressDialog
 
 import org.marques999.acme.store.R
 
 import android.content.Context
 import android.content.DialogInterface
+import android.support.annotation.StringRes
 
 object AcmeDialogs {
 
@@ -33,6 +35,15 @@ object AcmeDialogs {
         .setTitle(title)
         .setMessage(message)
         .setPositiveButton(android.R.string.ok, null)
+
+    /**
+     */
+    fun buildProgress(context: Context, @StringRes messageId: Int) = ProgressDialog(
+        context, R.style.AppTheme_Dark
+    ).apply {
+        isIndeterminate = true
+        setMessage(context.getString(messageId))
+    }
 
     /**
      */

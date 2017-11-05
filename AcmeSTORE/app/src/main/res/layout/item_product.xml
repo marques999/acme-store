@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:text="Acer Aspire E5-571G-72M5"
             android:textColor="#040404"
-            android:textSize="@dimen/cardView_mediumFont"
+            android:textSize="@dimen/global_mediumFont"
             android:textStyle="bold" />
 
           <TextView

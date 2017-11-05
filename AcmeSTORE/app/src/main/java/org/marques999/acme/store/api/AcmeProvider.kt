@@ -61,6 +61,7 @@ class AcmeProvider(private val session: Session, private val crypto: Cryptograph
      */
     fun getOrders() = api.getOrders()
     fun getProducts() = api.getProducts()
+    fun getCustomer() = session.customer
     fun getOrder(token: String) = api.getOrder(token)
     fun getProduct(barcode: String) = api.getProduct(barcode)
 

@@ -1,5 +1,6 @@
 package org.marques999.acme.store
 
+import android.app.Activity
 import java.text.NumberFormat
 
 import org.marques999.acme.store.api.AcmeProvider
@@ -72,6 +73,17 @@ class AcmeStore : Application() {
         private val KEY_PREFERENCES = "acmestore"
         private val ZXING_PACKAGE = "com.google.zxing.client.android"
 
+        private val USERNAME_MINIMUM = 3
+        private val PASSWORD_MINIMUM = 6
+        private val PASSWORD_MAXIMUM = 16
+        val ERROR_PASSWORD = "Password must have between $PASSWORD_MINIMUM and $PASSWORD_MAXIMUM alphanumeric characters"
+        val ERROR_USERNAME = "Username must be at least $USERNAME_MINIMUM characters long."
+        val ERROR_REQUIRED = "This field is required."
+
+        val REQUEST_LOGIN = 1
+        val REQUEST_REGISTER = 2
+        val REQUEST_SCAN = 3
+
         val ALGORITHM_PKCS = "RSA"
         val ALGORITHM_HASH = "SHA1WithRSA"
         val SERVER_URL = "http://192.168.1.87:3333/"
@@ -80,6 +92,18 @@ class AcmeStore : Application() {
         val ZXING_ACTIVITY = "$ZXING_PACKAGE.SCAN"
         val RAMEN_RECIPE = "mieic@feup#2017".toByteArray()
         val ZXING_URL = "market://details?id=$ZXING_PACKAGE"
+
+        fun invalidUsername(username: String): Boolean {
+            return username.length < AcmeStore.USERNAME_MINIMUM
+        }
+
+        fun activitySucceeded(requestCode: Int, resultCode: Int, initialRequest: Int): Boolean {
+            return requestCode == initialRequest && resultCode == Activity.RESULT_OK
+        }
+
+        fun invalidPassword(password: String): Boolean {
+            return password.length < AcmeStore.PASSWORD_MINIMUM || password.length > AcmeStore.PASSWORD_MAXIMUM
+        }
 
         fun formatCurrency(value: Double): String = NumberFormat.getCurrencyInstance(
             Locale.getDefault()

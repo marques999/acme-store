@@ -5,11 +5,11 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.View
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
+
 import kotlinx.android.synthetic.main.activity_login.*
 
 import org.marques999.acme.store.api.AuthenticationProvider
@@ -20,29 +20,10 @@ import org.marques999.acme.store.common.SessionJwt
 
 class LoginActivity : AppCompatActivity() {
 
-    private val launchRegister = View.OnClickListener {
-        //startActivityForResult(Intent(applicationContext, RegisterActivity::class.java), REQUEST_REGISTER)
-        finish()
-        //overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out)
-    }
-
+    /**
+     */
     private lateinit var acmeInstance: AcmeStore
-
-    /**
-     */
-    private fun onLogin(username: String) = Consumer<SessionJwt> {
-        progressDialog.dismiss()
-        acmeInstance.initializeApi(username, it)
-        AcmeDialogs.buildOk(this, R.string.main_connectionEstablished).show()
-        loginActivity_login.isEnabled = true
-        finish()
-    }
-
-    /**
-     */
-    override fun onBackPressed() {
-        moveTaskToBack(true)
-    }
+    private lateinit var progressDialog: ProgressDialog
 
     /**
      */
@@ -53,18 +34,31 @@ class LoginActivity : AppCompatActivity() {
     ).subscribeOn(
         Schedulers.io()
     ).subscribe(
-        onLogin(authentication.username), HttpErrorHandler(this).also {
+        onLoginCompleted(authentication.username),
+        onLoginFailed(HttpErrorHandler(this))
+    )
+
+    /**
+     */
+    private fun onLoginCompleted(username: String) = Consumer<SessionJwt> {
         progressDialog.dismiss()
         loginActivity_login.isEnabled = true
-    })
+        acmeInstance.initializeApi(username, it)
+        setResult(Activity.RESULT_OK, null)
+        finish()
+    }
 
-    private lateinit var progressDialog: ProgressDialog
+    /**
+     */
+    private fun onLoginFailed(next: Consumer<Throwable>) = Consumer<Throwable> {
+        progressDialog.dismiss()
+        loginActivity_login.isEnabled = true
+        next.accept(it)
+    }
 
-    private val authenticateCustomer = View.OnClickListener {
-
-        if (!validateForm()) {
-            return@OnClickListener
-        }
+    /**
+     */
+    private fun authenticateCustomer() {
 
         loginActivity_login.isEnabled = false
         progressDialog.show()
@@ -75,17 +69,34 @@ class LoginActivity : AppCompatActivity() {
         ))
     }
 
+    /**
+     */
+    override fun onBackPressed() {
+        moveTaskToBack(true)
+    }
+
+    /**
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         acmeInstance = application as AcmeStore
-        loginActivity_register.setOnClickListener(launchRegister)
-        loginActivity_login.setOnClickListener(authenticateCustomer)
+        progressDialog = AcmeDialogs.buildProgress(this, R.string.loginActivity_progress)
 
-        progressDialog = ProgressDialog(this, R.style.AppTheme_Dark).apply {
-            isIndeterminate = true
-            setMessage("Authenticating...")
+        loginActivity_register.setOnClickListener {
+
+            Intent(applicationContext, RegisterActivity::class.java).let {
+                startActivityForResult(it, AcmeStore.REQUEST_REGISTER)
+                finish()
+            }
+        }
+
+        loginActivity_login.setOnClickListener {
+
+            if (validateForm()) {
+                authenticateCustomer()
+            }
         }
 
         acmeInstance.loadCustomer().let {
@@ -94,40 +105,52 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    /**
+     */
+    override fun onActivityResult(request: Int, result: Int, data: Intent?) {
 
-        if (requestCode == REQUEST_REGISTER && resultCode == Activity.RESULT_OK) {
-            this.finish()
+        if (AcmeStore.activitySucceeded(request, result, AcmeStore.REQUEST_REGISTER)) {
+            finish()
         }
     }
 
+    /**
+     */
     private fun validateForm(): Boolean {
 
         var formValid = true
+        val username = loginActivity_username.text.toString()
 
-        if (loginActivity_username.text.toString().isEmpty()) {
-            loginActivity_username.error = "This field is required."
-            formValid = false
-        } else {
-            loginActivity_username.error = null
+        when {
+            username.isEmpty() -> {
+                loginActivity_username.error = AcmeStore.ERROR_REQUIRED
+                formValid = false
+            }
+            AcmeStore.invalidUsername(username) -> {
+                loginActivity_username.error = AcmeStore.ERROR_USERNAME
+                formValid = false
+            }
+            else -> {
+                loginActivity_username.error = null
+            }
         }
 
         val password = loginActivity_password.text.toString()
 
-        if (password.isEmpty()) {
-            loginActivity_password.error = "This field is required."
-            formValid = false
-        } else if (password.length < 6 || password.length > 16) {
-            loginActivity_password.error = "Password must be between 6 and 16 alphanumeric characters."
-            formValid = false
-        } else {
-            loginActivity_password.error = null
+        when {
+            password.isEmpty() -> {
+                loginActivity_password.error = AcmeStore.ERROR_REQUIRED
+                formValid = false
+            }
+            AcmeStore.invalidPassword(password) -> {
+                loginActivity_password.error = AcmeStore.ERROR_PASSWORD
+                formValid = false
+            }
+            else -> {
+                loginActivity_password.error = null
+            }
         }
 
         return formValid
-    }
-
-    companion object {
-        private val REQUEST_REGISTER = 0
     }
 }

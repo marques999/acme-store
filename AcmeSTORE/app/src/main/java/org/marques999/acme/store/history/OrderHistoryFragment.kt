@@ -1,16 +1,15 @@
-package org.marques999.acme.store.dummy
+package org.marques999.acme.store.history
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-import android.os.Bundle
+import org.marques999.acme.store.R
 
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-
-import org.marques999.acme.store.R
 
 class OrderHistoryFragment : Fragment() {
 
@@ -26,7 +25,7 @@ class OrderHistoryFragment : Fragment() {
 
         if (view is RecyclerView) {
             view.layoutManager = LinearLayoutManager(view.getContext())
-            view.adapter = OrderAdapter(OrderContent.ITEMS)
+            view.adapter = OrderAdapter(OrderContent.orders)
         }
 
         return view

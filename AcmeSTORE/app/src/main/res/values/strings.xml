@@ -1,8 +1,9 @@
 <resources>
-  <!-- MainActivity -->
-  <string name="main_activity">AcmeSTORE</string>
-  <string name="main_promptInstall">Launch Play Store and install a QR code scanner activity?</string>
-  <string name="main_connectionEstablished">Connection to the store server established successfully!</string>
+  <!-- ActionBar -->
+  <string name="actionBar_cart">Shopping Cart</string>
+  <string name="actionBar_catalog">Product Catalog</string>
+  <string name="actionBar_history">Order History</string>
+  <string name="actonBar_profile">My Profile</string>
 
   <!-- BottomNavigation -->
   <string name="bottomNavigation_cart">Cart</string>
@@ -11,18 +12,37 @@
   <string name="bottomNavigation_profile">Profile</string>
 
   <!-- LoginActivity -->
+  <string name="loginActivity_progress">Authenticating…</string>
   <string name="loginActivity_password">Password</string>
   <string name="loginActivity_username">Username</string>
   <string name="loginActivity_register">Don\'t have an account yet? Register!</string>
   <string name="loginActivity_login">Login</string>
   <string name="loginActivity_icon">TODO</string>
 
+  <!-- MainActivity -->
+  <string name="main_activity">AcmeSTORE</string>
+  <string name="main_promptInstall">Launch Play Store and install a QR code scanner activity?</string>
+  <string name="main_connectionEstablished">Connection to the store server established successfully!</string>
+
   <!-- ProductViewActivity -->
-  <string name="productView_activity">Product information</string>
+  <string name="productView_activity">Product Information</string>
   <string name="productView_barcode">UPC</string>
   <string name="productView_description">Description</string>
   <string name="productView_photo">TODO</string>
   <string name="productView_price">€000.00</string>
+
+  <!-- RegisterActivity -->
+  <string name="registerActivity_progress">"Creating Account…"</string>
+  <string name="registerActivity_name">Full Name</string>
+  <string name="registerActivity_username">Username</string>
+  <string name="registerActivity_address1">Address</string>
+  <string name="registerActivity_password">Password</string>
+  <string name="registerActivity_confirm">Re-enter Password</string>
+  <string name="registerActivity_address2">City &amp; Postal Code></string>
+  <string name="registerActivity_nif">Tax Number</string>
+  <string name="registerActivity_register">Create Account</string>
+  <string name="registerActivity_icon">TODO</string>
+  <string name="registerActivity_login">Already a member? Login!</string>
 
   <!-- ShoppingCartFragment -->
   <string name="shoppingCart_delete">Delete</string>
@@ -35,16 +55,8 @@
   <string name="title_activity_login">Login</string>
 
   <!-- Strings related to login -->
-  <string name="prompt_email">Email</string>
-  <string name="prompt_password">Password (optional)</string>
-  <string name="action_sign_in">Sign in or register</string>
-  <string name="action_sign_in_short">Sign in</string>
   <string name="error_invalid_email">This email address is invalid</string>
   <string name="error_invalid_password">This password is too short</string>
   <string name="error_incorrect_password">This password is incorrect</string>
-  <string name="error_field_required">This field is required</string>
-  <string name="permission_rationale">"Contacts permissions are needed for providing email
-    completions."
-  </string>
-
+  <string name="customerProfile_icon">TODO</string>
 </resources>

@@ -14,14 +14,21 @@ import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
 import com.google.zxing.common.BitMatrix
 
+import org.marques999.acme.store.AcmeStore
+
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class CustomerProfileFragment : Fragment() {
 
     /**
      */
+    private lateinit var customer: CustomerJSON
+
+    /**
+     */
     private val qrContent = String(
-        "8aqHkFw8".toByteArray(), charset("ISO-8859-1")
+        "8aqHkFw8".toByteArray(),
+        charset("ISO-8859-1")
     )
 
     /**
@@ -42,7 +49,10 @@ class CustomerProfileFragment : Fragment() {
         }
 
         if (qrException.isNotBlank()) {
-            activity.runOnUiThread { qrCode_textView.text = qrException }
+
+            activity.runOnUiThread {
+                qrCode_textView.text = qrException
+            }
         }
     }
 
@@ -61,6 +71,17 @@ class CustomerProfileFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Thread { encodeQrBitmap }.start()
+        customer = (activity.application as AcmeStore).acmeApi.getCustomer()
+    }
+
+    /**
+     */
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        customerProfile_name.text = customer.name
+        customerProfile_nif.text = customer.tax_number
+        customerProfile_address1.text = customer.address1
+        customerProfile_address2.text = customer.address2
     }
 
     /**

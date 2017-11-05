@@ -1,132 +1,210 @@
 package org.marques999.acme.store
 
+import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 
-import android.widget.Toast
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Consumer
+import io.reactivex.schedulers.Schedulers
+
+import kotlinx.android.synthetic.main.activity_register.*
+
+import org.marques999.acme.store.api.AuthenticationProvider
+import org.marques999.acme.store.common.AcmeDialogs
+import org.marques999.acme.store.common.HttpErrorHandler
+import org.marques999.acme.store.customers.CreditCard
+import org.marques999.acme.store.customers.Customer
+
+import java.util.Date
+
 
 class RegisterActivity : AppCompatActivity() {
 
-    public override fun onCreate(savedInstanceState: Bundle?) {
+    /**
+     */
+    private lateinit var acmeInstance: AcmeStore
+    private lateinit var progressDialog: ProgressDialog
 
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_signup)
-
-        _signupButton!!.setOnClickListener { signup() }
-
-        _loginLink!!.setOnClickListener {
-            // Finish the registration screen and return to the Login activity
-            val intent = Intent(applicationContext, LoginActivity::class.java)
-            startActivity(intent)
-            finish()
-            overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out)
-        }
-    }
-
-    fun signup() {
-
-        if (!validateForm()) {
-            onSignupFailed()
-            return
-        }
-
-        _signupButton!!.isEnabled = false
-
-        val progressDialog = ProgressDialog(this@SignupActivity,
-            R.style.AppTheme_Dark_Dialog)
-        progressDialog.isIndeterminate = true
-        progressDialog.setMessage("Creating Account...")
-        progressDialog.show()
-
-        val name = _nameText!!.text.toString()
-        val address = _addressText!!.text.toString()
-        val email = _emailText!!.text.toString()
-        val mobile = _mobileText!!.text.toString()
-        val password = _passwordText!!.text.toString()
-        val reEnterPassword = _reEnterPasswordText!!.text.toString()
-
-        // TODO: Implement your own signup logic here.
-
-        android.os.Handler().postDelayed(
-            {
-                // On complete call either onSignupSuccess or onSignupFailed
-                // depending on success
-                onSignupSuccess()
-                // onSignupFailed();
-                progressDialog.dismiss()
-            }, 3000)
-    }
-
-
-    fun onSignupSuccess() {
-        _signupButton!!.isEnabled = true
+    /**
+     */
+    private var onRegisterComplete = Consumer<Customer> {
+        registerActivity_register.isEnabled = true
         setResult(Activity.RESULT_OK, null)
         finish()
     }
 
-    fun onSignupFailed() {
-        Toast.makeText(baseContext, "Login failed", Toast.LENGTH_LONG).show()
-        _signupButton!!.isEnabled = true
+    /**
+     */
+    private fun onRegisterFailed(next: Consumer<Throwable>) = Consumer<Throwable> {
+        progressDialog.dismiss()
+        registerActivity_register.isEnabled = true
+        next.accept(it)
     }
 
-    fun validateForm(): Boolean {
+    /**
+     */
+    public override fun onCreate(savedInstanceState: Bundle?) {
+
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_register)
+        acmeInstance = application as AcmeStore
+        progressDialog = AcmeDialogs.buildProgress(this, R.string.loginActivity_progress)
+
+        registerActivity_register.setOnClickListener {
+
+            if (validateForm()) {
+                registerCustomer()
+            }
+        }
+
+        registerActivity_login.setOnClickListener {
+            startActivity(Intent(applicationContext, LoginActivity::class.java))
+            finish()
+            //overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out)
+        }
+    }
+
+    /**
+     */
+    private fun registerCustomer() {
+
+        registerActivity_register.isEnabled = false
+        progressDialog.show()
+
+        AuthenticationProvider().register(
+            registerActivity_name.text.toString(),
+            registerActivity_username.text.toString(),
+            registerActivity_password.text.toString(),
+            registerActivity_address1.text.toString(),
+            registerActivity_address2.text.toString(),
+            "PT",
+            registerActivity_nif.text.toString(),
+            "",
+            CreditCard(
+                "",
+                "",
+                Date()
+            )
+        ).observeOn(
+            AndroidSchedulers.mainThread()
+        ).subscribeOn(
+            Schedulers.io()
+        ).subscribe(
+            onRegisterComplete,
+            onRegisterFailed(HttpErrorHandler(this))
+        )
+    }
+
+    /**
+     */
+    private fun validateForm(): Boolean {
+
         var formValid = true
-        val name = _nameText!!.text.toString()
-        val address = _addressText!!.text.toString()
-        val email = _emailText!!.text.toString()
-        val mobile = _mobileText!!.text.toString()
-        val password = _passwordText!!.text.toString()
-        val reEnterPassword = _reEnterPasswordText!!.text.toString()
+        val name = registerActivity_name.text.toString()
 
-        if (name.isEmpty() || name.length < 3) {
-            _nameText!!.error = "at least 3 characters"
+        if (name.isEmpty()) {
+            registerActivity_name.error = AcmeStore.ERROR_REQUIRED
             formValid = false
         } else {
-            _nameText!!.error = null
+            registerActivity_name.error = null
         }
 
-        if (address.isEmpty()) {
-            _addressText!!.error = "Enter Valid Address"
-            formValid = false
-        } else {
-            _addressText!!.error = null
+        val username = registerActivity_username.text.toString()
+
+        when {
+            username.isEmpty() -> {
+                registerActivity_username.error = AcmeStore.ERROR_REQUIRED
+                formValid = false
+            }
+            AcmeStore.invalidUsername(username) -> {
+                registerActivity_username.error = AcmeStore.ERROR_USERNAME
+                formValid = false
+            }
+            else -> {
+                registerActivity_username.error = null
+            }
         }
 
+        val password = registerActivity_password.text.toString()
 
-        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            _emailText!!.error = "enter a valid email address"
-            formValid = false
-        } else {
-            _emailText!!.error = null
+        when {
+            password.isEmpty() -> {
+                registerActivity_password.error = AcmeStore.ERROR_REQUIRED
+                formValid = false
+            }
+            AcmeStore.invalidPassword(password) -> {
+                registerActivity_password.error = AcmeStore.ERROR_PASSWORD
+                formValid = false
+            }
+            else -> {
+                registerActivity_password.error = null
+            }
         }
 
-        if (mobile.isEmpty() || mobile.length != 10) {
-            _mobileText!!.error = "Enter Valid Mobile Number"
-            formValid = false
-        } else {
-            _mobileText!!.error = null
+        val confirmPassword = registerActivity_confirm.text.toString()
+
+        when {
+            confirmPassword.isEmpty() -> {
+                registerActivity_confirm.error = AcmeStore.ERROR_REQUIRED
+                formValid = false
+            }
+            AcmeStore.invalidPassword(confirmPassword) -> {
+                registerActivity_password.error = AcmeStore.ERROR_PASSWORD
+                formValid = false
+            }
+            confirmPassword != password -> {
+                registerActivity_confirm.error = ERROR_MISMATCH
+                formValid = false
+            }
+            else -> {
+                registerActivity_confirm.error = null
+            }
         }
 
-        if (password.isEmpty() || password.length < 4 || password.length > 10) {
-            _passwordText!!.error = "between 4 and 10 alphanumeric characters"
+        val address1 = registerActivity_address1.text.toString()
+
+        if (address1.isEmpty()) {
+            registerActivity_address1.error = AcmeStore.ERROR_REQUIRED
             formValid = false
         } else {
-            _passwordText!!.error = null
+            registerActivity_address1.error = null
         }
 
-        if (reEnterPassword.isEmpty() || reEnterPassword.length < 4 || reEnterPassword.length > 10 || reEnterPassword != password) {
-            _reEnterPasswordText!!.error = "Password Do not match"
+        val address2 = registerActivity_address2.text.toString()
+
+        if (address2.isEmpty()) {
+            registerActivity_address2.error = AcmeStore.ERROR_REQUIRED
             formValid = false
         } else {
-            _reEnterPasswordText!!.error = null
+            registerActivity_address2.error = null
+        }
+
+        val taxNumber = registerActivity_nif.text.toString()
+
+        when {
+            taxNumber.isEmpty() -> {
+                registerActivity_nif.error = AcmeStore.ERROR_REQUIRED
+                formValid = false
+            }
+            taxNumber.length != 9 -> {
+                registerActivity_nif.error = ERROR_NIF
+                formValid = false
+            }
+            else -> {
+                registerActivity_nif.error = null
+            }
         }
 
         return formValid
     }
 
+    /**
+     */
     companion object {
-        private val TAG = "SignupActivity"
+        private val ERROR_MISMATCH = "The passwords you entered do not match!"
+        private val ERROR_NIF = "The tax number must be exactly 9 digits long."
     }
 }

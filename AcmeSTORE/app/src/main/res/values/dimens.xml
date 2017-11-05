@@ -1,12 +1,15 @@
 <resources>
+
+  <!-- Globals -->
+  <dimen name="global_smallFont">12sp</dimen>
+  <dimen name="global_mediumFont">16sp</dimen>
+
   <!-- CardView -->
   <dimen name="cardView_elevation">4dp</dimen>
   <dimen name="cardView_halfMargin">8dp</dimen>
   <dimen name="cardView_image">72dp</dimen>
   <dimen name="cardView_margin">16dp</dimen>
-  <dimen name="cardView_mediumFont">16sp</dimen>
   <dimen name="cardView_quarterMargin">4dp</dimen>
-  <dimen name="cardView_smallFont">12sp</dimen>
 
   <!-- ProductViewActivity -->
   <dimen name="productView_photo">360dp</dimen>
@@ -28,7 +31,5 @@
   <!-- ShoppingCartFragment -->
   <dimen name="shoppingCart_button">48dp</dimen>
   <dimen name="shoppingCart_quantity">32dp</dimen>
-  <!-- Default screen margins, per the Android Design guidelines. -->
-  <dimen name="activity_horizontal_margin">16dp</dimen>
-  <dimen name="activity_vertical_margin">16dp</dimen>
+  <dimen name="text_margin">16dp</dimen>
 </resources>

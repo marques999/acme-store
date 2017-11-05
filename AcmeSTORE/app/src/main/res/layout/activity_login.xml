@@ -64,7 +64,7 @@
       android:layout_marginBottom="@dimen/loginActivity_largeMargin"
       android:gravity="center"
       android:text="@string/loginActivity_register"
-      android:textSize="@dimen/cardView_mediumFont" />
+      android:textSize="@dimen/global_mediumFont" />
 
   </LinearLayout>
 </ScrollView>

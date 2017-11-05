@@ -4,7 +4,6 @@
   package="org.marques999.acme.store">
 
   <uses-permission android:name="android.permission.INTERNET" />
-
   <application
     android:name=".AcmeStore"
     android:allowBackup="true"
@@ -16,8 +15,8 @@
     android:theme="@style/AppTheme"
     tools:ignore="GoogleAppIndexingWarning">
     <activity
-      android:name=".LoginActivity"
-      android:theme="@style/AppTheme.Dark">
+      android:name=".MainActivity"
+      android:label="@string/actionBar_cart">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
@@ -27,8 +26,9 @@
       android:name=".products.ProductViewActivity"
       android:label="@string/productView_activity" />
     <activity
-      android:name=".MainActivity"
-      android:label="@string/title_activity_login" />
+      android:name=".LoginActivity"
+      android:label="@string/title_activity_login"
+      android:theme="@style/AppTheme.Dark" />
     <activity
       android:name=".RegisterActivity"
       android:theme="@style/AppTheme.Dark" />

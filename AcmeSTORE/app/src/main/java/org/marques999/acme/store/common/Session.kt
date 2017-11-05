@@ -1,5 +1,6 @@
 package org.marques999.acme.store.common
 
+import java.util.Calendar
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.marques999.acme.store.customers.CustomerJSON
 
@@ -11,7 +12,7 @@ class Session(private val jwt: SessionJwt, username: String) {
 
     /**
      */
-    fun hasExpired() = jwt.expire.after(java.util.Calendar.getInstance().time)
+    fun hasExpired() = jwt.expire.after(Calendar.getInstance().time)
 
     /**
      */

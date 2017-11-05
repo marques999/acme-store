@@ -132,7 +132,7 @@
           android:layout_height="wrap_content"
           android:layout_marginBottom="@dimen/cardView_halfMargin"
           android:text="@string/productView_barcode"
-          android:textSize="@dimen/cardView_mediumFont"
+          android:textSize="@dimen/global_mediumFont"
           android:textStyle="bold" />
 
         <TextView
@@ -140,7 +140,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginBottom="@dimen/cardView_halfMargin"
-          android:textSize="@dimen/cardView_smallFont" />
+          android:textSize="@dimen/global_smallFont" />
       </LinearLayout>
     </android.support.v7.widget.CardView>
 
@@ -162,7 +162,7 @@
           android:layout_height="wrap_content"
           android:layout_marginBottom="@dimen/cardView_halfMargin"
           android:text="@string/productView_description"
-          android:textSize="@dimen/cardView_mediumFont"
+          android:textSize="@dimen/global_mediumFont"
           android:textStyle="bold" />
 
         <TextView
@@ -171,7 +171,7 @@
           android:layout_height="0dp"
           android:layout_weight="1"
           android:lineSpacingMultiplier="1.2"
-          android:textSize="@dimen/cardView_smallFont" />
+          android:textSize="@dimen/global_smallFont" />
       </LinearLayout>
     </android.support.v7.widget.CardView>
   </LinearLayout>

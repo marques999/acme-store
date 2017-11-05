@@ -1,4 +1,4 @@
-package org.marques999.acme.store.dummy
+package org.marques999.acme.store.history
 
 import android.support.v7.widget.RecyclerView
 
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import org.marques999.acme.store.R
-import org.marques999.acme.store.dummy.OrderContent.DummyItem
+import org.marques999.acme.store.history.OrderContent.DummyItem
 
 import android.widget.TextView
 
@@ -42,9 +42,6 @@ class OrderAdapter(private val mValues: List<DummyItem>) : RecyclerView.Adapter<
         /**
          */
         val mIdView: TextView = mView.findViewById(R.id.id)
-
-        /**
-         */
         val mContentView: TextView = mView.findViewById(R.id.content)
 
         /**
