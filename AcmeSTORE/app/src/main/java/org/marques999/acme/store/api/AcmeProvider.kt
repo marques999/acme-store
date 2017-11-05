@@ -4,13 +4,12 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.Rfc3339DateJsonAdapter
 import com.squareup.moshi.Types
 
-import org.marques999.acme.store.AcmeStore
-
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 
-import org.marques999.acme.store.customers.CustomerPOST
+import org.marques999.acme.store.AcmeStore
 import org.marques999.acme.store.common.Session
+import org.marques999.acme.store.customers.CustomerPOST
 
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory

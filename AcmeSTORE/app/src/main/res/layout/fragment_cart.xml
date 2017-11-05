@@ -1,0 +1,49 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/cart_relativeLayout"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  tools:context=".products.ShoppingCartFragment"
+  tools:listitem="@layout/fragment_cart_item">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="horizontal"
+    android:padding="@dimen/global_halfMargin">
+
+    <Button
+      android:id="@+id/shoppingCart_scan"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:drawablePadding="@dimen/global_defaultMargin"
+      android:drawableStart="@drawable/ic_camera_24dp"
+      android:padding="@dimen/global_defaultMargin"
+      android:text="@string/shoppingCart_scan"
+      android:textAlignment="textStart"
+      android:textColor="@android:color/primary_text_dark" />
+
+    <Button
+      android:id="@+id/shoppingCart_checkout"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:drawablePadding="@dimen/global_defaultMargin"
+      android:drawableStart="@drawable/ic_check_24dp"
+      android:enabled="false"
+      android:padding="@dimen/global_defaultMargin"
+      android:text="@string/shoppingCart_checkout"
+      android:textAlignment="textStart"
+      android:textColor="@android:color/primary_text_dark" />
+  </LinearLayout>
+
+  <android.support.v7.widget.RecyclerView
+    android:id="@+id/news_list"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    tools:listitem="@layout/fragment_cart_item" />
+</LinearLayout>

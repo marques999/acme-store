@@ -1,13 +1,14 @@
 package org.marques999.acme.store.catalog
 
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import org.marques999.acme.store.R
 
+import org.marques999.acme.store.R
 import org.marques999.acme.store.catalog.ProductCatalogFragment.OnListFragmentInteractionListener
+
+import android.support.v7.widget.RecyclerView
+import android.widget.TextView
 
 class ProductCatalogAdapter(
     private val products: List<ProductCatalogContent.DummyItem>,

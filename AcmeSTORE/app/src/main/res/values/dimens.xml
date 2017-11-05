@@ -1,15 +1,15 @@
 <resources>
-
   <!-- Globals -->
-  <dimen name="global_smallFont">12sp</dimen>
+  <dimen name="global_defaultMargin">16dp</dimen>
+  <dimen name="global_halfMargin">8dp</dimen>
   <dimen name="global_mediumFont">16sp</dimen>
+  <dimen name="global_quarterMargin">4dp</dimen>
+  <dimen name="global_smallFont">12sp</dimen>
+  <dimen name="global_tinyMargin">2dp</dimen>
 
   <!-- CardView -->
   <dimen name="cardView_elevation">4dp</dimen>
-  <dimen name="cardView_halfMargin">8dp</dimen>
   <dimen name="cardView_image">72dp</dimen>
-  <dimen name="cardView_margin">16dp</dimen>
-  <dimen name="cardView_quarterMargin">4dp</dimen>
 
   <!-- ProductViewActivity -->
   <dimen name="productView_photo">360dp</dimen>
@@ -17,7 +17,6 @@
   <dimen name="productView_model">28sp</dimen>
 
   <!-- LoginActivity -->
-  <dimen name="loginActivity_smallMargin">8dp</dimen>
   <dimen name="loginActivity_mediumMargin">12dp</dimen>
   <dimen name="loginActivity_largeMargin">24dp</dimen>
 
@@ -28,8 +27,11 @@
   <!-- QrCodeActivity -->
   <dimen name="qrCode_imageView">280dp</dimen>
 
+  <!-- RegisterActivity -->
+  <dimen name="registerActivity_button">12dp</dimen>
+  <dimen name="registerActivity_heading">20sp</dimen>
+
   <!-- ShoppingCartFragment -->
   <dimen name="shoppingCart_button">48dp</dimen>
   <dimen name="shoppingCart_quantity">32dp</dimen>
-  <dimen name="text_margin">16dp</dimen>
 </resources>

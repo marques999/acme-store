@@ -10,7 +10,7 @@ import org.marques999.acme.store.AcmeStore
 import org.marques999.acme.store.view.ViewType
 import org.marques999.acme.store.view.ViewTypeAdapter
 
-import kotlinx.android.synthetic.main.item_product.view.*
+import kotlinx.android.synthetic.main.fragment_cart_item.view.*
 import org.marques999.acme.store.orders.OrderProduct
 
 class ProductAdapter(val viewActions: ProductFragmentListener) : ViewTypeAdapter {
@@ -30,7 +30,7 @@ class ProductAdapter(val viewActions: ProductFragmentListener) : ViewTypeAdapter
     }
 
     inner class ProductViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
-        inflate(parent, R.layout.item_product)
+        inflate(parent, R.layout.fragment_cart_item)
     ) {
 
         fun bind(item: OrderProduct) {

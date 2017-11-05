@@ -1,22 +1,25 @@
 package org.marques999.acme.store
 
-import android.app.Activity
-import android.app.ProgressDialog
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+
+import kotlinx.android.synthetic.main.activity_login.*
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 
-import kotlinx.android.synthetic.main.activity_login.*
+import android.content.Intent
 
 import org.marques999.acme.store.api.AuthenticationProvider
 import org.marques999.acme.store.common.AcmeDialogs
 import org.marques999.acme.store.common.Authentication
 import org.marques999.acme.store.common.HttpErrorHandler
 import org.marques999.acme.store.common.SessionJwt
+import org.marques999.acme.store.register.RegisterActivity
+
+import android.app.Activity
+import android.app.ProgressDialog
 
 class LoginActivity : AppCompatActivity() {
 

@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
   package="org.marques999.acme.store">
-
   <uses-permission android:name="android.permission.INTERNET" />
   <application
     android:name=".AcmeStore"
@@ -14,9 +13,7 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme"
     tools:ignore="GoogleAppIndexingWarning">
-    <activity
-      android:name=".MainActivity"
-      android:label="@string/actionBar_cart">
+    <activity android:name=".MainActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
@@ -30,7 +27,7 @@
       android:label="@string/title_activity_login"
       android:theme="@style/AppTheme.Dark" />
     <activity
-      android:name=".RegisterActivity"
+      android:name=".register.RegisterActivity"
       android:theme="@style/AppTheme.Dark" />
   </application>
 </manifest>

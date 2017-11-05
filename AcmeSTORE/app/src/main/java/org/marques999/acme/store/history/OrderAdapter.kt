@@ -1,7 +1,5 @@
 package org.marques999.acme.store.history
 
-import android.support.v7.widget.RecyclerView
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +7,7 @@ import android.view.ViewGroup
 import org.marques999.acme.store.R
 import org.marques999.acme.store.history.OrderContent.DummyItem
 
+import android.support.v7.widget.RecyclerView
 import android.widget.TextView
 
 class OrderAdapter(private val mValues: List<DummyItem>) : RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
@@ -20,7 +19,7 @@ class OrderAdapter(private val mValues: List<DummyItem>) : RecyclerView.Adapter<
     /**
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.item_order, parent, false)
+        LayoutInflater.from(parent.context).inflate(R.layout.fragment_history_item, parent, false)
     )
 
     /**

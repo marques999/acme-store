@@ -21,7 +21,7 @@ class OrderHistoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.fragment_shopping_history, container, false)
+        val view = inflater.inflate(R.layout.fragment_history, container, false)
 
         if (view is RecyclerView) {
             view.layoutManager = LinearLayoutManager(view.getContext())

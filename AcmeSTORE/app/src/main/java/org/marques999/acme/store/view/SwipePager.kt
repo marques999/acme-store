@@ -6,22 +6,6 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 
 class SwipePager(context: Context, attrs: AttributeSet) : ViewPager(context, attrs) {
-
-    private var pagingEnabled = true
-
-    override fun onTouchEvent(motionEvent: MotionEvent?): Boolean = if (this.pagingEnabled) {
-        super.onTouchEvent(motionEvent)
-    } else {
-        false
-    }
-
-    override fun onInterceptTouchEvent(motionEvent: MotionEvent?) = if (this.pagingEnabled) {
-        super.onInterceptTouchEvent(motionEvent)
-    } else {
-        false
-    }
-
-    fun setPagingEnabled(enabled: Boolean) {
-        pagingEnabled = enabled
-    }
+    override fun onTouchEvent(motionEvent: MotionEvent?): Boolean = false
+    override fun onInterceptTouchEvent(motionEvent: MotionEvent?) = false
 }

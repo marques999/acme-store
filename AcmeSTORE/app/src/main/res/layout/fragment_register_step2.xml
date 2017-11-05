@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  android:paddingEnd="@dimen/global_defaultMargin"
+  android:paddingStart="@dimen/global_defaultMargin"
+  android:paddingTop="@dimen/global_defaultMargin">
+
+  <!--
+    LinearLayout: Heading
+  -->
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <!--
+      ImageView: Heading Icon
+    -->
+    <ImageView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:contentDescription="@string/registerActivity_icon"
+      android:padding="@dimen/global_tinyMargin"
+      android:src="@drawable/ic_credit_card_48dp"
+      android:tint="@color/bottomNavigation_iron" />
+
+    <!--
+      TextView: Heading Title
+    -->
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:padding="@dimen/registerActivity_button"
+      android:text="@string/registerActivity_heading2"
+      android:textAllCaps="true"
+      android:textSize="@dimen/registerActivity_heading"
+      android:textStyle="bold" />
+  </LinearLayout>
+
+  <!--
+   TextInputLayout: Credit Card Type
+  -->
+  <android.support.design.widget.TextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/global_halfMargin"
+    android:layout_marginTop="@dimen/global_halfMargin">
+
+    <EditText
+      android:id="@+id/registerActivity_ccType"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="@string/registerActivity_ccType" />
+  </android.support.design.widget.TextInputLayout>
+
+  <!--
+   TextInputLayout: Credit Card Number
+  -->
+  <android.support.design.widget.TextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/global_halfMargin"
+    android:layout_marginTop="@dimen/global_halfMargin">
+
+    <EditText
+      android:id="@+id/registerActivity_ccNumber"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="@string/registerActivity_ccNumber"
+      android:inputType="numberDecimal" />
+  </android.support.design.widget.TextInputLayout>
+
+  <!--
+    TextInputLayout: Credit Card Validity
+  -->
+  <android.support.design.widget.TextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/global_halfMargin"
+    android:layout_marginTop="@dimen/global_halfMargin">
+
+    <EditText
+      android:id="@+id/registerActivity_ccDate"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="@string/registerActivity_ccValidity"
+      android:inputType="date" />
+  </android.support.design.widget.TextInputLayout>
+
+  <!--
+     LinearLayout: Buttons
+  -->
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/global_halfMargin">
+
+    <!--
+      Button: Previous
+    -->
+    <android.support.v7.widget.AppCompatButton
+      android:id="@+id/registerActivity_previous"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:drawableStart="@drawable/ic_chevron_left_24dp"
+      android:padding="@dimen/registerActivity_button"
+      android:text="@string/registerActivity_previous" />
+
+    <!--
+      Button: Register
+    -->
+    <android.support.v7.widget.AppCompatButton
+      android:id="@+id/registerActivity_register"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:drawableEnd="@drawable/ic_chevron_right_24dp"
+      android:padding="@dimen/registerActivity_button"
+      android:text="@string/registerActivity_register" />
+  </LinearLayout>
+</LinearLayout>

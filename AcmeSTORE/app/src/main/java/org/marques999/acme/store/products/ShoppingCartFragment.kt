@@ -1,29 +1,35 @@
 package org.marques999.acme.store.products
 
-import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.DialogInterface
 import android.content.Intent
-import android.net.Uri
-import android.os.Bundle
-import android.support.v4.app.Fragment
+
+import kotlinx.android.synthetic.main.fragment_cart.*
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import kotlinx.android.synthetic.main.fragment_shopping_cart.*
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 
+import android.app.Activity
+
 import org.marques999.acme.store.R
 import org.marques999.acme.store.AcmeStore
+
+import android.net.Uri
+
 import org.marques999.acme.store.common.AcmeDialogs
 import org.marques999.acme.store.common.HttpErrorHandler
 
-import android.support.v7.widget.LinearLayoutManager
+import android.os.Bundle
+
 import org.marques999.acme.store.orders.OrderProduct
+
+import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
 
 class ShoppingCartFragment : Fragment(), ProductAdapter.ProductFragmentListener {
 
@@ -97,7 +103,7 @@ class ShoppingCartFragment : Fragment(), ProductAdapter.ProductFragmentListener 
         savedInstanceState: Bundle?
     ): View = LayoutInflater.from(
         context
-    ).inflate(R.layout.fragment_shopping_cart, container, false)
+    ).inflate(R.layout.fragment_cart, container, false)
 
     /**
      */
@@ -169,6 +175,6 @@ class ShoppingCartFragment : Fragment(), ProductAdapter.ProductFragmentListener 
             news_list.adapter = ShoppingCartAdapter(this)
         }
 
-        shoppingCart_scanButton.setOnClickListener(scanProductBarcode)
+        shoppingCart_scan.setOnClickListener(scanProductBarcode)
     }
 }

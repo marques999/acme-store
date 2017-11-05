@@ -22,13 +22,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="@dimen/cardView_halfMargin">
+        android:padding="@dimen/global_halfMargin">
 
         <TextView
           android:id="@+id/productView_brand"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginBottom="@dimen/cardView_quarterMargin"
+          android:layout_marginBottom="@dimen/global_quarterMargin"
           android:textSize="@dimen/productView_brand"
           android:textStyle="bold" />
 
@@ -52,7 +52,7 @@
         android:id="@+id/productView_photo"
         android:layout_width="match_parent"
         android:layout_height="@dimen/productView_photo"
-        android:layout_margin="@dimen/cardView_margin"
+        android:layout_margin="@dimen/global_defaultMargin"
         android:contentDescription="@string/productView_photo" />
 
     </android.support.v7.widget.CardView>
@@ -68,15 +68,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
-        android:paddingEnd="@dimen/cardView_quarterMargin"
-        android:paddingStart="@dimen/cardView_halfMargin">
+        android:paddingEnd="@dimen/global_quarterMargin"
+        android:paddingStart="@dimen/global_halfMargin">
 
         <TextView
           android:id="@+id/productView_price"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="start"
-          android:paddingTop="@dimen/cardView_margin"
+          android:paddingTop="@dimen/global_defaultMargin"
           android:text="@string/productView_price"
           android:textColor="@android:color/white"
           android:textStyle="bold" />
@@ -125,12 +125,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="@dimen/cardView_halfMargin">
+        android:padding="@dimen/global_halfMargin">
 
         <TextView
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginBottom="@dimen/cardView_halfMargin"
+          android:layout_marginBottom="@dimen/global_halfMargin"
           android:text="@string/productView_barcode"
           android:textSize="@dimen/global_mediumFont"
           android:textStyle="bold" />
@@ -139,7 +139,7 @@
           android:id="@+id/productView_barcode"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginBottom="@dimen/cardView_halfMargin"
+          android:layout_marginBottom="@dimen/global_halfMargin"
           android:textSize="@dimen/global_smallFont" />
       </LinearLayout>
     </android.support.v7.widget.CardView>
@@ -155,12 +155,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="@dimen/cardView_halfMargin">
+        android:padding="@dimen/global_halfMargin">
 
         <TextView
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginBottom="@dimen/cardView_halfMargin"
+          android:layout_marginBottom="@dimen/global_halfMargin"
           android:text="@string/productView_description"
           android:textSize="@dimen/global_mediumFont"
           android:textStyle="bold" />

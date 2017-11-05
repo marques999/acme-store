@@ -1,24 +1,24 @@
 package org.marques999.acme.store
 
-import android.app.Activity
-import java.text.NumberFormat
+import org.marques999.acme.store.common.Authentication
+import org.marques999.acme.store.common.Session
+import org.marques999.acme.store.common.SessionJwt
+
+import java.security.PrivateKey
 
 import org.marques999.acme.store.api.AcmeProvider
 import org.marques999.acme.store.api.CryptographyProvider
 
-import java.security.PrivateKey
-
 import android.content.Context
 import android.content.SharedPreferences
 
-import org.marques999.acme.store.common.Authentication
+import java.text.NumberFormat
+
+import android.app.Activity
+import android.app.Application
 
 import java.util.Currency
 import java.util.Locale
-
-import android.app.Application
-import org.marques999.acme.store.common.Session
-import org.marques999.acme.store.common.SessionJwt
 
 class AcmeStore : Application() {
 
@@ -76,6 +76,10 @@ class AcmeStore : Application() {
         private val USERNAME_MINIMUM = 3
         private val PASSWORD_MINIMUM = 6
         private val PASSWORD_MAXIMUM = 16
+
+        val NIF_LENGTH = 9
+        val ERROR_MISMATCH = "The passwords you entered do not match!"
+        val ERROR_NIF = "The tax number must be exactly $NIF_LENGTH digits long."
         val ERROR_PASSWORD = "Password must have between $PASSWORD_MINIMUM and $PASSWORD_MAXIMUM alphanumeric characters"
         val ERROR_USERNAME = "Username must be at least $USERNAME_MINIMUM characters long."
         val ERROR_REQUIRED = "This field is required."

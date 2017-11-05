@@ -1,16 +1,17 @@
 package org.marques999.acme.store.products
 
-import android.support.v7.app.AppCompatActivity
+import org.marques999.acme.store.orders.OrderProduct
+
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 
 import com.squareup.picasso.Picasso
 
-import org.marques999.acme.store.orders.OrderProduct
+import org.marques999.acme.store.R
+import org.marques999.acme.store.AcmeStore
 
 import kotlinx.android.synthetic.main.activity_product.*
-import org.marques999.acme.store.AcmeStore
-import org.marques999.acme.store.R
 
 class ProductViewActivity : AppCompatActivity() {
 

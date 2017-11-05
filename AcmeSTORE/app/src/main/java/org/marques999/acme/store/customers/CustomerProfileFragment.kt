@@ -2,21 +2,23 @@ package org.marques999.acme.store.customers
 
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-
-import org.marques999.acme.store.R
 
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
 import com.google.zxing.common.BitMatrix
 
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+
+import org.marques999.acme.store.R
 import org.marques999.acme.store.AcmeStore
 
 import kotlinx.android.synthetic.main.fragment_profile.*
+
+import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 
 class CustomerProfileFragment : Fragment() {
 
@@ -111,9 +113,9 @@ class CustomerProfileFragment : Fragment() {
             (0 until width).forEach { x ->
 
                 pixels[offset + x] = if (bitMatrix.get(x, y)) {
-                    resources.getColor(R.color.colorPrimary)
+                    ContextCompat.getColor(context, R.color.colorPrimary)
                 } else {
-                    resources.getColor(android.R.color.white)
+                    ContextCompat.getColor(context, android.R.color.white)
                 }
             }
         }

@@ -1,4 +1,7 @@
 <resources>
+  <!-- Globals -->
+  <string name="title_activity_login">Login</string>
+
   <!-- ActionBar -->
   <string name="actionBar_cart">Shopping Cart</string>
   <string name="actionBar_catalog">Product Catalog</string>
@@ -11,13 +14,16 @@
   <string name="bottomNavigation_history">History</string>
   <string name="bottomNavigation_profile">Profile</string>
 
+  <!-- CustomerProfile -->
+  <string name="customerProfile_icon">TODO</string>
+
   <!-- LoginActivity -->
-  <string name="loginActivity_progress">Authenticating…</string>
-  <string name="loginActivity_password">Password</string>
-  <string name="loginActivity_username">Username</string>
-  <string name="loginActivity_register">Don\'t have an account yet? Register!</string>
-  <string name="loginActivity_login">Login</string>
   <string name="loginActivity_icon">TODO</string>
+  <string name="loginActivity_login">Login</string>
+  <string name="loginActivity_password">Password</string>
+  <string name="loginActivity_progress">Authenticating…</string>
+  <string name="loginActivity_register">Don\'t have an account yet? Register!</string>
+  <string name="loginActivity_username">Username</string>
 
   <!-- MainActivity -->
   <string name="main_activity">AcmeSTORE</string>
@@ -32,19 +38,26 @@
   <string name="productView_price">€000.00</string>
 
   <!-- RegisterActivity -->
-  <string name="registerActivity_progress">"Creating Account…"</string>
-  <string name="registerActivity_name">Full Name</string>
-  <string name="registerActivity_username">Username</string>
-  <string name="registerActivity_address1">Address</string>
-  <string name="registerActivity_password">Password</string>
-  <string name="registerActivity_confirm">Re-enter Password</string>
-  <string name="registerActivity_address2">City &amp; Postal Code></string>
-  <string name="registerActivity_nif">Tax Number</string>
-  <string name="registerActivity_register">Create Account</string>
+  <string name="registerActivity_address1">Address (street)</string>
+  <string name="registerActivity_address2">Address (city/post)</string>
+  <string name="registerActivity_ccNumber">Number</string>
+  <string name="registerActivity_ccType">Type</string>
+  <string name="registerActivity_ccValidity">Validity</string>
+  <string name="registerActivity_confirm">Confirm Password</string>
+  <string name="registerActivity_heading1">Personal information</string>
+  <string name="registerActivity_heading2">Payment method</string>
   <string name="registerActivity_icon">TODO</string>
-  <string name="registerActivity_login">Already a member? Login!</string>
+  <string name="registerActivity_name">Full Name</string>
+  <string name="registerActivity_next">Next (Payment Method)</string>
+  <string name="registerActivity_nif">Tax Number</string>
+  <string name="registerActivity_password">Password</string>
+  <string name="registerActivity_previous">Previous</string>
+  <string name="registerActivity_progress">"Creating Account…"</string>
+  <string name="registerActivity_register">Register</string>
+  <string name="registerActivity_username">Username</string>
 
   <!-- ShoppingCartFragment -->
+  <string name="shoppingCart_checkout">CHECKOUT</string>
   <string name="shoppingCart_delete">Delete</string>
   <string name="shoppingCart_minus">-</string>
   <string name="shoppingCart_name">%1$s %2$s</string>
@@ -52,11 +65,4 @@
   <string name="shoppingCart_plus">+</string>
   <string name="shoppingCart_quantity">10</string>
   <string name="shoppingCart_scan">SCAN BARCODE</string>
-  <string name="title_activity_login">Login</string>
-
-  <!-- Strings related to login -->
-  <string name="error_invalid_email">This email address is invalid</string>
-  <string name="error_invalid_password">This password is too short</string>
-  <string name="error_incorrect_password">This password is incorrect</string>
-  <string name="customerProfile_icon">TODO</string>
 </resources>
