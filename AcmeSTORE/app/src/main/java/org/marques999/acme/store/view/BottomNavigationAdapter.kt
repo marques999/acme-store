@@ -39,8 +39,5 @@ class BottomNavigationAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(f
     /**
      */
     fun addFragments(fragment: Fragment) = fragments.add(fragment)
-
-    /**
-     */
-    fun getRegisteredFragment(position: Int) = registeredFragments.get(position)
+    fun getFragment(position: Int) = registeredFragments.get(position)
 }

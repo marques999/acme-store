@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  tools:context=".orders.OrderConfirmActivity">
+
+  <ImageView
+    android:id="@+id/qrCode_imageView"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/qrCode_imageView"
+    android:layout_gravity="center"
+    android:padding="@dimen/global_defaultMargin" />
+
+  <TextView
+    android:id="@+id/qrCode_textView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Hello World!"
+    android:textAlignment="center" />
+</LinearLayout>

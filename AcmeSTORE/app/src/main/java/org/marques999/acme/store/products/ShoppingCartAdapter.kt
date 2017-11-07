@@ -4,10 +4,9 @@ import android.support.v4.util.SparseArrayCompat
 import android.support.v7.widget.RecyclerView
 
 import org.marques999.acme.store.orders.OrderProduct
-
-import org.marques999.acme.store.view.RecyclerLoadingAdapter
 import org.marques999.acme.store.view.ViewType
 import org.marques999.acme.store.view.ViewTypeAdapter
+import org.marques999.acme.store.view.RecyclerLoadingAdapter
 
 import android.view.ViewGroup
 
@@ -48,9 +47,6 @@ class ShoppingCartAdapter(
     /**
      */
     override fun getItemCount(): Int = items.size
-
-    /**
-     */
     override fun getItemViewType(position: Int) = items[position].getViewType()
 
     /**

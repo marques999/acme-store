@@ -16,9 +16,15 @@ import java.text.NumberFormat
 
 import android.app.Activity
 import android.app.Application
+import android.support.annotation.ColorRes
+import android.support.v4.content.ContextCompat
 
+import java.util.Date
 import java.util.Currency
 import java.util.Locale
+
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.Rfc3339DateJsonAdapter
 
 class AcmeStore : Application() {
 
@@ -90,12 +96,23 @@ class AcmeStore : Application() {
 
         val ALGORITHM_PKCS = "RSA"
         val ALGORITHM_HASH = "SHA1WithRSA"
-        val SERVER_URL = "http://192.168.1.87:3333/"
+        val SERVER_URL = "http://10.0.2.2:3333/"
         val DEFAULT_USERNAME = "marques999"
         val DEFAULT_PASSWORD = "r0wsauce"
         val ZXING_ACTIVITY = "$ZXING_PACKAGE.SCAN"
         val RAMEN_RECIPE = "mieic@feup#2017".toByteArray()
         val ZXING_URL = "market://details?id=$ZXING_PACKAGE"
+
+        val jsonSerializer: Moshi by lazy {
+            Moshi.Builder().add(
+                Date::class.java,
+                Rfc3339DateJsonAdapter().nullSafe()
+            ).build()
+        }
+
+        fun fetchColor(context: Context, @ColorRes color: Int): Int {
+            return ContextCompat.getColor(context, color)
+        }
 
         fun invalidUsername(username: String): Boolean {
             return username.length < AcmeStore.USERNAME_MINIMUM

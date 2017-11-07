@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
   package="org.marques999.acme.store">
+
   <uses-permission android:name="android.permission.INTERNET" />
+
   <application
     android:name=".AcmeStore"
     android:allowBackup="true"
@@ -16,6 +18,7 @@
     <activity android:name=".MainActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
+
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
@@ -29,5 +32,7 @@
     <activity
       android:name=".register.RegisterActivity"
       android:theme="@style/AppTheme.Dark" />
+    <activity android:name=".orders.OrderConfirmActivity"></activity>
   </application>
+
 </manifest>

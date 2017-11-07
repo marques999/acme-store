@@ -16,30 +16,30 @@ object AcmeDialogs {
      */
     fun buildOk(
         context: Context,
-        resourceId: Int,
-        vararg format: Any
+        throwable: Exception,
+        message: String
     ): AlertDialog.Builder = AlertDialog
         .Builder(context)
-        .setTitle(R.string.main_activity)
-        .setMessage(context.getString(resourceId, *format))
+        .setTitle(throwable.javaClass.simpleName)
+        .setMessage(message)
         .setPositiveButton(android.R.string.ok, null)
 
     /**
      */
     fun buildOk(
         context: Context,
-        title: String,
-        message: String
+        resourceId: Int,
+        vararg params: Any
     ): AlertDialog.Builder = AlertDialog
         .Builder(context)
-        .setTitle(title)
-        .setMessage(message)
+        .setTitle(R.string.main_activity)
+        .setMessage(context.getString(resourceId, params))
         .setPositiveButton(android.R.string.ok, null)
 
     /**
      */
     fun buildProgress(context: Context, @StringRes messageId: Int) = ProgressDialog(
-        context, R.style.AppTheme_Dark
+        context
     ).apply {
         isIndeterminate = true
         setMessage(context.getString(messageId))

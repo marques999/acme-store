@@ -15,17 +15,13 @@ import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 
 import android.app.Activity
+import android.net.Uri
+import android.os.Bundle
 
 import org.marques999.acme.store.R
 import org.marques999.acme.store.AcmeStore
-
-import android.net.Uri
-
 import org.marques999.acme.store.common.AcmeDialogs
 import org.marques999.acme.store.common.HttpErrorHandler
-
-import android.os.Bundle
-
 import org.marques999.acme.store.orders.OrderProduct
 
 import android.support.v4.app.Fragment
@@ -33,6 +29,12 @@ import android.support.v7.widget.LinearLayoutManager
 
 class ShoppingCartFragment : Fragment(), ProductAdapter.ProductFragmentListener {
 
+    /**
+     */
+    private lateinit var application: AcmeStore
+
+    /**
+     */
     private val shoppingCart = HashMap<String, OrderProduct>()
 
     /**
@@ -48,14 +50,11 @@ class ShoppingCartFragment : Fragment(), ProductAdapter.ProductFragmentListener 
     /**
      */
     override fun onItemDeleted(barcode: String) {
+
         shoppingCart.remove(barcode)?.let {
             (news_list.adapter as ShoppingCartAdapter).removeProduct(it)
         }
     }
-
-    /**
-     */
-    private lateinit var application: AcmeStore
 
     /**
      */
@@ -101,9 +100,9 @@ class ShoppingCartFragment : Fragment(), ProductAdapter.ProductFragmentListener 
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = LayoutInflater.from(
-        context
-    ).inflate(R.layout.fragment_cart, container, false)
+    ): View = LayoutInflater.from(context).inflate(
+        R.layout.fragment_cart, container, false
+    )
 
     /**
      */
@@ -116,7 +115,8 @@ class ShoppingCartFragment : Fragment(), ProductAdapter.ProductFragmentListener 
         ).subscribeOn(
             Schedulers.io()
         ).subscribe(
-            onFetchProduct, HttpErrorHandler(context)
+            onFetchProduct,
+            HttpErrorHandler(context)
         )
     }
 
@@ -125,24 +125,21 @@ class ShoppingCartFragment : Fragment(), ProductAdapter.ProductFragmentListener 
     private val launchPlayStore = DialogInterface.OnClickListener { _, _ ->
         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(AcmeStore.ZXING_URL)))
     }
+
     /**
      */
-    private val scanProductBarcode = View.OnClickListener {
+    private val launchBarcodeScanner = View.OnClickListener {
 
         try {
-            launchBarcodeScanner()
+            startActivityForResult(Intent(
+                AcmeStore.ZXING_ACTIVITY
+            ).putExtra(
+                "SCAN_MODE", "PRODUCT_MODE"
+            ), 0)
         } catch (ex: ActivityNotFoundException) {
             AcmeDialogs.buildYesNo(activity, R.string.main_promptInstall, launchPlayStore).show()
         }
     }
-
-    /**
-     */
-    private fun launchBarcodeScanner() = startActivityForResult(Intent(
-        AcmeStore.ZXING_ACTIVITY
-    ).putExtra(
-        "SCAN_MODE", "PRODUCT_MODE"
-    ), 0)
 
     /**
      */
@@ -156,6 +153,8 @@ class ShoppingCartFragment : Fragment(), ProductAdapter.ProductFragmentListener 
 
         if (format == "UPC_A") {
             fetchProduct(data.getStringExtra("SCAN_RESULT"))
+        } else {
+            AcmeDialogs.buildOk(context, R.string.shoppingCart_invalidQr, format).show()
         }
     }
 
@@ -175,6 +174,6 @@ class ShoppingCartFragment : Fragment(), ProductAdapter.ProductFragmentListener 
             news_list.adapter = ShoppingCartAdapter(this)
         }
 
-        shoppingCart_scan.setOnClickListener(scanProductBarcode)
+        shoppingCart_scan.setOnClickListener(launchBarcodeScanner)
     }
 }

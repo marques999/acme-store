@@ -19,7 +19,9 @@ class OrderAdapter(private val mValues: List<DummyItem>) : RecyclerView.Adapter<
     /**
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.fragment_history_item, parent, false)
+        LayoutInflater.from(parent.context).inflate(
+            R.layout.fragment_history_item, parent, false
+        )
     )
 
     /**

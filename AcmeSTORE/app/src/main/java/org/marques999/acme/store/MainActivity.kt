@@ -1,23 +1,18 @@
 package org.marques999.acme.store
 
+import android.os.Bundle
 import android.content.Intent
+import android.graphics.Color
+import android.support.v7.app.AppCompatActivity
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
-
-import android.graphics.Color
 
 import org.marques999.acme.store.catalog.ProductCatalogFragment
 import org.marques999.acme.store.customers.CustomerProfileFragment
 import org.marques999.acme.store.history.OrderHistoryFragment
 import org.marques999.acme.store.products.ShoppingCartFragment
 import org.marques999.acme.store.view.BottomNavigationAdapter
-
-import android.os.Bundle
-
-import android.support.annotation.ColorRes
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
 
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -62,34 +57,46 @@ class MainActivity : AppCompatActivity() {
             isColored = true
             defaultBackgroundColor = Color.WHITE
             isTranslucentNavigationEnabled = false
-            accentColor = fetchColor(R.color.bottomNavigation_lightBackground)
-            inactiveColor = fetchColor(R.color.bottomNavigation_itemResting)
-            setColoredModeColors(Color.WHITE, fetchColor(R.color.bottomNavigation_itemResting))
+            accentColor = AcmeStore.fetchColor(this@MainActivity, R.color.colorAccent)
+            inactiveColor = AcmeStore.fetchColor(this@MainActivity, R.color.colorPrimaryDarker)
             titleState = AHBottomNavigation.TitleState.ALWAYS_SHOW
 
-            addItem(AHBottomNavigationItem(
-                R.string.bottomNavigation_cart,
-                R.drawable.ic_cart_24dp,
-                R.color.colorPrimaryDarker
-            ))
+            setColoredModeColors(
+                AcmeStore.fetchColor(this@MainActivity, R.color.colorAccent),
+                AcmeStore.fetchColor(this@MainActivity, R.color.colorPrimaryDarker)
+            )
 
-            addItem(AHBottomNavigationItem(
-                R.string.bottomNavigation_catalog,
-                R.drawable.ic_catalog_24dp,
-                R.color.colorPrimaryDarker
-            ))
+            addItem(
+                AHBottomNavigationItem(
+                    R.string.bottomNavigation_cart,
+                    R.drawable.ic_cart_24dp,
+                    R.color.colorPrimaryDark
+                )
+            )
 
-            addItem(AHBottomNavigationItem(
-                R.string.bottomNavigation_history,
-                R.drawable.ic_history_24dp,
-                R.color.colorPrimaryDarker
-            ))
+            addItem(
+                AHBottomNavigationItem(
+                    R.string.bottomNavigation_catalog,
+                    R.drawable.ic_catalog_24dp,
+                    R.color.colorPrimaryDark
+                )
+            )
 
-            addItem(AHBottomNavigationItem(
-                R.string.bottomNavigation_profile,
-                R.drawable.ic_person_24dp,
-                R.color.colorPrimaryDarker
-            ))
+            addItem(
+                AHBottomNavigationItem(
+                    R.string.bottomNavigation_history,
+                    R.drawable.ic_history_24dp,
+                    R.color.colorPrimaryDark
+                )
+            )
+
+            addItem(
+                AHBottomNavigationItem(
+                    R.string.bottomNavigation_profile,
+                    R.drawable.ic_person_24dp,
+                    R.color.colorPrimaryDark
+                )
+            )
 
             setOnTabSelectedListener { pos, selected ->
                 onChooseTab(pos, selected)
@@ -123,8 +130,4 @@ class MainActivity : AppCompatActivity() {
 
         return true
     }
-
-    /**
-     */
-    private fun fetchColor(@ColorRes color: Int) = ContextCompat.getColor(this, color)
 }

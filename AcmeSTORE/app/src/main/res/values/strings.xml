@@ -65,4 +65,6 @@
   <string name="shoppingCart_plus">+</string>
   <string name="shoppingCart_quantity">10</string>
   <string name="shoppingCart_scan">SCAN BARCODE</string>
+  <string name="shoppingCart_invalidQr">The code you scanned was recognized as \"%1\$s\",
+    expected \"UPC_A\".</string>
 </resources>

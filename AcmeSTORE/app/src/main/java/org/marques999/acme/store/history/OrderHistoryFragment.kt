@@ -1,6 +1,7 @@
 package org.marques999.acme.store.history
 
 import android.os.Bundle
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,15 +20,10 @@ class OrderHistoryFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
-        val view = inflater.inflate(R.layout.fragment_history, container, false)
-
-        if (view is RecyclerView) {
-            view.layoutManager = LinearLayoutManager(view.getContext())
-            view.adapter = OrderAdapter(OrderContent.orders)
+    ): View? = inflater.inflate(R.layout.fragment_history, container, false).apply {
+        if (this is RecyclerView) {
+            layoutManager = LinearLayoutManager(getContext())
+            adapter = OrderAdapter(OrderContent.orders)
         }
-
-        return view
     }
 }

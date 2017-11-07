@@ -1,7 +1,7 @@
 package org.marques999.acme.store.products
 
-import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
+import android.support.v7.widget.RecyclerView
 
 import com.squareup.picasso.Picasso
 
@@ -9,9 +9,9 @@ import org.marques999.acme.store.R
 import org.marques999.acme.store.AcmeStore
 import org.marques999.acme.store.view.ViewType
 import org.marques999.acme.store.view.ViewTypeAdapter
+import org.marques999.acme.store.orders.OrderProduct
 
 import kotlinx.android.synthetic.main.fragment_cart_item.view.*
-import org.marques999.acme.store.orders.OrderProduct
 
 class ProductAdapter(val viewActions: ProductFragmentListener) : ViewTypeAdapter {
 
@@ -56,6 +56,7 @@ class ProductAdapter(val viewActions: ProductFragmentListener) : ViewTypeAdapter
             itemView.product_barcode.text = itemBarcode
             itemView.product_price.text = AcmeStore.formatCurrency(item.product.price)
             itemView.shoppingCart_quantity.text = item.quantity.toString()
+
             itemView.product_name.text = itemView.context.getString(
                 R.string.shoppingCart_name, item.product.brand, item.product.name
             )

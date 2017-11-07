@@ -1,11 +1,9 @@
 package org.marques999.acme.store.api
 
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.Rfc3339DateJsonAdapter
-import com.squareup.moshi.Types
-
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+
+import com.squareup.moshi.Types
 
 import org.marques999.acme.store.AcmeStore
 import org.marques999.acme.store.common.Session
@@ -15,8 +13,6 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-import java.util.Date
-
 import org.marques999.acme.store.orders.OrderPOST
 import org.marques999.acme.store.orders.OrderProductPOST
 
@@ -25,18 +21,10 @@ class AcmeProvider(private val session: Session, private val crypto: Cryptograph
     /**
      */
     private val interceptor = Interceptor {
-        it.proceed(
-            it.request().newBuilder().addHeader(
-                "Authorization", session.wrapToken()
-            ).build()
-        )
+        it.proceed(it.request().newBuilder().addHeader(
+            "Authorization", session.wrapToken()
+        ).build())
     }
-
-    /**
-     */
-    private val serializer = Moshi.Builder().add(
-        Date::class.java, Rfc3339DateJsonAdapter().nullSafe()
-    ).build()
 
     /**
      */
@@ -45,14 +33,14 @@ class AcmeProvider(private val session: Session, private val crypto: Cryptograph
     ).addCallAdapterFactory(
         RxJava2CallAdapterFactory.create()
     ).addConverterFactory(
-        MoshiConverterFactory.create(serializer)
+        MoshiConverterFactory.create(AcmeStore.jsonSerializer)
     ).baseUrl(
         AcmeStore.SERVER_URL
     ).build().create(AcmeApi::class.java)
 
     /**
      */
-    private val listAdapter = serializer.adapter<List<OrderProductPOST>>(
+    private val listAdapter = AcmeStore.jsonSerializer.adapter<List<OrderProductPOST>>(
         Types.newParameterizedType(List::class.java, OrderProductPOST::class.java)
     )
 

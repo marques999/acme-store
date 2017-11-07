@@ -64,18 +64,11 @@
     </RelativeLayout>
   </android.support.v7.widget.CardView>
 
-  <ImageView
-    android:id="@+id/qrCode_imageView"
+  <Button
+    android:id="@+id/customerProfile_test"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/qrCode_imageView"
-    android:layout_gravity="center"
-    android:padding="@dimen/global_defaultMargin" />
-
-  <TextView
-    android:id="@+id/qrCode_textView"
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="1"
-    android:text="Hello World!"
-    android:textAlignment="center" />
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/global_defaultMargin"
+    android:padding="?attr/dialogPreferredPadding"
+    android:text="TEST QR GENERATION" />
 </LinearLayout>

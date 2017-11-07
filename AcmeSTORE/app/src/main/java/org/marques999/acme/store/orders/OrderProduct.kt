@@ -28,9 +28,6 @@ class OrderProduct(
     /**
      */
     override fun describeContents(): Int = 0
-
-    /**
-     */
     override fun getViewType(): Int = ViewType.PRODUCTS
 
     /**
