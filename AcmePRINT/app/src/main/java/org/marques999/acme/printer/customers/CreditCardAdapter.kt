@@ -31,7 +31,7 @@ class CreditCardAdapter : ViewTypeAdapter {
             itemView.cc_number.text = item.number
 
             itemView.cc_validity.text = itemView.context.getString(
-                R.string.cc_date, AcmePrinter.formatDate(item.validity)
+                R.string.details_ccDate, AcmePrinter.formatDate(item.validity)
             )
         }
     }

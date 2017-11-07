@@ -1,7 +1,7 @@
 package org.marques999.acme.printer.orders
 
-import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
+import android.support.v7.widget.RecyclerView
 
 import kotlinx.android.synthetic.main.fragment_order.view.*
 

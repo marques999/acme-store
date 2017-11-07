@@ -3,18 +3,24 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
+  android:orientation="vertical"
   android:padding="?android:attr/dialogPreferredPadding"
   tools:context="MainActivity">
 
-  <Button
-    android:id="@+id/main_scan"
+  <ImageView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:backgroundTint="@color/colorAccent"
-    android:drawablePadding="@dimen/cardView_halfMargin"
-    android:drawableTop="@drawable/ic_camera_alt_black_24dp"
+    android:contentDescription="@string/main_iconDescription"
+    android:padding="@dimen/global_largeMargin"
+    android:src="@drawable/ic_landscape_128dp" />
+
+  <Button
+    android:id="@+id/mainActivity_scan"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:drawablePadding="@dimen/global_mediumMargin"
+    android:drawableTop="@drawable/ic_camera_24dp"
     android:padding="?android:attr/dialogPreferredPadding"
-    android:text="@string/main_scan"
-    android:textColor="@android:color/white"
-    android:textSize="@dimen/cardView_mediumFont" />
+    android:text="@string/main_scanButton"
+    android:textSize="@dimen/global_mediumFont" />
 </LinearLayout>

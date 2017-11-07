@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
   package="org.marques999.acme.printer">
-
   <uses-permission android:name="android.permission.INTERNET" />
   <application
     android:name="AcmePrinter"
     android:allowBackup="true"
+    android:fullBackupContent="true"
     android:icon="@mipmap/ic_launcher"
-    android:label="@string/app_name"
+    android:label="@string/main_activityTitle"
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
-    android:theme="@style/AppTheme">
+    android:theme="@style/AppTheme.NoActionBar"
+    tools:ignore="GoogleAppIndexingWarning">
     <activity android:name=".MainActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -19,8 +21,9 @@
     </activity>
     <activity
       android:name=".DetailsActivity"
-      android:label="@string/activity_details"
-      android:parentActivityName=".MainActivity">
+      android:label="@string/details_activityTitle"
+      android:parentActivityName=".MainActivity"
+      android:theme="@style/AppTheme">
       <meta-data
         android:name="android.support.PARENT_ACTIVITY"
         android:value="org.marques999.acme.printer.MainActivity" />

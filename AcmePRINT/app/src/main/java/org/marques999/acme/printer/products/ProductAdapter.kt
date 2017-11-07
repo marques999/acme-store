@@ -6,14 +6,12 @@ import android.view.ViewGroup
 import com.squareup.picasso.Picasso
 
 import org.marques999.acme.printer.R
+import org.marques999.acme.printer.AcmePrinter
 import org.marques999.acme.printer.views.ViewType
 import org.marques999.acme.printer.views.ViewTypeAdapter
 import org.marques999.acme.printer.orders.OrderProduct
 
 import kotlinx.android.synthetic.main.fragment_product.view.*
-import org.marques999.acme.printer.AcmePrinter
-import java.text.NumberFormat
-import java.util.*
 
 class ProductAdapter : ViewTypeAdapter {
 
@@ -43,11 +41,11 @@ class ProductAdapter : ViewTypeAdapter {
             )
 
             itemView.product_quantity.text = itemView.context.getString(
-                R.string.product_quantity, item.quantity
+                R.string.details_orderQuantity, item.quantity
             )
 
             itemView.product_name.text = itemView.context.getString(
-                R.string.product_name, item.product.brand, item.product.name
+                R.string.details_productName, item.product.brand, item.product.name
             )
 
             Picasso.with(itemView.context).load(

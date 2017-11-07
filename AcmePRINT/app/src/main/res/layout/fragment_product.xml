@@ -6,32 +6,34 @@
   <android.support.v7.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    card_view:cardElevation="@dimen/cardView_halfElevation"
+    card_view:cardBackgroundColor="@color/cardview_light_background"
+    card_view:cardElevation="@dimen/details_smallElevation"
     card_view:cardUseCompatPadding="true">
 
     <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:padding="@dimen/cardView_defaultMargin">
+      android:padding="@dimen/global_largeMargin">
 
       <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/cardView_defaultMargin"
+        android:layout_marginEnd="@dimen/global_largeMargin"
         android:orientation="vertical">
 
         <ImageView
           android:id="@+id/product_photo"
-          android:layout_width="@dimen/cardView_imageDimensions"
-          android:layout_height="@dimen/cardView_imageDimensions"
-          android:layout_marginBottom="@dimen/cardView_defaultSpacing"
-          android:contentDescription="@string/product_photo" />
+          android:layout_width="@dimen/details_productPhoto"
+          android:layout_height="@dimen/details_productPhoto"
+          android:layout_marginBottom="@dimen/details_innerMargin"
+          android:contentDescription="@string/details_productPhoto" />
 
         <TextView
           android:id="@+id/product_price"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:textAlignment="center" />
+          android:textAlignment="center"
+          android:textColor="@color/colorAccent" />
       </LinearLayout>
 
       <RelativeLayout
@@ -45,34 +47,36 @@
           android:id="@+id/product_name"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginBottom="@dimen/cardView_tinyMargin"
-          android:textSize="@dimen/cardView_mediumFont" />
+          android:layout_marginBottom="@dimen/global_tinyMargin"
+          android:textColor="@color/colorAccent"
+          android:textSize="@dimen/global_mediumFont" />
 
         <TextView
           android:id="@+id/product_barcode"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_below="@+id/product_name"
-          android:layout_marginBottom="@dimen/cardView_halfMargin"
-          android:textSize="@dimen/cardView_smallFont"
+          android:layout_marginBottom="@dimen/global_mediumMargin"
+          android:textColor="@color/colorAccent"
+          android:textSize="@dimen/global_smallFont"
           android:textStyle="bold" />
 
         <TextView
           android:id="@+id/product_quantity"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_below="@+id/product_barcode" />
+          android:layout_below="@+id/product_barcode"
+          android:textColor="@color/colorAccent" />
       </RelativeLayout>
 
       <TextView
         android:id="@+id/product_total"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginStart="@dimen/cardView_halfMargin"
+        android:layout_marginStart="@dimen/global_mediumMargin"
         android:textAlignment="textEnd"
+        android:textColor="@color/colorAccent"
         android:textStyle="bold" />
-
     </LinearLayout>
-
   </android.support.v7.widget.CardView>
 </LinearLayout>

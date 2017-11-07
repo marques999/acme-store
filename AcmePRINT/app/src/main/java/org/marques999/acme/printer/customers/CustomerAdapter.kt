@@ -30,7 +30,7 @@ class CustomerAdapter : ViewTypeAdapter {
             itemView.customer_address2.text = item.address2
 
             itemView.customer_nif.text = itemView.context.getString(
-                R.string.customer_nif, item.tax_number
+                R.string.details_customerTax, item.tax_number
             )
         }
     }

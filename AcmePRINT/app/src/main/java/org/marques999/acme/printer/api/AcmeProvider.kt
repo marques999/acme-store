@@ -3,11 +3,6 @@ package org.marques999.acme.printer.api
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 
-import java.util.Date
-
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.Rfc3339DateJsonAdapter
-
 import org.marques999.acme.printer.AcmePrinter
 
 import retrofit2.Retrofit
@@ -21,18 +16,10 @@ class AcmeProvider(session: Session) {
     /**
      */
     private val interceptor = Interceptor {
-        it.proceed(
-            it.request().newBuilder().addHeader(
-                "Authorization", session.wrapToken()
-            ).build()
-        )
+        it.proceed(it.request().newBuilder().addHeader(
+            "Authorization", session.wrapToken()
+        ).build())
     }
-
-    /**
-     */
-    private val serializer = Moshi.Builder().add(
-        Date::class.java, Rfc3339DateJsonAdapter().nullSafe()
-    ).build()
 
     /**
      */
@@ -41,7 +28,7 @@ class AcmeProvider(session: Session) {
     ).addCallAdapterFactory(
         RxJava2CallAdapterFactory.create()
     ).addConverterFactory(
-        MoshiConverterFactory.create(serializer)
+        MoshiConverterFactory.create(AcmePrinter.jsonSerializer)
     ).baseUrl(
         AcmePrinter.SERVER_URL
     ).build().create(AcmeApi::class.java)

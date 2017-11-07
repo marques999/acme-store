@@ -1,27 +1,20 @@
 package org.marques999.acme.printer
 
-import android.app.Activity
-import android.os.Bundle
-import android.content.Intent
-import android.content.ActivityNotFoundException
-import android.content.DialogInterface
-import android.net.Uri
-
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
-import io.reactivex.schedulers.Schedulers
 
-import org.marques999.acme.printer.api.AcmeProvider
-import org.marques999.acme.printer.api.AuthenticationProvider
+import android.os.Bundle
+import android.net.Uri
+import android.support.v7.app.AppCompatActivity
 
 import kotlinx.android.synthetic.main.activity_main.*
 
-import org.marques999.acme.printer.common.AcmeDialogs
-import org.marques999.acme.printer.common.HttpErrorHandler
-import org.marques999.acme.printer.common.Session
-import org.marques999.acme.printer.common.SessionJwt
+import android.content.Intent
+import android.content.ActivityNotFoundException
+import android.content.DialogInterface
 
-class MainActivity : Activity() {
+import org.marques999.acme.printer.common.AcmeDialogs
+
+class MainActivity : AppCompatActivity() {
 
     /**
      */
@@ -35,34 +28,16 @@ class MainActivity : Activity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        main_scan.setOnClickListener { scanQrCode() }
+        mainActivity_scan.setOnClickListener { scanQrCode() }
 
-        if (main_scan.isEnabled && savedInstanceState != null) {
-            return
-        }
-
-        main_scan.isEnabled = false
-        authenticate("admin", "admin")
-    }
-
-    /**
-     */
-    private fun authenticate(username: String, password: String) = AuthenticationProvider().login(
-        username, password
-    ).observeOn(
-        AndroidSchedulers.mainThread()
-    ).subscribeOn(
-        Schedulers.io()
-    ).subscribe(
-        onLogin(username), HttpErrorHandler(this)
-    )
-
-    /**
-     */
-    private fun onLogin(username: String) = Consumer<SessionJwt> {
-        AcmeDialogs.buildOk(this, R.string.main_connected).show()
-        (application as AcmePrinter).acmeApi = AcmeProvider(Session(it, username))
-        main_scan.isEnabled = true
+        mainActivity_scan.isEnabled = (application as AcmePrinter).authenticate(
+            "admin",
+            "admin",
+            Consumer {
+                mainActivity_scan.isEnabled = true
+                AcmeDialogs.buildOk(this, R.string.main_connectionEstablished).show()
+            }
+        )
     }
 
     /**
@@ -85,13 +60,14 @@ class MainActivity : Activity() {
      */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
-        if (data == null || requestCode != 0 || resultCode != Activity.RESULT_OK) {
+        if (data == null || requestCode != 0 || resultCode != AppCompatActivity.RESULT_OK) {
             return
         }
 
         val format = data.getStringExtra("SCAN_RESULT_FORMAT")
 
         if (format == "QR_CODE") {
+
             startActivity(Intent(
                 this, DetailsActivity::class.java
             ).putExtra(

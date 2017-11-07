@@ -10,15 +10,7 @@ import org.marques999.acme.printer.customers.CreditCardAdapter
 import org.marques999.acme.printer.customers.CustomerAdapter
 import org.marques999.acme.printer.products.ProductAdapter
 
-class RecyclerAdapter(order: Order) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
-    /**
-     */
-    val stateRestore = order
-
-    /**
-     */
-    private val delegateAdapters = SparseArrayCompat<ViewTypeAdapter>()
+class RecyclerAdapter(private val order: Order) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     /**
      */
@@ -31,6 +23,10 @@ class RecyclerAdapter(order: Order) : RecyclerView.Adapter<RecyclerView.ViewHold
 
     /**
      */
+    private val delegateAdapters = SparseArrayCompat<ViewTypeAdapter>()
+
+    /**
+     */
     init {
         delegateAdapters.put(ViewType.ORDER, OrderAdapter())
         delegateAdapters.put(ViewType.PRODUCT, ProductAdapter())
@@ -38,6 +34,10 @@ class RecyclerAdapter(order: Order) : RecyclerView.Adapter<RecyclerView.ViewHold
         delegateAdapters.put(ViewType.CREDIT_CARD, CreditCardAdapter())
         notifyItemRangeChanged(0, items.size)
     }
+
+    /**
+     */
+    fun getState(): Order = order
 
     /**
      */
