@@ -27,25 +27,24 @@ class ProductAdapter : ViewTypeAdapter {
         inflate(parent, R.layout.fragment_product)
     ) {
 
-
         fun bind(item: OrderProduct) {
 
             itemView.product_barcode.text = item.product.barcode
-
-            itemView.product_price.text = AcmePrinter.formatCurrency(
-                item.product.price
-            )
+            itemView.product_price.text = AcmePrinter.formatCurrency(item.product.price)
 
             itemView.product_total.text = AcmePrinter.formatCurrency(
                 item.product.price * item.quantity
             )
 
             itemView.product_quantity.text = itemView.context.getString(
-                R.string.details_orderQuantity, item.quantity
+                R.string.details_orderQuantity,
+                item.quantity
             )
 
             itemView.product_name.text = itemView.context.getString(
-                R.string.details_productName, item.product.brand, item.product.name
+                R.string.details_productName,
+                item.product.brand,
+                item.product.name
             )
 
             Picasso.with(itemView.context).load(

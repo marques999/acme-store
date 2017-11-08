@@ -26,11 +26,11 @@ object AcmeDialogs {
      */
     fun buildOk(
         context: Context,
-        title: String,
+        throwable: Exception,
         message: String
     ): AlertDialog.Builder = AlertDialog
         .Builder(context)
-        .setTitle(title)
+        .setTitle(throwable.javaClass.simpleName)
         .setMessage(message)
         .setPositiveButton(android.R.string.ok, null)
 

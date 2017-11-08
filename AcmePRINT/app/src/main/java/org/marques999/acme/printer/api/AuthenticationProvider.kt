@@ -1,15 +1,14 @@
 package org.marques999.acme.printer.api
 
-import org.marques999.acme.printer.common.Authentication
-import org.marques999.acme.printer.common.SessionJwt
-
-import io.reactivex.Observable
-
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 
+import io.reactivex.Observable
+
 import org.marques999.acme.printer.AcmePrinter
+import org.marques999.acme.printer.common.Authentication
+import org.marques999.acme.printer.common.SessionJwt
 
 class AuthenticationProvider {
 

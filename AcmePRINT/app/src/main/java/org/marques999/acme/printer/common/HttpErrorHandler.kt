@@ -1,6 +1,7 @@
 package org.marques999.acme.printer.common
 
 import android.content.Context
+import retrofit2.HttpException
 import io.reactivex.functions.Consumer
 import org.marques999.acme.printer.AcmePrinter
 
@@ -14,12 +15,12 @@ class HttpErrorHandler(private val context: Context) : Consumer<Throwable> {
      */
     override fun accept(throwable: Throwable) {
 
-        if (throwable is retrofit2.HttpException) {
+        if (throwable is HttpException) {
             serializer.fromJson((throwable.response().errorBody()!!).source())?.let {
-                AcmeDialogs.buildOk(context, throwable.javaClass.name, it.error!!).show()
+                AcmeDialogs.buildOk(context, throwable, it.error!!).show()
             }
-        } else {
-            AcmeDialogs.buildOk(context, throwable.javaClass.name, throwable.localizedMessage).show()
+        } else if (throwable is Exception) {
+            AcmeDialogs.buildOk(context, throwable, throwable.localizedMessage).show()
         }
     }
 }

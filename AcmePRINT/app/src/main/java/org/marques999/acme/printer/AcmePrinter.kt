@@ -1,23 +1,26 @@
 package org.marques999.acme.printer
 
+import android.content.Context
+
+import java.text.DateFormat
+import java.text.NumberFormat
+
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Rfc3339DateJsonAdapter
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Consumer
-import io.reactivex.schedulers.Schedulers
 
 import java.util.Date
 import java.util.Locale
 import java.util.Currency
+
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Consumer
+import io.reactivex.schedulers.Schedulers
 
 import org.marques999.acme.printer.api.AcmeProvider
 import org.marques999.acme.printer.api.AuthenticationProvider
 import org.marques999.acme.printer.common.HttpErrorHandler
 import org.marques999.acme.printer.common.Session
 import org.marques999.acme.printer.common.SessionJwt
-
-import java.text.DateFormat
-import java.text.NumberFormat
 
 class AcmePrinter : android.app.Application() {
 
@@ -38,25 +41,24 @@ class AcmePrinter : android.app.Application() {
     /**
      */
     fun authenticate(
-        username: String,
-        password: String,
+        context: Context,
         callback: Consumer<SessionJwt>
     ): Boolean {
 
         if (acmeApi != null) {
             return true
-        } else {
-            AuthenticationProvider().login(
-                username, password
-            ).observeOn(
-                AndroidSchedulers.mainThread()
-            ).subscribeOn(
-                Schedulers.io()
-            ).subscribe(
-                authenticationHandler(username, callback),
-                HttpErrorHandler(this)
-            )
         }
+
+        AuthenticationProvider().login(
+            "admin", "admin"
+        ).observeOn(
+            AndroidSchedulers.mainThread()
+        ).subscribeOn(
+            Schedulers.io()
+        ).subscribe(
+            authenticationHandler("admin", callback),
+            HttpErrorHandler(context)
+        )
 
         return false
     }
@@ -67,18 +69,14 @@ class AcmePrinter : android.app.Application() {
 
         private val ZXING_PACKAGE = "com.google.zxing.client.android"
 
+        val SERVER_URL = "http://10.0.2.2:3333/"
         val ZXING_ACTIVITY = "$ZXING_PACKAGE.SCAN"
-        val SERVER_URL = "http://192.168.1.93:3333/"
         val RAMEN_RECIPE = "mieic@feup#2017".toByteArray()
         val ZXING_URL = "market://details?id=$ZXING_PACKAGE"
-        val EXTRA_TOKEN = "org.marques999.acme.printer.TOKEN"
-        val BUNDLE_ORDER = "org.marques999.acme.printer.ORDER"
 
-        val jsonSerializer: Moshi by lazy {
-            Moshi.Builder().add(
-                Date::class.java, Rfc3339DateJsonAdapter().nullSafe()
-            ).build()
-        }
+        val jsonSerializer: Moshi = Moshi.Builder().add(
+            Date::class.java, Rfc3339DateJsonAdapter().nullSafe()
+        ).build()
 
         fun formatDate(dateTime: Date): String = DateFormat.getDateInstance(
             DateFormat.MEDIUM, Locale("pt", "PT")

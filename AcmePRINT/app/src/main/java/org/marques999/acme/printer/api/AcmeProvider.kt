@@ -4,12 +4,11 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 
 import org.marques999.acme.printer.AcmePrinter
+import org.marques999.acme.printer.common.Session
 
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
-
-import org.marques999.acme.printer.common.Session
 
 class AcmeProvider(session: Session) {
 

@@ -1,7 +1,5 @@
 package org.marques999.acme.printer.views
 
-import android.support.v4.util.SparseArrayCompat
-import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 
 import org.marques999.acme.printer.orders.Order
@@ -9,6 +7,9 @@ import org.marques999.acme.printer.orders.OrderAdapter
 import org.marques999.acme.printer.customers.CreditCardAdapter
 import org.marques999.acme.printer.customers.CustomerAdapter
 import org.marques999.acme.printer.products.ProductAdapter
+
+import android.support.v4.util.SparseArrayCompat
+import android.support.v7.widget.RecyclerView
 
 class RecyclerAdapter(private val order: Order) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -42,6 +43,7 @@ class RecyclerAdapter(private val order: Order) : RecyclerView.Adapter<RecyclerV
     /**
      */
     override fun getItemCount(): Int = items.size
+
     override fun getItemViewType(position: Int) = items[position].getViewType()
 
     /**

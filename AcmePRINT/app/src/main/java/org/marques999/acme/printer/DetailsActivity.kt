@@ -1,17 +1,12 @@
 package org.marques999.acme.printer
 
 import android.os.Bundle
-
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Consumer
-import io.reactivex.schedulers.Schedulers
-
+import android.content.res.Configuration
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 
 import kotlinx.android.synthetic.main.activity_details.*
 
-import org.marques999.acme.printer.common.HttpErrorHandler
 import org.marques999.acme.printer.orders.Order
 import org.marques999.acme.printer.views.RecyclerAdapter
 
@@ -21,33 +16,14 @@ class DetailsActivity : AppCompatActivity() {
 
     /**
      */
-    private val onRefresh = Consumer<Order> {
-        detailsActivity_recyclerView.adapter = RecyclerAdapter(it)
-    }
-
-    /**
-     */
-    private fun fetchInformation() = intent.extras.getString(AcmePrinter.EXTRA_TOKEN)?.let {
-
-        (application as AcmePrinter).acmeApi!!.getOrder(it).subscribeOn(
-            Schedulers.io()
-        ).observeOn(
-            AndroidSchedulers.mainThread()
-        ).subscribe(
-            onRefresh, HttpErrorHandler(this)
-        )
-    }
-
-    /**
-     */
     override fun onSaveInstanceState(outState: Bundle?) {
 
         super.onSaveInstanceState(outState)
 
-        if (outState != null && detailsActivity_recyclerView?.adapter is RecyclerAdapter) {
+        if (detailsActivity_recyclerView?.adapter is RecyclerAdapter) {
 
-            outState.putSerializable(
-                AcmePrinter.BUNDLE_ORDER,
+            outState?.putSerializable(
+                BUNDLE_ORDER,
                 (detailsActivity_recyclerView.adapter as RecyclerAdapter).getState()
             )
         }
@@ -61,7 +37,7 @@ class DetailsActivity : AppCompatActivity() {
 
         savedInstanceState?.let {
             detailsActivity_recyclerView.adapter = RecyclerAdapter(
-                it.getSerializable(AcmePrinter.BUNDLE_ORDER) as Order
+                it.getSerializable(BUNDLE_ORDER) as Order
             )
         }
     }
@@ -79,13 +55,29 @@ class DetailsActivity : AppCompatActivity() {
             clearOnScrollListeners()
         }
 
-        OverScrollDecoratorHelper.setUpOverScroll(
-            detailsActivity_recyclerView,
-            OverScrollDecoratorHelper.ORIENTATION_VERTICAL
-        )
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            OverScrollDecoratorHelper.setUpOverScroll(
+                detailsActivity_recyclerView,
+                OverScrollDecoratorHelper.ORIENTATION_VERTICAL
+            )
+        } else {
+            OverScrollDecoratorHelper.setUpOverScroll(
+                detailsActivity_recyclerView,
+                OverScrollDecoratorHelper.ORIENTATION_HORIZONTAL
+            )
+        }
 
         if (savedInstanceState == null) {
-            fetchInformation()
+
+            detailsActivity_recyclerView.adapter = RecyclerAdapter(
+                intent.extras.getSerializable(MainActivity.EXTRA_ORDER) as Order
+            )
         }
+    }
+
+    /**
+     */
+    companion object {
+        private val BUNDLE_ORDER = "org.marques999.acme.printer.BUNDLE_ORDER"
     }
 }

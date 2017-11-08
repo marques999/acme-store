@@ -1,7 +1,7 @@
 package org.marques999.acme.printer.customers
 
-import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
+import android.support.v7.widget.RecyclerView
 
 import kotlinx.android.synthetic.main.fragment_customer.view.*
 
@@ -30,7 +30,8 @@ class CustomerAdapter : ViewTypeAdapter {
             itemView.customer_address2.text = item.address2
 
             itemView.customer_nif.text = itemView.context.getString(
-                R.string.details_customerTax, item.tax_number
+                R.string.details_customerTax,
+                item.tax_number
             )
         }
     }

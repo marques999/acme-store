@@ -96,7 +96,7 @@ class AcmeStore : Application() {
 
         val ALGORITHM_PKCS = "RSA"
         val ALGORITHM_HASH = "SHA1WithRSA"
-        val SERVER_URL = "http://10.0.2.2:3333/"
+        val SERVER_URL = "http://192.168.1.93:3333/"
         val DEFAULT_USERNAME = "marques999"
         val DEFAULT_PASSWORD = "r0wsauce"
         val ZXING_ACTIVITY = "$ZXING_PACKAGE.SCAN"

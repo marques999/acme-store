@@ -1,18 +1,22 @@
 package org.marques999.acme.printer
 
-import io.reactivex.functions.Consumer
-
 import android.os.Bundle
 import android.net.Uri
-import android.support.v7.app.AppCompatActivity
 
 import kotlinx.android.synthetic.main.activity_main.*
+
+import org.marques999.acme.printer.common.AcmeDialogs
+import org.marques999.acme.printer.common.HttpErrorHandler
 
 import android.content.Intent
 import android.content.ActivityNotFoundException
 import android.content.DialogInterface
 
-import org.marques999.acme.printer.common.AcmeDialogs
+import android.support.v7.app.AppCompatActivity
+
+import io.reactivex.functions.Consumer
+import io.reactivex.schedulers.Schedulers
+import io.reactivex.android.schedulers.AndroidSchedulers
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,8 +35,7 @@ class MainActivity : AppCompatActivity() {
         mainActivity_scan.setOnClickListener { scanQrCode() }
 
         mainActivity_scan.isEnabled = (application as AcmePrinter).authenticate(
-            "admin",
-            "admin",
+            this,
             Consumer {
                 mainActivity_scan.isEnabled = true
                 AcmeDialogs.buildOk(this, R.string.main_connectionEstablished).show()
@@ -42,11 +45,13 @@ class MainActivity : AppCompatActivity() {
 
     /**
      */
-    private fun launchQrScanner() = startActivityForResult(Intent(
-        AcmePrinter.ZXING_ACTIVITY
-    ).putExtra(
-        "SCAN_MODE", "QR_CODE_MODE"
-    ), 0)
+    private fun launchQrScanner() = startActivityForResult(
+        Intent(
+            AcmePrinter.ZXING_ACTIVITY
+        ).putExtra(
+            "SCAN_MODE", "QR_CODE_MODE"
+        ), 0
+    )
 
     /**
      */
@@ -68,13 +73,30 @@ class MainActivity : AppCompatActivity() {
 
         if (format == "QR_CODE") {
 
-            startActivity(Intent(
-                this, DetailsActivity::class.java
-            ).putExtra(
-                AcmePrinter.EXTRA_TOKEN, data.getStringExtra("SCAN_RESULT")
-            ))
+            (application as AcmePrinter).acmeApi!!.getOrder(
+                data.getStringExtra("SCAN_RESULT")
+            ).subscribeOn(
+                Schedulers.io()
+            ).observeOn(
+                AndroidSchedulers.mainThread()
+            ).subscribe(
+                Consumer {
+                    startActivity(
+                        Intent(this, DetailsActivity::class.java).putExtra(
+                            EXTRA_ORDER, it
+                        )
+                    )
+                },
+                HttpErrorHandler(this)
+            )
         } else {
             AcmeDialogs.buildOk(this, R.string.main_invalidQr, format).show()
         }
+    }
+
+    /**
+     */
+    companion object {
+        val EXTRA_ORDER = "org.marques999.acme.printer.EXTRA_ORDER"
     }
 }
