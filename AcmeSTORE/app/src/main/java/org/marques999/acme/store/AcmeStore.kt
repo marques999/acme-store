@@ -79,18 +79,6 @@ class AcmeStore : Application() {
         private val KEY_PREFERENCES = "acmestore"
         private val ZXING_PACKAGE = "com.google.zxing.client.android"
 
-        private val USERNAME_MINIMUM = 3
-        private val PASSWORD_MINIMUM = 6
-        private val PASSWORD_MAXIMUM = 16
-
-        val NIF_LENGTH = 9
-        val ERROR_MISMATCH = "The passwords you entered do not match!"
-        val ERROR_NIF = "The tax number must be exactly $NIF_LENGTH digits long."
-        val ERROR_PASSWORD = "Password must have between $PASSWORD_MINIMUM and $PASSWORD_MAXIMUM alphanumeric characters"
-        val ERROR_USERNAME = "Username must be at least $USERNAME_MINIMUM characters long."
-        val ERROR_REQUIRED = "This field is required."
-
-        val REQUEST_LOGIN = 1
         val REQUEST_REGISTER = 2
         val REQUEST_SCAN = 3
 
@@ -112,18 +100,6 @@ class AcmeStore : Application() {
 
         fun fetchColor(context: Context, @ColorRes color: Int): Int {
             return ContextCompat.getColor(context, color)
-        }
-
-        fun invalidUsername(username: String): Boolean {
-            return username.length < AcmeStore.USERNAME_MINIMUM
-        }
-
-        fun activitySucceeded(requestCode: Int, resultCode: Int, initialRequest: Int): Boolean {
-            return requestCode == initialRequest && resultCode == Activity.RESULT_OK
-        }
-
-        fun invalidPassword(password: String): Boolean {
-            return password.length < AcmeStore.PASSWORD_MINIMUM || password.length > AcmeStore.PASSWORD_MAXIMUM
         }
 
         fun formatCurrency(value: Double): String = NumberFormat.getCurrencyInstance(

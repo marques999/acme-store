@@ -1,29 +1,25 @@
-package org.marques999.acme.store.register
+package org.marques999.acme.store.authentication
 
-import android.content.Context
 import android.os.Bundle
+import android.content.Context
+import android.support.v4.app.Fragment
 
-import java.util.Date
+import kotlinx.android.synthetic.main.fragment_register_step1.*
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-import kotlinx.android.synthetic.main.fragment_register_step1.*
-
 import org.marques999.acme.store.R
-import org.marques999.acme.store.AcmeStore
-import org.marques999.acme.store.customers.CreditCard
-import org.marques999.acme.store.customers.CustomerPOST
-
-import android.support.v4.app.Fragment
+import org.marques999.acme.store.authentication.RegisterConstants.generateError
 
 class RegisterStepOneFragment : Fragment() {
 
     /**
      */
     interface StepOneListener {
-        fun nextPage(customerPOST: CustomerPOST)
+
+        fun nextPage(parameters: Map<String, Any>)
     }
 
     /**
@@ -46,10 +42,6 @@ class RegisterStepOneFragment : Fragment() {
 
     /**
      */
-    private val dummyCard = CreditCard("", "", Date())
-
-    /**
-     */
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -68,17 +60,17 @@ class RegisterStepOneFragment : Fragment() {
 
             if (validateForm()) {
 
-                listener?.nextPage(CustomerPOST(
-                    registerActivity_name.text.toString(),
-                    registerActivity_username.text.toString(),
-                    registerActivity_password.text.toString(),
-                    registerActivity_address1.text.toString(),
-                    registerActivity_address2.text.toString(),
-                    "PT",
-                    registerActivity_nif.text.toString(),
-                    "",
-                    dummyCard
-                ))
+                listener?.nextPage(
+                    mapOf(
+                        "country" to "PT",
+                        "name" to registerActivity_name.text.toString(),
+                        "tax_number" to registerActivity_nif.text.toString(),
+                        "username" to registerActivity_username.text.toString(),
+                        "password" to registerActivity_password.text.toString(),
+                        "address1" to registerActivity_address1.text.toString(),
+                        "address2" to registerActivity_address2.text.toString()
+                    )
+                )
             }
         }
     }
@@ -91,7 +83,7 @@ class RegisterStepOneFragment : Fragment() {
         val name = registerActivity_name.text.toString()
 
         if (name.isEmpty()) {
-            registerActivity_name.error = AcmeStore.ERROR_REQUIRED
+            registerActivity_name.error = generateError(R.string.errorRequired)
             formValid = false
         } else {
             registerActivity_name.error = null
@@ -101,11 +93,11 @@ class RegisterStepOneFragment : Fragment() {
 
         when {
             username.isEmpty() -> {
-                registerActivity_username.error = AcmeStore.ERROR_REQUIRED
+                registerActivity_username.error = generateError(R.string.errorRequired)
                 formValid = false
             }
-            AcmeStore.invalidUsername(username) -> {
-                registerActivity_username.error = AcmeStore.ERROR_USERNAME
+            RegisterConstants.invalidUsername(username) -> {
+                registerActivity_username.error = generateError(R.string.errorUsername)
                 formValid = false
             }
             else -> {
@@ -117,11 +109,11 @@ class RegisterStepOneFragment : Fragment() {
 
         when {
             password.isEmpty() -> {
-                registerActivity_password.error = AcmeStore.ERROR_REQUIRED
+                registerActivity_password.error = generateError(R.string.errorRequired)
                 formValid = false
             }
-            AcmeStore.invalidPassword(password) -> {
-                registerActivity_password.error = AcmeStore.ERROR_PASSWORD
+            RegisterConstants.invalidPassword(password) -> {
+                registerActivity_password.error = generateError(R.string.errorPassword)
                 formValid = false
             }
             else -> {
@@ -133,15 +125,15 @@ class RegisterStepOneFragment : Fragment() {
 
         when {
             confirmPassword.isEmpty() -> {
-                registerActivity_confirm.error = AcmeStore.ERROR_REQUIRED
+                registerActivity_confirm.error = generateError(R.string.errorRequired)
                 formValid = false
             }
-            AcmeStore.invalidPassword(confirmPassword) -> {
-                registerActivity_password.error = AcmeStore.ERROR_PASSWORD
+            RegisterConstants.invalidPassword(confirmPassword) -> {
+                registerActivity_password.error = generateError(R.string.errorPassword)
                 formValid = false
             }
             confirmPassword != password -> {
-                registerActivity_confirm.error = AcmeStore.ERROR_MISMATCH
+                registerActivity_confirm.error = generateError(R.string.errorMismatch)
                 formValid = false
             }
             else -> {
@@ -152,7 +144,7 @@ class RegisterStepOneFragment : Fragment() {
         val address1 = registerActivity_address1.text.toString()
 
         if (address1.isEmpty()) {
-            registerActivity_address1.error = AcmeStore.ERROR_REQUIRED
+            registerActivity_address1.error = generateError(R.string.errorRequired)
             formValid = false
         } else {
             registerActivity_address1.error = null
@@ -161,7 +153,7 @@ class RegisterStepOneFragment : Fragment() {
         val address2 = registerActivity_address2.text.toString()
 
         if (address2.isEmpty()) {
-            registerActivity_address2.error = AcmeStore.ERROR_REQUIRED
+            registerActivity_address2.error = generateError(R.string.errorRequired)
             formValid = false
         } else {
             registerActivity_address2.error = null
@@ -171,11 +163,11 @@ class RegisterStepOneFragment : Fragment() {
 
         when {
             taxNumber.isEmpty() -> {
-                registerActivity_nif.error = AcmeStore.ERROR_REQUIRED
+                registerActivity_nif.error = generateError(R.string.errorRequired)
                 formValid = false
             }
-            taxNumber.length != AcmeStore.NIF_LENGTH -> {
-                registerActivity_nif.error = AcmeStore.ERROR_NIF
+            RegisterConstants.invalidNif(taxNumber) -> {
+                registerActivity_nif.error = generateError(R.string.errorNif)
                 formValid = false
             }
             else -> {

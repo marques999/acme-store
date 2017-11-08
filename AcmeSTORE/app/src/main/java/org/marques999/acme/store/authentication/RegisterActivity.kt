@@ -1,15 +1,15 @@
-package org.marques999.acme.store.register
+package org.marques999.acme.store.authentication
 
-import android.app.Activity
-import android.app.ProgressDialog
-
-import org.marques999.acme.store.customers.*
+import android.os.Bundle
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 
-import android.os.Bundle
+import org.marques999.acme.store.customers.*
+
+import android.app.ProgressDialog
+import android.content.Intent
 
 import org.marques999.acme.store.R
 import org.marques999.acme.store.AcmeStore
@@ -21,6 +21,11 @@ import kotlinx.android.synthetic.main.fragment_register_step2.*
 
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.util.Base64
+
+import com.fasterxml.jackson.databind.ObjectMapper
+import org.marques999.acme.store.common.Authentication
+import java.security.KeyPairGenerator
 
 class RegisterActivity : AppCompatActivity(),
     RegisterStepOneFragment.StepOneListener,
@@ -28,7 +33,11 @@ class RegisterActivity : AppCompatActivity(),
 
     /**
      */
-    private lateinit var customer: CustomerPOST
+    private val customer = HashMap<String, Any>()
+    private val keyPair = KeyPairGenerator.getInstance("RSA").genKeyPair()
+
+    /**
+     */
     private lateinit var acmeInstance: AcmeStore
     private lateinit var progressDialog: ProgressDialog
     private lateinit var registerStepOne: RegisterStepOneFragment
@@ -36,18 +45,21 @@ class RegisterActivity : AppCompatActivity(),
 
     /**
      */
-    override fun submitCustomer(creditCard: CreditCard) {
+    override fun submitCustomer(parameters: Map<String, Any>) {
 
-        customer.credit_card = creditCard
+        customer.put("credit_card", parameters)
+        customer.put("public_key", Base64.encodeToString(keyPair.public.encoded, Base64.DEFAULT))
         registerActivity_register.isEnabled = false
         progressDialog.show()
 
-        AuthenticationProvider().register(customer).observeOn(
+        val customerPOST = ObjectMapper().convertValue(customer, CustomerPOST::class.java)
+
+        AuthenticationProvider().register(customerPOST).observeOn(
             AndroidSchedulers.mainThread()
         ).subscribeOn(
             Schedulers.io()
         ).subscribe(
-            onRegisterComplete,
+            onRegisterComplete(Authentication(customerPOST.username, customerPOST.password)),
             onRegisterFailed(HttpErrorHandler(this))
         )
     }
@@ -60,17 +72,24 @@ class RegisterActivity : AppCompatActivity(),
 
     /**
      */
-    override fun nextPage(customerPOST: CustomerPOST) {
-        customer = customerPOST
+    override fun nextPage(parameters: Map<String, Any>) {
+        customer.putAll(parameters)
         changeFragment(registerStepTwo, true)
     }
 
     /**
      */
-    private var onRegisterComplete = Consumer<Customer> {
-        registerActivity_register.isEnabled = true
-        setResult(Activity.RESULT_OK, null)
-        finish()
+    private fun onRegisterComplete(authentication: Authentication) = Consumer<Customer> {
+
+        Intent().putExtra(
+            RegisterConstants.EXTRA_USERNAME, authentication.username
+        ).putExtra(
+            RegisterConstants.EXTRA_PASSWORD, authentication.password
+        ).let {
+            (application as AcmeStore).saveCustomer(authentication, keyPair.private)
+            setResult(AppCompatActivity.RESULT_OK, it)
+            finish()
+        }
     }
 
     /**
@@ -107,10 +126,10 @@ class RegisterActivity : AppCompatActivity(),
         supportFragmentManager.beginTransaction().apply {
 
             setCustomAnimations(
-                android.R.anim.slide_in_left,
-                android.R.anim.slide_out_right,
-                android.R.anim.slide_in_left,
-                android.R.anim.slide_out_right
+                R.anim.enter_from_left,
+                R.anim.exit_to_right,
+                R.anim.enter_from_right,
+                R.anim.exit_to_left
             )
 
             replace(R.id.registerActivity_content, frag, backStateName)

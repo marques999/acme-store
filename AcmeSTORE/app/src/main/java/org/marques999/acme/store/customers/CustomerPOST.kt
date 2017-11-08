@@ -1,13 +1,13 @@
 package org.marques999.acme.store.customers
 
-class CustomerPOST(
-    val name: String,
-    val username: String,
-    val password: String,
-    val address1: String,
-    val address2: String,
-    val country: String,
-    val tax_number: String,
-    val public_key: String,
-    var credit_card: CreditCard
-)
+class CustomerPOST {
+    lateinit var name: String
+    lateinit var username: String
+    lateinit var password: String
+    lateinit var address1: String
+    lateinit var address2: String
+    lateinit var country: String
+    lateinit var tax_number: String
+    lateinit var public_key: String
+    lateinit var credit_card: CreditCardJSON
+}

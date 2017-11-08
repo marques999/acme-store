@@ -1,54 +1,61 @@
-package org.marques999.acme.store
+package org.marques999.acme.store.authentication
 
 import android.os.Bundle
+import android.content.Intent
+import android.app.ProgressDialog
 import android.support.v7.app.AppCompatActivity
 
-import kotlinx.android.synthetic.main.activity_login.*
+import org.marques999.acme.store.common.AcmeDialogs
+import org.marques999.acme.store.common.Authentication
+import org.marques999.acme.store.common.HttpErrorHandler
+import org.marques999.acme.store.common.SessionJwt
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 
-import android.content.Intent
+import org.marques999.acme.store.AcmeStore
+import org.marques999.acme.store.MainActivity
+import org.marques999.acme.store.R
+
+import kotlinx.android.synthetic.main.activity_login.*
 
 import org.marques999.acme.store.api.AuthenticationProvider
-import org.marques999.acme.store.common.AcmeDialogs
-import org.marques999.acme.store.common.Authentication
-import org.marques999.acme.store.common.HttpErrorHandler
-import org.marques999.acme.store.common.SessionJwt
-import org.marques999.acme.store.register.RegisterActivity
-
-import android.app.Activity
-import android.app.ProgressDialog
+import org.marques999.acme.store.authentication.RegisterConstants.generateError
 
 class LoginActivity : AppCompatActivity() {
 
     /**
      */
-    private lateinit var acmeInstance: AcmeStore
     private lateinit var progressDialog: ProgressDialog
 
     /**
      */
-    private fun authenticate(authentication: Authentication) = AuthenticationProvider().login(
-        authentication
+    private fun authenticate(
+        username: String,
+        password: String
+    ) = AuthenticationProvider().login(
+        Authentication(username, password)
     ).observeOn(
         AndroidSchedulers.mainThread()
     ).subscribeOn(
         Schedulers.io()
     ).subscribe(
-        onLoginCompleted(authentication.username),
+        onLoginCompleted(username),
         onLoginFailed(HttpErrorHandler(this))
     )
 
     /**
      */
     private fun onLoginCompleted(username: String) = Consumer<SessionJwt> {
+
         progressDialog.dismiss()
         loginActivity_login.isEnabled = true
-        acmeInstance.initializeApi(username, it)
-        setResult(Activity.RESULT_OK, null)
-        finish()
+        (application as AcmeStore).initializeApi(username, it)
+
+        Intent(this, MainActivity::class.java).let {
+            startActivity(it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+        }
     }
 
     /**
@@ -62,20 +69,21 @@ class LoginActivity : AppCompatActivity() {
     /**
      */
     private fun authenticateCustomer() {
-
         loginActivity_login.isEnabled = false
         progressDialog.show()
-
-        authenticate(Authentication(
-            loginActivity_username.text.toString(),
-            loginActivity_password.text.toString()
-        ))
+        authenticate(loginActivity_username.text.toString(), loginActivity_password.text.toString())
     }
 
     /**
      */
-    override fun onBackPressed() {
-        moveTaskToBack(true)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        if (data != null &&
+            resultCode == AppCompatActivity.RESULT_OK &&
+            requestCode == AcmeStore.REQUEST_REGISTER) {
+            loginActivity_username.setText(data.getStringExtra(RegisterConstants.EXTRA_USERNAME))
+            loginActivity_password.setText(data.getStringExtra(RegisterConstants.EXTRA_PASSWORD))
+        }
     }
 
     /**
@@ -84,14 +92,18 @@ class LoginActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        acmeInstance = application as AcmeStore
-        progressDialog = AcmeDialogs.buildProgress(this, R.string.loginActivity_progress)
+        progressDialog = AcmeDialogs.buildProgress(
+            this,
+            R.string.loginActivity_progress
+        )
 
         loginActivity_register.setOnClickListener {
 
             Intent(applicationContext, RegisterActivity::class.java).let {
-                startActivityForResult(it, AcmeStore.REQUEST_REGISTER)
-                finish()
+                startActivityForResult(
+                    it,
+                    AcmeStore.REQUEST_REGISTER
+                )
             }
         }
 
@@ -102,18 +114,9 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        acmeInstance.loadCustomer().let {
+        (application as AcmeStore).loadCustomer().let {
             loginActivity_username.setText(it.username)
             loginActivity_password.setText(it.password)
-        }
-    }
-
-    /**
-     */
-    override fun onActivityResult(request: Int, result: Int, data: Intent?) {
-
-        if (AcmeStore.activitySucceeded(request, result, AcmeStore.REQUEST_REGISTER)) {
-            finish()
         }
     }
 
@@ -126,11 +129,11 @@ class LoginActivity : AppCompatActivity() {
 
         when {
             username.isEmpty() -> {
-                loginActivity_username.error = AcmeStore.ERROR_REQUIRED
+                loginActivity_username.error = generateError(R.string.errorRequired)
                 formValid = false
             }
-            AcmeStore.invalidUsername(username) -> {
-                loginActivity_username.error = AcmeStore.ERROR_USERNAME
+            RegisterConstants.invalidUsername(username) -> {
+                loginActivity_username.error = generateError(R.string.errorUsername)
                 formValid = false
             }
             else -> {
@@ -142,11 +145,11 @@ class LoginActivity : AppCompatActivity() {
 
         when {
             password.isEmpty() -> {
-                loginActivity_password.error = AcmeStore.ERROR_REQUIRED
+                loginActivity_password.error = generateError(R.string.errorRequired)
                 formValid = false
             }
-            AcmeStore.invalidPassword(password) -> {
-                loginActivity_password.error = AcmeStore.ERROR_PASSWORD
+            RegisterConstants.invalidPassword(password) -> {
+                loginActivity_password.error = generateError(R.string.errorPassword)
                 formValid = false
             }
             else -> {

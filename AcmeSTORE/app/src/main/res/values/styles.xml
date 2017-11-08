@@ -1,11 +1,12 @@
 <resources>
   <style name="AppTheme" parent="Theme.AppCompat">
-    <item name="colorPrimary">@color/colorPrimaryDark</item>
+    <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-    <item name="colorAccent">@color/colorAccent</item>
+    <item name="colorAccent">@color/bottomNavigation_accent</item>
     <item name="colorButtonNormal">@color/colorAccent</item>
-    <item name="android:navigationBarColor">@color/colorPrimaryDarker</item>
-    <item name="android:windowBackground">@color/colorPrimary</item>
+    <item name="android:colorButtonNormal">@color/colorAccent</item>
+    <item name="android:textColorHint">@color/bottomNavigation_iron</item>
+    <item name="android:windowBackground">@color/colorPrimaryDark</item>
   </style>
   <style name="AppTheme.NoActionBar">
     <item name="windowActionBar">false</item>

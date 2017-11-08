@@ -55,6 +55,18 @@
   <string name="registerActivity_progress">"Creating Account…"</string>
   <string name="registerActivity_register">Register</string>
   <string name="registerActivity_username">Username</string>
+  <string-array name="planets_array">
+    <item>VISA</item>
+    <item>Maestro</item>
+    <item>Mastercard</item>
+    <item>VISA Electron</item>
+    <item>American Express</item>
+  </string-array>
+  <string name="errorMismatch">The passwords you entered do not match!</string>
+  <string name="errorNif">The tax number must be exactly %1$d digits long.</string>
+  <string name="errorPassword">Password must have at least %1$d alphanumeric characters.</string>
+  <string name="errorUsername">Username must be at least %1$d characters long.</string>
+  <string name="errorRequired">This field is required.</string>
 
   <!-- ShoppingCartFragment -->
   <string name="shoppingCart_checkout">CHECKOUT</string>
@@ -67,4 +79,7 @@
   <string name="shoppingCart_scan">SCAN BARCODE</string>
   <string name="shoppingCart_invalidQr">The code you scanned was recognized as \"%1\$s\",
     expected \"UPC_A\".</string>
+  <string name="registerActivity_title">Register customer</string>
+  <string name="errorNumber">The number you entered is not a valid %1$s card number!</string>
+  <string name="errorExpired">Your credit card has expired, please double check the expiration date!</string>
 </resources>

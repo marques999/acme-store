@@ -15,6 +15,6 @@ interface AuthenticationApi {
     @POST("login")
     fun login(@Body payload: Authentication): Observable<SessionJwt>
 
-    @POST("customers")
+    @POST("customers/")
     fun register(@Body customerPOST: CustomerPOST): Observable<Customer>
 }

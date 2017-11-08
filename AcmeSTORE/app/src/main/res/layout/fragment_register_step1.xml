@@ -5,39 +5,7 @@
   android:orientation="vertical"
   android:paddingEnd="@dimen/global_defaultMargin"
   android:paddingStart="@dimen/global_defaultMargin"
-  android:paddingTop="@dimen/global_defaultMargin">
-
-  <!--
-    LinearLayout: Heading
-  -->
-  <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-
-    <!--
-      ImageView: Heading Icon
-    -->
-    <ImageView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:contentDescription="@string/registerActivity_icon"
-      android:padding="@dimen/global_tinyMargin"
-      android:src="@drawable/ic_person_48dp"
-      android:tint="@color/bottomNavigation_iron" />
-
-    <!--
-      TextView: Heading Title
-    -->
-    <TextView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:padding="@dimen/registerActivity_button"
-      android:text="@string/registerActivity_heading1"
-      android:textAllCaps="true"
-      android:textSize="@dimen/registerActivity_heading"
-      android:textStyle="bold" />
-  </LinearLayout>
+  android:paddingTop="@dimen/global_halfMargin">
 
   <!--
    TextInputLayout: Name
