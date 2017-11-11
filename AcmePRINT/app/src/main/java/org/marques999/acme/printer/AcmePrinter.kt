@@ -26,7 +26,11 @@ class AcmePrinter : android.app.Application() {
 
     /**
      */
-    var acmeApi: AcmeProvider? = null
+    lateinit var api: AcmeProvider
+
+    /**
+     */
+    private var authenticated = false
 
     /**
      */
@@ -34,18 +38,16 @@ class AcmePrinter : android.app.Application() {
         username: String,
         next: Consumer<SessionJwt>
     ) = Consumer<SessionJwt> {
-        acmeApi = AcmeProvider(Session(it, username))
+        authenticated = true
+        api = AcmeProvider(Session(it, username))
         next.accept(it)
     }
 
     /**
      */
-    fun authenticate(
-        context: Context,
-        callback: Consumer<SessionJwt>
-    ): Boolean {
+    fun authenticate(context: Context, callback: Consumer<SessionJwt>): Boolean {
 
-        if (acmeApi != null) {
+        if (authenticated) {
             return true
         }
 
@@ -67,29 +69,13 @@ class AcmePrinter : android.app.Application() {
      */
     companion object {
 
-        private val ZXING_PACKAGE = "com.google.zxing.client.android"
-
-        val SERVER_URL = "http://10.0.2.2:3333/"
-        val ZXING_ACTIVITY = "$ZXING_PACKAGE.SCAN"
+        val SERVER_URL = "http://192.168.1.87:3333/"
         val RAMEN_RECIPE = "mieic@feup#2017".toByteArray()
-        val ZXING_URL = "market://details?id=$ZXING_PACKAGE"
+        val ZXING_ACTIVITY = "com.google.zxing.client.android.SCAN"
+        val ZXING_URL = "market://details?id=com.google.zxing.client.android"
 
         val jsonSerializer: Moshi = Moshi.Builder().add(
             Date::class.java, Rfc3339DateJsonAdapter().nullSafe()
         ).build()
-
-        fun formatDate(dateTime: Date): String = DateFormat.getDateInstance(
-            DateFormat.MEDIUM, Locale("pt", "PT")
-        ).format(dateTime)
-
-        fun formatDateTime(dateTime: Date): String = DateFormat.getDateTimeInstance(
-            DateFormat.MEDIUM, DateFormat.MEDIUM, Locale("pt", "PT")
-        ).format(dateTime)
-
-        fun formatCurrency(value: Double): String = NumberFormat.getCurrencyInstance(
-            Locale.getDefault()
-        ).apply {
-            currency = Currency.getInstance("EUR")
-        }.format(value)
     }
 }

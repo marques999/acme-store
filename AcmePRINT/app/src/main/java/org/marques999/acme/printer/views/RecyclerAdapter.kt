@@ -11,7 +11,7 @@ import org.marques999.acme.printer.products.ProductAdapter
 import android.support.v4.util.SparseArrayCompat
 import android.support.v7.widget.RecyclerView
 
-class RecyclerAdapter(private val order: Order) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RecyclerAdapter(val order: Order) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     /**
      */
@@ -19,7 +19,7 @@ class RecyclerAdapter(private val order: Order) : RecyclerView.Adapter<RecyclerV
         order.customer,
         order.customer.credit_card,
         order,
-        *order.products
+        *order.products.toTypedArray()
     )
 
     /**
@@ -38,12 +38,7 @@ class RecyclerAdapter(private val order: Order) : RecyclerView.Adapter<RecyclerV
 
     /**
      */
-    fun getState(): Order = order
-
-    /**
-     */
     override fun getItemCount(): Int = items.size
-
     override fun getItemViewType(position: Int) = items[position].getViewType()
 
     /**

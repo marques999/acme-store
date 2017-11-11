@@ -1,14 +1,15 @@
 package org.marques999.acme.printer.customers
 
+import org.marques999.acme.printer.R
+
 import android.view.ViewGroup
 import android.support.v7.widget.RecyclerView
 
-import kotlinx.android.synthetic.main.fragment_cc.view.*
-
-import org.marques999.acme.printer.R
-import org.marques999.acme.printer.AcmePrinter
 import org.marques999.acme.printer.views.ViewType
 import org.marques999.acme.printer.views.ViewTypeAdapter
+import org.marques999.acme.printer.views.ViewUtils
+
+import kotlinx.android.synthetic.main.fragment_cc.view.*
 
 class CreditCardAdapter : ViewTypeAdapter {
 
@@ -31,7 +32,7 @@ class CreditCardAdapter : ViewTypeAdapter {
 
             itemView.cc_validity.text = itemView.context.getString(
                 R.string.details_ccDate,
-                AcmePrinter.formatDate(item.validity)
+                ViewUtils.formatDate(item.validity)
             )
         }
     }

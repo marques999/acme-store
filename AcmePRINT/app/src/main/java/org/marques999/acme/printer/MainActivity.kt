@@ -12,11 +12,11 @@ import android.content.Intent
 import android.content.ActivityNotFoundException
 import android.content.DialogInterface
 
-import android.support.v7.app.AppCompatActivity
-
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.android.schedulers.AndroidSchedulers
+
+import android.support.v7.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,23 +24,6 @@ class MainActivity : AppCompatActivity() {
      */
     private val launchPlayStore = DialogInterface.OnClickListener { _, _ ->
         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(AcmePrinter.ZXING_URL)))
-    }
-
-    /**
-     */
-    override fun onCreate(savedInstanceState: Bundle?) {
-
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        mainActivity_scan.setOnClickListener { scanQrCode() }
-
-        mainActivity_scan.isEnabled = (application as AcmePrinter).authenticate(
-            this,
-            Consumer {
-                mainActivity_scan.isEnabled = true
-                AcmeDialogs.buildOk(this, R.string.main_connectionEstablished).show()
-            }
-        )
     }
 
     /**
@@ -55,10 +38,26 @@ class MainActivity : AppCompatActivity() {
 
     /**
      */
-    private fun scanQrCode() = try {
-        launchQrScanner()
-    } catch (ex: ActivityNotFoundException) {
-        AcmeDialogs.buildYesNo(this, R.string.main_promptInstall, launchPlayStore).show()
+    override fun onCreate(savedInstanceState: Bundle?) {
+
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        mainActivity_scan.setOnClickListener {
+            try {
+                launchQrScanner()
+            } catch (ex: ActivityNotFoundException) {
+                AcmeDialogs.buildYesNo(this, R.string.main_promptInstall, launchPlayStore).show()
+            }
+        }
+
+        mainActivity_scan.isEnabled = (application as AcmePrinter).authenticate(
+            this,
+            Consumer {
+                mainActivity_scan.isEnabled = true
+                AcmeDialogs.buildOk(this, R.string.main_connectionEstablished).show()
+            }
+        )
     }
 
     /**
@@ -73,7 +72,7 @@ class MainActivity : AppCompatActivity() {
 
         if (format == "QR_CODE") {
 
-            (application as AcmePrinter).acmeApi!!.getOrder(
+            (application as AcmePrinter).api.getOrder(
                 data.getStringExtra("SCAN_RESULT")
             ).subscribeOn(
                 Schedulers.io()
@@ -81,10 +80,9 @@ class MainActivity : AppCompatActivity() {
                 AndroidSchedulers.mainThread()
             ).subscribe(
                 Consumer {
-                    startActivity(
-                        Intent(this, DetailsActivity::class.java).putExtra(
-                            EXTRA_ORDER, it
-                        )
+                    startActivity(Intent(
+                        this, DetailsActivity::class.java
+                    ).putExtra(EXTRA_ORDER, it)
                     )
                 },
                 HttpErrorHandler(this)

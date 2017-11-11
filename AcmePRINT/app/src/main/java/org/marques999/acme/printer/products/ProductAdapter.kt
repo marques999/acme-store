@@ -3,13 +3,14 @@ package org.marques999.acme.printer.products
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 
+import org.marques999.acme.printer.R
+import org.marques999.acme.printer.orders.OrderProduct
+
 import com.squareup.picasso.Picasso
 
-import org.marques999.acme.printer.R
-import org.marques999.acme.printer.AcmePrinter
 import org.marques999.acme.printer.views.ViewType
 import org.marques999.acme.printer.views.ViewTypeAdapter
-import org.marques999.acme.printer.orders.OrderProduct
+import org.marques999.acme.printer.views.ViewUtils
 
 import kotlinx.android.synthetic.main.fragment_product.view.*
 
@@ -30,9 +31,9 @@ class ProductAdapter : ViewTypeAdapter {
         fun bind(item: OrderProduct) {
 
             itemView.product_barcode.text = item.product.barcode
-            itemView.product_price.text = AcmePrinter.formatCurrency(item.product.price)
+            itemView.product_price.text = ViewUtils.formatCurrency(item.product.price)
 
-            itemView.product_total.text = AcmePrinter.formatCurrency(
+            itemView.product_total.text = ViewUtils.formatCurrency(
                 item.product.price * item.quantity
             )
 

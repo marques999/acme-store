@@ -1,14 +1,13 @@
 package org.marques999.acme.printer
 
 import android.os.Bundle
-import android.content.res.Configuration
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+
+import org.marques999.acme.printer.views.RecyclerAdapter
 
 import kotlinx.android.synthetic.main.activity_details.*
 
-import org.marques999.acme.printer.orders.Order
-import org.marques999.acme.printer.views.RecyclerAdapter
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 
@@ -22,9 +21,9 @@ class DetailsActivity : AppCompatActivity() {
 
         if (detailsActivity_recyclerView?.adapter is RecyclerAdapter) {
 
-            outState?.putSerializable(
+            outState?.putParcelable(
                 BUNDLE_ORDER,
-                (detailsActivity_recyclerView.adapter as RecyclerAdapter).getState()
+                (detailsActivity_recyclerView.adapter as RecyclerAdapter).order
             )
         }
     }
@@ -37,7 +36,7 @@ class DetailsActivity : AppCompatActivity() {
 
         savedInstanceState?.let {
             detailsActivity_recyclerView.adapter = RecyclerAdapter(
-                it.getSerializable(BUNDLE_ORDER) as Order
+                it.getParcelable(BUNDLE_ORDER)
             )
         }
     }
@@ -55,22 +54,15 @@ class DetailsActivity : AppCompatActivity() {
             clearOnScrollListeners()
         }
 
-        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            OverScrollDecoratorHelper.setUpOverScroll(
-                detailsActivity_recyclerView,
-                OverScrollDecoratorHelper.ORIENTATION_VERTICAL
-            )
-        } else {
-            OverScrollDecoratorHelper.setUpOverScroll(
-                detailsActivity_recyclerView,
-                OverScrollDecoratorHelper.ORIENTATION_HORIZONTAL
-            )
-        }
+        OverScrollDecoratorHelper.setUpOverScroll(
+            detailsActivity_recyclerView,
+            OverScrollDecoratorHelper.ORIENTATION_VERTICAL
+        )
 
         if (savedInstanceState == null) {
 
             detailsActivity_recyclerView.adapter = RecyclerAdapter(
-                intent.extras.getSerializable(MainActivity.EXTRA_ORDER) as Order
+                intent.extras.getParcelable(MainActivity.EXTRA_ORDER)
             )
         }
     }
