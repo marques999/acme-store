@@ -18,7 +18,7 @@ class Order(
     val products: List<OrderProduct>,
     val created_at: Date,
     val updated_at: Date
-) : KotlinParcelable, ViewType {
+) : Parcelable, ViewType {
 
     /**
      */
@@ -34,6 +34,7 @@ class Order(
 
     /**
      */
+    override fun describeContents() = 0
     override fun getViewType(): Int = ViewType.ORDER
 
     /**

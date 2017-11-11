@@ -3,10 +3,6 @@ package org.marques999.acme.printer.products
 import android.os.Parcel
 import android.os.Parcelable
 
-import org.marques999.acme.printer.common.KotlinParcelable
-import org.marques999.acme.printer.common.parcelableCreator
-import org.marques999.acme.printer.orders.Order
-
 class Product(
     val name: String,
     val brand: String,
@@ -14,7 +10,7 @@ class Product(
     val barcode: String,
     var image_uri: String,
     val description: String
-) : KotlinParcelable {
+) : Parcelable {
 
     /**
      */
@@ -37,6 +33,10 @@ class Product(
         parcel.writeString(image_uri)
         parcel.writeString(description)
     }
+
+    /**
+     */
+    override fun describeContents() = 0
 
     /**
      */

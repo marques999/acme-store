@@ -19,7 +19,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:drawablePadding="@dimen/global_mediumMargin"
-    android:drawableTop="@drawable/ic_camera_24dp"
+    android:drawableTop="@drawable/ic_camera_48dp"
     android:padding="?android:attr/dialogPreferredPadding"
     android:text="@string/main_scanButton"
     android:textSize="@dimen/global_mediumFont" />

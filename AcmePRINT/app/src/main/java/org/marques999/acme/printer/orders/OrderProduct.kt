@@ -1,15 +1,12 @@
 package org.marques999.acme.printer.orders
 
-import org.marques999.acme.printer.common.KotlinParcelable
-import org.marques999.acme.printer.common.parcelableCreator
-
 import android.os.Parcel
 import android.os.Parcelable
 
 import org.marques999.acme.printer.views.ViewType
 import org.marques999.acme.printer.products.Product
 
-class OrderProduct(val quantity: Int, val product: Product) : ViewType, KotlinParcelable {
+class OrderProduct(val quantity: Int, val product: Product) : ViewType, Parcelable {
 
     /**
      */
@@ -20,14 +17,15 @@ class OrderProduct(val quantity: Int, val product: Product) : ViewType, KotlinPa
 
     /**
      */
-    override fun getViewType(): Int = ViewType.PRODUCT
-
-    /**
-     */
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(quantity)
         parcel.writeParcelable(product, flags)
     }
+
+    /**
+     */
+    override fun describeContents() = 0
+    override fun getViewType(): Int = ViewType.PRODUCT
 
     /**
      */

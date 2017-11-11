@@ -25,9 +25,11 @@ class OrderAdapter : ViewTypeAdapter {
     ) {
 
         fun bind(item: Order) {
+            itemView.order_token.text = item.token
             itemView.order_count.text = item.count.toString()
             itemView.order_total.text = ViewUtils.formatCurrency(item.total)
-            itemView.order_date.text = ViewUtils.formatDateTime(item.created_at)
+            itemView.order_createdAt.text = ViewUtils.formatDateTime(item.created_at)
+            itemView.order_modifiedAt.text = ViewUtils.formatDateTime(item.updated_at)
         }
     }
 }

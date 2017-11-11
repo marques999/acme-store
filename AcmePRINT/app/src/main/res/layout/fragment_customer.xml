@@ -24,7 +24,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginEnd="@dimen/global_largeMargin"
         android:contentDescription="@string/details_iconDescription"
-        android:src="@drawable/ic_person_24dp" />
+        android:src="@drawable/ic_person_48dp" />
 
       <TextView
         android:id="@+id/customer_name"

@@ -24,7 +24,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginEnd="@dimen/global_largeMargin"
         android:contentDescription="@string/details_iconDescription"
-        android:src="@drawable/ic_credit_card_24dp" />
+        android:src="@drawable/ic_credit_card_48dp" />
 
       <TextView
         android:id="@+id/cc_number"

@@ -6,7 +6,10 @@
   <string name="details_customerTax">NIF: %1$s</string>
   <string name="details_iconDescription">TODO</string>
   <string name="details_orderCount">#Products:\u0020</string>
+  <string name="details_orderCreated">Created:\u0020</string>
   <string name="details_orderQuantity">Quantity: %1$d</string>
+  <string name="details_orderToken">Token:\u0020</string>
+  <string name="details_orderUpdated">Updated:\u0020</string>
   <string name="details_productName">%1$s %2$s</string>
   <string name="details_productPhoto">TODO</string>
   <!-- MainActivity -->

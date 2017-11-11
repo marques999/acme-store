@@ -24,7 +24,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginEnd="@dimen/global_largeMargin"
         android:contentDescription="@string/details_iconDescription"
-        android:src="@drawable/ic_money_24dp" />
+        android:src="@drawable/ic_shopping_48dp" />
 
       <TextView
         android:id="@+id/order_total"
@@ -36,19 +36,10 @@
         android:textSize="@dimen/global_largeFont" />
 
       <TextView
-        android:id="@+id/order_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/order_total"
-        android:layout_marginBottom="@dimen/global_smallMargin"
-        android:layout_toEndOf="@+id/order_icon"
-        android:textSize="@dimen/global_mediumFont" />
-
-      <TextView
         android:id="@+id/label_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/order_date"
+        android:layout_below="@+id/order_total"
         android:layout_toEndOf="@+id/order_icon"
         android:text="@string/details_orderCount"
         android:textSize="@dimen/global_mediumFont"
@@ -58,8 +49,65 @@
         android:id="@+id/order_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/order_date"
+        android:layout_below="@+id/order_total"
+        android:layout_marginBottom="@dimen/global_smallMargin"
         android:layout_toEndOf="@+id/label_count"
+        android:textSize="@dimen/global_mediumFont" />
+
+      <TextView
+        android:id="@+id/label_token"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/order_count"
+        android:layout_toEndOf="@+id/order_icon"
+        android:text="@string/details_orderToken"
+        android:textSize="@dimen/global_mediumFont"
+        android:textStyle="bold" />
+
+      <TextView
+        android:id="@+id/order_token"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/order_count"
+        android:layout_marginBottom="@dimen/global_smallMargin"
+        android:layout_toEndOf="@+id/label_token"
+        android:textSize="@dimen/global_mediumFont" />
+
+      <TextView
+        android:id="@+id/label_createdAt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/order_token"
+        android:layout_toEndOf="@+id/order_icon"
+        android:text="@string/details_orderCreated"
+        android:textSize="@dimen/global_mediumFont"
+        android:textStyle="bold" />
+
+      <TextView
+        android:id="@+id/order_createdAt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/order_token"
+        android:layout_marginBottom="@dimen/global_smallMargin"
+        android:layout_toEndOf="@+id/label_createdAt"
+        android:textSize="@dimen/global_mediumFont" />
+
+      <TextView
+        android:id="@+id/label_modifiedAt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/order_createdAt"
+        android:layout_toEndOf="@+id/order_icon"
+        android:text="@string/details_orderUpdated"
+        android:textSize="@dimen/global_mediumFont"
+        android:textStyle="bold" />
+
+      <TextView
+        android:id="@+id/order_modifiedAt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/order_createdAt"
+        android:layout_toEndOf="@+id/label_modifiedAt"
         android:textSize="@dimen/global_mediumFont" />
     </RelativeLayout>
   </android.support.v7.widget.CardView>
