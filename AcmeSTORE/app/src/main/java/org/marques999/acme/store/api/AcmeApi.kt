@@ -2,15 +2,8 @@ package org.marques999.acme.store.api
 
 import retrofit2.http.*
 
-import org.marques999.acme.store.customers.Customer
-import org.marques999.acme.store.customers.CustomerPOST
-
 import io.reactivex.Observable
-
-import org.marques999.acme.store.orders.Order
-import org.marques999.acme.store.orders.OrderJSON
-import org.marques999.acme.store.orders.OrderPOST
-import org.marques999.acme.store.products.Product
+import org.marques999.acme.store.model.*
 
 interface AcmeApi {
 
@@ -36,7 +29,7 @@ interface AcmeApi {
      * Orders
      */
     @GET("orders/")
-    fun getOrders(): Observable<List<OrderJSON>>
+    fun getOrders(): Observable<List<Order>>
 
     @GET("orders/{id}")
     fun getOrder(@Path("id") token: String): Observable<OrderJSON>

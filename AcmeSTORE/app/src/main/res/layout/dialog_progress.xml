@@ -11,7 +11,7 @@
       android:id="@+id/progressBar2"
       style="?android:attr/progressBarStyle"
       android:layout_width="wrap_content"
-      android:padding="@dimen/global_halfMargin"
+      android:padding="@dimen/global_mediumMargin"
       android:layout_height="match_parent" />
 
     <TextView

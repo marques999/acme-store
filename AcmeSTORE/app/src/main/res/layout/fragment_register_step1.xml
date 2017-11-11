@@ -3,9 +3,9 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   android:orientation="vertical"
-  android:paddingEnd="@dimen/global_defaultMargin"
-  android:paddingStart="@dimen/global_defaultMargin"
-  android:paddingTop="@dimen/global_halfMargin">
+  android:paddingEnd="@dimen/global_largeMargin"
+  android:paddingStart="@dimen/global_largeMargin"
+  android:paddingTop="@dimen/global_mediumMargin">
 
   <!--
    TextInputLayout: Name
@@ -13,8 +13,8 @@
   <android.support.design.widget.TextInputLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/global_halfMargin"
-    android:layout_marginTop="@dimen/global_halfMargin">
+    android:layout_marginBottom="@dimen/global_mediumMargin"
+    android:layout_marginTop="@dimen/global_mediumMargin">
 
     <EditText
       android:id="@+id/registerActivity_name"
@@ -30,8 +30,8 @@
   <android.support.design.widget.TextInputLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/global_halfMargin"
-    android:layout_marginTop="@dimen/global_halfMargin">
+    android:layout_marginBottom="@dimen/global_mediumMargin"
+    android:layout_marginTop="@dimen/global_mediumMargin">
 
     <EditText
       android:id="@+id/registerActivity_username"
@@ -47,8 +47,8 @@
   <android.support.design.widget.TextInputLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/global_halfMargin"
-    android:layout_marginTop="@dimen/global_halfMargin">
+    android:layout_marginBottom="@dimen/global_mediumMargin"
+    android:layout_marginTop="@dimen/global_mediumMargin">
 
     <EditText
       android:id="@+id/registerActivity_password"
@@ -64,8 +64,8 @@
   <android.support.design.widget.TextInputLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/global_halfMargin"
-    android:layout_marginTop="@dimen/global_halfMargin">
+    android:layout_marginBottom="@dimen/global_mediumMargin"
+    android:layout_marginTop="@dimen/global_mediumMargin">
 
     <EditText
       android:id="@+id/registerActivity_confirm"
@@ -81,8 +81,8 @@
   <android.support.design.widget.TextInputLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/global_halfMargin"
-    android:layout_marginTop="@dimen/global_halfMargin">
+    android:layout_marginBottom="@dimen/global_mediumMargin"
+    android:layout_marginTop="@dimen/global_mediumMargin">
 
     <EditText
       android:id="@+id/registerActivity_address1"
@@ -98,8 +98,8 @@
   <android.support.design.widget.TextInputLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/global_halfMargin"
-    android:layout_marginTop="@dimen/global_halfMargin">
+    android:layout_marginBottom="@dimen/global_mediumMargin"
+    android:layout_marginTop="@dimen/global_mediumMargin">
 
     <EditText
       android:id="@+id/registerActivity_address2"
@@ -115,8 +115,8 @@
   <android.support.design.widget.TextInputLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/global_halfMargin"
-    android:layout_marginTop="@dimen/global_halfMargin">
+    android:layout_marginBottom="@dimen/global_mediumMargin"
+    android:layout_marginTop="@dimen/global_mediumMargin">
 
     <EditText
       android:id="@+id/registerActivity_nif"
@@ -133,7 +133,7 @@
     android:id="@+id/registerActivity_next"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/global_halfMargin"
+    android:layout_marginBottom="@dimen/global_mediumMargin"
     android:drawableEnd="@drawable/ic_chevron_right_24dp"
     android:padding="@dimen/registerActivity_button"
     android:text="@string/registerActivity_next" />

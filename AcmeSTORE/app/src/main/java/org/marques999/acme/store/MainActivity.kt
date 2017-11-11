@@ -10,10 +10,10 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import kotlinx.android.synthetic.main.activity_main.*
 
 import org.marques999.acme.store.catalog.ProductCatalogFragment
-import org.marques999.acme.store.customers.CustomerProfileFragment
-import org.marques999.acme.store.history.OrderHistoryFragment
-import org.marques999.acme.store.products.ShoppingCartFragment
-import org.marques999.acme.store.view.BottomNavigationAdapter
+import org.marques999.acme.store.views.profile.CustomerProfileFragment
+import org.marques999.acme.store.views.history.OrderHistoryFragment
+import org.marques999.acme.store.views.cart.ShoppingCartFragment
+import org.marques999.acme.store.views.common.BottomNavigationAdapter
 
 class MainActivity : AppCompatActivity() {
 

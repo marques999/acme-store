@@ -7,9 +7,9 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import io.reactivex.Observable
 
 import org.marques999.acme.store.AcmeStore
-import org.marques999.acme.store.common.Authentication
-import org.marques999.acme.store.customers.Customer
-import org.marques999.acme.store.customers.CustomerPOST
+import org.marques999.acme.store.model.Authentication
+import org.marques999.acme.store.model.Customer
+import org.marques999.acme.store.model.CustomerPOST
 
 class AuthenticationProvider {
 

@@ -4,14 +4,14 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:orientation="vertical"
-  tools:context=".orders.OrderConfirmActivity">
+  tools:context=".views.order.OrderConfirmActivity">
 
   <ImageView
     android:id="@+id/qrCode_imageView"
     android:layout_width="match_parent"
     android:layout_height="@dimen/qrCode_imageView"
     android:layout_gravity="center"
-    android:padding="@dimen/global_defaultMargin" />
+    android:padding="@dimen/global_largeMargin" />
 
   <TextView
     android:id="@+id/qrCode_textView"

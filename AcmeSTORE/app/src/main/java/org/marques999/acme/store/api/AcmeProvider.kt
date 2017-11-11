@@ -6,15 +6,15 @@ import okhttp3.OkHttpClient
 import com.squareup.moshi.Types
 
 import org.marques999.acme.store.AcmeStore
-import org.marques999.acme.store.common.Session
-import org.marques999.acme.store.customers.CustomerPOST
+import org.marques999.acme.store.model.Session
+import org.marques999.acme.store.model.CustomerPOST
 
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-import org.marques999.acme.store.orders.OrderPOST
-import org.marques999.acme.store.orders.OrderProductPOST
+import org.marques999.acme.store.model.OrderPOST
+import org.marques999.acme.store.model.OrderProductPOST
 
 class AcmeProvider(private val session: Session, private val crypto: CryptographyProvider) {
 

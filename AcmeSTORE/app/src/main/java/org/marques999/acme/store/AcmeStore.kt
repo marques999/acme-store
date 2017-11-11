@@ -1,8 +1,8 @@
 package org.marques999.acme.store
 
-import org.marques999.acme.store.common.Authentication
-import org.marques999.acme.store.common.Session
-import org.marques999.acme.store.common.SessionJwt
+import org.marques999.acme.store.model.Authentication
+import org.marques999.acme.store.model.Session
+import org.marques999.acme.store.model.SessionJwt
 
 import java.security.PrivateKey
 
@@ -14,7 +14,6 @@ import android.content.SharedPreferences
 
 import java.text.NumberFormat
 
-import android.app.Activity
 import android.app.Application
 import android.support.annotation.ColorRes
 import android.support.v4.content.ContextCompat
@@ -84,7 +83,7 @@ class AcmeStore : Application() {
 
         val ALGORITHM_PKCS = "RSA"
         val ALGORITHM_HASH = "SHA1WithRSA"
-        val SERVER_URL = "http://192.168.1.93:3333/"
+        val SERVER_URL = "http://192.168.1.87:3333/"
         val DEFAULT_USERNAME = "marques999"
         val DEFAULT_PASSWORD = "r0wsauce"
         val ZXING_ACTIVITY = "$ZXING_PACKAGE.SCAN"
@@ -101,12 +100,6 @@ class AcmeStore : Application() {
         fun fetchColor(context: Context, @ColorRes color: Int): Int {
             return ContextCompat.getColor(context, color)
         }
-
-        fun formatCurrency(value: Double): String = NumberFormat.getCurrencyInstance(
-            Locale.getDefault()
-        ).apply {
-            currency = Currency.getInstance("EUR")
-        }.format(value)
 
         val DEFAULT_PRIVATE = """-----BEGIN PRIVATE KEY-----
 MIIBAgIBADANBgkqhkiG9w0BAQEFAASB7TCB6gIBAAIvAL1L9h1N9xqNe0I4ddyjKD6lv0ArcEhB

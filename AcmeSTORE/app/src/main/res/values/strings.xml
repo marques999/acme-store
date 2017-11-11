@@ -1,7 +1,7 @@
 <resources>
   <!-- Globals -->
   <string name="title_activity_login">Login</string>
-
+  <string name="global_todoDescription">TODO</string>
   <!-- ActionBar -->
   <string name="actionBar_cart">Shopping Cart</string>
   <string name="actionBar_catalog">Product Catalog</string>
@@ -25,10 +25,21 @@
   <string name="loginActivity_register">Don\'t have an account yet? Register!</string>
   <string name="loginActivity_username">Username</string>
 
+  <string name="profileFragment_ccValidity">Validity:\u0020</string>
+
   <!-- MainActivity -->
   <string name="main_activity">AcmeSTORE</string>
   <string name="main_promptInstall">Launch Play Store and install a QR code scanner activity?</string>
   <string name="main_connectionEstablished">Connection to the store server established successfully!</string>
+
+  <!-- OrderViewActivity -->
+  <string name="orderView_count">#Products:\u0020</string>
+  <string name="orderView_created">Created:\u0020</string>
+  <string name="orderView_quantity">Quantity: %1$d</string>
+  <string name="orderView_token">Token:\u0020</string>
+  <string name="orderView_updated">Updated:\u0020</string>
+  <string name="orderView_productName">%1$s %2$s</string>
+  <string name="orderView_productPhoto">TODO</string>
 
   <!-- ProductViewActivity -->
   <string name="productView_activity">Product Information</string>

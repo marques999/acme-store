@@ -3,9 +3,9 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   android:orientation="vertical"
-  android:paddingEnd="@dimen/global_defaultMargin"
-  android:paddingStart="@dimen/global_defaultMargin"
-  android:paddingTop="@dimen/global_halfMargin">
+  android:paddingEnd="@dimen/global_largeMargin"
+  android:paddingStart="@dimen/global_largeMargin"
+  android:paddingTop="@dimen/global_mediumMargin">
 
   <!--
     Spinner: Credit Card Type
@@ -14,8 +14,8 @@
     android:id="@+id/registerActivity_ccType"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/global_defaultMargin"
-    android:layout_marginTop="@dimen/global_halfMargin" />
+    android:layout_marginBottom="@dimen/global_largeMargin"
+    android:layout_marginTop="@dimen/global_mediumMargin" />
 
   <!--
    TextInputLayout: Credit Card Number
@@ -23,8 +23,8 @@
   <android.support.design.widget.TextInputLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/global_defaultMargin"
-    android:layout_marginTop="@dimen/global_halfMargin">
+    android:layout_marginBottom="@dimen/global_largeMargin"
+    android:layout_marginTop="@dimen/global_mediumMargin">
 
     <EditText
       android:id="@+id/registerActivity_ccNumber"
@@ -52,8 +52,8 @@
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/global_halfMargin"
-    android:layout_marginTop="@dimen/global_halfMargin">
+    android:layout_marginBottom="@dimen/global_mediumMargin"
+    android:layout_marginTop="@dimen/global_mediumMargin">
 
     <!--
       Button: Previous
