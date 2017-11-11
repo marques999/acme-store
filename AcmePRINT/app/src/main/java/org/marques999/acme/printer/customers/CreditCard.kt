@@ -20,7 +20,7 @@ class CreditCard(
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
-        parcel.readDate()!!
+        parcel.readDate()
     )
 
     /**

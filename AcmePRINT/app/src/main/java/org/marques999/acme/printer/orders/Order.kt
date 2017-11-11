@@ -29,8 +29,8 @@ class Order(
         parcel.readInt(),
         parcel.readParcelable(Customer::class.java.classLoader),
         parcel.readCustomArray<OrderProduct>(),
-        parcel.readDate()!!,
-        parcel.readDate()!!)
+        parcel.readDate(),
+        parcel.readDate())
 
     /**
      */

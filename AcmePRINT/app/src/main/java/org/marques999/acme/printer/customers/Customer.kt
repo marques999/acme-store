@@ -31,8 +31,8 @@ class Customer(
         parcel.readString(),
         parcel.readString(),
         parcel.readParcelable(CreditCard::class.java.classLoader),
-        parcel.readDate()!!,
-        parcel.readDate()!!
+        parcel.readDate(),
+        parcel.readDate()
     )
 
     /**
