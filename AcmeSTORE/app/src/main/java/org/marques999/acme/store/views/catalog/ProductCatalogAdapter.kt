@@ -11,7 +11,8 @@ import org.marques999.acme.store.model.Product
 import org.marques999.acme.store.views.order.CatalogListener
 
 class ProductCatalogAdapter(
-    private val listener: CatalogListener
+    private val listener: CatalogListener,
+    private val productlistener: ProductCatalogListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val items = ArrayList<Product>()

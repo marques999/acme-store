@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 
 
-import org.marques999.acme.store.catalog.ProductCatalogListener
 
 import android.view.Menu
 import android.view.MenuItem
@@ -15,10 +14,11 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 
 import kotlinx.android.synthetic.main.activity_main.*
-import org.marques999.acme.store.catalog.ProductCatalogFragment
 
 import org.marques999.acme.store.views.BottomNavigationAdapter
 import org.marques999.acme.store.views.cart.ShoppingCartFragment
+import org.marques999.acme.store.views.catalog.ProductCatalogFragment
+import org.marques999.acme.store.views.catalog.ProductCatalogListener
 import org.marques999.acme.store.views.order.OrderHistoryFragment
 import org.marques999.acme.store.views.profile.CustomerProfileFragment
 

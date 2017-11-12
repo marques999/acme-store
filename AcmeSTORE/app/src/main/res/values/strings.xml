@@ -85,8 +85,12 @@
   <string name="shoppingCart_scan">SCAN BARCODE</string>
   <!-- Product Item View -->
   <string name="price">Price</string>
-    <string name="confirm_purchase">Confirm purchase</string>
+
+  <!-- -->
+  <string name="confirm_purchase">Confirm purchase</string>
   <string name="product_view">View</string>
   <string name="mainActivity_refresh">Refresh</string>
   <string name="main_confirmMessage">Are you sure you want to terminate your current session and return to the login screen?</string>
+    <string name="productView_barcode">Barcode</string>
+    <string name="productView_description">Description</string>
 </resources>
