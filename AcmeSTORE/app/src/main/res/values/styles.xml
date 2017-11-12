@@ -17,4 +17,78 @@
     <item name="android:textColorHint">@color/bottomNavigation_iron</item>
     <item name="android:windowBackground">@color/colorPrimaryDark</item>
   </style>
+
+  <style name="global_rowHeader">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textColor">@color/colorAccent</item>
+    <item name="android:textSize">@dimen/global_mediumFont</item>
+    <item name="android:textStyle">bold</item>
+  </style>
+
+  <style name="global_rowContent">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textSize">@dimen/global_mediumFont</item>
+  </style>
+
+  <style name="global_tableRow">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:padding">@dimen/global_smallMargin</item>
+  </style>
+
+  <style name="table_leftContainer">
+    <item name="android:layout_width">64dp</item>
+    <item name="android:layout_height">match_parent</item>
+    <item name="android:background">@color/colorAccent</item>
+    <item name="android:elevation">2dp</item>
+    <item name="android:padding">@dimen/global_mediumMargin</item>
+  </style>
+
+  <style name="global_tableHeader">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_marginBottom">@dimen/global_smallMargin</item>
+    <item name="android:layout_span">2</item>
+    <item name="android:textSize">@dimen/global_largeFont</item>
+  </style>
+
+  <style name="table_rightContainer">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">match_parent</item>
+    <item name="android:elevation">2dp</item>
+    <item name="android:padding">@dimen/global_mediumMargin</item>
+    <item name="android:stretchColumns">*</item>
+  </style>
+
+  <style name="global_button">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_weight">1</item>
+    <item name="android:drawablePadding">@dimen/global_mediumMargin</item>
+    <item name="android:padding">@dimen/global_largeMargin</item>
+    <item name="android:textAlignment">textStart</item>
+  </style>
+
+  <style name="table_parent">
+    <item name="android:minHeight">64dp</item>
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">match_parent</item>
+    <item name="android:orientation">horizontal</item>
+  </style>
+
+  <style name="global_buttonGroup">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:orientation">horizontal</item>
+    <item name="android:padding">@dimen/global_smallMargin</item>
+  </style>
+
+  <style name="global_textInput">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_marginBottom">@dimen/global_mediumMargin</item>
+    <item name="android:layout_marginTop">@dimen/global_mediumMargin</item>
+  </style>
 </resources>

@@ -6,9 +6,12 @@ import okhttp3.OkHttpClient
 import com.squareup.moshi.Types
 
 import org.marques999.acme.store.AcmeStore
+import org.marques999.acme.store.model.CustomerJSON
 import org.marques999.acme.store.model.Session
 import org.marques999.acme.store.model.OrderPOST
 import org.marques999.acme.store.model.OrderProductPOST
+
+import io.reactivex.Observable
 
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -46,9 +49,16 @@ class AcmeProvider(private val session: Session, private val crypto: Cryptograph
      */
     fun getOrders() = api.getOrders()
     fun getProducts() = api.getProducts()
-    fun getCustomer() = session.customer
     fun getOrder(token: String) = api.getOrder(token)
     fun getProduct(barcode: String) = api.getProduct(barcode)
+
+    /**
+     */
+    fun getCustomer(refreshCustomer: Boolean): Observable<CustomerJSON> = if (refreshCustomer) {
+        api.getCustomer(session.username)
+    } else {
+        Observable.just(session.customer)
+    }
 
     /**
      */

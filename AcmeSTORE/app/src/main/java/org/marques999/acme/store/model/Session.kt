@@ -5,7 +5,7 @@ import java.util.Calendar
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.util.ISO8601DateFormat
 
-class Session(private val jwt: SessionJwt, username: String) {
+class Session(private val jwt: SessionJwt, val username: String) {
 
     /**
      */

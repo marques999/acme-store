@@ -1,35 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:card_view="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
-  android:layout_height="wrap_content">
+  android:layout_height="wrap_content"
+  card_view:cardCornerRadius="0dp"
+  card_view:cardElevation="@dimen/cardView_elevation"
+  card_view:cardPreventCornerOverlap="true"
+  card_view:cardUseCompatPadding="true">
 
-  <android.support.v7.widget.CardView
+  <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    card_view:cardElevation="@dimen/cardView_elevation"
-    card_view:cardBackgroundColor="@color/bottomNavigation_accent"
-    card_view:cardPreventCornerOverlap="true"
-    card_view:cardUseCompatPadding="true">
+    android:baselineAligned="false">
 
     <LinearLayout
-      android:layout_width="match_parent"
+      android:layout_width="wrap_content"
       android:layout_height="match_parent"
+      android:padding="@dimen/global_smallMargin"
+      android:background="@color/colorAccent"
       android:orientation="vertical">
 
-      <LinearLayout
+      <Button
+        android:id="@+id/shoppingCart_plus"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/cardview_light_background"
+        android:text="@string/shoppingCart_plus"
+        android:textColor="@color/colorAccent" />
+
+      <TextView
+        android:id="@+id/shoppingCart_quantity"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="horizontal"
+        android:gravity="fill_vertical"
+        android:padding="@dimen/global_smallMargin"
+        android:text="@string/shoppingCart_quantity"
+        android:textAlignment="center"
+        android:textSize="@dimen/global_mediumFont"
+        android:textStyle="bold" />
+
+      <Button
+        android:id="@+id/shoppingCart_minus"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/cardview_light_background"
+        android:text="@string/shoppingCart_minus"
+        android:textColor="@color/colorAccent" />
+
+    </LinearLayout>
+
+    <LinearLayout
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:background="@color/cardview_light_background"
+      android:orientation="vertical">
+
+      <LinearLayout
+        android:id="@+id/product_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:padding="@dimen/global_mediumMargin">
 
         <ImageView
           android:id="@+id/product_photo"
           android:layout_width="@dimen/cardView_image"
+          android:layout_marginEnd="@dimen/global_mediumMargin"
           android:layout_height="@dimen/cardView_image"
-          android:layout_marginBottom="8dp"
-          android:layout_marginEnd="8dp"
           android:contentDescription="@string/shoppingCart_photo"
           android:src="@mipmap/ic_launcher" />
 
@@ -42,7 +80,6 @@
             android:id="@+id/product_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Acer Aspire E5-571G-72M5"
             android:textColor="#040404"
             android:textSize="@dimen/global_mediumFont"
             android:textStyle="bold" />
@@ -51,64 +88,36 @@
             android:id="@+id/product_barcode"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="471314789589"
-            android:textColor="#343434" />
-
-          <TextView
-            android:id="@+id/product_price"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="€490.00"
             android:textColor="#343434" />
         </LinearLayout>
       </LinearLayout>
 
       <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-         android:layout_marginTop="@dimen/global_smallMargin"
-        android:background="@color/colorAccent">
+        android:orientation="horizontal">
 
         <Button
           android:id="@+id/shoppingCart_delete"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_gravity="start"
           android:background="?android:attr/selectableItemBackground"
           android:text="@string/shoppingCart_delete"
-          android:textColor="@android:color/white" />
+          android:textColor="@color/colorAccent" />
 
         <View
           android:layout_width="0dp"
           android:layout_height="0dp"
           android:layout_weight="1" />
 
-        <Button
-          android:id="@+id/shoppingCart_minus"
-          android:layout_width="48dp"
-          android:layout_height="wrap_content"
-          android:layout_gravity="end"
-          android:backgroundTint="@android:color/white"
-          android:text="@string/shoppingCart_minus"
-          android:textColor="@color/colorAccent" />
-
         <TextView
-          android:id="@+id/shoppingCart_quantity"
-          android:layout_width="32dp"
+          android:id="@+id/product_price"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="@string/shoppingCart_quantity"
-          android:textAlignment="center"
-          android:textColor="@android:color/white"
-          android:textStyle="bold" />
-
-        <Button
-          android:id="@+id/shoppingCart_plus"
-          android:layout_width="48dp"
-          android:layout_height="wrap_content"
-          android:backgroundTint="@android:color/white"
-          android:text="@string/shoppingCart_plus"
+          android:layout_marginEnd="@dimen/global_largeMargin"
+          android:textStyle="bold"
           android:textColor="@color/colorAccent" />
       </LinearLayout>
     </LinearLayout>
-  </android.support.v7.widget.CardView>
-</FrameLayout>
+  </LinearLayout>
+</android.support.v7.widget.CardView>

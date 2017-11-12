@@ -108,7 +108,7 @@ class RegisterActivity : AppCompatActivity(), RegisterStepOneListener, RegisterS
         acmeInstance = application as AcmeStore
         registerStepOne = RegisterStepOneFragment()
         registerStepTwo = RegisterStepTwoFragment()
-        progressDialog = AcmeDialogs.buildProgress(this, R.string.loginActivity_progress)
+        progressDialog = AcmeDialogs.buildProgress(this, R.string.login_progressDialog)
         changeFragment(registerStepOne, false)
     }
 

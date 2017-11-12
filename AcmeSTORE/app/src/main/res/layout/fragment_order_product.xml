@@ -10,19 +10,20 @@
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="horizontal"
     android:padding="@dimen/global_largeMargin">
 
     <LinearLayout
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginEnd="@dimen/global_largeMargin"
+      android:layout_marginEnd="@dimen/global_mediumMargin"
       android:orientation="vertical">
 
       <ImageView
         android:id="@+id/product_photo"
-        android:layout_width="@dimen/orderView_productPhoto"
-        android:layout_height="@dimen/orderView_productPhoto"
-        android:layout_marginBottom="@dimen/orderView_innerMargin"
+        android:layout_width="@dimen/order_photo"
+        android:layout_height="@dimen/order_photo"
+        android:layout_marginBottom="@dimen/order_margin"
         android:contentDescription="@string/global_todoDescription" />
 
       <TextView
@@ -65,13 +66,27 @@
         android:textColor="@color/colorAccent" />
     </RelativeLayout>
 
-    <TextView
-      android:id="@+id/product_total"
-      android:layout_width="wrap_content"
+    <LinearLayout
+      android:layout_width="64dp"
       android:layout_height="match_parent"
-      android:layout_marginStart="@dimen/global_mediumMargin"
-      android:textAlignment="textEnd"
-      android:textColor="@color/colorAccent"
-      android:textStyle="bold" />
+      android:layout_marginStart="@dimen/global_smallMargin"
+      android:orientation="vertical">
+
+      <TextView
+        android:id="@+id/product_total"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold" />
+
+      <Button
+        android:id="@+id/product_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/product_view" />
+    </LinearLayout>
   </LinearLayout>
 </android.support.v7.widget.CardView>

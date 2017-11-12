@@ -7,8 +7,6 @@ import android.content.ActivityNotFoundException
 import kotlinx.android.synthetic.main.fragment_cart.*
 
 import android.view.View
-import android.view.ViewGroup
-import android.view.LayoutInflater
 
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
@@ -25,15 +23,25 @@ import org.marques999.acme.store.AcmeDialogs
 import org.marques999.acme.store.model.Product
 import org.marques999.acme.store.model.OrderProduct
 import org.marques999.acme.store.api.HttpErrorHandler
+
 import org.marques999.acme.store.views.product.ProductViewActivity
 
-import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import org.marques999.acme.store.model.Order
 import org.marques999.acme.store.model.OrderProductPOST
 
-class ShoppingCartFragment : Fragment(), ShoppingCartListener {
+import org.marques999.acme.store.views.MainActivityFragment
+
+class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), ShoppingCartListener {
+
+    /**
+     */
+    override fun onRefresh() {
+        AcmeDialogs.buildOk(activity, R.string.actionBar_cart).show()
+    }
 
     private val shoppingCart = HashMap<String, OrderProduct>()
 
@@ -43,8 +51,11 @@ class ShoppingCartFragment : Fragment(), ShoppingCartListener {
     override fun onItemUpdated(barcode: String, delta: Int) {
 
         shoppingCart[barcode]?.apply {
-            quantity += delta
-            adapter.update(this)
+
+            if (delta != 0 && (delta > 0 && quantity < 99) || (delta < 0 && quantity > 0)) {
+                quantity += delta
+                adapter.update(this)
+            }
         }
 
 
@@ -61,11 +72,11 @@ class ShoppingCartFragment : Fragment(), ShoppingCartListener {
 
     /**
      */
-    private val onFetchProduct = Consumer<Product> {
+    private fun registerPurchase(product: Product) {
 
-        val orderProduct = OrderProduct(1, it)
+        val orderProduct = OrderProduct(1, product)
 
-        shoppingCart[it.barcode]?.let {
+        shoppingCart[product.barcode]?.let {
             orderProduct.quantity += it.quantity
             adapter.remove(it)
         }
@@ -73,6 +84,13 @@ class ShoppingCartFragment : Fragment(), ShoppingCartListener {
         adapter.insert(orderProduct)
         shoppingCart.put(orderProduct.product.barcode, orderProduct)
         shoppingCart_checkout.isEnabled = shoppingCart.isNotEmpty()
+
+    }
+
+    /**
+     */
+    private val onFetchProduct = Consumer<Product> {
+        registerPurchase(it)
         progressDialog.dismiss()
     }
 
@@ -83,9 +101,9 @@ class ShoppingCartFragment : Fragment(), ShoppingCartListener {
             startActivity(Intent(
                 activity, ProductViewActivity::class.java
             ).putExtra(
-                ProductViewActivity.ORDER_PRODUCT, it
+                ProductViewActivity.EXTRA_PRODUCT, it
             ).putExtra(
-                ProductViewActivity.ORDER_ACTIVE, true
+                ProductViewActivity.EXTRA_ACTIVE, true
             ))
         }
     }
@@ -105,7 +123,7 @@ class ShoppingCartFragment : Fragment(), ShoppingCartListener {
             }
         }
 
-        (activity.application as AcmeStore).acmeApi.insertOrder(cartList).observeOn(
+        (activity.application as AcmeStore).api.insertOrder(cartList).observeOn(
                 AndroidSchedulers.mainThread()
         ).subscribeOn(
                 Schedulers.io()
@@ -125,9 +143,9 @@ class ShoppingCartFragment : Fragment(), ShoppingCartListener {
 
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View = LayoutInflater.from(context).inflate(
         R.layout.fragment_cart, container, false
     )
@@ -136,7 +154,7 @@ class ShoppingCartFragment : Fragment(), ShoppingCartListener {
 
         progressDialog.show()
 
-        (activity.application as AcmeStore).acmeApi.getProduct(barcode).observeOn(
+        (activity.application as AcmeStore).api.getProduct(barcode).observeOn(
             AndroidSchedulers.mainThread()
         ).subscribeOn(
             Schedulers.io()
@@ -192,15 +210,15 @@ class ShoppingCartFragment : Fragment(), ShoppingCartListener {
         super.onActivityCreated(savedInstanceState)
         progressDialog = AcmeDialogs.buildProgress(context, R.string.global_progressLoading)
 
-        cart_recyclerView.apply {
+        shoppingCart_recyclerView.apply {
             setHasFixedSize(false)
             layoutManager = LinearLayoutManager(context)
             clearOnScrollListeners()
         }
 
-        if (cart_recyclerView.adapter == null) {
+        if (shoppingCart_recyclerView.adapter == null) {
             adapter = ShoppingCartAdapter(this)
-            cart_recyclerView.adapter = adapter
+            shoppingCart_recyclerView.adapter = adapter
         }
 
         shoppingCart_scan.setOnClickListener(launchBarcodeScanner)

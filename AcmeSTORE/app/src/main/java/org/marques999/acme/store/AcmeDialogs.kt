@@ -40,6 +40,7 @@ object AcmeDialogs {
         .Builder(context)
         .setTitle(R.string.mainActivity_title)
         .setMessage(resourceId)
+        .setIcon(android.R.drawable.ic_dialog_alert)
         .setNegativeButton(android.R.string.no, null)
         .setPositiveButton(android.R.string.yes, callback)
 }

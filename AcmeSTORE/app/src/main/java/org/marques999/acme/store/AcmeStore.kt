@@ -25,7 +25,8 @@ class AcmeStore : Application() {
 
     /**
      */
-    lateinit var acmeApi: AcmeProvider
+    lateinit var api: AcmeProvider
+    lateinit var privateKey: String
 
     /**
      */
@@ -37,13 +38,14 @@ class AcmeStore : Application() {
     override fun onCreate() {
         super.onCreate()
         preferences = getSharedPreferences(KEY_PREFERENCES, Context.MODE_PRIVATE)
-        cryptography = CryptographyProvider(preferences.getString(PREF_PRIVATE, DEFAULT_PRIVATE))
+        privateKey = preferences.getString(PREF_PRIVATE, DEFAULT_PRIVATE)
+        cryptography = CryptographyProvider(privateKey)
     }
 
     /**
      */
     fun initializeApi(username: String, sessionJwt: SessionJwt) {
-        acmeApi = AcmeProvider(Session(sessionJwt, username), cryptography)
+        api = AcmeProvider(Session(sessionJwt, username), cryptography)
     }
 
     /**

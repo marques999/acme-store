@@ -90,7 +90,7 @@ class LoginActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        progressDialog = AcmeDialogs.buildProgress(this, R.string.loginActivity_progress)
+        progressDialog = AcmeDialogs.buildProgress(this, R.string.login_progressDialog)
 
         loginActivity_register.setOnClickListener {
 

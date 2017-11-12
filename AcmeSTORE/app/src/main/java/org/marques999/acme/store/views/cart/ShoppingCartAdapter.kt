@@ -1,18 +1,18 @@
 package org.marques999.acme.store.views.cart
 
-import com.squareup.picasso.Picasso
-
 import android.view.ViewGroup
-import android.view.LayoutInflater
+import android.support.v7.widget.RecyclerView
 
-import kotlinx.android.synthetic.main.fragment_cart_item.view.*
+import com.squareup.picasso.Picasso
 
 import org.marques999.acme.store.R
 import org.marques999.acme.store.AcmeUtils
+
+import kotlinx.android.synthetic.main.fragment_cart_item.view.*
+
+import org.marques999.acme.store.model.inflate
 import org.marques999.acme.store.model.ViewType
 import org.marques999.acme.store.model.OrderProduct
-
-import android.support.v7.widget.RecyclerView
 
 class ShoppingCartAdapter(
     private val listener: ShoppingCartListener
@@ -37,22 +37,19 @@ class ShoppingCartAdapter(
     /**
      */
     override fun getItemCount(): Int = items.size
-
     override fun getItemViewType(position: Int) = ViewType.SHOPPING_CART_PRODUCT
 
     /**
      */
     inner class ProductViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
-        LayoutInflater.from(parent.context).inflate(
-            R.layout.fragment_cart_item, parent, false
-        )
+        parent.inflate(R.layout.fragment_cart_item)
     ) {
 
         fun bind(item: OrderProduct) {
 
             val itemBarcode = item.product.barcode
 
-            itemView.setOnClickListener {
+            itemView.product_container.setOnClickListener {
                 listener.onItemSelected(itemBarcode)
             }
 
