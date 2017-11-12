@@ -6,9 +6,9 @@ import android.support.v4.app.Fragment
 
 import kotlinx.android.synthetic.main.fragment_register_step1.*
 
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.LayoutInflater
 
 import org.marques999.acme.store.R
 import org.marques999.acme.store.views.register.RegisterConstants.generateError
@@ -17,19 +17,13 @@ class RegisterStepOneFragment : Fragment() {
 
     /**
      */
-    interface StepOneListener {
-        fun nextPage(parameters: Map<String, Any>)
-    }
-
-    /**
-     */
-    private var listener: StepOneListener? = null
+    private var listener: RegisterStepOneListener? = null
 
     /**
      */
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        listener = context as StepOneListener
+        listener = context as RegisterStepOneListener
     }
 
     /**

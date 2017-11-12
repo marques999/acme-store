@@ -26,7 +26,11 @@
     </activity>
     <activity
       android:name=".views.product.ProductViewActivity"
-      android:label="@string/productView_activity" />
+      android:label="@string/productView_activity">
+      <meta-data
+        android:name="android.support.PARENT_ACTIVITY"
+        android:value=".LoginActivity" />
+    </activity>
     <activity android:name=".MainActivity" />
     <activity
       android:name=".views.register.RegisterActivity"
@@ -36,11 +40,12 @@
         android:value=".LoginActivity" />
     </activity>
     <activity android:name=".views.order.OrderConfirmActivity" />
-    <activity android:name=".views.order.OrderViewActivity">
+    <activity
+      android:name=".views.order.OrderViewActivity"
+      android:label="@string/orderView_title">
       <meta-data
         android:name="android.support.PARENT_ACTIVITY"
         android:value=".MainActivity" />
     </activity>
   </application>
-
 </manifest>

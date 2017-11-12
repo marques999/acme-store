@@ -1,43 +1,37 @@
 package org.marques999.acme.store.views.order
 
 import android.view.ViewGroup
-import android.view.LayoutInflater
 import android.support.v7.widget.RecyclerView
 
 import com.squareup.picasso.Picasso
 
 import org.marques999.acme.store.R
 import org.marques999.acme.store.model.OrderProduct
+
+import kotlinx.android.synthetic.main.fragment_order_product.view.*
+
 import org.marques999.acme.store.views.ViewType
+import org.marques999.acme.store.views.ViewTypeAdapter
 import org.marques999.acme.store.views.ViewUtils
 
-import kotlinx.android.synthetic.main.fragment_product.view.*
-
-class OrderViewProductAdapter(private val items: List<OrderProduct>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class OrderViewProductAdapter : ViewTypeAdapter {
 
     /**
      */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return ProductViewHolder(parent)
+    override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
+        return OrderProductViewHolder(parent)
     }
 
     /**
      */
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as ProductViewHolder).bind(items[position])
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: ViewType) {
+        (holder as OrderProductViewHolder).bind(item as OrderProduct)
     }
 
     /**
      */
-    override fun getItemCount(): Int = items.size
-    override fun getItemViewType(position: Int) = ViewType.PRODUCTS
-
-    /**
-     */
-    inner class ProductViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
-        LayoutInflater.from(parent.context).inflate(
-            R.layout.fragment_product, parent, false
-        )
+    inner class OrderProductViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
+        inflate(parent, R.layout.fragment_order_product)
     ) {
 
         fun bind(item: OrderProduct) {

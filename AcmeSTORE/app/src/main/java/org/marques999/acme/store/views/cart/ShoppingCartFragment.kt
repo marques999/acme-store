@@ -1,35 +1,36 @@
 package org.marques999.acme.store.views.cart
 
-import android.content.ActivityNotFoundException
-import android.content.DialogInterface
 import android.content.Intent
+import android.content.DialogInterface
+import android.content.ActivityNotFoundException
 
 import kotlinx.android.synthetic.main.fragment_cart.*
 
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.LayoutInflater
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 
-import android.app.Activity
 import android.net.Uri
 import android.os.Bundle
+import android.app.Activity
+import android.app.ProgressDialog
 
 import org.marques999.acme.store.R
 import org.marques999.acme.store.AcmeStore
 import org.marques999.acme.store.AcmeDialogs
-import org.marques999.acme.store.common.HttpErrorHandler
+import org.marques999.acme.store.model.Product
 import org.marques999.acme.store.model.OrderProduct
+import org.marques999.acme.store.common.HttpErrorHandler
 import org.marques999.acme.store.views.product.ProductViewActivity
 
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import org.marques999.acme.store.model.Product
 
-class ShoppingCartFragment : Fragment(), ShoppingCartProductAdapter.ProductFragmentListener {
+class ShoppingCartFragment : Fragment(), ShoppingCartListener {
 
     /**
      */
@@ -37,7 +38,8 @@ class ShoppingCartFragment : Fragment(), ShoppingCartProductAdapter.ProductFragm
 
     /**
      */
-    private lateinit var shoppingCartAdapter: ShoppingCartAdapter
+    private lateinit var adapter: ShoppingCartAdapter
+    private lateinit var progressDialog: ProgressDialog
 
     /**
      */
@@ -45,17 +47,14 @@ class ShoppingCartFragment : Fragment(), ShoppingCartProductAdapter.ProductFragm
 
         shoppingCart[barcode]?.apply {
             quantity += delta
-            shoppingCartAdapter.updateQuantity(this)
+            adapter.update(this)
         }
     }
 
     /**
      */
     override fun onItemDeleted(barcode: String) {
-
-        shoppingCart.remove(barcode)?.let {
-            shoppingCartAdapter.removeProduct(it)
-        }
+        shoppingCart.remove(barcode)?.let { adapter.remove(it) }
     }
 
     /**
@@ -66,11 +65,12 @@ class ShoppingCartFragment : Fragment(), ShoppingCartProductAdapter.ProductFragm
 
         shoppingCart[it.barcode]?.let {
             orderProduct.quantity += it.quantity
-            shoppingCartAdapter.removeProduct(it)
+            adapter.remove(it)
         }
 
-        shoppingCartAdapter.insertProduct(orderProduct)
+        adapter.insert(orderProduct)
         shoppingCart.put(orderProduct.product.barcode, orderProduct)
+        progressDialog.dismiss()
     }
 
     /**
@@ -103,7 +103,7 @@ class ShoppingCartFragment : Fragment(), ShoppingCartProductAdapter.ProductFragm
      */
     private fun fetchProduct(barcode: String) {
 
-        shoppingCartAdapter.beginLoading()
+        progressDialog.show()
 
         (activity.application as AcmeStore).acmeApi.getProduct(barcode).observeOn(
             AndroidSchedulers.mainThread()
@@ -111,7 +111,10 @@ class ShoppingCartFragment : Fragment(), ShoppingCartProductAdapter.ProductFragm
             Schedulers.io()
         ).subscribe(
             onFetchProduct,
-            HttpErrorHandler(context)
+            Consumer {
+                progressDialog.dismiss()
+                HttpErrorHandler(context).accept(it)
+            }
         )
     }
 
@@ -138,9 +141,9 @@ class ShoppingCartFragment : Fragment(), ShoppingCartProductAdapter.ProductFragm
 
     /**
      */
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(request: Int, result: Int, data: Intent?) {
 
-        if (data == null || requestCode != 0 || resultCode != Activity.RESULT_OK) {
+        if (data == null || request != AcmeStore.REQUEST_SCAN || result != Activity.RESULT_OK) {
             return
         }
 
@@ -158,6 +161,7 @@ class ShoppingCartFragment : Fragment(), ShoppingCartProductAdapter.ProductFragm
     override fun onActivityCreated(savedInstanceState: Bundle?) {
 
         super.onActivityCreated(savedInstanceState)
+        progressDialog = AcmeDialogs.buildProgress(context, R.string.global_progressLoading)
 
         cart_recyclerView.apply {
             setHasFixedSize(false)
@@ -166,8 +170,8 @@ class ShoppingCartFragment : Fragment(), ShoppingCartProductAdapter.ProductFragm
         }
 
         if (cart_recyclerView.adapter == null) {
-            shoppingCartAdapter = ShoppingCartAdapter(this)
-            cart_recyclerView.adapter = shoppingCartAdapter
+            adapter = ShoppingCartAdapter(this)
+            cart_recyclerView.adapter = adapter
         }
 
         shoppingCart_scan.setOnClickListener(launchBarcodeScanner)

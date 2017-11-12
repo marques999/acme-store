@@ -3,6 +3,8 @@ package org.marques999.acme.store.model
 import android.os.Parcel
 import android.os.Parcelable
 
+import java.util.Date
+
 import org.marques999.acme.store.common.readDate
 import org.marques999.acme.store.common.writeDate
 
@@ -14,8 +16,8 @@ class Customer(
     val country: String,
     val tax_number: String,
     val credit_card: CreditCard,
-    val created_at: java.util.Date,
-    val updated_at: java.util.Date
+    val created_at: Date,
+    val updated_at: Date
 ) : Parcelable {
 
     /**

@@ -20,7 +20,7 @@
       android:padding="@dimen/global_largeMargin">
 
       <ImageView
-        android:id="@+id/customerProfile_icon"
+        android:id="@+id/profile_customerIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -30,36 +30,36 @@
         android:src="@drawable/ic_person_48dp" />
 
       <TextView
-        android:id="@+id/customerProfile_name"
+        android:id="@+id/profile_customerName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginBottom="12dp"
-        android:layout_toEndOf="@+id/customerProfile_icon"
+        android:layout_toEndOf="@+id/profile_customerIcon"
         android:textSize="30sp" />
 
       <TextView
-        android:id="@+id/customerProfile_address1"
+        android:id="@+id/profile_customerAddress1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/customerProfile_name"
-        android:layout_toEndOf="@+id/customerProfile_icon"
+        android:layout_below="@+id/profile_customerName"
+        android:layout_toEndOf="@+id/profile_customerIcon"
         android:textSize="@dimen/global_mediumFont" />
 
       <TextView
-        android:id="@+id/customerProfile_address2"
+        android:id="@+id/profile_customerAddress2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/customerProfile_address1"
-        android:layout_toEndOf="@+id/customerProfile_icon"
+        android:layout_below="@+id/profile_customerAddress1"
+        android:layout_toEndOf="@+id/profile_customerIcon"
         android:textSize="@dimen/global_mediumFont" />
 
       <TextView
-        android:id="@+id/customerProfile_nif"
+        android:id="@+id/profile_customerNif"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/customerProfile_address2"
-        android:layout_toEndOf="@+id/customerProfile_icon"
+        android:layout_below="@+id/profile_customerAddress2"
+        android:layout_toEndOf="@+id/profile_customerIcon"
         android:textSize="@dimen/global_mediumFont" />
     </RelativeLayout>
   </android.support.v7.widget.CardView>
@@ -78,7 +78,7 @@
       android:padding="@dimen/global_largeMargin">
 
       <ImageView
-        android:id="@+id/cc_icon"
+        android:id="@+id/profile_cardIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -88,45 +88,45 @@
         android:src="@drawable/ic_credit_card_48dp" />
 
       <TextView
-        android:id="@+id/cc_number"
+        android:id="@+id/profile_cardNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginBottom="@dimen/orderView_innerMargin"
-        android:layout_toEndOf="@+id/cc_icon"
+        android:layout_toEndOf="@+id/profile_cardIcon"
         android:textSize="@dimen/global_largeFont" />
 
       <TextView
-        android:id="@+id/cc_type"
+        android:id="@+id/profile_cardType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/cc_number"
+        android:layout_below="@+id/profile_cardNumber"
         android:layout_marginBottom="@dimen/global_smallMargin"
-        android:layout_toEndOf="@+id/cc_icon"
+        android:layout_toEndOf="@+id/profile_cardIcon"
         android:textSize="@dimen/global_mediumFont" />
 
       <TextView
         android:id="@+id/label_validity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/cc_type"
-        android:layout_toEndOf="@+id/cc_icon"
+        android:layout_below="@+id/profile_cardType"
+        android:layout_toEndOf="@+id/profile_cardIcon"
         android:text="@string/profileFragment_ccValidity"
         android:textSize="@dimen/global_mediumFont"
         android:textStyle="bold" />
 
       <TextView
-        android:id="@+id/cc_validity"
+        android:id="@+id/profile_cardValidity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/cc_type"
+        android:layout_below="@+id/profile_cardType"
         android:layout_toEndOf="@+id/label_validity"
         android:textSize="@dimen/global_mediumFont" />
     </RelativeLayout>
   </android.support.v7.widget.CardView>
 
   <Button
-    android:id="@+id/customerProfile_test"
+    android:id="@+id/profile_qrTest"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/global_largeMargin"

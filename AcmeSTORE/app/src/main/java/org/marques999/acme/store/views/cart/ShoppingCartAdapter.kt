@@ -1,92 +1,111 @@
 package org.marques999.acme.store.views.cart
 
-import android.support.v4.util.SparseArrayCompat
-import android.support.v7.widget.RecyclerView
-
-import org.marques999.acme.store.model.OrderProduct
-import org.marques999.acme.store.views.ViewType
-import org.marques999.acme.store.views.ViewTypeAdapter
+import com.squareup.picasso.Picasso
 
 import android.view.ViewGroup
-import org.marques999.acme.store.views.common.LoadingAdapter
+import android.view.LayoutInflater
+
+import kotlinx.android.synthetic.main.fragment_cart_item.view.*
+
+import org.marques999.acme.store.R
+import org.marques999.acme.store.views.ViewType
+import org.marques999.acme.store.views.ViewUtils
+import org.marques999.acme.store.model.OrderProduct
+
+import android.support.v7.widget.RecyclerView
 
 class ShoppingCartAdapter(
-    listener: ShoppingCartProductAdapter.ProductFragmentListener
+    private val listener: ShoppingCartListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     /**
      */
-    private val items = ArrayList<ViewType>()
-    private val delegateAdapters = SparseArrayCompat<ViewTypeAdapter>()
-
-    /**
-     */
-    private val loadingItem = object : ViewType {
-        override fun getViewType() = ViewType.LOADING
-    }
-
-    /**
-     */
-    init {
-        delegateAdapters.put(ViewType.LOADING, LoadingAdapter())
-        delegateAdapters.put(ViewType.PRODUCTS, ShoppingCartProductAdapter(listener))
-    }
+    private val items = ArrayList<OrderProduct>()
 
     /**
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return delegateAdapters.get(viewType).onCreateViewHolder(parent)
+        return ProductViewHolder(parent)
     }
 
     /**
      */
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        delegateAdapters.get(getItemViewType(position)).onBindViewHolder(holder, items[position])
+        (holder as ProductViewHolder).bind(items[position])
     }
 
     /**
      */
     override fun getItemCount(): Int = items.size
-    override fun getItemViewType(position: Int) = items[position].getViewType()
+    override fun getItemViewType(position: Int) = ViewType.SHOPPING_CART_PRODUCT
 
     /**
      */
-    fun beginLoading() {
-        items.add(loadingItem)
-        notifyItemInserted(items.size - 1)
+    inner class ProductViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
+        LayoutInflater.from(parent.context).inflate(
+            R.layout.fragment_cart_item, parent, false
+        )
+    ) {
+
+        fun bind(item: OrderProduct) {
+
+            val itemBarcode = item.product.barcode
+
+            itemView.setOnClickListener {
+                listener.onItemSelected(itemBarcode)
+            }
+
+            itemView.shoppingCart_delete.setOnClickListener {
+                listener.onItemDeleted(itemBarcode)
+            }
+
+            itemView.shoppingCart_minus.setOnClickListener {
+                listener.onItemUpdated(itemBarcode, -1)
+            }
+
+            itemView.shoppingCart_plus.setOnClickListener {
+                listener.onItemUpdated(itemBarcode, +1)
+            }
+
+            itemView.product_name.text = itemView.context.getString(
+                R.string.shoppingCart_name, item.product.brand, item.product.name
+            )
+
+            itemView.product_barcode.text = itemBarcode
+            itemView.shoppingCart_quantity.text = item.quantity.toString()
+            itemView.product_price.text = ViewUtils.formatCurrency(item.product.price)
+
+            Picasso.with(itemView.context).load(
+                item.product.image_uri
+            ).fit().centerInside().into(
+                itemView.product_photo
+            )
+        }
     }
 
     /**
      */
-    private fun endLoading(loadingPosition: Int) {
-        items.removeAt(loadingPosition)
-        notifyItemRemoved(loadingPosition)
-    }
-
-    /**
-     */
-    fun insertProduct(orderProduct: OrderProduct) {
-        endLoading(items.size - 1)
+    fun insert(orderProduct: OrderProduct) {
         items.add(orderProduct)
         notifyItemInserted(items.size - 1)
     }
 
     /**
      */
-    private fun removeProduct(productIndex: Int) {
+    private fun remove(productIndex: Int) {
         items.removeAt(productIndex)
         notifyItemRemoved(productIndex)
     }
 
     /**
      */
-    fun removeProduct(orderProduct: OrderProduct) {
-        removeProduct(items.indexOf(orderProduct))
+    fun remove(orderProduct: OrderProduct) {
+        remove(items.indexOf(orderProduct))
     }
 
     /**
      */
-    fun updateQuantity(orderProduct: OrderProduct) {
+    fun update(orderProduct: OrderProduct) {
         notifyItemChanged(items.indexOf(orderProduct))
     }
 }

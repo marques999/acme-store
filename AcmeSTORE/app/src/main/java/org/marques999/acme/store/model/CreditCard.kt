@@ -8,11 +8,7 @@ import java.util.Date
 import org.marques999.acme.store.common.readDate
 import org.marques999.acme.store.common.writeDate
 
-class CreditCard(
-    val type: String,
-    val number: String,
-    val validity: Date
-) : Parcelable {
+class CreditCard(val type: String, val number: String, val validity: Date) : Parcelable {
 
     /**
      */

@@ -1,17 +1,18 @@
 package org.marques999.acme.store.views.profile
 
-import android.view.View
-import android.view.ViewGroup
-import android.view.LayoutInflater
+import android.os.Bundle
+import android.content.Intent
+import android.support.v4.app.Fragment
 
 import org.marques999.acme.store.R
 import org.marques999.acme.store.AcmeStore
 import org.marques999.acme.store.model.CustomerJSON
+import org.marques999.acme.store.views.ViewUtils
 import org.marques999.acme.store.views.order.OrderConfirmActivity
 
-import android.os.Bundle
-import android.content.Intent
-import android.support.v4.app.Fragment
+import android.view.View
+import android.view.ViewGroup
+import android.view.LayoutInflater
 
 import kotlinx.android.synthetic.main.fragment_profile.*
 
@@ -43,12 +44,18 @@ class CustomerProfileFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
 
         super.onActivityCreated(savedInstanceState)
-        customerProfile_name.text = customer.name
-        customerProfile_nif.text = customer.tax_number
-        customerProfile_address1.text = customer.address1
-        customerProfile_address2.text = customer.address2
+        profile_customerName.text = customer.name
+        profile_customerNif.text = customer.tax_number
+        profile_customerAddress1.text = customer.address1
+        profile_customerAddress2.text = customer.address2
 
-        customerProfile_test.setOnClickListener {
+        customer.credit_card.let {
+            profile_cardType.text = it.type
+            profile_cardNumber.text = it.number
+            profile_cardValidity.text = ViewUtils.formatDate(it.validity)
+        }
+
+        profile_qrTest.setOnClickListener {
             startActivity(Intent(context, OrderConfirmActivity::class.java))
         }
     }

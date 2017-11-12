@@ -23,8 +23,8 @@
 
         <ImageView
           android:id="@+id/product_photo"
-          android:layout_width="@dimen/productView_photo"
-          android:layout_height="@dimen/productView_photo"
+          android:layout_width="@dimen/orderView_productPhoto"
+          android:layout_height="@dimen/orderView_productPhoto"
           android:layout_marginBottom="@dimen/orderView_innerMargin"
           android:contentDescription="@string/global_todoDescription" />
 

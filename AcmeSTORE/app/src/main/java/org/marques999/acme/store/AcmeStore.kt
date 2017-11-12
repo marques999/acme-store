@@ -12,15 +12,11 @@ import org.marques999.acme.store.api.CryptographyProvider
 import android.content.Context
 import android.content.SharedPreferences
 
-import java.text.NumberFormat
-
 import android.app.Application
 import android.support.annotation.ColorRes
 import android.support.v4.content.ContextCompat
 
 import java.util.Date
-import java.util.Currency
-import java.util.Locale
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Rfc3339DateJsonAdapter
@@ -78,8 +74,8 @@ class AcmeStore : Application() {
         private val KEY_PREFERENCES = "acmestore"
         private val ZXING_PACKAGE = "com.google.zxing.client.android"
 
-        val REQUEST_REGISTER = 2
-        val REQUEST_SCAN = 3
+        val REQUEST_SCAN = 0
+        val REQUEST_REGISTER = 1
 
         val ALGORITHM_PKCS = "RSA"
         val ALGORITHM_HASH = "SHA1WithRSA"

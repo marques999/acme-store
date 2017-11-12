@@ -11,46 +11,50 @@ import org.marques999.acme.store.model.OrderProduct
 import org.marques999.acme.store.views.ViewUtils
 
 import kotlinx.android.synthetic.main.activity_product.*
-import org.marques999.acme.store.model.Product
 
 class ProductViewActivity : AppCompatActivity() {
 
+    /**
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        viewInformation(intent.getParcelableExtra(ORDER_PRODUCT))
-    }
-
-    private fun viewProduct(product: Product) {
-
-        productView_model.text = product.name
-        productView_brand.text = product.brand
-        productView_barcode.text = product.barcode
-        productView_description.text = product.description
-        productView_price.text = ViewUtils.formatCurrency(product.price)
-
-        Picasso.with(this).load(
-            product.image_uri
-        ).fit().centerInside().into(productView_photo)
-    }
-
-    private fun viewInformation(orderProduct: OrderProduct) {
-
-        viewProduct(orderProduct.product)
-        productView_quantity.text = orderProduct.quantity.toString()
 
         intent.getBooleanExtra(ORDER_ACTIVE, false).let {
             productView_plus.isEnabled = it
             productView_minus.isEnabled = it
         }
+
+        intent.getParcelableExtra<OrderProduct>(ORDER_PRODUCT).let {
+
+            it.product.let {
+
+                productView_model.text = it.name
+                productView_brand.text = it.brand
+                productView_barcode.text = it.barcode
+                productView_description.text = it.description
+                productView_price.text = ViewUtils.formatCurrency(it.price)
+
+                Picasso.with(this).load(
+                    it.image_uri
+                ).fit().centerInside().into(productView_photo)
+            }
+
+            productView_quantity.text = it.quantity.toString()
+        }
     }
 
+    /**
+     */
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         onBackPressed()
         return super.onOptionsItemSelected(item)
     }
 
+    /**
+     */
     companion object {
         val ORDER_ACTIVE = "org.marques999.acme.store.ORDER_ACTIVE"
         val ORDER_PRODUCT = "org.marques999.acme.store.ORDER_PRODUCT"

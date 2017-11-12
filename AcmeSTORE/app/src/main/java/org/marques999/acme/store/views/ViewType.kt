@@ -5,8 +5,21 @@ interface ViewType {
     fun getViewType(): Int
 
     companion object {
-        val PRODUCTS = 1
-        val ORDERS = 3
-        val LOADING = 2
+
+        /**
+         *  ShoppingCartFramgent
+         */
+        val SHOPPING_CART_PRODUCT = 10
+
+        /**
+         *  OrderHistoryFramgent
+         */
+        val ORDER_HISTORY_ORDER = 20
+
+        /**
+         *  OrderViewActivity
+         */
+        val ORDER_VIEW_ORDER = 30
+        val ORDER_VIEW_PRODUCT = 31
     }
 }

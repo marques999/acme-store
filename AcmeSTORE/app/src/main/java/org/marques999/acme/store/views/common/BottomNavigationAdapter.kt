@@ -1,12 +1,11 @@
 package org.marques999.acme.store.views.common
 
+import android.view.ViewGroup
 import android.util.SparseArray
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
-
-import android.view.ViewGroup
 
 class BottomNavigationAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
@@ -39,5 +38,4 @@ class BottomNavigationAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(f
     /**
      */
     fun addFragments(fragment: Fragment) = fragments.add(fragment)
-    fun getFragment(position: Int) = registeredFragments.get(position)
 }

@@ -1,20 +1,22 @@
 package org.marques999.acme.store.views.register
 
 import android.os.Bundle
+import android.content.Context
+import android.util.SparseArray
+import android.support.v4.app.Fragment
+
+import kotlinx.android.synthetic.main.fragment_register_step2.*
+
 import android.view.View
 import android.view.ViewGroup
 import android.view.LayoutInflater
-import android.content.Context
-import android.widget.DatePicker
-import android.widget.ArrayAdapter
-import android.support.v4.app.Fragment
-import android.util.SparseArray
-
-import kotlinx.android.synthetic.main.fragment_register_step2.*
 
 import org.marques999.acme.store.R
 import org.marques999.acme.store.views.register.RegisterConstants.generateError
 import org.marques999.acme.store.AcmeDialogs
+
+import android.widget.DatePicker
+import android.widget.ArrayAdapter
 
 import java.util.Calendar
 import java.util.regex.Pattern
@@ -23,18 +25,11 @@ class RegisterStepTwoFragment : Fragment(), DatePicker.OnDateChangedListener {
 
     /**
      */
-    interface StepTwoListener {
-        fun previousPage()
-        fun submitCustomer(parameters: Map<String, Any>)
-    }
-
-    /**
-     */
     private val validity = Calendar.getInstance()
 
     /**
      */
-    private var stepTwoListener: StepTwoListener? = null
+    private var stepTwoListener: RegisterStepTwoListener? = null
 
     /**
      */
@@ -46,7 +41,7 @@ class RegisterStepTwoFragment : Fragment(), DatePicker.OnDateChangedListener {
      */
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        stepTwoListener = context as StepTwoListener
+        stepTwoListener = context as RegisterStepTwoListener
     }
 
     /**

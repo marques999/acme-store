@@ -1,16 +1,17 @@
 package org.marques999.acme.store.views.order
 
+import android.os.Bundle
 import android.graphics.Bitmap
 import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
+
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
 
 import kotlinx.android.synthetic.main.activity_confirm.*
-import org.marques999.acme.store.AcmeStore
 
 import org.marques999.acme.store.R
+import org.marques999.acme.store.AcmeStore
 
 class OrderConfirmActivity : AppCompatActivity() {
 

@@ -16,7 +16,7 @@ class OrderJSON(
     val token: String,
     val total: Double,
     val updated_at: java.util.Date
-) : Parcelable {
+) : ViewType, Parcelable {
 
     /**
      */
@@ -47,6 +47,7 @@ class OrderJSON(
     /**
      */
     override fun describeContents() = 0
+    override fun getViewType() = ViewType.ORDER_VIEW_ORDER
 
     /**
      */

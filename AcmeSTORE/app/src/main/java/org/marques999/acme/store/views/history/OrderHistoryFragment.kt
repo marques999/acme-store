@@ -96,7 +96,7 @@ class OrderHistoryFragment : Fragment(), OrderHistoryListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
 
         super.onActivityCreated(savedInstanceState)
-        progressDialog = AcmeDialogs.buildProgress(context, R.string.loginActivity_progress)
+        progressDialog = AcmeDialogs.buildProgress(context, R.string.global_progressLoading)
 
         history_recyclerView.apply {
             setHasFixedSize(false)

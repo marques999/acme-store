@@ -2,9 +2,11 @@ package org.marques999.acme.store.model
 
 import android.os.Parcel
 import android.os.Parcelable
+
 import org.marques999.acme.store.common.readDate
 import org.marques999.acme.store.common.writeDate
 import org.marques999.acme.store.views.ViewType
+
 import java.util.Date
 
 class Order(
@@ -16,7 +18,7 @@ class Order(
     val total: Double,
     val customer: String,
     val token: String
-) : Parcelable, ViewType {
+) : ViewType, Parcelable {
 
     /**
      */
@@ -56,17 +58,12 @@ class Order(
      */
     override fun describeContents() = 0
     override fun hashCode() = id.hashCode()
-    override fun getViewType() = ViewType.ORDERS
+    override fun getViewType() = ViewType.ORDER_HISTORY_ORDER
 
     /**
      */
     companion object CREATOR : Parcelable.Creator<Order> {
-        override fun createFromParcel(parcel: Parcel): Order {
-            return Order(parcel)
-        }
-
-        override fun newArray(size: Int): Array<Order?> {
-            return arrayOfNulls(size)
-        }
+        override fun newArray(size: Int) = arrayOfNulls<Order>(size)
+        override fun createFromParcel(parcel: Parcel) = Order(parcel)
     }
 }

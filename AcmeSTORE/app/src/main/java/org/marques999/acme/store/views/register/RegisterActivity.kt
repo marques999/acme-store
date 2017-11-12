@@ -1,35 +1,34 @@
 package org.marques999.acme.store.views.register
 
 import android.os.Bundle
+import android.util.Base64
+import android.content.Intent
+import android.app.ProgressDialog
+
+import java.security.KeyPairGenerator
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 
-import android.app.ProgressDialog
-import android.content.Intent
-
 import org.marques999.acme.store.R
 import org.marques999.acme.store.AcmeStore
-import org.marques999.acme.store.api.AuthenticationProvider
 import org.marques999.acme.store.AcmeDialogs
+import org.marques999.acme.store.api.AuthenticationProvider
 import org.marques999.acme.store.common.HttpErrorHandler
 
 import kotlinx.android.synthetic.main.fragment_register_step2.*
 
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import android.util.Base64
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import org.marques999.acme.store.model.Authentication
+
 import org.marques999.acme.store.model.Customer
 import org.marques999.acme.store.model.CustomerPOST
-import java.security.KeyPairGenerator
+import org.marques999.acme.store.model.Authentication
 
-class RegisterActivity : AppCompatActivity(),
-    RegisterStepOneFragment.StepOneListener,
-    RegisterStepTwoFragment.StepTwoListener {
+class RegisterActivity : AppCompatActivity(), RegisterStepOneListener, RegisterStepTwoListener {
 
     /**
      */

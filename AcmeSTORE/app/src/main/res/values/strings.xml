@@ -6,7 +6,7 @@
   <string name="actionBar_cart">Shopping Cart</string>
   <string name="actionBar_catalog">Product Catalog</string>
   <string name="actionBar_history">Order History</string>
-  <string name="actonBar_profile">My Profile</string>
+  <string name="actionBar_profile">My Profile</string>
 
   <!-- BottomNavigation -->
   <string name="bottomNavigation_cart">Cart</string>
@@ -33,6 +33,7 @@
   <string name="main_connectionEstablished">Connection to the store server established successfully!</string>
 
   <!-- OrderViewActivity -->
+  <string name="orderView_title">Order information</string>
   <string name="orderView_count">#Products:\u0020</string>
   <string name="orderView_created">Created:\u0020</string>
   <string name="orderView_quantity">Quantity: %1$d</string>
@@ -42,7 +43,7 @@
   <string name="orderView_productPhoto">TODO</string>
 
   <!-- ProductViewActivity -->
-  <string name="productView_activity">Product Information</string>
+  <string name="productView_activity">Product information</string>
   <string name="productView_barcode">UPC</string>
   <string name="productView_description">Description</string>
   <string name="productView_photo">TODO</string>
@@ -93,4 +94,5 @@
   <string name="registerActivity_title">Register customer</string>
   <string name="errorNumber">The number you entered is not a valid %1$s card number!</string>
   <string name="errorExpired">Your credit card has expired, please double check the expiration date!</string>
+  <string name="global_progressLoading">Loading...</string>
 </resources>

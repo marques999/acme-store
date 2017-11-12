@@ -5,10 +5,7 @@ import android.os.Parcelable
 
 import org.marques999.acme.store.views.ViewType
 
-class OrderProduct(
-    var quantity: Int,
-    val product: Product
-) : ViewType, Parcelable {
+class OrderProduct(var quantity: Int, val product: Product) : ViewType, Parcelable {
 
     /**
      */
@@ -27,7 +24,7 @@ class OrderProduct(
     /**
      */
     override fun describeContents(): Int = 0
-    override fun getViewType(): Int = ViewType.PRODUCTS
+    override fun getViewType() = ViewType.ORDER_VIEW_PRODUCT
 
     /**
      */
