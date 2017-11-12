@@ -5,7 +5,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 
-import org.marques999.acme.store.catalog.ProductCatalogFragment
+import org.marques999.acme.store.views.catalog.ProductCatalogFragment
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem

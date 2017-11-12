@@ -1,4 +1,4 @@
-package org.marques999.acme.store.catalog
+package org.marques999.acme.store.views.catalog
 
 import java.util.ArrayList
 import java.util.HashMap
