@@ -38,7 +38,7 @@ class AcmeStore : Application() {
     override fun onCreate() {
         super.onCreate()
         preferences = getSharedPreferences(KEY_PREFERENCES, Context.MODE_PRIVATE)
-        privateKey = preferences.getString(PREF_PRIVATE, DEFAULT_PRIVATE)
+        privateKey = DEFAULT_PRIVATE //preferences.getString(PREF_PRIVATE, DEFAULT_PRIVATE)
         cryptography = CryptographyProvider(privateKey)
     }
 
@@ -81,7 +81,7 @@ class AcmeStore : Application() {
 
         val ALGORITHM_PKCS = "RSA"
         val ALGORITHM_HASH = "SHA1WithRSA"
-        val SERVER_URL = "http://192.168.1.102:3333/"
+        val SERVER_URL = "http://192.168.1.87:3333/"
         val DEFAULT_USERNAME = "marques999"
         val DEFAULT_PASSWORD = "r0wsauce"
         val ZXING_ACTIVITY = "$ZXING_PACKAGE.SCAN"

@@ -6,20 +6,17 @@
   android:paddingEnd="@dimen/global_largeMargin"
   android:paddingStart="@dimen/global_largeMargin"
   android:paddingTop="@dimen/global_mediumMargin">
-
   <Spinner
     android:id="@+id/registerActivity_ccType"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/global_largeMargin"
     android:layout_marginTop="@dimen/global_mediumMargin" />
-
   <android.support.design.widget.TextInputLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/global_largeMargin"
     android:layout_marginTop="@dimen/global_mediumMargin">
-
     <EditText
       android:id="@+id/registerActivity_ccNumber"
       android:layout_width="match_parent"
@@ -27,7 +24,6 @@
       android:hint="@string/registerActivity_ccNumber"
       android:inputType="numberDecimal" />
   </android.support.design.widget.TextInputLayout>
-
   <DatePicker
     android:id="@+id/registerActivity_ccDate"
     android:layout_width="wrap_content"
@@ -35,13 +31,11 @@
     android:layout_gravity="center"
     android:calendarViewShown="false"
     android:datePickerMode="spinner" />
-
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/global_mediumMargin"
     android:layout_marginTop="@dimen/global_mediumMargin">
-
     <android.support.v7.widget.AppCompatButton
       android:id="@+id/registerActivity_previous"
       android:layout_width="0dp"
@@ -50,7 +44,6 @@
       android:drawableStart="@drawable/ic_chevron_left_24dp"
       android:padding="@dimen/registerActivity_button"
       android:text="@string/registerActivity_previous" />
-
     <android.support.v7.widget.AppCompatButton
       android:id="@+id/registerActivity_register"
       android:layout_width="0dp"

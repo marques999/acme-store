@@ -1,7 +1,7 @@
 package org.marques999.acme.store.views.order
 
-import android.content.Intent
 import android.os.Bundle
+import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
 
 import kotlinx.android.synthetic.main.activity_order.*
@@ -23,9 +23,9 @@ class OrderViewActivity : BackButtonActivity(), OrderViewListener {
         startActivity(Intent(
             this, ProductViewActivity::class.java
         ).putExtra(
-            ProductViewActivity.EXTRA_PRODUCT, orderProduct
+            ProductViewActivity.EXTRA_PRODUCT, orderProduct.product
         ).putExtra(
-            ProductViewActivity.EXTRA_ACTIVE, false
+            ProductViewActivity.EXTRA_PURCHASED, true
         ))
     }
 

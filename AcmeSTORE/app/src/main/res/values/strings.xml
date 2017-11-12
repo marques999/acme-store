@@ -95,4 +95,6 @@
     <string name="productView_description">Description</string>
     <string name="price_cart">Sub-Total</string>
     <string name="items_cart">Items</string>
+  <string name="product_price">Price</string>
+  <string name="product_total">Total</string>
 </resources>

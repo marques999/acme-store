@@ -37,22 +37,19 @@ class OrderViewProductAdapter(private val listener: OrderViewListener) : ViewTyp
 
         fun bind(item: OrderProduct) {
 
-            itemView.product_barcode.text = item.product.barcode
-            itemView.product_price.text = AcmeUtils.formatCurrency(item.product.price)
+            itemView.orderView_barcode.text = item.product.barcode
+            itemView.orderView_quantity.text = item.quantity.toString()
+            itemView.orderView_price.text = AcmeUtils.formatCurrency(item.product.price)
 
-            itemView.product_view.setOnClickListener {
+            itemView.orderView_container.setOnClickListener {
                 listener.onViewProduct(item)
             }
 
-            itemView.product_total.text = AcmeUtils.formatCurrency(
+            itemView.orderView_total.text = AcmeUtils.formatCurrency(
                 item.product.price * item.quantity
             )
 
-            itemView.product_quantity.text = itemView.context.getString(
-                R.string.order_quantity
-            )
-
-            itemView.product_name.text = itemView.context.getString(
+            itemView.orderView_product.text = itemView.context.getString(
                 R.string.order_product,
                 item.product.brand,
                 item.product.name
@@ -61,7 +58,7 @@ class OrderViewProductAdapter(private val listener: OrderViewListener) : ViewTyp
             Picasso.with(itemView.context).load(
                 item.product.image_uri
             ).fit().centerCrop().into(
-                itemView.product_photo
+                itemView.orderView_photo
             )
         }
     }
