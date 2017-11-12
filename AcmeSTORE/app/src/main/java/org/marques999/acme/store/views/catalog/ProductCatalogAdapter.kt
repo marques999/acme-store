@@ -8,28 +8,35 @@ import org.marques999.acme.store.R
 import android.support.v7.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_catalog_item.view.*
 import org.marques999.acme.store.model.Product
+import org.marques999.acme.store.model.inflate
 import org.marques999.acme.store.views.order.CatalogListener
 
 class ProductCatalogAdapter(
-    private val listener: CatalogListener,
-    private val productlistener: ProductCatalogListener
+    private val listener: CatalogListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    /**
+     */
     private val items = ArrayList<Product>()
 
+    /**
+     */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return CatalogViewHolder(parent)
     }
 
+    /**
+     */
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as CatalogViewHolder).bind(items[position])
     }
 
-    inner class CatalogViewHolder(parent: ViewGroup): RecyclerView.ViewHolder(
-            LayoutInflater.from(parent.context).inflate(
-                    R.layout.fragment_catalog_item, parent, false
-            )
+    /**
+     */
+    inner class CatalogViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
+        parent.inflate(R.layout.fragment_catalog_item)
     ) {
+
         fun bind(item: Product) {
             itemView.item_name.text = item.name
             itemView.item_price.text = item.price.toString()
@@ -37,6 +44,8 @@ class ProductCatalogAdapter(
         }
     }
 
+    /**
+     */
     fun refreshItems(orders: List<Product>) {
         notifyItemRangeRemoved(0, items.size)
         items.clear()
@@ -44,5 +53,7 @@ class ProductCatalogAdapter(
         notifyItemRangeInserted(0, orders.size)
     }
 
+    /**
+     */
     override fun getItemCount() = items.size
 }
