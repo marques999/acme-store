@@ -48,6 +48,20 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
     private lateinit var adapter: ShoppingCartAdapter
     private lateinit var progressDialog: ProgressDialog
 
+    private fun recalculateCart () {
+
+        var subtotal = 0.0
+        var quantity = 0
+
+        shoppingCart.values.forEach{
+            subtotal += it.product.price * it.quantity
+            quantity += it.quantity
+        }
+
+        cart_quantity.text = quantity.toString()
+        cart_subtotal.text = subtotal.toString() + " €"
+    }
+
     override fun onItemUpdated(barcode: String, delta: Int) {
 
         shoppingCart[barcode]?.apply {
@@ -58,6 +72,7 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
             }
         }
 
+        recalculateCart()
 
         shoppingCart_checkout.isEnabled = shoppingCart.isNotEmpty()
     }
@@ -66,6 +81,8 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
      */
     override fun onItemDeleted(barcode: String) {
         shoppingCart.remove(barcode)?.let { adapter.remove(it) }
+
+        recalculateCart()
 
         shoppingCart_checkout.isEnabled = shoppingCart.isNotEmpty()
     }
@@ -91,6 +108,7 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
      */
     private val onFetchProduct = Consumer<Product> {
         registerPurchase(it)
+        recalculateCart()
         progressDialog.dismiss()
     }
 
