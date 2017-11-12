@@ -14,7 +14,7 @@
   <string name="bottomNavigation_catalog">Catalog</string>
   <string name="bottomNavigation_history">History</string>
   <string name="bottomNavigation_profile">Profile</string>
-  <ProfileFragmentment -->
+  <!-- ProfileFragment -->
   <string name="customer_address1">Address 1</string>
   <string name="customer_address2">Address 2</string>
   <string name="customer_ccNumber">Number</string>
@@ -79,18 +79,7 @@
   <string name="shoppingCart_minus">-</string>
   <string name="shoppingCart_plus">+</string>
   <string name="shoppingCart_scan">SCAN BARCODE</string>
-  <!-- Product Item View -->
-  <string name="price">Price</string>
-
   <!-- -->
-  <string name="confirm_purchase">Confirm purchase</string>
-  <string name="product_view">View</string>
-  <string name="mainActivity_refresh">Refresh</string>
-  <string name="main_confirmMessage">Are you sure you want to terminate your current session and return to the login screen?</string>
-    <string name="productView_barcode">Barcode</string>
-    <string name="productView_description">Description</string>
-    <string name="price_cart">Sub-Total</string>
-    <string name="items_cart">Items</string>
-  <string name="product_price">Price</string>
-  <string name="product_total">Total</string>
+  <string name="price_cart">Sub-Total</string>
+  <string name="items_cart">Items</string>
 </resources>

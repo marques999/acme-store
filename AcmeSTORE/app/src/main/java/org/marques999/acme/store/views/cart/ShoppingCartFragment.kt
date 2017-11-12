@@ -1,15 +1,16 @@
 package org.marques999.acme.store.views.cart
 
 import android.view.View
+import android.support.v7.widget.LinearLayoutManager
 
 import org.marques999.acme.store.model.Product
 import org.marques999.acme.store.model.OrderProduct
+import org.marques999.acme.store.model.OrderProductPOST
 
 import android.content.Intent
 import android.content.DialogInterface
 import android.content.ActivityNotFoundException
 
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.android.schedulers.AndroidSchedulers
 
@@ -22,13 +23,11 @@ import kotlinx.android.synthetic.main.fragment_cart.*
 
 import org.marques999.acme.store.R
 import org.marques999.acme.store.AcmeStore
+import org.marques999.acme.store.AcmeUtils
 import org.marques999.acme.store.AcmeDialogs
 
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.ViewGroup
-
-import org.marques999.acme.store.model.OrderProductPOST
 
 import org.marques999.acme.store.api.HttpErrorHandler
 import org.marques999.acme.store.views.main.MainActivityFragment
@@ -51,43 +50,42 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
     private lateinit var adapter: ShoppingCartAdapter
     private lateinit var progressDialog: ProgressDialog
 
-    private fun recalculateCart () {
+    /**
+     */
+    private fun recalculateCart() {
 
         var subtotal = 0.0
         var quantity = 0
 
-        shoppingCart.values.forEach{
+        shoppingCart.values.forEach {
             subtotal += it.product.price * it.quantity
             quantity += it.quantity
         }
 
         cart_quantity.text = quantity.toString()
-        cart_subtotal.text = subtotal.toString() + " €"
+        cart_subtotal.text = AcmeUtils.formatCurrency(subtotal)
     }
 
+    /**
+     */
     override fun onItemUpdated(barcode: String, delta: Int) {
 
         shoppingCart[barcode]?.apply {
 
-            if (delta != 0 && (delta > 0 && quantity < 99) || (delta < 0 && quantity > 0)) {
+            if (delta != 0 && (delta > 0 && quantity < 99) || (delta < 0 && quantity > 1)) {
                 quantity += delta
                 adapter.update(this)
+                recalculateCart()
             }
         }
-
-        recalculateCart()
-
-        shoppingCart_checkout.isEnabled = shoppingCart.isNotEmpty()
-
     }
 
     /**
      */
     override fun onItemDeleted(barcode: String) {
         shoppingCart.remove(barcode)?.let { adapter.remove(it) }
-
-        recalculateCart()
         shoppingCart_checkout.isEnabled = shoppingCart.isNotEmpty()
+        recalculateCart()
     }
 
     /**
@@ -104,14 +102,7 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
         adapter.insert(orderProduct)
         shoppingCart.put(orderProduct.product.barcode, orderProduct)
         shoppingCart_checkout.isEnabled = shoppingCart.isNotEmpty()
-    }
-
-    /**
-     */
-    private val onFetchProduct = Consumer<Product> {
-        registerPurchase(it)
         recalculateCart()
-        progressDialog.dismiss()
     }
 
     /**
@@ -168,13 +159,13 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
             AndroidSchedulers.mainThread()
         ).subscribeOn(
             Schedulers.io()
-        ).subscribe(
-            onFetchProduct,
-            Consumer {
-                progressDialog.dismiss()
-                HttpErrorHandler(context).accept(it)
-            }
-        )
+        ).subscribe({
+            registerPurchase(it)
+            progressDialog.dismiss()
+        }, {
+            progressDialog.dismiss()
+            HttpErrorHandler(context).accept(it)
+        })
     }
 
     /**
@@ -206,6 +197,7 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
 
         super.onActivityCreated(savedInstanceState)
         progressDialog = AcmeDialogs.buildProgress(context, R.string.global_progressLoading)
+        recalculateCart()
 
         shoppingCart_recyclerView.apply {
             setHasFixedSize(false)
