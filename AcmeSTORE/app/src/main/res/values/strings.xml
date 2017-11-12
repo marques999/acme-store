@@ -76,4 +76,5 @@
   <string name="shoppingCart_scan">SCAN BARCODE</string>
   <!-- Product Item View -->
   <string name="price">Price</string>
+    <string name="confirm_purchase">Confirm purchase</string>
 </resources>
