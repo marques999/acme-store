@@ -1,12 +1,13 @@
 package org.marques999.acme.store.views.cart
 
+import android.view.View
+
+import org.marques999.acme.store.model.Product
+import org.marques999.acme.store.model.OrderProduct
+
 import android.content.Intent
 import android.content.DialogInterface
 import android.content.ActivityNotFoundException
-
-import kotlinx.android.synthetic.main.fragment_cart.*
-
-import android.view.View
 
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
@@ -17,18 +18,17 @@ import android.os.Bundle
 import android.app.Activity
 import android.app.ProgressDialog
 
+import kotlinx.android.synthetic.main.fragment_cart.*
+
 import org.marques999.acme.store.R
 import org.marques999.acme.store.AcmeStore
 import org.marques999.acme.store.AcmeDialogs
-import org.marques999.acme.store.model.Product
-import org.marques999.acme.store.model.OrderProduct
-import org.marques999.acme.store.api.HttpErrorHandler
-
-import org.marques999.acme.store.views.product.ProductViewActivity
 
 import android.support.v7.widget.LinearLayoutManager
 
+import org.marques999.acme.store.api.HttpErrorHandler
 import org.marques999.acme.store.views.MainActivityFragment
+import org.marques999.acme.store.views.product.ProductViewActivity
 
 class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), ShoppingCartListener {
 

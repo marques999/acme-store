@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
-  android:id="@+id/coordinator"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
-
   <android.support.v7.widget.ActionBarContainer
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
-
-  </android.support.v7.widget.ActionBarContainer>
-
+    android:layout_height="wrap_content" />
   <org.marques999.acme.store.views.SwipelessPager
-    android:id="@+id/viewpager"
+    android:id="@+id/main_viewPager"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
   <com.aurelhubert.ahbottomnavigation.AHBottomNavigation
     android:id="@+id/main_bottomNavigation"
     android:layout_width="match_parent"

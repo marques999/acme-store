@@ -1,25 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:card_view="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  card_view:cardCornerRadius="0dp"
+  card_view:cardBackgroundColor="@color/colorPrimaryDarker"
   card_view:cardElevation="@dimen/cardView_elevation"
-  card_view:cardPreventCornerOverlap="true"
   card_view:cardUseCompatPadding="true">
-
+  <ImageView
+    android:id="@+id/product_photo"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:alpha="0.10"
+    android:contentDescription="@string/global_todoDescription"
+    android:scaleType="centerCrop" />
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:baselineAligned="false">
-
     <LinearLayout
       android:layout_width="wrap_content"
       android:layout_height="match_parent"
-      android:padding="@dimen/global_smallMargin"
       android:background="@color/colorAccent"
-      android:orientation="vertical">
-
+      android:orientation="vertical"
+      android:padding="@dimen/global_smallMargin">
       <Button
         android:id="@+id/shoppingCart_plus"
         android:layout_width="48dp"
@@ -27,7 +29,6 @@
         android:backgroundTint="@color/cardview_light_background"
         android:text="@string/shoppingCart_plus"
         android:textColor="@color/colorAccent" />
-
       <TextView
         android:id="@+id/shoppingCart_quantity"
         android:layout_width="match_parent"
@@ -39,7 +40,6 @@
         android:textAlignment="center"
         android:textSize="@dimen/global_mediumFont"
         android:textStyle="bold" />
-
       <Button
         android:id="@+id/shoppingCart_minus"
         android:layout_width="48dp"
@@ -47,56 +47,32 @@
         android:backgroundTint="@color/cardview_light_background"
         android:text="@string/shoppingCart_minus"
         android:textColor="@color/colorAccent" />
-
     </LinearLayout>
-
     <LinearLayout
+      android:id="@+id/product_container"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_weight="1"
-      android:background="@color/cardview_light_background"
       android:orientation="vertical">
-
       <LinearLayout
-        android:id="@+id/product_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/global_mediumMargin">
-
-        <ImageView
-          android:id="@+id/product_photo"
-          android:layout_width="@dimen/cardView_image"
-          android:layout_marginEnd="@dimen/global_mediumMargin"
-          android:layout_height="@dimen/cardView_image"
-          android:contentDescription="@string/shoppingCart_photo"
-          android:src="@mipmap/ic_launcher" />
-
-        <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/global_largeMargin">
+        <TextView
+          android:id="@+id/product_name"
+          style="@style/global_tableHeader"
+          android:textSize="24sp" />
+        <TextView
+          android:id="@+id/product_barcode"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:orientation="vertical">
-
-          <TextView
-            android:id="@+id/product_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#040404"
-            android:textSize="@dimen/global_mediumFont"
-            android:textStyle="bold" />
-
-          <TextView
-            android:id="@+id/product_barcode"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#343434" />
-        </LinearLayout>
+          android:textSize="@dimen/global_mediumFont" />
       </LinearLayout>
-
       <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
+        android:layout_marginTop="@dimen/global_mediumMargin">
         <Button
           android:id="@+id/shoppingCart_delete"
           android:layout_width="wrap_content"
@@ -104,19 +80,17 @@
           android:background="?android:attr/selectableItemBackground"
           android:text="@string/shoppingCart_delete"
           android:textColor="@color/colorAccent" />
-
         <View
           android:layout_width="0dp"
           android:layout_height="0dp"
           android:layout_weight="1" />
-
         <TextView
           android:id="@+id/product_price"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginEnd="@dimen/global_largeMargin"
-          android:textStyle="bold"
-          android:textColor="@color/colorAccent" />
+          android:textColor="@color/colorAccent"
+          android:textStyle="bold" />
       </LinearLayout>
     </LinearLayout>
   </LinearLayout>

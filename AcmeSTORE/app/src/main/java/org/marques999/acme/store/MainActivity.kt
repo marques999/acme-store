@@ -1,6 +1,5 @@
 package org.marques999.acme.store
 
-import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -86,7 +85,7 @@ class MainActivity : AppCompatActivity(), ProductCatalogListener {
         bottomNavigationAdapter.addFragments(ProductCatalogFragment())
         bottomNavigationAdapter.addFragments(OrderHistoryFragment())
         bottomNavigationAdapter.addFragments(CustomerProfileFragment())
-        viewpager.adapter = bottomNavigationAdapter
+        main_viewPager.adapter = bottomNavigationAdapter
         bottomNavigation.currentItem = 0
         bottomNavigation.isColored = true
         bottomNavigation.titleState = AHBottomNavigation.TitleState.ALWAYS_SHOW
@@ -125,7 +124,7 @@ class MainActivity : AppCompatActivity(), ProductCatalogListener {
 
             if (!selected) {
                 supportActionBar?.setTitle(titles[position])
-                viewpager.currentItem = position
+                main_viewPager.currentItem = position
             }
 
             true

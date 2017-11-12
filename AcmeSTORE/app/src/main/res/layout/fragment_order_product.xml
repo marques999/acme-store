@@ -1,92 +1,58 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:card_view="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/orderView_container"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  card_view:cardBackgroundColor="@color/cardview_light_background"
-  card_view:cardCornerRadius="0dp"
+  card_view:cardBackgroundColor="@color/colorPrimaryDarker"
   card_view:cardElevation="@dimen/cardView_elevation"
   card_view:cardUseCompatPadding="true">
-
-  <LinearLayout
+  <ImageView
+    android:id="@+id/orderView_photo"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="@dimen/global_largeMargin">
-
-    <LinearLayout
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="@dimen/global_mediumMargin"
-      android:orientation="vertical">
-
-      <ImageView
-        android:id="@+id/product_photo"
-        android:layout_width="@dimen/order_photo"
-        android:layout_height="@dimen/order_photo"
-        android:layout_marginBottom="@dimen/order_margin"
-        android:contentDescription="@string/global_todoDescription" />
-
-      <TextView
-        android:id="@+id/product_price"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textColor="@color/colorAccent" />
-    </LinearLayout>
-
-    <RelativeLayout
-      android:layout_width="0dp"
-      android:layout_height="match_parent"
-      android:layout_weight="1"
-      android:orientation="horizontal">
-
-      <TextView
-        android:id="@+id/product_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/global_tinyMargin"
-        android:textColor="@color/colorAccent"
-        android:textSize="@dimen/global_mediumFont" />
-
-      <TextView
-        android:id="@+id/product_barcode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/product_name"
-        android:layout_marginBottom="@dimen/global_mediumMargin"
-        android:textColor="@color/colorAccent"
-        android:textSize="@dimen/global_smallFont"
-        android:textStyle="bold" />
-
-      <TextView
-        android:id="@+id/product_quantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/product_barcode"
-        android:textColor="@color/colorAccent" />
-    </RelativeLayout>
-
-    <LinearLayout
-      android:layout_width="64dp"
-      android:layout_height="match_parent"
-      android:layout_marginStart="@dimen/global_smallMargin"
-      android:orientation="vertical">
-
-      <TextView
-        android:id="@+id/product_total"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:textAlignment="center"
-        android:textColor="@color/colorAccent"
-        android:textStyle="bold" />
-
-      <Button
-        android:id="@+id/product_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/product_view" />
-    </LinearLayout>
+    android:layout_height="match_parent"
+    android:alpha="0.10"
+    android:scaleType="fitXY" />
+  <LinearLayout style="@style/table_parent">
+    <TextView
+      android:id="@+id/orderView_quantity"
+      style="@style/table_leftContainer"
+      android:gravity="center"
+      android:textDirection="firstStrong"
+      android:textSize="@dimen/global_largeFont"
+      android:textStyle="bold" />
+    <TableLayout style="@style/table_rightContainer">
+      <TableRow
+        style="@style/global_tableRow"
+        android:layout_marginBottom="@dimen/global_smallMargin">
+        <TextView
+          android:id="@+id/orderView_product"
+          style="@style/global_tableHeader"
+          android:textSize="24sp" />
+      </TableRow>
+      <TableRow style="@style/global_tableRow">
+        <TextView
+          style="@style/global_rowHeader"
+          android:text="@string/product_barcode" />
+        <TextView
+          android:id="@+id/orderView_barcode"
+          style="@style/global_rowContent" />
+      </TableRow>
+      <TableRow style="@style/global_tableRow">
+        <TextView
+          style="@style/global_rowHeader"
+          android:text="@string/product_price" />
+        <TextView
+          android:id="@+id/orderView_price"
+          style="@style/global_rowContent" />
+      </TableRow>
+      <TableRow style="@style/global_tableRow">
+        <TextView
+          style="@style/global_rowHeader"
+          android:text="@string/product_total" />
+        <TextView
+          android:id="@+id/orderView_total"
+          style="@style/global_rowContent" />
+      </TableRow>
+    </TableLayout>
   </LinearLayout>
 </android.support.v7.widget.CardView>

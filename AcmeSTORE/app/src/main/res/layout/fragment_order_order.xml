@@ -2,7 +2,6 @@
   xmlns:card_view="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  card_view:cardCornerRadius="0dp"
   card_view:cardElevation="@dimen/cardView_elevation"
   card_view:cardUseCompatPadding="true">
   <LinearLayout style="@style/table_parent">
@@ -15,16 +14,8 @@
         style="@style/global_tableRow"
         android:layout_marginBottom="@dimen/global_smallMargin">
         <TextView
-          android:id="@+id/orderView_total"
+          android:id="@+id/orderView_orderTotal"
           style="@style/global_tableHeader" />
-      </TableRow>
-      <TableRow style="@style/global_tableRow">
-        <TextView
-          style="@style/global_rowHeader"
-          android:text="@string/order_count" />
-        <TextView
-          android:id="@+id/orderView_count"
-          style="@style/global_rowContent" />
       </TableRow>
       <TableRow style="@style/global_tableRow">
         <TextView

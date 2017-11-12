@@ -120,36 +120,21 @@ class LoginActivity : AppCompatActivity() {
     private fun validateForm(): Boolean {
 
         var formValid = true
-        val username = loginActivity_username.text.toString()
 
-        when {
-            username.isEmpty() -> {
-                loginActivity_username.error = generateError(R.string.errorRequired)
-                formValid = false
-            }
-            RegisterConstants.invalidUsername(username) -> {
-                loginActivity_username.error = generateError(R.string.errorUsername)
-                formValid = false
-            }
-            else -> {
-                loginActivity_username.error = null
-            }
+        if (loginActivity_username.text.toString().isEmpty()) {
+            loginActivity_username.error = generateError(R.string.errorRequired)
+            formValid = false
+        }
+        else {
+            loginActivity_username.error = null
         }
 
-        val password = loginActivity_password.text.toString()
-
-        when {
-            password.isEmpty() -> {
-                loginActivity_password.error = generateError(R.string.errorRequired)
-                formValid = false
-            }
-            RegisterConstants.invalidPassword(password) -> {
-                loginActivity_password.error = generateError(R.string.errorPassword)
-                formValid = false
-            }
-            else -> {
-                loginActivity_password.error = null
-            }
+        if (loginActivity_password.text.toString().isEmpty()) {
+            loginActivity_password.error = generateError(R.string.errorRequired)
+            formValid = false
+        }
+        else {
+            loginActivity_password.error = null
         }
 
         return formValid
