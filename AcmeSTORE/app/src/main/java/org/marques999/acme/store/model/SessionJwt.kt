@@ -5,22 +5,19 @@ import android.os.Parcelable
 
 import java.util.Date
 
-import org.marques999.acme.store.common.readDate
-import org.marques999.acme.store.common.writeDate
-
 class SessionJwt(val expire: Date, val token: String) : Parcelable {
 
     /**
      */
     constructor(parcel: Parcel) : this(
-        parcel.readDate(),
+        Date(parcel.readLong()),
         parcel.readString()
     )
 
     /**
      */
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeDate(expire)
+        parcel.writeLong(expire.time)
         parcel.writeString(token)
     }
 

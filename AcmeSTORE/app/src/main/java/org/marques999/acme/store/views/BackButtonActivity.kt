@@ -1,4 +1,4 @@
-package org.marques999.acme.store.views.common
+package org.marques999.acme.store.views
 
 import android.view.MenuItem
 import android.support.v7.app.AppCompatActivity

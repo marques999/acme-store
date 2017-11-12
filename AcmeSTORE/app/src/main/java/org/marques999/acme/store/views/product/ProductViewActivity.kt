@@ -2,12 +2,13 @@ package org.marques999.acme.store.views.product
 
 import android.os.Bundle
 
+import org.marques999.acme.store.R
+import org.marques999.acme.store.AcmeUtils
+
 import com.squareup.picasso.Picasso
 
-import org.marques999.acme.store.R
 import org.marques999.acme.store.model.OrderProduct
-import org.marques999.acme.store.views.ViewUtils
-import org.marques999.acme.store.views.common.BackButtonActivity
+import org.marques999.acme.store.views.BackButtonActivity
 
 import kotlinx.android.synthetic.main.activity_product.*
 
@@ -33,7 +34,7 @@ class ProductViewActivity : BackButtonActivity() {
                 productView_brand.text = it.brand
                 productView_barcode.text = it.barcode
                 productView_description.text = it.description
-                productView_price.text = ViewUtils.formatCurrency(it.price)
+                productView_price.text = AcmeUtils.formatCurrency(it.price)
 
                 Picasso.with(this).load(
                     it.image_uri

@@ -5,17 +5,18 @@ import android.content.Intent
 import android.app.ProgressDialog
 import android.support.v7.app.AppCompatActivity
 
-import org.marques999.acme.store.model.Authentication
-import org.marques999.acme.store.api.HttpErrorHandler
 import org.marques999.acme.store.model.SessionJwt
+import org.marques999.acme.store.model.Authentication
 
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
+import io.reactivex.android.schedulers.AndroidSchedulers
+
+import org.marques999.acme.store.api.AuthenticationProvider
+import org.marques999.acme.store.api.HttpErrorHandler
 
 import kotlinx.android.synthetic.main.activity_login.*
 
-import org.marques999.acme.store.api.AuthenticationProvider
 import org.marques999.acme.store.views.register.RegisterActivity
 import org.marques999.acme.store.views.register.RegisterConstants
 import org.marques999.acme.store.views.register.RegisterConstants.generateError

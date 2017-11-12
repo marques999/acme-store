@@ -1,4 +1,4 @@
-package org.marques999.acme.store.views.common
+package org.marques999.acme.store.views
 
 import android.content.Context
 import android.support.v4.view.ViewPager

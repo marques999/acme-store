@@ -6,13 +6,13 @@ import android.support.v7.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
 import org.marques999.acme.store.R
-import org.marques999.acme.store.model.OrderProduct
+import org.marques999.acme.store.AcmeUtils
 
 import kotlinx.android.synthetic.main.fragment_order_product.view.*
 
-import org.marques999.acme.store.views.ViewType
-import org.marques999.acme.store.views.ViewTypeAdapter
-import org.marques999.acme.store.views.ViewUtils
+import org.marques999.acme.store.model.OrderProduct
+import org.marques999.acme.store.model.ViewType
+import org.marques999.acme.store.model.ViewTypeAdapter
 
 class OrderViewProductAdapter : ViewTypeAdapter {
 
@@ -37,9 +37,9 @@ class OrderViewProductAdapter : ViewTypeAdapter {
         fun bind(item: OrderProduct) {
 
             itemView.product_barcode.text = item.product.barcode
-            itemView.product_price.text = ViewUtils.formatCurrency(item.product.price)
+            itemView.product_price.text = AcmeUtils.formatCurrency(item.product.price)
 
-            itemView.product_total.text = ViewUtils.formatCurrency(
+            itemView.product_total.text = AcmeUtils.formatCurrency(
                 item.product.price * item.quantity
             )
 

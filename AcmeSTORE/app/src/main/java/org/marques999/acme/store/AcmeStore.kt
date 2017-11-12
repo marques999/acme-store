@@ -83,7 +83,6 @@ class AcmeStore : Application() {
         val DEFAULT_USERNAME = "marques999"
         val DEFAULT_PASSWORD = "r0wsauce"
         val ZXING_ACTIVITY = "$ZXING_PACKAGE.SCAN"
-        val RAMEN_RECIPE = "mieic@feup#2017".toByteArray()
         val ZXING_URL = "market://details?id=$ZXING_PACKAGE"
 
         val jsonSerializer: Moshi by lazy {

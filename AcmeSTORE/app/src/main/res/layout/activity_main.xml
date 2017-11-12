@@ -5,7 +5,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent">
 
-  <org.marques999.acme.store.views.common.SwipelessPager
+  <org.marques999.acme.store.views.SwipelessPager
     android:id="@+id/viewpager"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

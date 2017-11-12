@@ -8,8 +8,8 @@ import android.view.LayoutInflater
 import kotlinx.android.synthetic.main.fragment_cart_item.view.*
 
 import org.marques999.acme.store.R
-import org.marques999.acme.store.views.ViewType
-import org.marques999.acme.store.views.ViewUtils
+import org.marques999.acme.store.AcmeUtils
+import org.marques999.acme.store.model.ViewType
 import org.marques999.acme.store.model.OrderProduct
 
 import android.support.v7.widget.RecyclerView
@@ -37,6 +37,7 @@ class ShoppingCartAdapter(
     /**
      */
     override fun getItemCount(): Int = items.size
+
     override fun getItemViewType(position: Int) = ViewType.SHOPPING_CART_PRODUCT
 
     /**
@@ -73,7 +74,7 @@ class ShoppingCartAdapter(
 
             itemView.product_barcode.text = itemBarcode
             itemView.shoppingCart_quantity.text = item.quantity.toString()
-            itemView.product_price.text = ViewUtils.formatCurrency(item.product.price)
+            itemView.product_price.text = AcmeUtils.formatCurrency(item.product.price)
 
             Picasso.with(itemView.context).load(
                 item.product.image_uri

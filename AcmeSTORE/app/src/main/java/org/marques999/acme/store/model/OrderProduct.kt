@@ -3,8 +3,6 @@ package org.marques999.acme.store.model
 import android.os.Parcel
 import android.os.Parcelable
 
-import org.marques999.acme.store.views.ViewType
-
 class OrderProduct(var quantity: Int, val product: Product) : ViewType, Parcelable {
 
     /**

@@ -3,10 +3,6 @@ package org.marques999.acme.store.model
 import android.os.Parcel
 import android.os.Parcelable
 
-import org.marques999.acme.store.common.readDate
-import org.marques999.acme.store.common.writeDate
-import org.marques999.acme.store.views.ViewType
-
 import java.util.Date
 
 class Order(
@@ -24,8 +20,8 @@ class Order(
      */
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
-        parcel.readDate(),
-        parcel.readDate(),
+        Date(parcel.readLong()),
+        Date(parcel.readLong()),
         parcel.readInt(),
         parcel.readInt(),
         parcel.readDouble(),
@@ -36,8 +32,8 @@ class Order(
      */
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
-        parcel.writeDate(created_at)
-        parcel.writeDate(updated_at)
+        parcel.writeLong(created_at.time)
+        parcel.writeLong(updated_at.time)
         parcel.writeInt(status)
         parcel.writeInt(count)
         parcel.writeDouble(total)
@@ -57,6 +53,7 @@ class Order(
     /**
      */
     override fun describeContents() = 0
+
     override fun hashCode() = id.hashCode()
     override fun getViewType() = ViewType.ORDER_HISTORY_ORDER
 

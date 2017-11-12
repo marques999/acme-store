@@ -3,8 +3,8 @@ package org.marques999.acme.store.views.order
 import android.view.ViewGroup
 
 import org.marques999.acme.store.model.OrderJSON
-import org.marques999.acme.store.views.ViewType
-import org.marques999.acme.store.views.ViewTypeAdapter
+import org.marques999.acme.store.model.ViewType
+import org.marques999.acme.store.model.ViewTypeAdapter
 
 import android.support.v4.util.SparseArrayCompat
 import android.support.v7.widget.RecyclerView

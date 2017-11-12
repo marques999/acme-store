@@ -1,9 +1,13 @@
-package org.marques999.acme.store.views
+package org.marques999.acme.store.model
 
 interface ViewType {
 
+    /**
+     */
     fun getViewType(): Int
 
+    /**
+     */
     companion object {
 
         /**

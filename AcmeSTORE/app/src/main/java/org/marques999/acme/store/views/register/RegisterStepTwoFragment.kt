@@ -12,8 +12,8 @@ import android.view.ViewGroup
 import android.view.LayoutInflater
 
 import org.marques999.acme.store.R
-import org.marques999.acme.store.views.register.RegisterConstants.generateError
 import org.marques999.acme.store.AcmeDialogs
+import org.marques999.acme.store.views.register.RegisterConstants.generateError
 
 import android.widget.DatePicker
 import android.widget.ArrayAdapter

@@ -5,9 +5,6 @@ import android.os.Parcelable
 
 import java.util.Date
 
-import org.marques999.acme.store.common.readDate
-import org.marques999.acme.store.common.writeDate
-
 class CreditCard(val type: String, val number: String, val validity: Date) : Parcelable {
 
     /**
@@ -15,7 +12,7 @@ class CreditCard(val type: String, val number: String, val validity: Date) : Par
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
-        parcel.readDate()
+        Date(parcel.readLong())
     )
 
     /**
@@ -23,7 +20,7 @@ class CreditCard(val type: String, val number: String, val validity: Date) : Par
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(type)
         parcel.writeString(number)
-        parcel.writeDate(validity)
+        parcel.writeLong(validity.time)
     }
 
     /**

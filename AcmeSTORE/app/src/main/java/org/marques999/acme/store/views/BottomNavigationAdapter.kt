@@ -1,4 +1,4 @@
-package org.marques999.acme.store.views.common
+package org.marques999.acme.store.views
 
 import android.view.ViewGroup
 import android.util.SparseArray

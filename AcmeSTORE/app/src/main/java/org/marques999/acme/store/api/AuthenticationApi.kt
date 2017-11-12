@@ -13,7 +13,7 @@ import org.marques999.acme.store.model.SessionJwt
 interface AuthenticationApi {
 
     @POST("login")
-    fun login(@Body payload: Authentication): Observable<SessionJwt>
+    fun login(@Body authentication: Authentication): Observable<SessionJwt>
 
     @POST("customers/")
     fun register(@Body customerPOST: CustomerPOST): Observable<Customer>

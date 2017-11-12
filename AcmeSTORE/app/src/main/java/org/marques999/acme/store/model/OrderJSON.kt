@@ -3,45 +3,43 @@ package org.marques999.acme.store.model
 import android.os.Parcel
 import android.os.Parcelable
 
-import org.marques999.acme.store.common.readDate
-import org.marques999.acme.store.common.writeDate
-import org.marques999.acme.store.views.ViewType
+import java.util.Date
 
 class OrderJSON(
     val count: Int,
-    val created_at: java.util.Date,
+    val created_at: Date,
     val customer: Customer,
     val products: List<OrderProduct>,
     val status: Int,
     val token: String,
     val total: Double,
-    val updated_at: java.util.Date
+    val updated_at: Date
 ) : ViewType, Parcelable {
 
     /**
      */
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
-        parcel.readDate(),
+        Date(parcel.readLong()),
         parcel.readParcelable(Customer::class.java.classLoader),
         parcel.createTypedArrayList(OrderProduct),
         parcel.readInt(),
         parcel.readString(),
         parcel.readDouble(),
-        parcel.readDate()
+        Date(parcel.readLong())
     )
 
     /**
      */
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(count)
-        parcel.writeDate(created_at)
+        parcel.writeLong(created_at.time)
         parcel.writeParcelable(customer, flags)
         parcel.writeTypedList(products)
         parcel.writeInt(status)
         parcel.writeString(token)
         parcel.writeDouble(total)
-        parcel.writeDate(updated_at)
+        parcel.writeLong(updated_at.time)
     }
 
     /**

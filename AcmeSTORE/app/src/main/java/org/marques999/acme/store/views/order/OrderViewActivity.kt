@@ -7,7 +7,7 @@ import kotlinx.android.synthetic.main.activity_order.*
 
 import org.marques999.acme.store.R
 import org.marques999.acme.store.model.OrderJSON
-import org.marques999.acme.store.views.common.BackButtonActivity
+import org.marques999.acme.store.views.BackButtonActivity
 
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 

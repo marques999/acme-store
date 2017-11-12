@@ -7,13 +7,14 @@ import android.app.ProgressDialog
 
 import java.security.KeyPairGenerator
 
+import org.marques999.acme.store.R
+import org.marques999.acme.store.AcmeStore
+import org.marques999.acme.store.AcmeDialogs
+
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 
-import org.marques999.acme.store.R
-import org.marques999.acme.store.AcmeStore
-import org.marques999.acme.store.AcmeDialogs
 import org.marques999.acme.store.api.AuthenticationProvider
 import org.marques999.acme.store.api.HttpErrorHandler
 

@@ -6,13 +6,14 @@ import android.support.v4.app.Fragment
 
 import org.marques999.acme.store.R
 import org.marques999.acme.store.AcmeStore
-import org.marques999.acme.store.model.CustomerJSON
-import org.marques999.acme.store.views.ViewUtils
-import org.marques999.acme.store.views.order.OrderConfirmActivity
+import org.marques999.acme.store.AcmeUtils
 
 import android.view.View
 import android.view.ViewGroup
 import android.view.LayoutInflater
+
+import org.marques999.acme.store.model.CustomerJSON
+import org.marques999.acme.store.views.order.OrderConfirmActivity
 
 import kotlinx.android.synthetic.main.fragment_profile.*
 
@@ -52,7 +53,7 @@ class CustomerProfileFragment : Fragment() {
         customer.credit_card.let {
             profile_cardType.text = it.type
             profile_cardNumber.text = it.number
-            profile_cardValidity.text = ViewUtils.formatDate(it.validity)
+            profile_cardValidity.text = AcmeUtils.formatDate(it.validity)
         }
 
         profile_qrTest.setOnClickListener {

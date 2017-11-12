@@ -1,4 +1,4 @@
-package org.marques999.acme.store.views
+package org.marques999.acme.store
 
 import java.text.DateFormat
 import java.text.NumberFormat
@@ -7,7 +7,7 @@ import java.util.Date
 import java.util.Locale
 import java.util.Currency
 
-object ViewUtils {
+object AcmeUtils {
 
     /**
      */

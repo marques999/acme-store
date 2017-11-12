@@ -1,20 +1,18 @@
 package org.marques999.acme.store.api
 
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Path
 
 import io.reactivex.Observable
-import org.marques999.acme.store.model.*
+
+import org.marques999.acme.store.model.Order
+import org.marques999.acme.store.model.OrderJSON
+import org.marques999.acme.store.model.OrderPOST
+import org.marques999.acme.store.model.Product
 
 interface AcmeApi {
-
-    /**
-     * Customers
-     */
-    @DELETE("customers/{id}")
-    fun deleteCustomer(@Path("id") username: String): Observable<Any>
-
-    @PUT("customers/{id}")
-    fun updateCustomer(@Path("id") username: String, @Body customer: CustomerPOST): Observable<Customer>
 
     /**
      * Products
@@ -36,7 +34,4 @@ interface AcmeApi {
 
     @POST("orders/")
     fun insertOrder(@Body order: OrderPOST): Observable<Order>
-
-    @DELETE("orders/{id}")
-    fun deleteOrder(@Path("id") token: String): Observable<Any>
 }

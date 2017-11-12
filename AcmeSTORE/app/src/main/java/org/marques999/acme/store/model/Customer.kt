@@ -5,9 +5,6 @@ import android.os.Parcelable
 
 import java.util.Date
 
-import org.marques999.acme.store.common.readDate
-import org.marques999.acme.store.common.writeDate
-
 class Customer(
     val name: String,
     val username: String,
@@ -30,8 +27,8 @@ class Customer(
         parcel.readString(),
         parcel.readString(),
         parcel.readParcelable(CreditCard::class.java.classLoader),
-        parcel.readDate(),
-        parcel.readDate()
+        Date(parcel.readLong()),
+        Date(parcel.readLong())
     )
 
     /**
@@ -44,8 +41,8 @@ class Customer(
         parcel.writeString(country)
         parcel.writeString(tax_number)
         parcel.writeParcelable(credit_card, flags)
-        parcel.writeDate(created_at)
-        parcel.writeDate(updated_at)
+        parcel.writeLong(created_at.time)
+        parcel.writeLong(updated_at.time)
     }
 
     /**

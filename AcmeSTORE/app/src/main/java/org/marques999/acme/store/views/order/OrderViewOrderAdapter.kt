@@ -4,13 +4,13 @@ import android.view.ViewGroup
 import android.support.v7.widget.RecyclerView
 
 import org.marques999.acme.store.R
-import org.marques999.acme.store.model.OrderJSON
+import org.marques999.acme.store.AcmeUtils
 
 import kotlinx.android.synthetic.main.fragment_order_order.view.*
 
-import org.marques999.acme.store.views.ViewType
-import org.marques999.acme.store.views.ViewTypeAdapter
-import org.marques999.acme.store.views.ViewUtils
+import org.marques999.acme.store.model.OrderJSON
+import org.marques999.acme.store.model.ViewType
+import org.marques999.acme.store.model.ViewTypeAdapter
 
 class OrderViewOrderAdapter : ViewTypeAdapter {
 
@@ -35,9 +35,9 @@ class OrderViewOrderAdapter : ViewTypeAdapter {
         fun bind(item: OrderJSON) {
             itemView.orderView_token.text = item.token
             itemView.orderView_count.text = item.count.toString()
-            itemView.orderView_total.text = ViewUtils.formatCurrency(item.total)
-            itemView.orderView_createdAt.text = ViewUtils.formatDateTime(item.created_at)
-            itemView.orderView_modifiedAt.text = ViewUtils.formatDateTime(item.updated_at)
+            itemView.orderView_total.text = AcmeUtils.formatCurrency(item.total)
+            itemView.orderView_createdAt.text = AcmeUtils.formatDateTime(item.created_at)
+            itemView.orderView_modifiedAt.text = AcmeUtils.formatDateTime(item.updated_at)
         }
     }
 }

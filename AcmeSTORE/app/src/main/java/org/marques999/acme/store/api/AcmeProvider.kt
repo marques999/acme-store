@@ -7,14 +7,12 @@ import com.squareup.moshi.Types
 
 import org.marques999.acme.store.AcmeStore
 import org.marques999.acme.store.model.Session
-import org.marques999.acme.store.model.CustomerPOST
+import org.marques999.acme.store.model.OrderPOST
+import org.marques999.acme.store.model.OrderProductPOST
 
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
-
-import org.marques999.acme.store.model.OrderPOST
-import org.marques999.acme.store.model.OrderProductPOST
 
 class AcmeProvider(private val session: Session, private val crypto: CryptographyProvider) {
 
@@ -51,17 +49,6 @@ class AcmeProvider(private val session: Session, private val crypto: Cryptograph
     fun getCustomer() = session.customer
     fun getOrder(token: String) = api.getOrder(token)
     fun getProduct(barcode: String) = api.getProduct(barcode)
-
-    /**
-     */
-    fun deleteOrder(token: String) = api.deleteOrder(token)
-    fun deleteCustomer() = api.deleteCustomer(session.customer.username)
-
-    /**
-     */
-    fun updateCustomer(customer: CustomerPOST) = api.updateCustomer(
-        session.customer.username, customer
-    )
 
     /**
      */

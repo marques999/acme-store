@@ -10,9 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.LayoutInflater
 
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
+import io.reactivex.android.schedulers.AndroidSchedulers
 
 import android.net.Uri
 import android.os.Bundle
