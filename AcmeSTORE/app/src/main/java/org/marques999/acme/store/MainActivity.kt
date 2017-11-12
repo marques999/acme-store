@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 import org.marques999.acme.store.catalog.ProductCatalogFragment
 import org.marques999.acme.store.views.cart.ShoppingCartFragment
-import org.marques999.acme.store.views.history.OrderHistoryFragment
+import org.marques999.acme.store.views.order.OrderHistoryFragment
 import org.marques999.acme.store.views.profile.CustomerProfileFragment
 import org.marques999.acme.store.views.common.BottomNavigationAdapter
 

@@ -1,4 +1,4 @@
-package org.marques999.acme.store.views.history
+package org.marques999.acme.store.views.order
 
 import android.os.Bundle
 import android.content.Intent
@@ -17,7 +17,6 @@ import org.marques999.acme.store.AcmeStore
 import org.marques999.acme.store.AcmeDialogs
 import org.marques999.acme.store.model.Order
 import org.marques999.acme.store.common.HttpErrorHandler
-import org.marques999.acme.store.views.order.OrderViewActivity
 
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager

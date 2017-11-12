@@ -1,4 +1,4 @@
-package org.marques999.acme.store.views.history
+package org.marques999.acme.store.views.order
 
 import android.view.ViewGroup
 import android.view.LayoutInflater
