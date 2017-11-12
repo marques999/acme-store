@@ -16,8 +16,6 @@ class Order(
     val updated_at: Date
 ) : ViewType, Parcelable {
 
-    /**
-     */
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readInt(),
@@ -29,14 +27,6 @@ class Order(
         Date(parcel.readLong())
     )
 
-    /**
-     */
-    override fun describeContents() = 0
-
-    override fun getViewType(): Int = ViewType.DETAILS_ORDER
-
-    /**
-     */
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(token)
         parcel.writeInt(count)
@@ -48,8 +38,9 @@ class Order(
         parcel.writeLong(updated_at.time)
     }
 
-    /**
-     */
+    override fun describeContents() = 0
+    override fun getViewType(): Int = ViewType.DETAILS_ORDER
+
     companion object CREATOR : Parcelable.Creator<Order> {
         override fun newArray(size: Int) = arrayOfNulls<Order>(size)
         override fun createFromParcel(parcel: Parcel) = Order(parcel)

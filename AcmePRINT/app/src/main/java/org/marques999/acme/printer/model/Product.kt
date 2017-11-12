@@ -12,8 +12,6 @@ class Product(
     val description: String
 ) : Parcelable {
 
-    /**
-     */
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
@@ -23,8 +21,6 @@ class Product(
         parcel.readString()
     )
 
-    /**
-     */
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)
         parcel.writeString(brand)
@@ -34,12 +30,8 @@ class Product(
         parcel.writeString(description)
     }
 
-    /**
-     */
     override fun describeContents() = 0
 
-    /**
-     */
     companion object CREATOR : Parcelable.Creator<Product> {
         override fun newArray(size: Int) = arrayOfNulls<Product>(size)
         override fun createFromParcel(parcel: Parcel) = Product(parcel)

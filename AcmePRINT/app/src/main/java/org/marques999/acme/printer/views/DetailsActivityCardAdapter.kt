@@ -3,13 +3,13 @@ package org.marques999.acme.printer.views
 import android.view.ViewGroup
 import android.support.v7.widget.RecyclerView
 
-import kotlinx.android.synthetic.main.fragment_cc.view.*
 import org.marques999.acme.printer.R
+import org.marques999.acme.printer.AcmeUtils
+import org.marques999.acme.printer.model.CreditCard
 import org.marques999.acme.printer.model.ViewType
 import org.marques999.acme.printer.model.ViewTypeAdapter
-import org.marques999.acme.printer.AcmeUtils
 
-import org.marques999.acme.printer.model.CreditCard
+import kotlinx.android.synthetic.main.fragment_cc.view.*
 
 class DetailsActivityCardAdapter : ViewTypeAdapter {
 

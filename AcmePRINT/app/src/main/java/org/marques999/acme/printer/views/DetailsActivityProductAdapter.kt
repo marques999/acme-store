@@ -1,17 +1,17 @@
 package org.marques999.acme.printer.views
 
-import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
-
-import org.marques999.acme.printer.model.OrderProduct
+import android.support.v7.widget.RecyclerView
 
 import com.squareup.picasso.Picasso
 
-import kotlinx.android.synthetic.main.fragment_product.view.*
 import org.marques999.acme.printer.R
+import org.marques999.acme.printer.AcmeUtils
+import org.marques999.acme.printer.model.OrderProduct
 import org.marques999.acme.printer.model.ViewType
 import org.marques999.acme.printer.model.ViewTypeAdapter
-import org.marques999.acme.printer.AcmeUtils
+
+import kotlinx.android.synthetic.main.fragment_product.view.*
 
 class DetailsActivityProductAdapter : ViewTypeAdapter {
 

@@ -12,8 +12,6 @@ import org.marques999.acme.printer.model.SessionJwt
 
 class AuthenticationProvider {
 
-    /**
-     */
     private val api = Retrofit.Builder().addCallAdapterFactory(
         RxJava2CallAdapterFactory.create()
     ).addConverterFactory(
@@ -22,8 +20,6 @@ class AuthenticationProvider {
         AcmePrinter.SERVER_URL
     ).build().create(AuthenticationApi::class.java)
 
-    /**
-     */
     fun login(username: String, password: String): Observable<SessionJwt> {
         return api.login(Authentication(username, password))
     }

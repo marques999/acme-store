@@ -1,33 +1,30 @@
 package org.marques999.acme.printer
 
 import android.os.Bundle
-import android.net.Uri
-
-import kotlinx.android.synthetic.main.activity_main.*
 
 import org.marques999.acme.printer.api.HttpErrorHandler
+import org.marques999.acme.printer.views.DetailsActivity
+
+import android.net.Uri
 
 import android.content.Intent
 import android.content.ActivityNotFoundException
 import android.content.DialogInterface
+
+import kotlinx.android.synthetic.main.activity_main.*
 
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.android.schedulers.AndroidSchedulers
 
 import android.support.v7.app.AppCompatActivity
-import org.marques999.acme.printer.views.DetailsActivity
 
 class MainActivity : AppCompatActivity() {
 
-    /**
-     */
     private val launchPlayStore = DialogInterface.OnClickListener { _, _ ->
         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(AcmePrinter.ZXING_URL)))
     }
 
-    /**
-     */
     private fun launchQrScanner() = startActivityForResult(
         Intent(
             AcmePrinter.ZXING_ACTIVITY
@@ -36,8 +33,6 @@ class MainActivity : AppCompatActivity() {
         ), 0
     )
 
-    /**
-     */
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -60,8 +55,6 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    /**
-     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
         if (data == null || requestCode != 0 || resultCode != AppCompatActivity.RESULT_OK) {
@@ -92,8 +85,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    /**
-     */
     companion object {
         val EXTRA_ORDER = "org.marques999.acme.printer.EXTRA_ORDER"
     }

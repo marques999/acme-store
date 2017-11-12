@@ -3,12 +3,12 @@ package org.marques999.acme.printer.views
 import android.view.ViewGroup
 import android.support.v7.widget.RecyclerView
 
-import kotlinx.android.synthetic.main.fragment_customer.view.*
 import org.marques999.acme.printer.R
+import org.marques999.acme.printer.model.Customer
 import org.marques999.acme.printer.model.ViewType
 import org.marques999.acme.printer.model.ViewTypeAdapter
 
-import org.marques999.acme.printer.model.Customer
+import kotlinx.android.synthetic.main.fragment_customer.view.*
 
 class DetailsActivityCustomerAdapter : ViewTypeAdapter {
 

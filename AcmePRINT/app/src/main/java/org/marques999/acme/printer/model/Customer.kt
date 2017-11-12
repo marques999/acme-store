@@ -17,8 +17,6 @@ class Customer(
     val updated_at: Date
 ) : ViewType, Parcelable {
 
-    /**
-     */
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
@@ -31,8 +29,6 @@ class Customer(
         Date(parcel.readLong())
     )
 
-    /**
-     */
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)
         parcel.writeString(username)
@@ -45,13 +41,9 @@ class Customer(
         parcel.writeLong(updated_at.time)
     }
 
-    /**
-     */
     override fun describeContents() = 0
     override fun getViewType(): Int = ViewType.DETAILS_CUSTOMER
 
-    /**
-     */
     companion object CREATOR : Parcelable.Creator<Customer> {
         override fun newArray(size: Int) = arrayOfNulls<Customer>(size)
         override fun createFromParcel(parcel: Parcel) = Customer(parcel)

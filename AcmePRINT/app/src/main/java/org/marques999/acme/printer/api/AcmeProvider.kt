@@ -3,7 +3,10 @@ package org.marques999.acme.printer.api
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 
+import io.reactivex.Observable
+
 import org.marques999.acme.printer.AcmePrinter
+import org.marques999.acme.printer.model.Order
 import org.marques999.acme.printer.model.Session
 
 import retrofit2.Retrofit
@@ -12,16 +15,12 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 class AcmeProvider(session: Session) {
 
-    /**
-     */
     private val interceptor = Interceptor {
         it.proceed(it.request().newBuilder().addHeader(
             "Authorization", session.wrapToken()
         ).build())
     }
 
-    /**
-     */
     private val api = Retrofit.Builder().client(
         OkHttpClient.Builder().addInterceptor(interceptor).build()
     ).addCallAdapterFactory(
@@ -32,7 +31,7 @@ class AcmeProvider(session: Session) {
         AcmePrinter.SERVER_URL
     ).build().create(AcmeApi::class.java)
 
-    /**
-     */
-    fun getOrder(token: String) = api.getOrder(token)
+    fun getOrder(token: String): Observable<Order> {
+        return api.getOrder(token)
+    }
 }

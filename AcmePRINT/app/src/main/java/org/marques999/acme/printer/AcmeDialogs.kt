@@ -8,8 +8,6 @@ import android.content.DialogInterface
 
 object AcmeDialogs {
 
-    /**
-     */
     fun buildOk(
         context: Context,
         resourceId: Int,
@@ -20,20 +18,6 @@ object AcmeDialogs {
         .setMessage(context.getString(resourceId, *format))
         .setPositiveButton(android.R.string.ok, null)
 
-    /**
-     */
-    fun buildOk(
-        context: Context,
-        throwable: Exception,
-        message: String
-    ): AlertDialog.Builder = AlertDialog
-        .Builder(context)
-        .setTitle(throwable.javaClass.simpleName)
-        .setMessage(message)
-        .setPositiveButton(android.R.string.ok, null)
-
-    /**
-     */
     fun buildYesNo(
         context: Activity,
         resourceId: Int,
