@@ -2,15 +2,10 @@ package org.marques999.acme.printer
 
 import android.content.Context
 
-import java.text.DateFormat
-import java.text.NumberFormat
-
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Rfc3339DateJsonAdapter
 
 import java.util.Date
-import java.util.Locale
-import java.util.Currency
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
@@ -18,9 +13,9 @@ import io.reactivex.schedulers.Schedulers
 
 import org.marques999.acme.printer.api.AcmeProvider
 import org.marques999.acme.printer.api.AuthenticationProvider
-import org.marques999.acme.printer.common.HttpErrorHandler
-import org.marques999.acme.printer.common.Session
-import org.marques999.acme.printer.common.SessionJwt
+import org.marques999.acme.printer.api.HttpErrorHandler
+import org.marques999.acme.printer.model.Session
+import org.marques999.acme.printer.model.SessionJwt
 
 class AcmePrinter : android.app.Application() {
 

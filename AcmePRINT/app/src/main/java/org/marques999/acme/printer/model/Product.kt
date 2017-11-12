@@ -1,4 +1,4 @@
-package org.marques999.acme.printer.products
+package org.marques999.acme.printer.model
 
 import android.os.Parcel
 import android.os.Parcelable

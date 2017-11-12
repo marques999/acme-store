@@ -2,16 +2,15 @@ package org.marques999.acme.printer.views
 
 import android.view.ViewGroup
 
-import org.marques999.acme.printer.orders.Order
-import org.marques999.acme.printer.orders.OrderAdapter
-import org.marques999.acme.printer.customers.CreditCardAdapter
-import org.marques999.acme.printer.customers.CustomerAdapter
-import org.marques999.acme.printer.products.ProductAdapter
+import org.marques999.acme.printer.model.Order
 
 import android.support.v4.util.SparseArrayCompat
 import android.support.v7.widget.RecyclerView
 
-class RecyclerAdapter(val order: Order) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+import org.marques999.acme.printer.model.ViewType
+import org.marques999.acme.printer.model.ViewTypeAdapter
+
+class DetailsAdapter(val order: Order) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     /**
      */
@@ -29,16 +28,17 @@ class RecyclerAdapter(val order: Order) : RecyclerView.Adapter<RecyclerView.View
     /**
      */
     init {
-        delegateAdapters.put(ViewType.ORDER, OrderAdapter())
-        delegateAdapters.put(ViewType.PRODUCT, ProductAdapter())
-        delegateAdapters.put(ViewType.CUSTOMER, CustomerAdapter())
-        delegateAdapters.put(ViewType.CREDIT_CARD, CreditCardAdapter())
+        delegateAdapters.put(ViewType.DETAILS_ORDER, DetailsActivityOrderAdapter())
+        delegateAdapters.put(ViewType.DETAILS_PRODUCT, DetailsActivityProductAdapter())
+        delegateAdapters.put(ViewType.DETAILS_CUSTOMER, DetailsActivityCustomerAdapter())
+        delegateAdapters.put(ViewType.DETAILS_CREDIT_CARD, DetailsActivityCardAdapter())
         notifyItemRangeChanged(0, items.size)
     }
 
     /**
      */
     override fun getItemCount(): Int = items.size
+
     override fun getItemViewType(position: Int) = items[position].getViewType()
 
     /**

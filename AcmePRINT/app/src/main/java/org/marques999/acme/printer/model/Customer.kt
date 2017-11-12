@@ -1,13 +1,9 @@
-package org.marques999.acme.printer.customers
-
-import android.os.Parcel
-import android.os.Parcelable
+package org.marques999.acme.printer.model
 
 import java.util.Date
 
-import org.marques999.acme.printer.common.readDate
-import org.marques999.acme.printer.common.writeDate
-import org.marques999.acme.printer.views.ViewType
+import android.os.Parcel
+import android.os.Parcelable
 
 class Customer(
     val name: String,
@@ -31,8 +27,8 @@ class Customer(
         parcel.readString(),
         parcel.readString(),
         parcel.readParcelable(CreditCard::class.java.classLoader),
-        parcel.readDate(),
-        parcel.readDate()
+        Date(parcel.readLong()),
+        Date(parcel.readLong())
     )
 
     /**
@@ -45,14 +41,14 @@ class Customer(
         parcel.writeString(country)
         parcel.writeString(tax_number)
         parcel.writeParcelable(credit_card, flags)
-        parcel.writeDate(created_at)
-        parcel.writeDate(updated_at)
+        parcel.writeLong(created_at.time)
+        parcel.writeLong(updated_at.time)
     }
 
     /**
      */
     override fun describeContents() = 0
-    override fun getViewType(): Int = ViewType.CUSTOMER
+    override fun getViewType(): Int = ViewType.DETAILS_CUSTOMER
 
     /**
      */

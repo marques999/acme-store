@@ -1,15 +1,16 @@
-package org.marques999.acme.printer.customers
+package org.marques999.acme.printer.views
 
 import android.view.ViewGroup
 import android.support.v7.widget.RecyclerView
 
 import kotlinx.android.synthetic.main.fragment_customer.view.*
-
 import org.marques999.acme.printer.R
-import org.marques999.acme.printer.views.ViewType
-import org.marques999.acme.printer.views.ViewTypeAdapter
+import org.marques999.acme.printer.model.ViewType
+import org.marques999.acme.printer.model.ViewTypeAdapter
 
-class CustomerAdapter : ViewTypeAdapter {
+import org.marques999.acme.printer.model.Customer
+
+class DetailsActivityCustomerAdapter : ViewTypeAdapter {
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         return CustomerViewHolder(parent)

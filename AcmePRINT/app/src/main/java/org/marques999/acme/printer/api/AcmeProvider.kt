@@ -4,7 +4,7 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 
 import org.marques999.acme.printer.AcmePrinter
-import org.marques999.acme.printer.common.Session
+import org.marques999.acme.printer.model.Session
 
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory

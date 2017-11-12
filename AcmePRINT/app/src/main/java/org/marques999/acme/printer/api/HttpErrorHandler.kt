@@ -1,9 +1,11 @@
-package org.marques999.acme.printer.common
+package org.marques999.acme.printer.api
 
 import android.content.Context
 import retrofit2.HttpException
 import io.reactivex.functions.Consumer
+import org.marques999.acme.printer.AcmeDialogs
 import org.marques999.acme.printer.AcmePrinter
+import org.marques999.acme.printer.model.Response
 
 class HttpErrorHandler(private val context: Context) : Consumer<Throwable> {
 

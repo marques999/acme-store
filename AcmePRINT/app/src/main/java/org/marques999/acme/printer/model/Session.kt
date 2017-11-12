@@ -1,4 +1,4 @@
-package org.marques999.acme.printer.common
+package org.marques999.acme.printer.model
 
 import org.marques999.acme.printer.AcmePrinter
 

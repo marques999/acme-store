@@ -1,18 +1,17 @@
 package org.marques999.acme.store.views.product
 
 import android.os.Bundle
-import android.view.MenuItem
-import android.support.v7.app.AppCompatActivity
 
 import com.squareup.picasso.Picasso
 
 import org.marques999.acme.store.R
 import org.marques999.acme.store.model.OrderProduct
 import org.marques999.acme.store.views.ViewUtils
+import org.marques999.acme.store.views.common.BackButtonActivity
 
 import kotlinx.android.synthetic.main.activity_product.*
 
-class ProductViewActivity : AppCompatActivity() {
+class ProductViewActivity : BackButtonActivity() {
 
     /**
      */
@@ -20,7 +19,6 @@ class ProductViewActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         intent.getBooleanExtra(ORDER_ACTIVE, false).let {
             productView_plus.isEnabled = it
@@ -44,13 +42,6 @@ class ProductViewActivity : AppCompatActivity() {
 
             productView_quantity.text = it.quantity.toString()
         }
-    }
-
-    /**
-     */
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        onBackPressed()
-        return super.onOptionsItemSelected(item)
     }
 
     /**

@@ -1,13 +1,9 @@
-package org.marques999.acme.printer.orders
+package org.marques999.acme.printer.model
+
+import java.util.Date
 
 import android.os.Parcel
 import android.os.Parcelable
-
-import org.marques999.acme.printer.common.*
-import org.marques999.acme.printer.customers.Customer
-import org.marques999.acme.printer.views.ViewType
-
-import java.util.Date
 
 class Order(
     val token: String,
@@ -18,7 +14,7 @@ class Order(
     val products: List<OrderProduct>,
     val created_at: Date,
     val updated_at: Date
-) : Parcelable, ViewType {
+) : ViewType, Parcelable {
 
     /**
      */
@@ -28,14 +24,16 @@ class Order(
         parcel.readDouble(),
         parcel.readInt(),
         parcel.readParcelable(Customer::class.java.classLoader),
-        parcel.readCustomArray<OrderProduct>(),
-        parcel.readDate(),
-        parcel.readDate())
+        parcel.createTypedArrayList(OrderProduct.CREATOR),
+        Date(parcel.readLong()),
+        Date(parcel.readLong())
+    )
 
     /**
      */
     override fun describeContents() = 0
-    override fun getViewType(): Int = ViewType.ORDER
+
+    override fun getViewType(): Int = ViewType.DETAILS_ORDER
 
     /**
      */
@@ -45,9 +43,9 @@ class Order(
         parcel.writeDouble(total)
         parcel.writeInt(status)
         parcel.writeParcelable(customer, flags)
-        parcel.writeList(products)
-        parcel.writeDate(created_at)
-        parcel.writeDate(updated_at)
+        parcel.writeTypedList(products)
+        parcel.writeLong(created_at.time)
+        parcel.writeLong(updated_at.time)
     }
 
     /**

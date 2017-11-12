@@ -5,8 +5,8 @@ import retrofit2.http.POST
 
 import io.reactivex.Observable
 
-import org.marques999.acme.printer.common.Authentication
-import org.marques999.acme.printer.common.SessionJwt
+import org.marques999.acme.printer.model.Authentication
+import org.marques999.acme.printer.model.SessionJwt
 
 interface AuthenticationApi {
 

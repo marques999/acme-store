@@ -7,12 +7,12 @@ interface ViewType {
     companion object {
 
         /**
-         *  ShoppingCartFramgent
+         *  ShoppingCartFragment
          */
         val SHOPPING_CART_PRODUCT = 10
 
         /**
-         *  OrderHistoryFramgent
+         *  OrderHistoryFragment
          */
         val ORDER_HISTORY_ORDER = 20
 

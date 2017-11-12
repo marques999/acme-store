@@ -1,9 +1,7 @@
-package org.marques999.acme.printer.common
+package org.marques999.acme.printer
 
 import android.app.Activity
 import android.app.AlertDialog
-
-import org.marques999.acme.printer.R
 
 import android.content.Context
 import android.content.DialogInterface

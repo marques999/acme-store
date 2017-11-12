@@ -1,13 +1,9 @@
-package org.marques999.acme.printer.customers
-
-import android.os.Parcel
-import android.os.Parcelable
+package org.marques999.acme.printer.model
 
 import java.util.Date
 
-import org.marques999.acme.printer.common.readDate
-import org.marques999.acme.printer.common.writeDate
-import org.marques999.acme.printer.views.ViewType
+import android.os.Parcel
+import android.os.Parcelable
 
 class CreditCard(
     val type: String,
@@ -20,7 +16,7 @@ class CreditCard(
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
-        parcel.readDate()
+        Date(parcel.readLong())
     )
 
     /**
@@ -28,13 +24,13 @@ class CreditCard(
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(type)
         parcel.writeString(number)
-        parcel.writeDate(validity)
+        parcel.writeLong(validity.time)
     }
 
     /**
      */
     override fun describeContents() = 0
-    override fun getViewType(): Int = ViewType.CREDIT_CARD
+    override fun getViewType(): Int = ViewType.DETAILS_CREDIT_CARD
 
     /**
      */

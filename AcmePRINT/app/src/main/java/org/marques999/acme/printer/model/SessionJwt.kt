@@ -1,3 +1,3 @@
-package org.marques999.acme.printer.common
+package org.marques999.acme.printer.model
 
 class SessionJwt(val expire: java.util.Date, val token: String)

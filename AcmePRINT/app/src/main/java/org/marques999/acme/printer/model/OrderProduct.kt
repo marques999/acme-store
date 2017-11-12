@@ -1,10 +1,7 @@
-package org.marques999.acme.printer.orders
+package org.marques999.acme.printer.model
 
 import android.os.Parcel
 import android.os.Parcelable
-
-import org.marques999.acme.printer.views.ViewType
-import org.marques999.acme.printer.products.Product
 
 class OrderProduct(val quantity: Int, val product: Product) : ViewType, Parcelable {
 
@@ -25,7 +22,7 @@ class OrderProduct(val quantity: Int, val product: Product) : ViewType, Parcelab
     /**
      */
     override fun describeContents() = 0
-    override fun getViewType(): Int = ViewType.PRODUCT
+    override fun getViewType(): Int = ViewType.DETAILS_PRODUCT
 
     /**
      */

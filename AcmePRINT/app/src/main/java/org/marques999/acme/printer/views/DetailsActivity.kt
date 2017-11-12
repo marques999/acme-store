@@ -1,8 +1,6 @@
-package org.marques999.acme.printer
+package org.marques999.acme.printer.views
 
 import android.os.Bundle
-
-import org.marques999.acme.printer.views.RecyclerAdapter
 
 import kotlinx.android.synthetic.main.activity_details.*
 
@@ -10,6 +8,8 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
+import org.marques999.acme.printer.MainActivity
+import org.marques999.acme.printer.R
 
 class DetailsActivity : AppCompatActivity() {
 
@@ -19,11 +19,11 @@ class DetailsActivity : AppCompatActivity() {
 
         super.onSaveInstanceState(outState)
 
-        if (detailsActivity_recyclerView?.adapter is RecyclerAdapter) {
+        if (detailsActivity_recyclerView?.adapter is DetailsAdapter) {
 
             outState?.putParcelable(
                 BUNDLE_ORDER,
-                (detailsActivity_recyclerView.adapter as RecyclerAdapter).order
+                (detailsActivity_recyclerView.adapter as DetailsAdapter).order
             )
         }
     }
@@ -35,7 +35,7 @@ class DetailsActivity : AppCompatActivity() {
         super.onRestoreInstanceState(savedInstanceState)
 
         savedInstanceState?.let {
-            detailsActivity_recyclerView.adapter = RecyclerAdapter(
+            detailsActivity_recyclerView.adapter = DetailsAdapter(
                 it.getParcelable(BUNDLE_ORDER)
             )
         }
@@ -61,7 +61,7 @@ class DetailsActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
 
-            detailsActivity_recyclerView.adapter = RecyclerAdapter(
+            detailsActivity_recyclerView.adapter = DetailsAdapter(
                 intent.extras.getParcelable(MainActivity.EXTRA_ORDER)
             )
         }

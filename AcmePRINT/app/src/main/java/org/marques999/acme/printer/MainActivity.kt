@@ -5,8 +5,7 @@ import android.net.Uri
 
 import kotlinx.android.synthetic.main.activity_main.*
 
-import org.marques999.acme.printer.common.AcmeDialogs
-import org.marques999.acme.printer.common.HttpErrorHandler
+import org.marques999.acme.printer.api.HttpErrorHandler
 
 import android.content.Intent
 import android.content.ActivityNotFoundException
@@ -17,6 +16,7 @@ import io.reactivex.schedulers.Schedulers
 import io.reactivex.android.schedulers.AndroidSchedulers
 
 import android.support.v7.app.AppCompatActivity
+import org.marques999.acme.printer.views.DetailsActivity
 
 class MainActivity : AppCompatActivity() {
 
