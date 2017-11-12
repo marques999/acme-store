@@ -7,8 +7,6 @@ import android.content.ActivityNotFoundException
 import kotlinx.android.synthetic.main.fragment_cart.*
 
 import android.view.View
-import android.view.ViewGroup
-import android.view.LayoutInflater
 
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
@@ -17,9 +15,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import android.net.Uri
 import android.os.Bundle
 import android.app.Activity
-import android.app.AlertDialog
 import android.app.ProgressDialog
-import android.support.v4.app.Fragment
 
 import org.marques999.acme.store.R
 import org.marques999.acme.store.AcmeStore
@@ -71,7 +67,9 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
         shoppingCart_checkout.isEnabled = shoppingCart.isNotEmpty()
     }
 
-    fun registerPurchase(product: Product) {
+    /**
+     */
+    private fun registerPurchase(product: Product) {
 
         val orderProduct = OrderProduct(1, product)
 
@@ -114,7 +112,7 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
 
         progressDialog.show()
 
-        (activity.application as AcmeStore).acmeApi.getProduct(barcode).observeOn(
+        (activity.application as AcmeStore).api.getProduct(barcode).observeOn(
             AndroidSchedulers.mainThread()
         ).subscribeOn(
             Schedulers.io()
@@ -172,15 +170,15 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
         super.onActivityCreated(savedInstanceState)
         progressDialog = AcmeDialogs.buildProgress(context, R.string.global_progressLoading)
 
-        cart_recyclerView.apply {
+        shoppingCart_recyclerView.apply {
             setHasFixedSize(false)
             layoutManager = LinearLayoutManager(context)
             clearOnScrollListeners()
         }
 
-        if (cart_recyclerView.adapter == null) {
+        if (shoppingCart_recyclerView.adapter == null) {
             adapter = ShoppingCartAdapter(this)
-            cart_recyclerView.adapter = adapter
+            shoppingCart_recyclerView.adapter = adapter
         }
 
         shoppingCart_scan.setOnClickListener(launchBarcodeScanner)

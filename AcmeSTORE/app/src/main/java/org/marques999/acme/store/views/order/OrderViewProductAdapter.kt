@@ -10,6 +10,7 @@ import org.marques999.acme.store.AcmeUtils
 
 import kotlinx.android.synthetic.main.fragment_order_product.view.*
 
+import org.marques999.acme.store.model.inflate
 import org.marques999.acme.store.model.OrderProduct
 import org.marques999.acme.store.model.ViewType
 import org.marques999.acme.store.model.ViewTypeAdapter
@@ -31,7 +32,7 @@ class OrderViewProductAdapter(private val listener: OrderViewListener) : ViewTyp
     /**
      */
     inner class OrderProductViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
-        inflate(parent, R.layout.fragment_order_product)
+        parent.inflate(R.layout.fragment_order_product)
     ) {
 
         fun bind(item: OrderProduct) {
@@ -48,12 +49,11 @@ class OrderViewProductAdapter(private val listener: OrderViewListener) : ViewTyp
             )
 
             itemView.product_quantity.text = itemView.context.getString(
-                R.string.orderView_quantity,
-                item.quantity
+                R.string.order_quantity
             )
 
             itemView.product_name.text = itemView.context.getString(
-                R.string.orderView_productName,
+                R.string.order_product,
                 item.product.brand,
                 item.product.name
             )

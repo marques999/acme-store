@@ -8,10 +8,6 @@ import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.android.schedulers.AndroidSchedulers
 
-import android.view.View
-import android.view.ViewGroup
-import android.view.LayoutInflater
-
 import kotlinx.android.synthetic.main.fragment_history.*
 
 import org.marques999.acme.store.*
@@ -25,14 +21,31 @@ class OrderHistoryFragment : MainActivityFragment(R.layout.fragment_history), Or
 
     /**
      */
-    override fun onRefresh() {
-        AcmeDialogs.buildOk(activity, R.string.actionBar_history).show()
-    }
+    private lateinit var orders: ArrayList<Order>
+    private lateinit var progressDialog: ProgressDialog
 
     /**
      */
-    private lateinit var orders: ArrayList<Order>
-    private lateinit var progressDialog: ProgressDialog
+    override fun onRefresh() {
+
+        (orderHistory_container.adapter as OrderHistoryAdapter).let { adapter ->
+
+            progressDialog.show()
+
+            (activity.application as AcmeStore).api.getOrders().observeOn(
+                AndroidSchedulers.mainThread()
+            ).subscribeOn(
+                Schedulers.io()
+            ).subscribe({
+                orders = ArrayList(it)
+                adapter.refreshItems(it)
+                progressDialog.dismiss()
+            }, {
+                progressDialog.dismiss()
+                HttpErrorHandler(context).accept(it)
+            })
+        }
+    }
 
     /**
      */
@@ -45,7 +58,7 @@ class OrderHistoryFragment : MainActivityFragment(R.layout.fragment_history), Or
      */
     override fun onItemSelected(token: String) {
 
-        (activity.application as AcmeStore).acmeApi.getOrder(token).subscribeOn(
+        (activity.application as AcmeStore).api.getOrder(token).subscribeOn(
             Schedulers.io()
         ).observeOn(
             AndroidSchedulers.mainThread()
@@ -63,35 +76,12 @@ class OrderHistoryFragment : MainActivityFragment(R.layout.fragment_history), Or
 
     /**
      */
-    private fun refreshOrders() {
-
-        (history_recyclerView.adapter as OrderHistoryAdapter).let { adapter ->
-
-            progressDialog.show()
-
-            (activity.application as AcmeStore).acmeApi.getOrders().observeOn(
-                AndroidSchedulers.mainThread()
-            ).subscribeOn(
-                Schedulers.io()
-            ).subscribe({
-                orders = ArrayList(it)
-                adapter.refreshItems(it)
-                progressDialog.dismiss()
-            }, {
-                progressDialog.dismiss()
-                HttpErrorHandler(context).accept(it)
-            })
-        }
-    }
-
-    /**
-     */
     override fun onActivityCreated(savedInstanceState: Bundle?) {
 
         super.onActivityCreated(savedInstanceState)
         progressDialog = AcmeDialogs.buildProgress(context, R.string.global_progressLoading)
 
-        history_recyclerView.apply {
+        orderHistory_container.apply {
             setHasFixedSize(false)
             layoutManager = LinearLayoutManager(context)
             clearOnScrollListeners()
@@ -99,13 +89,15 @@ class OrderHistoryFragment : MainActivityFragment(R.layout.fragment_history), Or
         }
 
         if (savedInstanceState == null) {
-            refreshOrders()
+            onRefresh()
         } else {
             orders = savedInstanceState.getParcelableArrayList(BUNDLE_ORDER)
-            (history_recyclerView.adapter as OrderHistoryAdapter).refreshItems(orders)
+            (orderHistory_container.adapter as OrderHistoryAdapter).refreshItems(orders)
         }
     }
 
+    /**
+     */
     companion object {
         private val BUNDLE_ORDER = "org.marques999.acme.bundles.ORDER"
     }

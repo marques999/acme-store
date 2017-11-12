@@ -10,6 +10,7 @@
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="horizontal"
     android:padding="@dimen/global_largeMargin">
 
     <LinearLayout
@@ -20,9 +21,9 @@
 
       <ImageView
         android:id="@+id/product_photo"
-        android:layout_width="@dimen/orderView_productPhoto"
-        android:layout_height="@dimen/orderView_productPhoto"
-        android:layout_marginBottom="@dimen/orderView_innerMargin"
+        android:layout_width="@dimen/order_photo"
+        android:layout_height="@dimen/order_photo"
+        android:layout_marginBottom="@dimen/order_margin"
         android:contentDescription="@string/global_todoDescription" />
 
       <TextView

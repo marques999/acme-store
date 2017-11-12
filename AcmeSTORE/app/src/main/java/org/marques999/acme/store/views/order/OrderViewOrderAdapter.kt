@@ -8,6 +8,7 @@ import org.marques999.acme.store.AcmeUtils
 
 import kotlinx.android.synthetic.main.fragment_order_order.view.*
 
+import org.marques999.acme.store.model.inflate
 import org.marques999.acme.store.model.OrderJSON
 import org.marques999.acme.store.model.ViewType
 import org.marques999.acme.store.model.ViewTypeAdapter
@@ -29,7 +30,7 @@ class OrderViewOrderAdapter : ViewTypeAdapter {
     /**
      */
     inner class OrderViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
-        inflate(parent, R.layout.fragment_order_order)
+        parent.inflate(R.layout.fragment_order_order)
     ) {
 
         fun bind(item: OrderJSON) {

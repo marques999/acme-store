@@ -12,15 +12,15 @@
   <dimen name="cardView_elevation">4dp</dimen>
   <dimen name="cardView_image">72dp</dimen>
   <!-- OrderViewActivity -->
-  <dimen name="orderView_innerMargin">12dp</dimen>
-  <dimen name="orderView_productPhoto">72dp</dimen>
+  <dimen name="order_margin">12dp</dimen>
+  <dimen name="order_photo">72dp</dimen>
   <!-- ProductViewActivity -->
-  <dimen name="productView_photo">360dp</dimen>
-  <dimen name="productView_brand">18sp</dimen>
-  <dimen name="productView_model">28sp</dimen>
+  <dimen name="product_photo">360dp</dimen>
+  <dimen name="product_brand">18sp</dimen>
+  <dimen name="product_model">28sp</dimen>
   <!-- LoginActivity -->
-  <dimen name="loginActivity_mediumMargin">12dp</dimen>
-  <dimen name="loginActivity_largeMargin">24dp</dimen>
+  <dimen name="login_mediumMargin">12dp</dimen>
+  <dimen name="login_largeMargin">24dp</dimen>
   <!-- ProgressBar -->
   <dimen name="progressBar_width">48dp</dimen>
   <dimen name="progressBar_height">64dp</dimen>

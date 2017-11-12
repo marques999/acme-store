@@ -1,5 +1,7 @@
 package org.marques999.acme.store
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 
@@ -47,6 +49,17 @@ class MainActivity : AppCompatActivity(), ProductCatalogListener {
      */
     private lateinit var bottomNavigation: AHBottomNavigation
     private lateinit var bottomNavigationAdapter: BottomNavigationAdapter
+
+    /**
+     */
+    override fun onBackPressed() {
+
+        AcmeDialogs.buildYesNo(this, R.string.main_confirmMessage,
+            DialogInterface.OnClickListener { _, _ ->
+                finish()
+            }
+        ).show()
+    }
 
     /**
      */

@@ -13,30 +13,39 @@
   <string name="bottomNavigation_history">History</string>
   <string name="bottomNavigation_profile">Profile</string>
   <!-- CustomerProfile -->
-  <string name="customerProfile_ccValidity">Validity:\u0020</string>
+  <string name="profile_cardType">Type</string>
+  <string name="profile_cardValidity">Validity</string>
+  <string name="profile_customerAddress1">Address 1</string>
+  <string name="profile_customerAddress2">Address 2</string>
+  <string name="profile_customerCreated">Created</string>
+  <string name="profile_customerNif">NIF</string>
+  <string name="profile_customerUpdated">Updated</string>
+  <string name="profile_customerUsername">Username</string>
+  <string name="profile_logout">LOGOUT</string>
+  <string name="profile_qrTest">GENERATE QR</string>
   <!-- LoginActivity -->
-  <string name="loginActivity_login">Login</string>
-  <string name="loginActivity_password">Password</string>
-  <string name="loginActivity_progress">Authenticating…</string>
-  <string name="loginActivity_register">Don\'t have an account yet? Register!</string>
-  <string name="loginActivity_username">Username</string>
+  <string name="login_inputPassword">Password</string>
+  <string name="login_inputUsername">Username</string>
+  <string name="login_loginButton">Login</string>
+  <string name="login_progressDialog">Authenticating…</string>
+  <string name="login_registerButton">Don\'t have an account yet? Register!</string>
   <!-- MainActivity -->
   <string name="mainActivity_title">AcmeSTORE</string>
   <string name="mainActivity_prompt">Launch Play Store and install a QR code scanner activity?</string>
   <!-- OrderViewActivity -->
-  <string name="orderView_title">Order information</string>
-  <string name="orderView_count">#Products:\u0020</string>
-  <string name="orderView_created">Created:\u0020</string>
-  <string name="orderView_quantity">Quantity: %1$d</string>
-  <string name="orderView_token">Token:\u0020</string>
-  <string name="orderView_updated">Updated:\u0020</string>
-  <string name="orderView_productName">%1$s %2$s</string>
+  <string name="order_count">#Products</string>
+  <string name="order_created">Created</string>
+  <string name="order_product">%1$s %2$s</string>
+  <string name="order_quantity">Quantity</string>
+  <string name="order_title">Order information</string>
+  <string name="order_token">Token</string>
+  <string name="order_updated">Updated</string>
   <!-- ProductViewActivity -->
-  <string name="productView_activity">Product information</string>
-  <string name="productView_barcode">UPC</string>
-  <string name="productView_description">Description</string>
+  <string name="product_activity">Product information</string>
+  <string name="product_barcode">UPC</string>
+  <string name="product_description">Description</string>
   <!-- RegisterActivity -->
-  <string name="registerActivity_address1">Address (street)</string>
+  <string name="register_address1">Address (street)</string>
   <string name="registerActivity_address2">Address (city/post)</string>
   <string name="registerActivity_ccNumber">Number</string>
   <string name="registerActivity_confirm">Confirm Password</string>
@@ -76,4 +85,5 @@
   <string name="shoppingCart_scan">SCAN BARCODE</string>
   <string name="product_view">View</string>
   <string name="mainActivity_refresh">Refresh</string>
+  <string name="main_confirmMessage">Are you sure you want to terminate your current session and return to the login screen?</string>
 </resources>

@@ -2,42 +2,21 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:orientation="vertical">
-
-  <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/colorPrimaryDark"
-    android:orientation="horizontal"
-    android:padding="@dimen/global_mediumMargin">
-
+  <LinearLayout style="@style/global_buttonGroup">
     <Button
       android:id="@+id/shoppingCart_scan"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_weight="1"
-      android:drawablePadding="@dimen/global_largeMargin"
+      style="@style/global_button"
       android:drawableStart="@drawable/ic_camera_24dp"
-      android:padding="@dimen/global_largeMargin"
-      android:text="@string/shoppingCart_scan"
-      android:textAlignment="textStart"
-      android:textColor="@android:color/primary_text_dark" />
-
+      android:text="@string/shoppingCart_scan" />
     <Button
       android:id="@+id/shoppingCart_checkout"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_weight="1"
-      android:drawablePadding="@dimen/global_largeMargin"
+      style="@style/global_button"
       android:drawableStart="@drawable/ic_check_24dp"
       android:enabled="false"
-      android:padding="@dimen/global_largeMargin"
-      android:text="@string/shoppingCart_checkout"
-      android:textAlignment="textStart"
-      android:textColor="@android:color/primary_text_dark" />
+      android:text="@string/shoppingCart_checkout" />
   </LinearLayout>
-
   <android.support.v7.widget.RecyclerView
-    android:id="@+id/cart_recyclerView"
+    android:id="@+id/shoppingCart_recyclerView"
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="1" />

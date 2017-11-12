@@ -28,7 +28,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginBottom="@dimen/global_smallMargin"
-          android:textSize="@dimen/productView_brand"
+          android:textSize="@dimen/product_brand"
           android:textStyle="bold" />
 
         <TextView
@@ -36,7 +36,7 @@
           android:layout_width="match_parent"
           android:layout_height="0dp"
           android:layout_weight="1"
-          android:textSize="@dimen/productView_model" />
+          android:textSize="@dimen/product_model" />
       </LinearLayout>
     </android.support.v7.widget.CardView>
 
@@ -56,7 +56,7 @@
         <ImageView
           android:id="@+id/productView_photo"
           android:layout_width="match_parent"
-          android:layout_height="@dimen/productView_photo"
+          android:layout_height="@dimen/product_photo"
           android:layout_margin="@dimen/global_largeMargin"
           android:contentDescription="@string/global_todoDescription" />
 
@@ -128,7 +128,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginBottom="@dimen/global_mediumMargin"
-          android:text="@string/productView_barcode"
+          android:text="@string/product_barcode"
           android:textSize="@dimen/global_mediumFont"
           android:textStyle="bold" />
 
@@ -157,7 +157,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginBottom="@dimen/global_mediumMargin"
-          android:text="@string/productView_description"
+          android:text="@string/product_description"
           android:textSize="@dimen/global_mediumFont"
           android:textStyle="bold" />
 
