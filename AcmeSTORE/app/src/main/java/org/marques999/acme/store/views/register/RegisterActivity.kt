@@ -15,7 +15,7 @@ import org.marques999.acme.store.R
 import org.marques999.acme.store.AcmeStore
 import org.marques999.acme.store.AcmeDialogs
 import org.marques999.acme.store.api.AuthenticationProvider
-import org.marques999.acme.store.common.HttpErrorHandler
+import org.marques999.acme.store.api.HttpErrorHandler
 
 import kotlinx.android.synthetic.main.fragment_register_step2.*
 

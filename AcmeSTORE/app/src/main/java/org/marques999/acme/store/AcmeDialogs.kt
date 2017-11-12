@@ -30,7 +30,7 @@ object AcmeDialogs {
         vararg params: Any
     ): AlertDialog.Builder = AlertDialog
         .Builder(context)
-        .setTitle(R.string.main_activity)
+        .setTitle(R.string.mainActivity_title)
         .setMessage(context.getString(resourceId, params))
         .setPositiveButton(android.R.string.ok, null)
 
@@ -51,7 +51,7 @@ object AcmeDialogs {
         callback: DialogInterface.OnClickListener
     ): AlertDialog.Builder = AlertDialog
         .Builder(context)
-        .setTitle(R.string.main_activity)
+        .setTitle(R.string.mainActivity_title)
         .setMessage(resourceId)
         .setNegativeButton(android.R.string.no, null)
         .setPositiveButton(android.R.string.yes, callback)

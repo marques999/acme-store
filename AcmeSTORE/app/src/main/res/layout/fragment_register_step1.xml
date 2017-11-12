@@ -7,9 +7,6 @@
   android:paddingStart="@dimen/global_largeMargin"
   android:paddingTop="@dimen/global_mediumMargin">
 
-  <!--
-   TextInputLayout: Name
-  -->
   <android.support.design.widget.TextInputLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -24,9 +21,6 @@
       android:inputType="textPersonName" />
   </android.support.design.widget.TextInputLayout>
 
-  <!--
-   TextInputLayout: Username
-  -->
   <android.support.design.widget.TextInputLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -41,9 +35,6 @@
       android:inputType="textPersonName" />
   </android.support.design.widget.TextInputLayout>
 
-  <!--
-    TextInputLayout: Password
-  -->
   <android.support.design.widget.TextInputLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -58,9 +49,6 @@
       android:inputType="textPassword" />
   </android.support.design.widget.TextInputLayout>
 
-  <!--
-    TextInputLayout: Confirm Password
-  -->
   <android.support.design.widget.TextInputLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -75,9 +63,6 @@
       android:inputType="textPassword" />
   </android.support.design.widget.TextInputLayout>
 
-  <!--
-    TextInputLayout: Street Address
-  -->
   <android.support.design.widget.TextInputLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -92,9 +77,6 @@
       android:inputType="textPostalAddress" />
   </android.support.design.widget.TextInputLayout>
 
-  <!--
-    TextInputLayout: City & Postal Code
-  -->
   <android.support.design.widget.TextInputLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -109,9 +91,6 @@
       android:inputType="textEmailAddress" />
   </android.support.design.widget.TextInputLayout>
 
-  <!--
-    TextInputLayout: Tax Number
-  -->
   <android.support.design.widget.TextInputLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -126,9 +105,6 @@
       android:inputType="number" />
   </android.support.design.widget.TextInputLayout>
 
-  <!--
-    Button: Register
-  -->
   <android.support.v7.widget.AppCompatButton
     android:id="@+id/registerActivity_next"
     android:layout_width="fill_parent"

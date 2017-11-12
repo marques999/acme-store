@@ -6,7 +6,7 @@ import android.app.ProgressDialog
 import android.support.v7.app.AppCompatActivity
 
 import org.marques999.acme.store.model.Authentication
-import org.marques999.acme.store.common.HttpErrorHandler
+import org.marques999.acme.store.api.HttpErrorHandler
 import org.marques999.acme.store.model.SessionJwt
 
 import io.reactivex.android.schedulers.AndroidSchedulers

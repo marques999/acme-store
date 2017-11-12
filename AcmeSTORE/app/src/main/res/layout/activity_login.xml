@@ -17,7 +17,7 @@
       android:layout_height="128dp"
       android:layout_gravity="center_horizontal"
       android:layout_marginBottom="@dimen/loginActivity_largeMargin"
-      android:contentDescription="@string/loginActivity_icon"
+      android:contentDescription="@string/global_todoDescription"
       android:src="@drawable/ic_landscape_128dp" />
 
     <android.support.design.widget.TextInputLayout

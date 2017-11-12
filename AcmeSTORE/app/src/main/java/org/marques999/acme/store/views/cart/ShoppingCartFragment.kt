@@ -24,7 +24,7 @@ import org.marques999.acme.store.AcmeStore
 import org.marques999.acme.store.AcmeDialogs
 import org.marques999.acme.store.model.Product
 import org.marques999.acme.store.model.OrderProduct
-import org.marques999.acme.store.common.HttpErrorHandler
+import org.marques999.acme.store.api.HttpErrorHandler
 import org.marques999.acme.store.views.product.ProductViewActivity
 
 import android.support.v4.app.Fragment
@@ -135,7 +135,7 @@ class ShoppingCartFragment : Fragment(), ShoppingCartListener {
                 "SCAN_MODE", "PRODUCT_MODE"
             ), 0)
         } catch (ex: ActivityNotFoundException) {
-            AcmeDialogs.buildYesNo(activity, R.string.main_promptInstall, launchPlayStore).show()
+            AcmeDialogs.buildYesNo(activity, R.string.mainActivity_prompt, launchPlayStore).show()
         }
     }
 

@@ -16,7 +16,7 @@ import org.marques999.acme.store.R
 import org.marques999.acme.store.AcmeStore
 import org.marques999.acme.store.AcmeDialogs
 import org.marques999.acme.store.model.Order
-import org.marques999.acme.store.common.HttpErrorHandler
+import org.marques999.acme.store.api.HttpErrorHandler
 
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager

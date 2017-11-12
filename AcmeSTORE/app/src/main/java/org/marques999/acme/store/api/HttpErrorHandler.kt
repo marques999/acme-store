@@ -1,4 +1,4 @@
-package org.marques999.acme.store.common
+package org.marques999.acme.store.api
 
 import retrofit2.HttpException
 import android.content.Context

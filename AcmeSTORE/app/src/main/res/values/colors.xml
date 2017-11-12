@@ -5,7 +5,6 @@
   <color name="colorPrimaryDark">#37474f</color>
   <color name="colorAccent">#f4511e</color>
   <color name="colorPrimaryDarker">#263238</color>
-
   <!-- BottomNavigation -->
   <color name="bottomNavigation_accent">#FFFFFF</color>
   <color name="bottomNavigation_iron">#CCCCCC</color>
