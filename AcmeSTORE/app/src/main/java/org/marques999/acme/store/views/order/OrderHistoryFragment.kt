@@ -12,18 +12,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.LayoutInflater
 
-import org.marques999.acme.store.R
-import org.marques999.acme.store.AcmeStore
-import org.marques999.acme.store.AcmeDialogs
-import org.marques999.acme.store.model.Order
-import org.marques999.acme.store.api.HttpErrorHandler
-
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
-
 import kotlinx.android.synthetic.main.fragment_history.*
 
-class OrderHistoryFragment : Fragment(), OrderHistoryListener {
+import org.marques999.acme.store.*
+import org.marques999.acme.store.model.Order
+import org.marques999.acme.store.api.HttpErrorHandler
+import org.marques999.acme.store.views.MainActivityFragment
+
+import android.support.v7.widget.LinearLayoutManager
+
+class OrderHistoryFragment : MainActivityFragment(R.layout.fragment_history), OrderHistoryListener {
+
+    /**
+     */
+    override fun onRefresh() {
+        AcmeDialogs.buildOk(activity, R.string.actionBar_history).show()
+    }
 
     /**
      */
@@ -56,16 +60,6 @@ class OrderHistoryFragment : Fragment(), OrderHistoryListener {
             HttpErrorHandler(context)
         )
     }
-
-    /**
-     */
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View = LayoutInflater.from(context).inflate(
-        R.layout.fragment_history, container, false
-    )
 
     /**
      */

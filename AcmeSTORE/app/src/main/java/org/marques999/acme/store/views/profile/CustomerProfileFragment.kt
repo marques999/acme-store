@@ -2,7 +2,6 @@ package org.marques999.acme.store.views.profile
 
 import android.os.Bundle
 import android.content.Intent
-import android.support.v4.app.Fragment
 
 import org.marques999.acme.store.R
 import org.marques999.acme.store.AcmeStore
@@ -12,26 +11,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.LayoutInflater
 
-import org.marques999.acme.store.model.CustomerJSON
-import org.marques999.acme.store.views.order.OrderConfirmActivity
-
 import kotlinx.android.synthetic.main.fragment_profile.*
 
-class CustomerProfileFragment : Fragment() {
+import org.marques999.acme.store.AcmeDialogs
+import org.marques999.acme.store.model.CustomerJSON
+import org.marques999.acme.store.views.MainActivityFragment
+import org.marques999.acme.store.views.order.OrderConfirmActivity
+
+class CustomerProfileFragment : MainActivityFragment(R.layout.fragment_profile) {
+
+    /**
+     */
+    override fun onRefresh() {
+        AcmeDialogs.buildOk(activity, R.string.actionBar_profile).show()
+    }
 
     /**
      */
     private lateinit var customer: CustomerJSON
-
-    /**
-     */
-    override fun onCreateView(
-        inflater: LayoutInflater?,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View = LayoutInflater.from(context).inflate(
-        R.layout.fragment_profile, container, false
-    )
 
     /**
      */

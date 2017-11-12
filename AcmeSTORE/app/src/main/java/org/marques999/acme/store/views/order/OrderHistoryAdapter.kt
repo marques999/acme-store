@@ -50,7 +50,6 @@ class OrderHistoryAdapter(
     /**
      */
     override fun getItemCount(): Int = items.size
-
     override fun getItemViewType(position: Int) = ViewType.ORDER_HISTORY_ORDER
 
     /**

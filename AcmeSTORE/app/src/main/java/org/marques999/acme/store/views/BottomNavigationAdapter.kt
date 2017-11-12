@@ -3,7 +3,6 @@ package org.marques999.acme.store.views
 import android.view.ViewGroup
 import android.util.SparseArray
 
-import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 
@@ -11,14 +10,14 @@ class BottomNavigationAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(f
 
     /**
      */
-    private val fragments = ArrayList<Fragment>()
-    private val registeredFragments = SparseArray<Fragment>()
+    private val fragments = ArrayList<MainActivityFragment>()
+    private val registeredFragments = SparseArray<MainActivityFragment>()
 
     /**
      */
     override fun instantiateItem(container: ViewGroup?, position: Int): Any {
 
-        return (super.instantiateItem(container, position) as Fragment).apply {
+        return (super.instantiateItem(container, position) as MainActivityFragment).apply {
             registeredFragments.put(position, this)
         }
     }
@@ -37,5 +36,6 @@ class BottomNavigationAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(f
 
     /**
      */
-    fun addFragments(fragment: Fragment) = fragments.add(fragment)
+    fun addFragments(fragment: MainActivityFragment) = fragments.add(fragment)
+    fun getFragment(position: Int): MainActivityFragment = registeredFragments[position]
 }

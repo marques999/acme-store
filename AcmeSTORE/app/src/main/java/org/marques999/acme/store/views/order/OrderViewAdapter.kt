@@ -9,7 +9,10 @@ import org.marques999.acme.store.model.ViewTypeAdapter
 import android.support.v4.util.SparseArrayCompat
 import android.support.v7.widget.RecyclerView
 
-class OrderViewAdapter(val order: OrderJSON) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class OrderViewAdapter(
+    val order: OrderJSON,
+    private val listener: OrderViewListener
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     /**
      */
@@ -21,7 +24,7 @@ class OrderViewAdapter(val order: OrderJSON) : RecyclerView.Adapter<RecyclerView
      */
     private val delegateAdapters = SparseArrayCompat<ViewTypeAdapter>().apply {
         put(ViewType.ORDER_VIEW_ORDER, OrderViewOrderAdapter())
-        put(ViewType.ORDER_VIEW_PRODUCT, OrderViewProductAdapter())
+        put(ViewType.ORDER_VIEW_PRODUCT, OrderViewProductAdapter(listener))
         notifyItemRangeChanged(0, items.size)
     }
 

@@ -74,4 +74,6 @@
   <string name="shoppingCart_plus">+</string>
   <string name="shoppingCart_quantity">10</string>
   <string name="shoppingCart_scan">SCAN BARCODE</string>
+  <string name="product_view">View</string>
+  <string name="mainActivity_refresh">Refresh</string>
 </resources>

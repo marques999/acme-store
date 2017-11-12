@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:card_view="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/productView_scrollView"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
 
@@ -42,22 +43,7 @@
     <android.support.v7.widget.CardView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      card_view:cardElevation="@dimen/cardView_elevation"
-      card_view:cardPreventCornerOverlap="true"
-      card_view:cardUseCompatPadding="true">
-
-      <ImageView
-        android:id="@+id/productView_photo"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/productView_photo"
-        android:layout_margin="@dimen/global_largeMargin"
-        android:contentDescription="@string/global_todoDescription" />
-
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
+      card_view:cardBackgroundColor="@color/cardview_light_background"
       card_view:cardElevation="@dimen/cardView_elevation"
       card_view:cardPreventCornerOverlap="true"
       card_view:cardUseCompatPadding="true">
@@ -65,51 +51,65 @@
       <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
-        android:paddingEnd="@dimen/global_smallMargin"
-        android:paddingStart="@dimen/global_mediumMargin">
+        android:orientation="vertical">
 
-        <TextView
-          android:id="@+id/productView_price"
+        <ImageView
+          android:id="@+id/productView_photo"
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/productView_photo"
+          android:layout_margin="@dimen/global_largeMargin"
+          android:contentDescription="@string/global_todoDescription" />
+
+        <LinearLayout
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_gravity="start"
-          android:paddingTop="@dimen/global_largeMargin"
-          android:textColor="@android:color/white"
-          android:textStyle="bold" />
+          android:background="@color/colorAccent"
+          android:paddingEnd="@dimen/global_smallMargin"
+          android:paddingStart="@dimen/global_mediumMargin">
 
-        <View
-          android:layout_width="0dp"
-          android:layout_height="0dp"
-          android:layout_weight="1" />
+          <TextView
+            android:id="@+id/productView_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:paddingTop="@dimen/global_largeMargin"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
 
-        <Button
-          android:id="@+id/productView_minus"
-          android:layout_width="@dimen/shoppingCart_button"
-          android:layout_height="wrap_content"
-          android:layout_gravity="end"
-          android:backgroundTint="@android:color/white"
-          android:text="@string/shoppingCart_minus"
-          android:textColor="@color/colorAccent" />
+          <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-        <TextView
-          android:id="@+id/productView_quantity"
-          android:layout_width="@dimen/shoppingCart_quantity"
-          android:layout_height="wrap_content"
-          android:text="@string/shoppingCart_quantity"
-          android:textAlignment="center"
-          android:textColor="@android:color/white"
-          android:textStyle="bold" />
+          <Button
+            android:id="@+id/productView_minus"
+            android:layout_width="@dimen/shoppingCart_button"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:backgroundTint="@android:color/white"
+            android:text="@string/shoppingCart_minus"
+            android:textColor="@color/colorAccent" />
 
-        <Button
-          android:id="@+id/productView_plus"
-          android:layout_width="@dimen/shoppingCart_button"
-          android:layout_height="wrap_content"
-          android:backgroundTint="@android:color/white"
-          android:text="@string/shoppingCart_plus"
-          android:textColor="@color/colorAccent" />
+          <TextView
+            android:id="@+id/productView_quantity"
+            android:layout_width="@dimen/shoppingCart_quantity"
+            android:layout_height="wrap_content"
+            android:text="@string/shoppingCart_quantity"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+          <Button
+            android:id="@+id/productView_plus"
+            android:layout_width="@dimen/shoppingCart_button"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/white"
+            android:text="@string/shoppingCart_plus"
+            android:textColor="@color/colorAccent" />
+        </LinearLayout>
       </LinearLayout>
     </android.support.v7.widget.CardView>
+
 
     <android.support.v7.widget.CardView
       android:layout_width="match_parent"
@@ -136,8 +136,7 @@
           android:id="@+id/productView_barcode"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginBottom="@dimen/global_mediumMargin"
-          android:textSize="@dimen/global_smallFont" />
+          android:layout_marginBottom="@dimen/global_mediumMargin" />
       </LinearLayout>
     </android.support.v7.widget.CardView>
 
@@ -167,8 +166,7 @@
           android:layout_width="match_parent"
           android:layout_height="0dp"
           android:layout_weight="1"
-          android:lineSpacingMultiplier="1.2"
-          android:textSize="@dimen/global_smallFont" />
+          android:lineSpacingMultiplier="1.2" />
       </LinearLayout>
     </android.support.v7.widget.CardView>
   </LinearLayout>

@@ -37,7 +37,6 @@ class ShoppingCartAdapter(
     /**
      */
     override fun getItemCount(): Int = items.size
-
     override fun getItemViewType(position: Int) = ViewType.SHOPPING_CART_PRODUCT
 
     /**

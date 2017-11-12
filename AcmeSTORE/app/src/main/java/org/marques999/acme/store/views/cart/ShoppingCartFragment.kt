@@ -17,7 +17,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import android.net.Uri
 import android.os.Bundle
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.ProgressDialog
+import android.support.v4.app.Fragment
 
 import org.marques999.acme.store.R
 import org.marques999.acme.store.AcmeStore
@@ -25,12 +27,20 @@ import org.marques999.acme.store.AcmeDialogs
 import org.marques999.acme.store.model.Product
 import org.marques999.acme.store.model.OrderProduct
 import org.marques999.acme.store.api.HttpErrorHandler
+
 import org.marques999.acme.store.views.product.ProductViewActivity
 
-import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 
-class ShoppingCartFragment : Fragment(), ShoppingCartListener {
+import org.marques999.acme.store.views.MainActivityFragment
+
+class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), ShoppingCartListener {
+
+    /**
+     */
+    override fun onRefresh() {
+        AcmeDialogs.buildOk(activity, R.string.actionBar_cart).show()
+    }
 
     /**
      */
@@ -46,8 +56,11 @@ class ShoppingCartFragment : Fragment(), ShoppingCartListener {
     override fun onItemUpdated(barcode: String, delta: Int) {
 
         shoppingCart[barcode]?.apply {
-            quantity += delta
-            adapter.update(this)
+
+            if (delta != 0 && (delta > 0 && quantity < 99) || (delta < 0 && quantity > 0)) {
+                quantity += delta
+                adapter.update(this)
+            }
         }
     }
 
@@ -55,21 +68,27 @@ class ShoppingCartFragment : Fragment(), ShoppingCartListener {
      */
     override fun onItemDeleted(barcode: String) {
         shoppingCart.remove(barcode)?.let { adapter.remove(it) }
+        shoppingCart_checkout.isEnabled = shoppingCart.isNotEmpty()
     }
 
-    /**
-     */
-    private val onFetchProduct = Consumer<Product> {
+    fun registerPurchase(product: Product) {
 
-        val orderProduct = OrderProduct(1, it)
+        val orderProduct = OrderProduct(1, product)
 
-        shoppingCart[it.barcode]?.let {
+        shoppingCart[product.barcode]?.let {
             orderProduct.quantity += it.quantity
             adapter.remove(it)
         }
 
         adapter.insert(orderProduct)
         shoppingCart.put(orderProduct.product.barcode, orderProduct)
+        shoppingCart_checkout.isEnabled = shoppingCart.isNotEmpty()
+    }
+
+    /**
+     */
+    private val onFetchProduct = Consumer<Product> {
+        registerPurchase(it)
         progressDialog.dismiss()
     }
 
@@ -82,22 +101,12 @@ class ShoppingCartFragment : Fragment(), ShoppingCartListener {
             startActivity(Intent(
                 activity, ProductViewActivity::class.java
             ).putExtra(
-                ProductViewActivity.ORDER_PRODUCT, it
+                ProductViewActivity.EXTRA_PRODUCT, it
             ).putExtra(
-                ProductViewActivity.ORDER_ACTIVE, true
+                ProductViewActivity.EXTRA_ACTIVE, true
             ))
         }
     }
-
-    /**
-     */
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View = LayoutInflater.from(context).inflate(
-        R.layout.fragment_cart, container, false
-    )
 
     /**
      */

@@ -2,51 +2,55 @@ package org.marques999.acme.store.catalog
 
 import android.os.Bundle
 import android.content.Context
-import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+
+import kotlinx.android.synthetic.main.fragment_dummy_list.*
 
 import org.marques999.acme.store.R
+import org.marques999.acme.store.AcmeDialogs
+import org.marques999.acme.store.views.MainActivityFragment
 
-import android.view.View
-import android.view.ViewGroup
-import android.view.LayoutInflater
+class ProductCatalogFragment : MainActivityFragment(R.layout.fragment_dummy_list), ProductCatalogListener {
 
-class ProductCatalogFragment : Fragment() {
-
-    private var mListener: OnListFragmentInteractionListener? = null
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        val view = inflater.inflate(R.layout.fragment_dummy_list, container, false)
-
-        if (view is RecyclerView) {
-            view.layoutManager = LinearLayoutManager(view.getContext())
-            view.adapter = ProductCatalogAdapter(ProductCatalogContent.products, mListener)
-        }
-
-        return view
+    /**
+     */
+    override fun onPurchase(product: String) {
+        productCatalogListener?.onPurchase(product)
     }
 
-    override fun onAttach(context: Context) {
+    /**
+     */
+    override fun onRefresh() {
+        AcmeDialogs.buildOk(activity, R.string.actionBar_catalog).show()
+    }
+
+    /**
+     */
+    private var productCatalogListener: ProductCatalogListener? = null
+
+    /**
+     */
+    override fun onAttach(context: Context?) {
 
         super.onAttach(context)
 
-        if (context is OnListFragmentInteractionListener) {
-            mListener = context
+        (activity as? ProductCatalogListener)?.let {
+            productCatalogListener = it
         }
     }
 
+    /**
+     */
     override fun onDetach() {
         super.onDetach()
-        mListener = null
+        productCatalogListener = null
     }
 
-    interface OnListFragmentInteractionListener {
-        fun onListFragmentInteraction(item: ProductCatalogContent.DummyItem)
+    /**
+     */
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        list.layoutManager = LinearLayoutManager(context)
+        list.adapter = ProductCatalogAdapter(ProductCatalogContent.products, this)
     }
 }

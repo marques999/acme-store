@@ -12,6 +12,8 @@ import org.marques999.acme.store.views.BackButtonActivity
 
 import kotlinx.android.synthetic.main.activity_product.*
 
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
+
 class ProductViewActivity : BackButtonActivity() {
 
     /**
@@ -20,13 +22,14 @@ class ProductViewActivity : BackButtonActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product)
+        OverScrollDecoratorHelper.setUpOverScroll(productView_scrollView)
 
-        intent.getBooleanExtra(ORDER_ACTIVE, false).let {
+        intent.getBooleanExtra(EXTRA_ACTIVE, false).let {
             productView_plus.isEnabled = it
             productView_minus.isEnabled = it
         }
 
-        intent.getParcelableExtra<OrderProduct>(ORDER_PRODUCT).let {
+        intent.getParcelableExtra<OrderProduct>(EXTRA_PRODUCT).let {
 
             it.product.let {
 
@@ -48,7 +51,7 @@ class ProductViewActivity : BackButtonActivity() {
     /**
      */
     companion object {
-        val ORDER_ACTIVE = "org.marques999.acme.store.ORDER_ACTIVE"
-        val ORDER_PRODUCT = "org.marques999.acme.store.ORDER_PRODUCT"
+        val EXTRA_ACTIVE = "org.marques999.acme.store.extra.ORDER_ACTIVE"
+        val EXTRA_PRODUCT = "org.marques999.acme.store.extra.ORDER_PRODUCT"
     }
 }

@@ -14,7 +14,7 @@ import org.marques999.acme.store.model.OrderProduct
 import org.marques999.acme.store.model.ViewType
 import org.marques999.acme.store.model.ViewTypeAdapter
 
-class OrderViewProductAdapter : ViewTypeAdapter {
+class OrderViewProductAdapter(private val listener: OrderViewListener) : ViewTypeAdapter {
 
     /**
      */
@@ -38,6 +38,10 @@ class OrderViewProductAdapter : ViewTypeAdapter {
 
             itemView.product_barcode.text = item.product.barcode
             itemView.product_price.text = AcmeUtils.formatCurrency(item.product.price)
+
+            itemView.product_view.setOnClickListener {
+                listener.onViewProduct(item)
+            }
 
             itemView.product_total.text = AcmeUtils.formatCurrency(
                 item.product.price * item.quantity
