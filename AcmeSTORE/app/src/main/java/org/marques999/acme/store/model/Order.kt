@@ -14,7 +14,7 @@ class Order(
     val total: Double,
     val customer: String,
     val token: String
-) : ViewType, Parcelable {
+) : Parcelable {
 
     /**
      */
@@ -53,9 +53,7 @@ class Order(
     /**
      */
     override fun describeContents() = 0
-
     override fun hashCode() = id.hashCode()
-    override fun getViewType() = ViewType.ORDER_HISTORY_ORDER
 
     /**
      */

@@ -1,4 +1,4 @@
-package org.marques999.acme.store.views.profile
+package org.marques999.acme.store.views.register
 
 import android.os.Bundle
 import android.content.Intent
@@ -17,12 +17,12 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 
 import org.marques999.acme.store.api.HttpErrorHandler
 import org.marques999.acme.store.model.CustomerJSON
-import org.marques999.acme.store.views.MainActivityFragment
+import org.marques999.acme.store.views.main.MainActivityFragment
 import org.marques999.acme.store.views.order.OrderConfirmActivity
 
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 
-class CustomerProfileFragment : MainActivityFragment(R.layout.fragment_profile) {
+class ProfileFragment : MainActivityFragment(R.layout.fragment_profile) {
 
     /**
      */

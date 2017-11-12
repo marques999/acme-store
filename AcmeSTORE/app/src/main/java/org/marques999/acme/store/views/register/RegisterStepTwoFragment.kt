@@ -108,7 +108,7 @@ class RegisterStepTwoFragment : Fragment(), DatePicker.OnDateChangedListener {
 
         registerActivity_ccType.adapter = ArrayAdapter.createFromResource(
             context,
-            R.array.planets_array,
+            R.array.registerActivity_cards,
             android.R.layout.simple_spinner_item
         ).apply {
             setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)

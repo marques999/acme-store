@@ -1,4 +1,4 @@
-package org.marques999.acme.store.views
+package org.marques999.acme.store.views.main
 
 import android.os.Bundle
 import android.view.View

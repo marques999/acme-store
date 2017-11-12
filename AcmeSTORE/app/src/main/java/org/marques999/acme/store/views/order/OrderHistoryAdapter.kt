@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView
 
 import org.marques999.acme.store.model.Order
 import org.marques999.acme.store.model.inflate
-import org.marques999.acme.store.model.ViewType
 
 import kotlinx.android.synthetic.main.fragment_history_item.view.*
 
@@ -20,6 +19,10 @@ class OrderHistoryAdapter(
     /**
      */
     private val items = ArrayList<Order>()
+
+    /**
+     */
+    override fun getItemCount(): Int = items.size
 
     /**
      */
@@ -45,11 +48,6 @@ class OrderHistoryAdapter(
             itemView.setOnClickListener { listener.onItemSelected(item.token) }
         }
     }
-
-    /**
-     */
-    override fun getItemCount(): Int = items.size
-    override fun getItemViewType(position: Int) = ViewType.ORDER_HISTORY_ORDER
 
     /**
      */

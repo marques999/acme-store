@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_history.*
 import org.marques999.acme.store.*
 import org.marques999.acme.store.model.Order
 import org.marques999.acme.store.api.HttpErrorHandler
-import org.marques999.acme.store.views.MainActivityFragment
+import org.marques999.acme.store.views.main.MainActivityFragment
 
 import android.support.v7.widget.LinearLayoutManager
 

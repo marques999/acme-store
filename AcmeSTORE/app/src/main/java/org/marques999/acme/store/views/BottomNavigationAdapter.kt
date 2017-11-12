@@ -5,6 +5,7 @@ import android.util.SparseArray
 
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
+import org.marques999.acme.store.views.main.MainActivityFragment
 
 class BottomNavigationAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 

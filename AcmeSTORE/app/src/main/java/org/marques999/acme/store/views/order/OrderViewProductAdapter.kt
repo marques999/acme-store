@@ -50,7 +50,7 @@ class OrderViewProductAdapter(private val listener: OrderViewListener) : ViewTyp
             )
 
             itemView.orderView_product.text = itemView.context.getString(
-                R.string.order_product,
+                R.string.product_name,
                 item.product.brand,
                 item.product.name
             )

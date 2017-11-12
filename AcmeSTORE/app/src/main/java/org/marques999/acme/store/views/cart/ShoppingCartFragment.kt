@@ -31,7 +31,7 @@ import android.view.ViewGroup
 import org.marques999.acme.store.model.OrderProductPOST
 
 import org.marques999.acme.store.api.HttpErrorHandler
-import org.marques999.acme.store.views.MainActivityFragment
+import org.marques999.acme.store.views.main.MainActivityFragment
 import org.marques999.acme.store.views.product.ProductViewActivity
 
 class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), ShoppingCartListener {
@@ -73,7 +73,7 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
 
     /**
      */
-    private fun registerPurchase(product: Product) {
+    fun registerPurchase(product: Product) {
 
         val orderProduct = OrderProduct(1, product)
 
@@ -103,7 +103,7 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
             startActivity(Intent(
                 activity, ProductViewActivity::class.java
             ).putExtra(
-                ProductViewActivity.EXTRA_PRODUCT, it
+                ProductViewActivity.EXTRA_PRODUCT, it.product
             ).putExtra(
                 ProductViewActivity.EXTRA_PURCHASED, true
             ))
@@ -212,7 +212,7 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
         }
 
         shoppingCart_checkout.setOnClickListener {
-            AcmeDialogs.buildYesNo(activity, R.string.confirm_purchase, confirmPurchase).show()
+            AcmeDialogs.buildYesNo(activity, R.string.shoppingCart_confirm, confirmPurchase).show()
         }
     }
 }

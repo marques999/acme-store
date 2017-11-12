@@ -11,7 +11,6 @@ import org.marques999.acme.store.AcmeUtils
 import kotlinx.android.synthetic.main.fragment_cart_item.view.*
 
 import org.marques999.acme.store.model.inflate
-import org.marques999.acme.store.model.ViewType
 import org.marques999.acme.store.model.OrderProduct
 
 class ShoppingCartAdapter(
@@ -24,24 +23,23 @@ class ShoppingCartAdapter(
 
     /**
      */
+    override fun getItemCount(): Int = items.size
+
+    /**
+     */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return ProductViewHolder(parent)
+        return ShoppingCartViewHolder(parent)
     }
 
     /**
      */
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as ProductViewHolder).bind(items[position])
+        (holder as ShoppingCartViewHolder).bind(items[position])
     }
 
     /**
      */
-    override fun getItemCount(): Int = items.size
-    override fun getItemViewType(position: Int) = ViewType.SHOPPING_CART_PRODUCT
-
-    /**
-     */
-    inner class ProductViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
+    inner class ShoppingCartViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
         parent.inflate(R.layout.fragment_cart_item)
     ) {
 
@@ -66,7 +64,7 @@ class ShoppingCartAdapter(
             }
 
             itemView.product_name.text = itemView.context.getString(
-                R.string.shoppingCart_name, item.product.brand, item.product.name
+                R.string.product_name, item.product.brand, item.product.name
             )
 
             itemView.product_barcode.text = itemBarcode

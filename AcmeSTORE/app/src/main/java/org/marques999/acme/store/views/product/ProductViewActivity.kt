@@ -25,8 +25,8 @@ class ProductViewActivity : BackButtonActivity() {
         OverScrollDecoratorHelper.setUpOverScroll(productView_scrollView)
 
         intent.getBooleanExtra(EXTRA_PURCHASED, false).let {
-            productView_plus.isEnabled = it
-            productView_minus.isEnabled = it
+            productView_purchase.isEnabled = !it
+            productView_purchase.text = if (it) "Purchased" else "Purchase"
         }
 
         intent.getParcelableExtra<Product>(EXTRA_PRODUCT).let {

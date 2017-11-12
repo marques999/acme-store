@@ -1,32 +1,33 @@
-package org.marques999.acme.store.views.catalog
+package org.marques999.acme.store.views.product
 
-import android.app.ProgressDialog
-import android.content.Context
 import android.os.Bundle
-import android.content.Intent
-
+import android.app.ProgressDialog
 import android.support.v7.widget.LinearLayoutManager
 
+import io.reactivex.schedulers.Schedulers
+import io.reactivex.android.schedulers.AndroidSchedulers
+
+import android.content.Context
+import android.content.Intent
+
 import org.marques999.acme.store.R
+import org.marques999.acme.store.AcmeDialogs
+import org.marques999.acme.store.AcmeStore
 
 import android.view.View
 import android.view.ViewGroup
 import android.view.LayoutInflater
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Consumer
-import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.fragment_catalog.*
-import org.marques999.acme.store.AcmeDialogs
-import org.marques999.acme.store.AcmeStore
-import org.marques999.acme.store.api.HttpErrorHandler
-import org.marques999.acme.store.model.Product
-import org.marques999.acme.store.views.MainActivityFragment
-import org.marques999.acme.store.views.order.CatalogListener
-import org.marques999.acme.store.views.product.ProductViewActivity
 
-class ProductCatalogFragment : MainActivityFragment(
-    R.layout.fragment_catalog
-), CatalogListener, ProductCatalogListener {
+import kotlinx.android.synthetic.main.fragment_catalog.*
+
+import org.marques999.acme.store.model.Product
+import org.marques999.acme.store.api.HttpErrorHandler
+import org.marques999.acme.store.views.main.MainActivityFragment
+import org.marques999.acme.store.views.main.MainActivityCatalogListener
+
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
+
+class ProductCatalogFragment : MainActivityFragment(R.layout.fragment_catalog), ProductCatalogListener {
 
     /**
      */
@@ -35,11 +36,11 @@ class ProductCatalogFragment : MainActivityFragment(
 
     /**
      */
-    private var productCatalogListener: ProductCatalogListener? = null
+    private var productCatalogListener: MainActivityCatalogListener? = null
 
     /**
      */
-    override fun onPurchase(product: String) {
+    override fun onItemPurchased(product: Product) {
         productCatalogListener?.onPurchase(product)
     }
 
@@ -47,11 +48,11 @@ class ProductCatalogFragment : MainActivityFragment(
      */
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
-        outState?.putParcelableArrayList(ProductCatalogFragment.BUNDLE_PRODUCTS, products)
+        outState?.putParcelableArrayList(BUNDLE_PRODUCTS, products)
     }
 
     /**
-      */
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         progressDialog = AcmeDialogs.buildProgress(context, R.string.global_progressLoading)
@@ -82,21 +83,36 @@ class ProductCatalogFragment : MainActivityFragment(
 
     /**
      */
+    private fun initializeRecycler(products: List<Product>) = catalog_recyclerView.apply {
+
+        setHasFixedSize(true)
+        layoutManager = LinearLayoutManager(context)
+        clearOnScrollListeners()
+        adapter = ProductCatalogAdapter(products, this@ProductCatalogFragment)
+
+        OverScrollDecoratorHelper.setUpOverScroll(
+            this, OverScrollDecoratorHelper.ORIENTATION_VERTICAL
+        )
+    }
+
+    /**
+     */
     override fun onRefresh() {
 
-        (catalog_recyclerView.adapter as ProductCatalogAdapter).let { adapter ->
+        progressDialog.show()
 
-            progressDialog.show()
-
-            (activity.application as AcmeStore).api.getProducts().observeOn(
-                AndroidSchedulers.mainThread()
-            ).subscribeOn(
-                Schedulers.io()
-            ).subscribe(Consumer {
-                products = ArrayList(it)
-                adapter.refreshItems(it)
-            }, HttpErrorHandler(context))
-        }
+        (activity.application as AcmeStore).api.getProducts().observeOn(
+            AndroidSchedulers.mainThread()
+        ).subscribeOn(
+            Schedulers.io()
+        ).subscribe({
+            progressDialog.dismiss()
+            products = ArrayList(it)
+            initializeRecycler(it)
+        }, {
+            progressDialog.dismiss()
+            HttpErrorHandler(context).accept(it)
+        })
     }
 
     /**
@@ -105,18 +121,11 @@ class ProductCatalogFragment : MainActivityFragment(
 
         super.onActivityCreated(savedInstanceState)
 
-        catalog_recyclerView.apply {
-            setHasFixedSize(false)
-            layoutManager = LinearLayoutManager(context)
-            clearOnScrollListeners()
-            adapter = ProductCatalogAdapter(this@ProductCatalogFragment)
-        }
-
         if (savedInstanceState == null) {
             onRefresh()
         } else {
             products = savedInstanceState.getParcelableArrayList(BUNDLE_PRODUCTS)
-            (catalog_recyclerView.adapter as ProductCatalogAdapter).refreshItems(products)
+            initializeRecycler(products)
         }
     }
 
@@ -126,7 +135,7 @@ class ProductCatalogFragment : MainActivityFragment(
 
         super.onAttach(context)
 
-        (activity as? ProductCatalogListener)?.let {
+        (activity as? MainActivityCatalogListener)?.let {
             productCatalogListener = it
         }
     }

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 
 
-
 import android.view.Menu
 import android.view.MenuItem
 
@@ -13,20 +12,25 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 
 import kotlinx.android.synthetic.main.activity_main.*
+import org.marques999.acme.store.model.Product
 
 import org.marques999.acme.store.views.BottomNavigationAdapter
 import org.marques999.acme.store.views.cart.ShoppingCartFragment
-import org.marques999.acme.store.views.catalog.ProductCatalogFragment
-import org.marques999.acme.store.views.catalog.ProductCatalogListener
+import org.marques999.acme.store.views.product.ProductCatalogFragment
+import org.marques999.acme.store.views.main.MainActivityCatalogListener
 import org.marques999.acme.store.views.order.OrderHistoryFragment
-import org.marques999.acme.store.views.profile.CustomerProfileFragment
+import org.marques999.acme.store.views.register.ProfileFragment
 
-class MainActivity : AppCompatActivity(), ProductCatalogListener {
+class MainActivity : AppCompatActivity(), MainActivityCatalogListener {
 
     /**
      */
-    override fun onPurchase(product: String) {
-        bottomNavigation.currentItem = 0
+    override fun onPurchase(product: Product) {
+
+        (bottomNavigationAdapter.getFragment(0) as? ShoppingCartFragment)?.let {
+            it.registerPurchase(product)
+            bottomNavigation.currentItem = 0
+        }
     }
 
     /**
@@ -54,7 +58,7 @@ class MainActivity : AppCompatActivity(), ProductCatalogListener {
      */
     override fun onBackPressed() {
 
-        AcmeDialogs.buildYesNo(this, R.string.main_confirmMessage,
+        AcmeDialogs.buildYesNo(this, R.string.mainActivity_logout,
             DialogInterface.OnClickListener { _, _ ->
                 finish()
             }
@@ -85,7 +89,7 @@ class MainActivity : AppCompatActivity(), ProductCatalogListener {
         bottomNavigationAdapter.addFragments(ShoppingCartFragment())
         bottomNavigationAdapter.addFragments(ProductCatalogFragment())
         bottomNavigationAdapter.addFragments(OrderHistoryFragment())
-        bottomNavigationAdapter.addFragments(CustomerProfileFragment())
+        bottomNavigationAdapter.addFragments(ProfileFragment())
         main_viewPager.adapter = bottomNavigationAdapter
         bottomNavigation.currentItem = 0
         bottomNavigation.isColored = true
