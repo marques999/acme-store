@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.content.Intent
 import android.app.ProgressDialog
 
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.android.schedulers.AndroidSchedulers
 
@@ -58,20 +57,30 @@ class OrderHistoryFragment : MainActivityFragment(R.layout.fragment_history), Or
      */
     override fun onItemSelected(token: String) {
 
+        progressDialog.show()
+
         (activity.application as AcmeStore).api.getOrder(token).subscribeOn(
             Schedulers.io()
         ).observeOn(
             AndroidSchedulers.mainThread()
-        ).subscribe(
-            Consumer {
-                startActivity(Intent(
-                    activity, OrderViewActivity::class.java
-                ).putExtra(
-                    OrderViewActivity.EXTRA_ORDER, it
-                ))
-            },
-            HttpErrorHandler(context)
-        )
+        ).subscribe({
+            progressDialog.dismiss()
+            startActivity(Intent(
+                activity, OrderViewActivity::class.java
+            ).putExtra(
+                OrderViewActivity.EXTRA_ORDER, it
+            ))
+        }, {
+            progressDialog.dismiss()
+            HttpErrorHandler(context).accept(it)
+        })
+    }
+
+    /**
+     */
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        progressDialog = AcmeDialogs.buildProgress(context, R.string.global_progressLoading)
     }
 
     /**
@@ -79,7 +88,6 @@ class OrderHistoryFragment : MainActivityFragment(R.layout.fragment_history), Or
     override fun onActivityCreated(savedInstanceState: Bundle?) {
 
         super.onActivityCreated(savedInstanceState)
-        progressDialog = AcmeDialogs.buildProgress(context, R.string.global_progressLoading)
 
         orderHistory_container.apply {
             setHasFixedSize(false)
