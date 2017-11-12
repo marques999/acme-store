@@ -25,6 +25,11 @@ import org.marques999.acme.store.AcmeStore
 import org.marques999.acme.store.AcmeDialogs
 
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import org.marques999.acme.store.model.Order
+import org.marques999.acme.store.model.OrderProductPOST
 
 import org.marques999.acme.store.api.HttpErrorHandler
 import org.marques999.acme.store.views.MainActivityFragment
@@ -38,17 +43,11 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
         AcmeDialogs.buildOk(activity, R.string.actionBar_cart).show()
     }
 
-    /**
-     */
     private val shoppingCart = HashMap<String, OrderProduct>()
 
-    /**
-     */
     private lateinit var adapter: ShoppingCartAdapter
     private lateinit var progressDialog: ProgressDialog
 
-    /**
-     */
     override fun onItemUpdated(barcode: String, delta: Int) {
 
         shoppingCart[barcode]?.apply {
@@ -58,12 +57,16 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
                 adapter.update(this)
             }
         }
+
+
+        shoppingCart_checkout.isEnabled = shoppingCart.isNotEmpty()
     }
 
     /**
      */
     override fun onItemDeleted(barcode: String) {
         shoppingCart.remove(barcode)?.let { adapter.remove(it) }
+
         shoppingCart_checkout.isEnabled = shoppingCart.isNotEmpty()
     }
 
@@ -81,6 +84,7 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
         adapter.insert(orderProduct)
         shoppingCart.put(orderProduct.product.barcode, orderProduct)
         shoppingCart_checkout.isEnabled = shoppingCart.isNotEmpty()
+
     }
 
     /**
@@ -90,8 +94,6 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
         progressDialog.dismiss()
     }
 
-    /**
-     */
     override fun onItemSelected(barcode: String) {
 
         shoppingCart[barcode]?.let {
@@ -106,8 +108,48 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
         }
     }
 
-    /**
-     */
+
+    private val confirmPurchaseBtn = View.OnClickListener {
+        AcmeDialogs.buildYesNo(activity, R.string.confirm_purchase, confirmPurchase).show()
+    }
+
+
+    private val confirmPurchase = DialogInterface.OnClickListener { _, _ ->
+
+        var cartList: ArrayList<OrderProductPOST> = ArrayList<OrderProductPOST>()
+
+        shoppingCart.values.map { elem -> {
+                cartList.add( OrderProductPOST(elem.quantity, elem.product.barcode))
+            }
+        }
+
+        (activity.application as AcmeStore).api.insertOrder(cartList).observeOn(
+                AndroidSchedulers.mainThread()
+        ).subscribeOn(
+                Schedulers.io()
+        ).subscribe(
+                onOrderInserted,
+                Consumer {
+                    progressDialog.dismiss()
+                    HttpErrorHandler(context).accept(it)
+                }
+        )
+    }
+
+    private val onOrderInserted = Consumer<Order> {
+
+        progressDialog.dismiss()
+    }
+
+
+    override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+    ): View = LayoutInflater.from(context).inflate(
+        R.layout.fragment_cart, container, false
+    )
+
     private fun fetchProduct(barcode: String) {
 
         progressDialog.show()
@@ -125,8 +167,6 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
         )
     }
 
-    /**
-     */
     private val launchPlayStore = DialogInterface.OnClickListener { _, _ ->
         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(AcmeStore.ZXING_URL)))
     }
@@ -182,5 +222,6 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
         }
 
         shoppingCart_scan.setOnClickListener(launchBarcodeScanner)
+        shoppingCart_checkout.setOnClickListener(confirmPurchaseBtn)
     }
 }

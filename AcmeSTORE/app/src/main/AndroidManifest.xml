@@ -47,5 +47,11 @@
         android:name="android.support.PARENT_ACTIVITY"
         android:value=".MainActivity" />
     </activity>
+      <activity android:name=".views.catalog.CatalogProductViewActivity"
+          android:label="Product Information">
+          <meta-data
+              android:name="android.support.PARENT_ACTIVITY"
+              android:value=".MainActivity" />
+      </activity>
   </application>
 </manifest>
