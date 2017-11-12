@@ -3,7 +3,7 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   card_view:cardBackgroundColor="@color/colorPrimaryDarker"
-  card_view:cardElevation="@dimen/cardView_elevation"
+  card_view:cardElevation="@dimen/global_cardElevation"
   card_view:cardUseCompatPadding="true">
   <ImageView
     android:id="@+id/product_photo"
@@ -36,7 +36,6 @@
         android:layout_weight="1"
         android:gravity="fill_vertical"
         android:padding="@dimen/global_smallMargin"
-        android:text="@string/shoppingCart_quantity"
         android:textAlignment="center"
         android:textSize="@dimen/global_mediumFont"
         android:textStyle="bold" />

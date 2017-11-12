@@ -13,17 +13,17 @@
         android:id="@+id/profile_qrTest"
         style="@style/global_button"
         android:drawableStart="@drawable/ic_camera_24dp"
-        android:text="@string/profile_qrTest" />
+        android:text="@string/customer_qrTest" />
       <Button
         android:id="@+id/profile_logout"
         style="@style/global_button"
         android:drawableStart="@drawable/ic_exit_24dp"
-        android:text="@string/profile_logout" />
+        android:text="@string/customer_logout" />
     </LinearLayout>
     <android.support.v7.widget.CardView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      app:cardElevation="@dimen/cardView_elevation"
+      app:cardElevation="@dimen/global_cardElevation"
       app:cardUseCompatPadding="true">
       <LinearLayout style="@style/table_parent">
         <ImageView
@@ -41,7 +41,7 @@
           <TableRow style="@style/global_tableRow">
             <TextView
               style="@style/global_rowHeader"
-              android:text="@string/profile_customerNif" />
+              android:text="@string/customer_nif" />
             <TextView
               android:id="@+id/profile_customerNif"
               style="@style/global_rowContent" />
@@ -49,7 +49,7 @@
           <TableRow style="@style/global_tableRow">
             <TextView
               style="@style/global_rowHeader"
-              android:text="@string/profile_customerUsername" />
+              android:text="@string/customer_username" />
             <TextView
               android:id="@+id/profile_customerUsername"
               style="@style/global_rowContent" />
@@ -57,7 +57,7 @@
           <TableRow style="@style/global_tableRow">
             <TextView
               style="@style/global_rowHeader"
-              android:text="@string/profile_customerAddress1" />
+              android:text="@string/customer_address1" />
             <TextView
               android:id="@+id/profile_customerAddress1"
               style="@style/global_rowContent" />
@@ -65,7 +65,7 @@
           <TableRow style="@style/global_tableRow">
             <TextView
               style="@style/global_rowHeader"
-              android:text="@string/profile_customerAddress2" />
+              android:text="@string/customer_address2" />
             <TextView
               android:id="@+id/profile_customerAddress2"
               style="@style/global_rowContent" />
@@ -73,7 +73,7 @@
           <TableRow style="@style/global_tableRow">
             <TextView
               style="@style/global_rowHeader"
-              android:text="@string/profile_customerCreated" />
+              android:text="@string/global_created" />
             <TextView
               android:id="@+id/profile_customerCreated"
               style="@style/global_rowContent" />
@@ -81,7 +81,7 @@
           <TableRow style="@style/global_tableRow">
             <TextView
               style="@style/global_rowHeader"
-              android:text="@string/profile_customerUpdated" />
+              android:text="@string/global_updated" />
             <TextView
               android:id="@+id/profile_customerUpdated"
               style="@style/global_rowContent" />
@@ -92,7 +92,7 @@
     <android.support.v7.widget.CardView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      app:cardElevation="@dimen/cardView_elevation"
+      app:cardElevation="@dimen/global_cardElevation"
       app:cardUseCompatPadding="true">
       <LinearLayout style="@style/table_parent">
         <ImageView
@@ -110,7 +110,7 @@
           <TableRow style="@style/global_tableRow">
             <TextView
               style="@style/global_rowHeader"
-              android:text="@string/profile_cardType" />
+              android:text="@string/customer_ccType" />
             <TextView
               android:id="@+id/profile_cardType"
               style="@style/global_rowContent" />
@@ -118,7 +118,7 @@
           <TableRow style="@style/global_tableRow">
             <TextView
               style="@style/global_rowHeader"
-              android:text="@string/profile_cardValidity" />
+              android:text="@string/customer_ccValidity" />
             <TextView
               android:id="@+id/profile_cardValidity"
               style="@style/global_rowContent" />
@@ -129,7 +129,7 @@
     <android.support.v7.widget.CardView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      app:cardElevation="@dimen/cardView_elevation"
+      app:cardElevation="@dimen/global_cardElevation"
       app:cardUseCompatPadding="true">
       <LinearLayout style="@style/table_parent">
         <ImageView

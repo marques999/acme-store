@@ -4,7 +4,7 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   card_view:cardBackgroundColor="@color/colorPrimaryDarker"
-  card_view:cardElevation="@dimen/cardView_elevation"
+  card_view:cardElevation="@dimen/global_cardElevation"
   card_view:cardUseCompatPadding="true">
   <ImageView
     android:id="@+id/orderView_photo"

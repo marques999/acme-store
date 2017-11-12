@@ -1,22 +1,62 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:card_view="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  card_view:cardBackgroundColor="@color/colorPrimaryDarker"
+  card_view:cardElevation="@dimen/global_cardElevation"
+  card_view:cardUseCompatPadding="true">
+  <ImageView
+    android:id="@+id/catalog_photo"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-
-    <TextView
-        android:id="@+id/item_name"
+    android:layout_height="match_parent"
+    android:alpha="0.10"
+    android:contentDescription="@string/global_todoDescription"
+    android:scaleType="centerCrop" />
+  <LinearLayout
+    android:id="@+id/catalog_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:orientation="vertical">
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:orientation="vertical"
+      android:padding="@dimen/global_largeMargin">
+      <TextView
+        android:id="@+id/catalog_name"
+        style="@style/global_tableHeader"
+        android:textSize="24sp" />
+      <TextView
+        android:id="@+id/catalog_barcode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/global_largeMargin"
-        android:textAppearance="?attr/textAppearanceListItem" />
-
-    <TextView
-        android:id="@+id/item_price"
-        android:layout_width="0dp"
+        android:textSize="@dimen/global_mediumFont" />
+    </LinearLayout>
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:padding="@dimen/global_mediumMargin">
+      <Button
+        android:id="@+id/catalog_purchase"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/global_largeMargin"
-        android:layout_weight="1"
-        android:textAlignment="textEnd"
-        android:textAppearance="?attr/textAppearanceListItem" />
-</LinearLayout>
+        android:background="?android:attr/selectableItemBackground"
+        android:text="@string/product_purchase"
+        android:textColor="@color/colorAccent" />
+      <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+      <TextView
+        android:id="@+id/catalog_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/global_largeMargin"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/global_mediumFont"
+        android:textStyle="bold" />
+    </LinearLayout>
+  </LinearLayout>
+</android.support.v7.widget.CardView>

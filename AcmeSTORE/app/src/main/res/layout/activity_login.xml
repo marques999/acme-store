@@ -22,7 +22,7 @@
         android:id="@+id/loginActivity_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/login_inputUsername"
+        android:hint="@string/customer_username"
         android:inputType="textPersonName" />
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout style="@style/global_textInput">
@@ -30,7 +30,7 @@
         android:id="@+id/loginActivity_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/login_inputPassword"
+        android:hint="@string/customer_password"
         android:inputType="textPassword" />
     </android.support.design.widget.TextInputLayout>
     <android.support.v7.widget.AppCompatButton
