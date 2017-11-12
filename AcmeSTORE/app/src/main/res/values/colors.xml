@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <!-- AppTheme -->
-  <color name="colorPrimary">#455a64</color>
-  <color name="colorPrimaryDark">#37474f</color>
-  <color name="colorAccent">#f4511e</color>
+  <color name="colorPrimary">#455A64</color>
+  <color name="colorPrimaryDark">#37474F</color>
+  <color name="colorAccent">#F4511E</color>
   <color name="colorPrimaryDarker">#263238</color>
-  <!-- BottomNavigation -->
   <color name="bottomNavigation_accent">#FFFFFF</color>
   <color name="bottomNavigation_iron">#CCCCCC</color>
-  <color name="bottomNavigation_itemDisabled">#1e000000</color>
-  <color name="bottomNavigation_itemResting">#36000000</color>
-  <color name="bottomNavigation_lightBackground">#fafafa</color>
 </resources>

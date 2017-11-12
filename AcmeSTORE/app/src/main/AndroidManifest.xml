@@ -34,7 +34,7 @@
     <activity android:name=".MainActivity" />
     <activity
       android:name=".views.register.RegisterActivity"
-      android:label="@string/registerActivity_title">
+      android:label="@string/register_title">
       <meta-data
         android:name="android.support.PARENT_ACTIVITY"
         android:value=".LoginActivity" />
