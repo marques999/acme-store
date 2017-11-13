@@ -9,6 +9,7 @@ class CustomerCart {
     /**
      */
     fun count() = shoppingCart.size
+    fun checkout() = shoppingCart.clear()
     fun getProducts() = shoppingCart.values
     fun notEmpty() = shoppingCart.isNotEmpty()
     fun delete(barcode: String) = shoppingCart.remove(barcode)

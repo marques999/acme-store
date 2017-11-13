@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.content.DialogInterface
 import android.support.v7.app.AppCompatActivity
 
+import org.marques999.acme.store.model.Order
 import org.marques999.acme.store.model.Product
 
 import android.view.Menu
@@ -15,14 +16,15 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import kotlinx.android.synthetic.main.activity_main.*
 
 import org.marques999.acme.store.views.BottomNavigationAdapter
+import org.marques999.acme.store.views.BottomNavigationFragments
 import org.marques999.acme.store.views.cart.ShoppingCartFragment
-import org.marques999.acme.store.views.main.MainActivityBadgeListener
-import org.marques999.acme.store.views.main.MainActivityCatalogListener
+import org.marques999.acme.store.views.main.MainActivityListener
+import org.marques999.acme.store.views.main.MainActivityMessage
 import org.marques999.acme.store.views.order.OrderHistoryFragment
 import org.marques999.acme.store.views.product.ProductCatalogFragment
 import org.marques999.acme.store.views.customer.ProfileFragment
 
-class MainActivity : AppCompatActivity(), MainActivityBadgeListener, MainActivityCatalogListener {
+class MainActivity : AppCompatActivity(), MainActivityListener {
 
     /**
      */
@@ -51,14 +53,28 @@ class MainActivity : AppCompatActivity(), MainActivityBadgeListener, MainActivit
         return true
     }
 
-    /**
-     */
-    override fun onPurchase(product: Product) {
+    override fun onNotify(messageId: MainActivityMessage, value: Any) {
 
-        (bottomNavigationAdapter.getFragment(0) as? ShoppingCartFragment)?.let {
-            it.registerPurchase(product)
-            bottomNavigation.currentItem = 0
-            bottomNavigation.restoreBottomNavigation(true)
+        if (messageId == MainActivityMessage.PURCHASE) {
+
+            bottomNavigation.currentItem = BottomNavigationFragments.CART
+
+            (bottomNavigationAdapter.getFragment(
+                BottomNavigationFragments.CART
+            ) as? ShoppingCartFragment)?.let {
+                bottomNavigation.restoreBottomNavigation(true)
+                it.registerPurchase(value as Product)
+            }
+        } else if (messageId == MainActivityMessage.CHECKOUT) {
+
+            bottomNavigation.currentItem = BottomNavigationFragments.HISTORY
+
+            (bottomNavigationAdapter.getFragment(
+                BottomNavigationFragments.HISTORY
+            ) as? OrderHistoryFragment)?.let {
+                bottomNavigation.restoreBottomNavigation(true)
+                it.registerOrder(value as Order)
+            }
         }
     }
 
@@ -99,11 +115,12 @@ class MainActivity : AppCompatActivity(), MainActivityBadgeListener, MainActivit
         bottomNavigationAdapter.addFragments(OrderHistoryFragment())
         bottomNavigationAdapter.addFragments(ProfileFragment())
         main_viewPager.adapter = bottomNavigationAdapter
-        bottomNavigation.currentItem = 0
         bottomNavigation.isColored = true
+        bottomNavigation.currentItem = BottomNavigationFragments.CART
         bottomNavigation.isTranslucentNavigationEnabled = true
         bottomNavigation.titleState = AHBottomNavigation.TitleState.ALWAYS_SHOW
         bottomNavigation.accentColor = AcmeStore.fetchColor(this, R.color.colorAccent)
+
         bottomNavigation.setColoredModeColors(
             AcmeStore.fetchColor(this, R.color.colorAccent),
             AcmeStore.fetchColor(this, R.color.colorPrimaryDarker)

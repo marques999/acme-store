@@ -23,14 +23,15 @@ import android.content.Context
 import android.app.ProgressDialog
 import android.support.v7.widget.LinearLayoutManager
 
-import org.marques999.acme.store.model.Product
-import org.marques999.acme.store.model.CustomerCart
-
 import kotlinx.android.synthetic.main.fragment_cart.*
 
 import org.marques999.acme.store.api.HttpErrorHandler
-import org.marques999.acme.store.views.main.MainActivityBadgeListener
+import org.marques999.acme.store.model.Product
+import org.marques999.acme.store.model.CustomerCart
+import org.marques999.acme.store.views.BottomNavigationFragments
+import org.marques999.acme.store.views.main.MainActivityListener
 import org.marques999.acme.store.views.main.MainActivityFragment
+import org.marques999.acme.store.views.main.MainActivityMessage
 import org.marques999.acme.store.views.product.ProductViewActivity
 
 class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), ShoppingCartListener {
@@ -61,6 +62,8 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
         ).subscribeOn(
             Schedulers.io()
         ).subscribe({
+            (shoppingCart_recyclerView.adapter as ShoppingCartAdapter).clearItems()
+            mainActivityListener?.onNotify(MainActivityMessage.CHECKOUT, it)
             progressDialog.dismiss()
         }, {
             progressDialog.dismiss()
@@ -70,24 +73,20 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
 
     /**
      */
-    private var badgeListener: MainActivityBadgeListener? = null
+    private var mainActivityListener: MainActivityListener? = null
 
     /**
      */
     override fun onAttach(context: Context?) {
-
         super.onAttach(context)
-
-        (context as? MainActivityBadgeListener)?.let {
-            badgeListener = it
-        }
+        mainActivityListener = context as? MainActivityListener
     }
 
     /**
      */
     override fun onDetach() {
         super.onDetach()
-        badgeListener = null
+        mainActivityListener = null
     }
 
     /**
@@ -95,7 +94,7 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
     override fun onItemChanged() = shoppingCart.calculate().let {
         cart_quantity.text = it.first.toString()
         cart_subtotal.text = AcmeUtils.formatCurrency(it.second)
-        badgeListener?.onUpdateBadge(0, shoppingCart.count())
+        mainActivityListener?.onUpdateBadge(BottomNavigationFragments.CART, shoppingCart.count())
         shoppingCart_checkout.isEnabled = shoppingCart.notEmpty()
     }
 

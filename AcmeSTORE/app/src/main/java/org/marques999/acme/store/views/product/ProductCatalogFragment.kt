@@ -18,9 +18,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.LayoutInflater
 
+import org.marques999.acme.store.views.BottomNavigationFragments
 import org.marques999.acme.store.views.main.MainActivityFragment
-import org.marques999.acme.store.views.main.MainActivityBadgeListener
-import org.marques999.acme.store.views.main.MainActivityCatalogListener
+import org.marques999.acme.store.views.main.MainActivityMessage
+import org.marques999.acme.store.views.main.MainActivityListener
 
 import kotlinx.android.synthetic.main.fragment_catalog.*
 
@@ -36,13 +37,12 @@ class ProductCatalogFragment : MainActivityFragment(R.layout.fragment_catalog), 
 
     /**
      */
-    private var badgeListener: MainActivityBadgeListener? = null
-    private var catalogListener: MainActivityCatalogListener? = null
+    private var mainActivityListener: MainActivityListener? = null
 
     /**
      */
     override fun onItemPurchased(product: Product) {
-        catalogListener?.onPurchase(product)
+        mainActivityListener?.onNotify(MainActivityMessage.PURCHASE, product)
     }
 
     /**
@@ -100,7 +100,7 @@ class ProductCatalogFragment : MainActivityFragment(R.layout.fragment_catalog), 
             progressDialog.dismiss()
             products = ArrayList(it)
             initializeRecycler(it)
-            badgeListener?.onUpdateBadge(1, it.size)
+            mainActivityListener?.onUpdateBadge(BottomNavigationFragments.CATALOG, it.size)
         }, {
             progressDialog.dismiss()
             HttpErrorHandler(context).accept(it)
@@ -117,7 +117,7 @@ class ProductCatalogFragment : MainActivityFragment(R.layout.fragment_catalog), 
             onRefresh()
         } else {
             products = savedInstanceState.getParcelableArrayList(BUNDLE_PRODUCTS)
-            badgeListener?.onUpdateBadge(1, products.size)
+            mainActivityListener?.onUpdateBadge(BottomNavigationFragments.CATALOG, products.size)
             initializeRecycler(products)
         }
     }
@@ -126,16 +126,14 @@ class ProductCatalogFragment : MainActivityFragment(R.layout.fragment_catalog), 
      */
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        badgeListener = context as? MainActivityBadgeListener
-        catalogListener = activity as? MainActivityCatalogListener
+        mainActivityListener = context as? MainActivityListener
     }
 
     /**
      */
     override fun onDetach() {
         super.onDetach()
-        badgeListener = null
-        catalogListener = null
+        mainActivityListener = null
     }
 
     /**

@@ -93,6 +93,14 @@ class ShoppingCartAdapter(
 
     /**
      */
+    fun clearItems() {
+        shoppingCart.checkout()
+        notifyItemRangeRemoved(0, hashItems.size)
+        listener.onItemChanged()
+    }
+
+    /**
+     */
     private fun updateItem(barcode: String, delta: Int) {
 
         shoppingCart.update(barcode, delta)?.let {
