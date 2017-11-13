@@ -3,14 +3,12 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:orientation="vertical">
-
   <ImageView
     android:id="@+id/qrCode_imageView"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/qrCode_imageView"
+    android:layout_height="@dimen/global_qrCode"
     android:layout_gravity="center"
     android:padding="@dimen/global_largeMargin" />
-
   <TextView
     android:id="@+id/qrCode_textView"
     android:layout_width="match_parent"

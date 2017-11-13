@@ -3,6 +3,7 @@ package org.marques999.acme.store.views.product
 import android.os.Bundle
 
 import org.marques999.acme.store.R
+import org.marques999.acme.store.AcmeStore
 import org.marques999.acme.store.AcmeUtils
 
 import com.squareup.picasso.Picasso
@@ -24,12 +25,11 @@ class ProductViewActivity : BackButtonActivity() {
         setContentView(R.layout.activity_product)
         OverScrollDecoratorHelper.setUpOverScroll(productView_scrollView)
 
-        intent.getBooleanExtra(EXTRA_PURCHASED, false).let {
-            productView_purchase.isEnabled = !it
-            productView_purchase.text = if (it) "Purchased" else "Purchase"
-        }
-
         intent.getParcelableExtra<Product>(EXTRA_PRODUCT).let {
+
+            (application as AcmeStore).shoppingCart[it.barcode]?.let {
+                productView_purchase.text = getString(R.string.product_purchased)
+            }
 
             productView_model.text = it.name
             productView_brand.text = it.brand
@@ -46,7 +46,6 @@ class ProductViewActivity : BackButtonActivity() {
     /**
      */
     companion object {
-        val EXTRA_PURCHASED = "org.marques999.acme.store.extra.ORDER_PURCHASED"
         val EXTRA_PRODUCT = "org.marques999.acme.store.extra.ORDER_PRODUCT"
     }
 }

@@ -11,19 +11,24 @@ import org.marques999.acme.store.AcmeUtils
 import kotlinx.android.synthetic.main.fragment_cart_item.view.*
 
 import org.marques999.acme.store.model.inflate
+import org.marques999.acme.store.model.Product
+import org.marques999.acme.store.model.CustomerCart
 import org.marques999.acme.store.model.OrderProduct
 
+import java.util.ArrayList
+
 class ShoppingCartAdapter(
+    private val shoppingCart: CustomerCart,
     private val listener: ShoppingCartListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     /**
      */
-    private val items = ArrayList<OrderProduct>()
+    override fun getItemCount(): Int = hashItems.size
 
     /**
      */
-    override fun getItemCount(): Int = items.size
+    private val hashItems = ArrayList<OrderProduct>(shoppingCart.getProducts())
 
     /**
      */
@@ -34,7 +39,7 @@ class ShoppingCartAdapter(
     /**
      */
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as ShoppingCartViewHolder).bind(items[position])
+        (holder as ShoppingCartViewHolder).bind(hashItems[position])
     }
 
     /**
@@ -48,19 +53,26 @@ class ShoppingCartAdapter(
             val itemBarcode = item.product.barcode
 
             itemView.product_container.setOnClickListener {
-                listener.onItemSelected(itemBarcode)
+
+                shoppingCart[itemBarcode]?.let {
+                    listener.onItemSelected(it.product)
+                }
             }
 
             itemView.shoppingCart_delete.setOnClickListener {
-                listener.onItemDeleted(itemBarcode)
+
+                shoppingCart.delete(itemBarcode)?.let {
+                    deleteItem(it)
+                    listener.onItemChanged()
+                }
             }
 
             itemView.shoppingCart_minus.setOnClickListener {
-                listener.onItemUpdated(itemBarcode, -1)
+                updateItem(itemBarcode, -1)
             }
 
             itemView.shoppingCart_plus.setOnClickListener {
-                listener.onItemUpdated(itemBarcode, +1)
+                updateItem(itemBarcode, 1)
             }
 
             itemView.product_name.text = itemView.context.getString(
@@ -81,27 +93,36 @@ class ShoppingCartAdapter(
 
     /**
      */
-    fun insert(orderProduct: OrderProduct) {
-        items.add(orderProduct)
-        notifyItemInserted(items.size - 1)
+    private fun updateItem(barcode: String, delta: Int) {
+
+        shoppingCart.update(barcode, delta)?.let {
+            notifyItemChanged(hashItems.indexOf(it))
+            listener.onItemChanged()
+        }
     }
 
     /**
      */
-    private fun remove(productIndex: Int) {
-        items.removeAt(productIndex)
-        notifyItemRemoved(productIndex)
+    private fun deleteItem(orderProduct: OrderProduct) {
+
+        hashItems.indexOf(orderProduct).let {
+            hashItems.removeAt(it)
+            notifyItemRemoved(it)
+        }
     }
 
     /**
      */
-    fun remove(orderProduct: OrderProduct) {
-        remove(items.indexOf(orderProduct))
-    }
+    fun upsertItem(product: Product) {
 
-    /**
-     */
-    fun update(orderProduct: OrderProduct) {
-        notifyItemChanged(items.indexOf(orderProduct))
+        shoppingCart[product.barcode]?.let {
+            deleteItem(it)
+        }
+
+        shoppingCart.insert(product).let {
+            hashItems.add(it)
+            notifyItemInserted(hashItems.lastIndex)
+            listener.onItemChanged()
+        }
     }
 }

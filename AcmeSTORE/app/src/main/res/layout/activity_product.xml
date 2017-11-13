@@ -59,27 +59,24 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:background="@color/colorAccent"
-          android:paddingEnd="@dimen/global_smallMargin"
-          android:paddingStart="@dimen/global_mediumMargin">
+          android:padding="@dimen/global_largeMargin">
           <TextView
-            android:id="@+id/productView_price"
+            android:id="@+id/productView_purchase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:paddingTop="@dimen/global_largeMargin"
-            android:textColor="@android:color/white"
+            android:textAllCaps="true"
+            android:text="@string/product_available"
             android:textStyle="bold" />
           <View
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1" />
-          <Button
-            android:id="@+id/productView_purchase"
+          <TextView
+            android:id="@+id/productView_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="?android:attr/selectableItemBackground"
-            android:text="@string/product_purchase"
-            android:textColor="@android:color/white" />
+            android:textStyle="bold" />
         </LinearLayout>
       </LinearLayout>
     </android.support.v7.widget.CardView>
@@ -89,7 +86,6 @@
       card_view:cardElevation="@dimen/global_cardElevation"
       card_view:cardPreventCornerOverlap="true"
       card_view:cardUseCompatPadding="true">
-
       <LinearLayout style="@style/table_parent">
         <ImageView
           style="@style/table_leftContainer"

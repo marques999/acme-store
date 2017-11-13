@@ -1,11 +1,13 @@
 package org.marques999.acme.store.views.cart
 
 import android.view.View
-import android.support.v7.widget.LinearLayoutManager
+import android.view.ViewGroup
+import android.view.LayoutInflater
 
-import org.marques999.acme.store.model.Product
-import org.marques999.acme.store.model.OrderProduct
-import org.marques999.acme.store.model.OrderProductPOST
+import org.marques999.acme.store.R
+import org.marques999.acme.store.AcmeStore
+import org.marques999.acme.store.AcmeUtils
+import org.marques999.acme.store.AcmeDialogs
 
 import android.content.Intent
 import android.content.DialogInterface
@@ -21,13 +23,10 @@ import android.app.ProgressDialog
 
 import kotlinx.android.synthetic.main.fragment_cart.*
 
-import org.marques999.acme.store.R
-import org.marques999.acme.store.AcmeStore
-import org.marques999.acme.store.AcmeUtils
-import org.marques999.acme.store.AcmeDialogs
+import org.marques999.acme.store.model.Product
+import org.marques999.acme.store.model.CustomerCart
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
+import android.support.v7.widget.LinearLayoutManager
 
 import org.marques999.acme.store.api.HttpErrorHandler
 import org.marques999.acme.store.views.main.MainActivityFragment
@@ -37,97 +36,26 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
 
     /**
      */
-    override fun onRefresh() {
-        AcmeDialogs.buildOk(activity, R.string.actionBar_cart).show()
-    }
+    override fun onRefresh() = Unit
 
     /**
      */
-    private val shoppingCart = HashMap<String, OrderProduct>()
-
-    /**
-     */
-    private lateinit var adapter: ShoppingCartAdapter
+    private lateinit var shoppingCart: CustomerCart
     private lateinit var progressDialog: ProgressDialog
 
     /**
      */
-    private fun recalculateCart() {
-
-        var subtotal = 0.0
-        var quantity = 0
-
-        shoppingCart.values.forEach {
-            subtotal += it.product.price * it.quantity
-            quantity += it.quantity
-        }
-
-        cart_quantity.text = quantity.toString()
-        cart_subtotal.text = AcmeUtils.formatCurrency(subtotal)
-    }
-
-    /**
-     */
-    override fun onItemUpdated(barcode: String, delta: Int) {
-
-        shoppingCart[barcode]?.apply {
-
-            if (delta != 0 && (delta > 0 && quantity < 99) || (delta < 0 && quantity > 1)) {
-                quantity += delta
-                adapter.update(this)
-                recalculateCart()
-            }
-        }
-    }
-
-    /**
-     */
-    override fun onItemDeleted(barcode: String) {
-        shoppingCart.remove(barcode)?.let { adapter.remove(it) }
-        shoppingCart_checkout.isEnabled = shoppingCart.isNotEmpty()
-        recalculateCart()
-    }
-
-    /**
-     */
-    fun registerPurchase(product: Product) {
-
-        val orderProduct = OrderProduct(1, product)
-
-        shoppingCart[product.barcode]?.let {
-            orderProduct.quantity += it.quantity
-            adapter.remove(it)
-        }
-
-        adapter.insert(orderProduct)
-        shoppingCart.put(orderProduct.product.barcode, orderProduct)
-        shoppingCart_checkout.isEnabled = shoppingCart.isNotEmpty()
-        recalculateCart()
-    }
-
-    /**
-     */
-    override fun onItemSelected(barcode: String) {
-
-        shoppingCart[barcode]?.let {
-
-            startActivity(Intent(
-                activity, ProductViewActivity::class.java
-            ).putExtra(
-                ProductViewActivity.EXTRA_PRODUCT, it.product
-            ).putExtra(
-                ProductViewActivity.EXTRA_PURCHASED, true
-            ))
-        }
+    private val launchPlayStore = DialogInterface.OnClickListener { _, _ ->
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(AcmeStore.ZXING_URL)))
     }
 
     /**
      */
     private val confirmPurchase = DialogInterface.OnClickListener { _, _ ->
 
-        (activity.application as AcmeStore).api.insertOrder(shoppingCart.values.map {
-            OrderProductPOST(it.quantity, it.product.barcode)
-        }).observeOn(
+        (activity.application as AcmeStore).api.insertOrder(
+            shoppingCart.convertJson()
+        ).observeOn(
             AndroidSchedulers.mainThread()
         ).subscribeOn(
             Schedulers.io()
@@ -141,6 +69,22 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
 
     /**
      */
+    override fun onItemChanged() = shoppingCart.calculate().let {
+        cart_quantity.text = it.first.toString()
+        cart_subtotal.text = AcmeUtils.formatCurrency(it.second)
+        shoppingCart_checkout.isEnabled = shoppingCart.notEmpty()
+    }
+
+    /**
+     */
+    override fun onItemSelected(product: Product) = startActivity(Intent(
+        activity, ProductViewActivity::class.java
+    ).putExtra(
+        ProductViewActivity.EXTRA_PRODUCT, product
+    ))
+
+    /**
+     */
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -148,6 +92,20 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
     ): View = LayoutInflater.from(context).inflate(
         R.layout.fragment_cart, container, false
     )
+
+    /**
+     */
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        shoppingCart = (activity.application as AcmeStore).shoppingCart
+        progressDialog = AcmeDialogs.buildProgress(context, R.string.global_progressLoading)
+    }
+
+    /**
+     */
+    fun registerPurchase(product: Product) {
+        (shoppingCart_recyclerView.adapter as ShoppingCartAdapter).upsertItem(product)
+    }
 
     /**
      */
@@ -166,12 +124,6 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
             progressDialog.dismiss()
             HttpErrorHandler(context).accept(it)
         })
-    }
-
-    /**
-     */
-    private val launchPlayStore = DialogInterface.OnClickListener { _, _ ->
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(AcmeStore.ZXING_URL)))
     }
 
     /**
@@ -196,18 +148,13 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
     override fun onActivityCreated(savedInstanceState: Bundle?) {
 
         super.onActivityCreated(savedInstanceState)
-        progressDialog = AcmeDialogs.buildProgress(context, R.string.global_progressLoading)
-        recalculateCart()
 
         shoppingCart_recyclerView.apply {
-            setHasFixedSize(false)
-            layoutManager = LinearLayoutManager(context)
+            setHasFixedSize(true)
             clearOnScrollListeners()
-        }
-
-        if (shoppingCart_recyclerView.adapter == null) {
-            adapter = ShoppingCartAdapter(this)
-            shoppingCart_recyclerView.adapter = adapter
+            layoutManager = LinearLayoutManager(context)
+            adapter = ShoppingCartAdapter(shoppingCart, this@ShoppingCartFragment)
+            onItemChanged()
         }
 
         shoppingCart_scan.setOnClickListener {

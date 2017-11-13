@@ -7,14 +7,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingEnd="@dimen/login_largeMargin"
-    android:paddingStart="@dimen/login_largeMargin"
+    android:paddingEnd="@dimen/login_large"
+    android:paddingStart="@dimen/login_large"
     android:paddingTop="56dp">
     <ImageView
       android:layout_width="wrap_content"
       android:layout_height="128dp"
       android:layout_gravity="center_horizontal"
-      android:layout_marginBottom="@dimen/login_largeMargin"
+      android:layout_marginBottom="@dimen/login_large"
       android:contentDescription="@string/global_todoDescription"
       android:src="@drawable/ic_landscape_128dp" />
     <android.support.design.widget.TextInputLayout style="@style/global_textInput">
@@ -37,15 +37,15 @@
       android:id="@+id/loginActivity_login"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="@dimen/login_largeMargin"
-      android:layout_marginTop="@dimen/login_largeMargin"
-      android:padding="@dimen/login_mediumMargin"
+      android:layout_marginBottom="@dimen/login_large"
+      android:layout_marginTop="@dimen/login_large"
+      android:padding="@dimen/login_medium"
       android:text="@string/login_loginButton" />
     <TextView
       android:id="@+id/loginActivity_register"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="@dimen/login_largeMargin"
+      android:layout_marginBottom="@dimen/login_large"
       android:gravity="center"
       android:text="@string/login_registerButton"
       android:textSize="@dimen/global_mediumFont" />

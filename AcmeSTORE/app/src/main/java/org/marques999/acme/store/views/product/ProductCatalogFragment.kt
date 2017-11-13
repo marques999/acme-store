@@ -70,16 +70,11 @@ class ProductCatalogFragment : MainActivityFragment(R.layout.fragment_catalog), 
 
     /**
      */
-    override fun onItemSelected(product: Product) {
-
-        startActivity(Intent(
-            activity, ProductViewActivity::class.java
-        ).putExtra(
-            ProductViewActivity.EXTRA_PRODUCT, product
-        ).putExtra(
-            ProductViewActivity.EXTRA_PURCHASED, false
-        ))
-    }
+    override fun onItemSelected(product: Product) = startActivity(Intent(
+        activity, ProductViewActivity::class.java
+    ).putExtra(
+        ProductViewActivity.EXTRA_PRODUCT, product
+    ))
 
     /**
      */

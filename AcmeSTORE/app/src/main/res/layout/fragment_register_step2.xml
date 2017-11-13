@@ -42,7 +42,7 @@
       android:layout_height="wrap_content"
       android:layout_weight="1"
       android:drawableStart="@drawable/ic_chevron_left_24dp"
-      android:padding="@dimen/registerActivity_button"
+      android:padding="@dimen/login_medium"
       android:text="@string/register_previous" />
     <android.support.v7.widget.AppCompatButton
       android:id="@+id/registerActivity_register"
@@ -50,7 +50,7 @@
       android:layout_height="wrap_content"
       android:layout_weight="1"
       android:drawableEnd="@drawable/ic_chevron_right_24dp"
-      android:padding="@dimen/registerActivity_button"
+      android:padding="@dimen/login_medium"
       android:text="@string/register_button" />
   </LinearLayout>
 </LinearLayout>

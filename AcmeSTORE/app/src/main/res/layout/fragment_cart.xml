@@ -32,7 +32,7 @@
         <TableRow style="@style/global_tableRow">
           <TextView
             style="@style/global_rowHeader"
-            android:text="@string/items_cart" />
+            android:text="@string/shoppingCart_items" />
           <TextView
             android:id="@+id/cart_quantity"
             style="@style/global_rowContent"
@@ -41,7 +41,7 @@
         <TableRow style="@style/global_tableRow">
           <TextView
             style="@style/global_rowHeader"
-            android:text="@string/price_cart" />
+            android:text="@string/shoppingCart_price" />
           <TextView
             android:id="@+id/cart_subtotal"
             style="@style/global_rowContent"

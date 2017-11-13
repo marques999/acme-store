@@ -20,6 +20,7 @@ import java.util.Date
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Rfc3339DateJsonAdapter
+import org.marques999.acme.store.model.CustomerCart
 
 class AcmeStore : Application() {
 
@@ -27,6 +28,10 @@ class AcmeStore : Application() {
      */
     lateinit var api: AcmeProvider
     lateinit var privateKey: String
+
+    /**
+     */
+    val shoppingCart = CustomerCart()
 
     /**
      */

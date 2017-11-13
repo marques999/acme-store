@@ -42,7 +42,7 @@ class OrderViewProductAdapter(private val listener: OrderViewListener) : ViewTyp
             itemView.orderView_price.text = AcmeUtils.formatCurrency(item.product.price)
 
             itemView.orderView_container.setOnClickListener {
-                listener.onViewProduct(item)
+                listener.onItemSelected(item)
             }
 
             itemView.orderView_total.text = AcmeUtils.formatCurrency(

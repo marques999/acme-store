@@ -18,16 +18,11 @@ class OrderViewActivity : BackButtonActivity(), OrderViewListener {
 
     /**
      */
-    override fun onViewProduct(orderProduct: OrderProduct) {
-
-        startActivity(Intent(
-            this, ProductViewActivity::class.java
-        ).putExtra(
-            ProductViewActivity.EXTRA_PRODUCT, orderProduct.product
-        ).putExtra(
-            ProductViewActivity.EXTRA_PURCHASED, true
-        ))
-    }
+    override fun onItemSelected(orderProduct: OrderProduct) = startActivity(Intent(
+        this, ProductViewActivity::class.java
+    ).putExtra(
+        ProductViewActivity.EXTRA_PRODUCT, orderProduct.product
+    ))
 
     /**
      */

@@ -69,6 +69,6 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/global_mediumMargin"
     android:drawableEnd="@drawable/ic_chevron_right_24dp"
-    android:padding="@dimen/registerActivity_button"
+    android:padding="@dimen/login_medium"
     android:text="@string/register_next" />
 </LinearLayout>
