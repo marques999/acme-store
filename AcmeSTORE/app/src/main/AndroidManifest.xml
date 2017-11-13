@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
   package="org.marques999.acme.store">
-
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.CONTROL_KEYGUARD" />
-
   <application
     android:name=".AcmeStore"
     android:allowBackup="true"
@@ -14,44 +11,41 @@
     android:label="@string/mainActivity_title"
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
-    android:theme="@style/AppTheme"
-    tools:ignore="GoogleAppIndexingWarning">
+    android:theme="@style/AppTheme">
     <activity
       android:name=".LoginActivity"
       android:theme="@style/AppTheme.Dark">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
+        <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
     <activity
       android:name=".views.product.ProductViewActivity"
-      android:label="@string/product_activity">
+      android:label="@string/product_activity"
+      android:parentActivityName=".MainActivity">
       <meta-data
         android:name="android.support.PARENT_ACTIVITY"
-        android:value=".LoginActivity" />
+        android:value="org.marques999.acme.store.MainActivity" />
     </activity>
     <activity android:name=".MainActivity" />
     <activity
       android:name=".views.register.RegisterActivity"
-      android:label="@string/register_title">
+      android:label="@string/register_title"
+      android:parentActivityName=".LoginActivity">
       <meta-data
         android:name="android.support.PARENT_ACTIVITY"
-        android:value=".LoginActivity" />
+        android:value="org.marques999.acme.store.LoginActivity" />
     </activity>
     <activity android:name=".views.order.OrderConfirmActivity" />
     <activity
       android:name=".views.order.OrderViewActivity"
-      android:label="@string/order_title">
+      android:label="@string/order_title"
+      android:parentActivityName=".MainActivity">
       <meta-data
         android:name="android.support.PARENT_ACTIVITY"
-        android:value=".MainActivity" />
+        android:value="org.marques999.acme.store.MainActivity" />
     </activity>
-      <activity android:name=".views.catalog.CatalogProductViewActivity"
-          android:label="Product Information">
-          <meta-data
-              android:name="android.support.PARENT_ACTIVITY"
-              android:value=".MainActivity" />
-      </activity>
   </application>
 </manifest>
