@@ -5,13 +5,12 @@ import android.support.v7.widget.RecyclerView
 
 import org.marques999.acme.store.R
 import org.marques999.acme.store.AcmeUtils
-
-import kotlinx.android.synthetic.main.fragment_order_order.view.*
-
 import org.marques999.acme.store.model.inflate
 import org.marques999.acme.store.model.OrderJSON
 import org.marques999.acme.store.model.ViewType
 import org.marques999.acme.store.model.ViewTypeAdapter
+
+import kotlinx.android.synthetic.main.fragment_order_order.view.*
 
 class OrderViewOrderAdapter : ViewTypeAdapter {
 

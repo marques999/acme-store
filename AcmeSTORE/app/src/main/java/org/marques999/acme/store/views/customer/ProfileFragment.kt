@@ -1,7 +1,6 @@
 package org.marques999.acme.store.views.customer
 
 import android.os.Bundle
-import android.content.Intent
 import android.app.ProgressDialog
 import android.support.v7.widget.LinearLayoutManager
 
@@ -18,7 +17,6 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 import org.marques999.acme.store.api.HttpErrorHandler
 import org.marques999.acme.store.model.CustomerJSON
 import org.marques999.acme.store.views.main.MainActivityFragment
-import org.marques999.acme.store.views.order.OrderConfirmActivity
 
 class ProfileFragment : MainActivityFragment(R.layout.fragment_profile) {
 
@@ -83,10 +81,6 @@ class ProfileFragment : MainActivityFragment(R.layout.fragment_profile) {
 
         profile_logout.setOnClickListener {
             activity.onBackPressed()
-        }
-
-        profile_edit.setOnClickListener {
-            startActivity(Intent(context, OrderConfirmActivity::class.java))
         }
     }
 }

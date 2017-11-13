@@ -5,11 +5,13 @@ import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
 
 import org.marques999.acme.store.R
+import org.marques999.acme.store.AcmeUtils
 import org.marques999.acme.store.views.BackButtonActivity
 import org.marques999.acme.store.views.product.ProductViewActivity
 
 import kotlinx.android.synthetic.main.activity_order.*
 
+import org.marques999.acme.store.model.QrCode
 import org.marques999.acme.store.model.OrderJSON
 import org.marques999.acme.store.model.OrderProduct
 
@@ -37,7 +39,12 @@ class OrderViewActivity : BackButtonActivity(), OrderViewListener {
         }
 
         intent.getParcelableExtra<OrderJSON>(OrderViewActivity.EXTRA_ORDER).let {
-            orderView_recyclerView.adapter = OrderViewAdapter(it, this)
+
+            val qrBitmap = AcmeUtils.encodeQrCode(this, String(
+                it.token.toByteArray(), charset("ISO-8859-1")
+            ))
+
+            orderView_recyclerView.adapter = OrderViewAdapter(it, QrCode(qrBitmap), this)
         }
     }
 

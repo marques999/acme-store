@@ -18,11 +18,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.marques999.acme.store.views.BottomNavigationAdapter
 import org.marques999.acme.store.views.BottomNavigationFragments
 import org.marques999.acme.store.views.cart.ShoppingCartFragment
+import org.marques999.acme.store.views.customer.ProfileFragment
 import org.marques999.acme.store.views.main.MainActivityListener
 import org.marques999.acme.store.views.main.MainActivityMessage
+import org.marques999.acme.store.views.order.OrderCheckoutDialog
 import org.marques999.acme.store.views.order.OrderHistoryFragment
 import org.marques999.acme.store.views.product.ProductCatalogFragment
-import org.marques999.acme.store.views.customer.ProfileFragment
 
 class MainActivity : AppCompatActivity(), MainActivityListener {
 
@@ -67,13 +68,15 @@ class MainActivity : AppCompatActivity(), MainActivityListener {
             }
         } else if (messageId == MainActivityMessage.CHECKOUT) {
 
+            value as Order
+            OrderCheckoutDialog.newInstance(value.token).show(supportFragmentManager, "ocd")
             bottomNavigation.currentItem = BottomNavigationFragments.HISTORY
 
             (bottomNavigationAdapter.getFragment(
                 BottomNavigationFragments.HISTORY
             ) as? OrderHistoryFragment)?.let {
                 bottomNavigation.restoreBottomNavigation(true)
-                it.registerOrder(value as Order)
+                it.registerOrder(value)
             }
         }
     }

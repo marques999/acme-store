@@ -13,6 +13,18 @@ object AcmeDialogs {
      */
     fun buildOk(
         context: Context,
+        throwable: Exception,
+        message: String
+    ): AlertDialog.Builder = AlertDialog
+        .Builder(context)
+        .setTitle(throwable.javaClass.simpleName)
+        .setMessage(message)
+        .setPositiveButton(android.R.string.ok, null)
+
+    /**
+     */
+    fun buildOk(
+        context: Context,
         resourceId: Int,
         vararg params: Any
     ): AlertDialog.Builder = AlertDialog

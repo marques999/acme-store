@@ -32,6 +32,7 @@ import org.marques999.acme.store.views.BottomNavigationFragments
 import org.marques999.acme.store.views.main.MainActivityListener
 import org.marques999.acme.store.views.main.MainActivityFragment
 import org.marques999.acme.store.views.main.MainActivityMessage
+import org.marques999.acme.store.views.order.OrderCheckoutDialog
 import org.marques999.acme.store.views.product.ProductViewActivity
 
 class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), ShoppingCartListener {
@@ -63,8 +64,8 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
             Schedulers.io()
         ).subscribe({
             (shoppingCart_recyclerView.adapter as ShoppingCartAdapter).clearItems()
-            mainActivityListener?.onNotify(MainActivityMessage.CHECKOUT, it)
             progressDialog.dismiss()
+            mainActivityListener?.onNotify(MainActivityMessage.CHECKOUT, it)
         }, {
             progressDialog.dismiss()
             HttpErrorHandler(context).accept(it)

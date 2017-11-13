@@ -38,7 +38,6 @@
         android:name="android.support.PARENT_ACTIVITY"
         android:value="org.marques999.acme.store.LoginActivity" />
     </activity>
-    <activity android:name=".views.order.OrderConfirmActivity" />
     <activity
       android:name=".views.order.OrderViewActivity"
       android:label="@string/activity_order"

@@ -1,12 +1,10 @@
 package org.marques999.acme.store.views.order
 
 import android.view.ViewGroup
+import android.support.v7.widget.RecyclerView
 
 import org.marques999.acme.store.R
 import org.marques999.acme.store.AcmeUtils
-
-import android.support.v7.widget.RecyclerView
-
 import org.marques999.acme.store.model.Order
 import org.marques999.acme.store.model.inflate
 
