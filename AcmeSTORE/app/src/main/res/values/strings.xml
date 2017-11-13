@@ -2,7 +2,7 @@
   <string name="actionBar_cart">Shopping Cart</string>
   <string name="actionBar_catalog">Product Catalog</string>
   <string name="actionBar_history">Order History</string>
-  <string name="actionBar_profile">My Profile</string>
+  <string name="actionBar_profile">Customer Profile</string>
   <string name="activity_main">AcmeSTORE</string>
   <string name="activity_order">Order information</string>
   <string name="activity_product">Product information</string>
