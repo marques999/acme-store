@@ -18,14 +18,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.LayoutInflater
 
+import org.marques999.acme.store.views.main.MainActivityFragment
+import org.marques999.acme.store.views.main.MainActivityBadgeListener
+import org.marques999.acme.store.views.main.MainActivityCatalogListener
+
 import kotlinx.android.synthetic.main.fragment_catalog.*
 
 import org.marques999.acme.store.model.Product
 import org.marques999.acme.store.api.HttpErrorHandler
-import org.marques999.acme.store.views.main.MainActivityFragment
-import org.marques999.acme.store.views.main.MainActivityCatalogListener
-
-import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 
 class ProductCatalogFragment : MainActivityFragment(R.layout.fragment_catalog), ProductCatalogListener {
 
@@ -36,12 +36,13 @@ class ProductCatalogFragment : MainActivityFragment(R.layout.fragment_catalog), 
 
     /**
      */
-    private var productCatalogListener: MainActivityCatalogListener? = null
+    private var badgeListener: MainActivityBadgeListener? = null
+    private var catalogListener: MainActivityCatalogListener? = null
 
     /**
      */
     override fun onItemPurchased(product: Product) {
-        productCatalogListener?.onPurchase(product)
+        catalogListener?.onPurchase(product)
     }
 
     /**
@@ -79,15 +80,10 @@ class ProductCatalogFragment : MainActivityFragment(R.layout.fragment_catalog), 
     /**
      */
     private fun initializeRecycler(products: List<Product>) = catalog_recyclerView.apply {
-
         setHasFixedSize(true)
         layoutManager = LinearLayoutManager(context)
         clearOnScrollListeners()
         adapter = ProductCatalogAdapter(products, this@ProductCatalogFragment)
-
-        OverScrollDecoratorHelper.setUpOverScroll(
-            this, OverScrollDecoratorHelper.ORIENTATION_VERTICAL
-        )
     }
 
     /**
@@ -104,6 +100,7 @@ class ProductCatalogFragment : MainActivityFragment(R.layout.fragment_catalog), 
             progressDialog.dismiss()
             products = ArrayList(it)
             initializeRecycler(it)
+            badgeListener?.onUpdateBadge(1, it.size)
         }, {
             progressDialog.dismiss()
             HttpErrorHandler(context).accept(it)
@@ -120,6 +117,7 @@ class ProductCatalogFragment : MainActivityFragment(R.layout.fragment_catalog), 
             onRefresh()
         } else {
             products = savedInstanceState.getParcelableArrayList(BUNDLE_PRODUCTS)
+            badgeListener?.onUpdateBadge(1, products.size)
             initializeRecycler(products)
         }
     }
@@ -127,19 +125,17 @@ class ProductCatalogFragment : MainActivityFragment(R.layout.fragment_catalog), 
     /**
      */
     override fun onAttach(context: Context?) {
-
         super.onAttach(context)
-
-        (activity as? MainActivityCatalogListener)?.let {
-            productCatalogListener = it
-        }
+        badgeListener = context as? MainActivityBadgeListener
+        catalogListener = activity as? MainActivityCatalogListener
     }
 
     /**
      */
     override fun onDetach() {
         super.onDetach()
-        productCatalogListener = null
+        badgeListener = null
+        catalogListener = null
     }
 
     /**

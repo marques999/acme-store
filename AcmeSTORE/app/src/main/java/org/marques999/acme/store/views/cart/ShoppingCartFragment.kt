@@ -19,16 +19,17 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import android.net.Uri
 import android.os.Bundle
 import android.app.Activity
+import android.content.Context
 import android.app.ProgressDialog
-
-import kotlinx.android.synthetic.main.fragment_cart.*
+import android.support.v7.widget.LinearLayoutManager
 
 import org.marques999.acme.store.model.Product
 import org.marques999.acme.store.model.CustomerCart
 
-import android.support.v7.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.fragment_cart.*
 
 import org.marques999.acme.store.api.HttpErrorHandler
+import org.marques999.acme.store.views.main.MainActivityBadgeListener
 import org.marques999.acme.store.views.main.MainActivityFragment
 import org.marques999.acme.store.views.product.ProductViewActivity
 
@@ -36,7 +37,7 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
 
     /**
      */
-    override fun onRefresh() = Unit
+    override fun onRefresh() {}
 
     /**
      */
@@ -69,9 +70,32 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
 
     /**
      */
+    private var badgeListener: MainActivityBadgeListener? = null
+
+    /**
+     */
+    override fun onAttach(context: Context?) {
+
+        super.onAttach(context)
+
+        (context as? MainActivityBadgeListener)?.let {
+            badgeListener = it
+        }
+    }
+
+    /**
+     */
+    override fun onDetach() {
+        super.onDetach()
+        badgeListener = null
+    }
+
+    /**
+     */
     override fun onItemChanged() = shoppingCart.calculate().let {
         cart_quantity.text = it.first.toString()
         cart_subtotal.text = AcmeUtils.formatCurrency(it.second)
+        badgeListener?.onUpdateBadge(0, shoppingCart.count())
         shoppingCart_checkout.isEnabled = shoppingCart.notEmpty()
     }
 
@@ -150,11 +174,11 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
         super.onActivityCreated(savedInstanceState)
 
         shoppingCart_recyclerView.apply {
-            setHasFixedSize(true)
-            clearOnScrollListeners()
             layoutManager = LinearLayoutManager(context)
+            clearOnScrollListeners()
             adapter = ShoppingCartAdapter(shoppingCart, this@ShoppingCartFragment)
             onItemChanged()
+            setHasFixedSize(true)
         }
 
         shoppingCart_scan.setOnClickListener {

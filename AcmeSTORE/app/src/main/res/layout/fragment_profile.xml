@@ -1,147 +1,21 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  android:id="@+id/profile_scrollView"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
-  android:layout_height="wrap_content"
-  app:layout_behavior="@string/appbar_scrolling_view_behavior">
-  <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-    <LinearLayout style="@style/global_buttonGroup">
-      <Button
-        android:id="@+id/profile_qrTest"
-        style="@style/global_button"
-        android:drawableStart="@drawable/ic_camera_24dp"
-        android:text="@string/customer_qrTest" />
-      <Button
-        android:id="@+id/profile_logout"
-        style="@style/global_button"
-        android:drawableStart="@drawable/ic_exit_24dp"
-        android:text="@string/customer_logout" />
-    </LinearLayout>
-    <android.support.v7.widget.CardView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      app:cardElevation="@dimen/global_cardElevation"
-      app:cardUseCompatPadding="true">
-      <LinearLayout style="@style/table_parent">
-        <ImageView
-          style="@style/table_leftContainer"
-          android:contentDescription="@string/global_todoDescription"
-          android:src="@drawable/ic_person_48dp" />
-        <TableLayout style="@style/table_rightContainer">
-          <TableRow
-            style="@style/global_tableRow"
-            android:layout_marginBottom="@dimen/global_smallMargin">
-            <TextView
-              android:id="@+id/profile_customerName"
-              style="@style/global_tableHeader" />
-          </TableRow>
-          <TableRow style="@style/global_tableRow">
-            <TextView
-              style="@style/global_rowHeader"
-              android:text="@string/customer_nif" />
-            <TextView
-              android:id="@+id/profile_customerNif"
-              style="@style/global_rowContent" />
-          </TableRow>
-          <TableRow style="@style/global_tableRow">
-            <TextView
-              style="@style/global_rowHeader"
-              android:text="@string/customer_username" />
-            <TextView
-              android:id="@+id/profile_customerUsername"
-              style="@style/global_rowContent" />
-          </TableRow>
-          <TableRow style="@style/global_tableRow">
-            <TextView
-              style="@style/global_rowHeader"
-              android:text="@string/customer_address1" />
-            <TextView
-              android:id="@+id/profile_customerAddress1"
-              style="@style/global_rowContent" />
-          </TableRow>
-          <TableRow style="@style/global_tableRow">
-            <TextView
-              style="@style/global_rowHeader"
-              android:text="@string/customer_address2" />
-            <TextView
-              android:id="@+id/profile_customerAddress2"
-              style="@style/global_rowContent" />
-          </TableRow>
-          <TableRow style="@style/global_tableRow">
-            <TextView
-              style="@style/global_rowHeader"
-              android:text="@string/global_created" />
-            <TextView
-              android:id="@+id/profile_customerCreated"
-              style="@style/global_rowContent" />
-          </TableRow>
-          <TableRow style="@style/global_tableRow">
-            <TextView
-              style="@style/global_rowHeader"
-              android:text="@string/global_updated" />
-            <TextView
-              android:id="@+id/profile_customerUpdated"
-              style="@style/global_rowContent" />
-          </TableRow>
-        </TableLayout>
-      </LinearLayout>
-    </android.support.v7.widget.CardView>
-    <android.support.v7.widget.CardView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      app:cardElevation="@dimen/global_cardElevation"
-      app:cardUseCompatPadding="true">
-      <LinearLayout style="@style/table_parent">
-        <ImageView
-          style="@style/table_leftContainer"
-          android:contentDescription="@string/global_todoDescription"
-          android:src="@drawable/ic_credit_card_48dp" />
-        <TableLayout style="@style/table_rightContainer">
-          <TableRow
-            style="@style/global_tableRow"
-            android:layout_marginBottom="@dimen/global_smallMargin">
-            <TextView
-              android:id="@+id/profile_cardNumber"
-              style="@style/global_tableHeader" />
-          </TableRow>
-          <TableRow style="@style/global_tableRow">
-            <TextView
-              style="@style/global_rowHeader"
-              android:text="@string/customer_ccType" />
-            <TextView
-              android:id="@+id/profile_cardType"
-              style="@style/global_rowContent" />
-          </TableRow>
-          <TableRow style="@style/global_tableRow">
-            <TextView
-              style="@style/global_rowHeader"
-              android:text="@string/customer_ccValidity" />
-            <TextView
-              android:id="@+id/profile_cardValidity"
-              style="@style/global_rowContent" />
-          </TableRow>
-        </TableLayout>
-      </LinearLayout>
-    </android.support.v7.widget.CardView>
-    <android.support.v7.widget.CardView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      app:cardElevation="@dimen/global_cardElevation"
-      app:cardUseCompatPadding="true">
-      <LinearLayout style="@style/table_parent">
-        <ImageView
-          style="@style/table_leftContainer"
-          android:contentDescription="@string/global_todoDescription"
-          android:src="@drawable/ic_key_48dp" />
-        <TextView
-          android:id="@+id/profile_privateKey"
-          android:layout_width="wrap_content"
-          android:layout_height="match_parent"
-          android:padding="@dimen/global_mediumMargin" />
-      </LinearLayout>
-    </android.support.v7.widget.CardView>
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+  <LinearLayout style="@style/global_buttonGroup">
+    <Button
+      android:id="@+id/profile_qrTest"
+      style="@style/global_button"
+      android:drawableStart="@drawable/ic_camera_24dp"
+      android:text="@string/customer_qrTest" />
+    <Button
+      android:id="@+id/profile_logout"
+      style="@style/global_button"
+      android:drawableStart="@drawable/ic_exit_24dp"
+      android:text="@string/customer_logout" />
   </LinearLayout>
-</ScrollView>
+  <android.support.v7.widget.RecyclerView
+    android:id="@+id/profile_recyclerView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+</LinearLayout>

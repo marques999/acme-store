@@ -5,7 +5,11 @@ import android.os.Parcelable
 
 import java.util.Date
 
-class CreditCard(val type: String, val number: String, val validity: Date) : Parcelable {
+class CreditCard(
+    private val type: String,
+    private val number: String,
+    private val validity: Date
+) : Parcelable {
 
     /**
      */

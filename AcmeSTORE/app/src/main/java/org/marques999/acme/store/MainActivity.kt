@@ -1,9 +1,10 @@
 package org.marques999.acme.store
 
-import android.content.DialogInterface
 import android.os.Bundle
+import android.content.DialogInterface
 import android.support.v7.app.AppCompatActivity
 
+import org.marques999.acme.store.model.Product
 
 import android.view.Menu
 import android.view.MenuItem
@@ -12,26 +13,16 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 
 import kotlinx.android.synthetic.main.activity_main.*
-import org.marques999.acme.store.model.Product
 
 import org.marques999.acme.store.views.BottomNavigationAdapter
 import org.marques999.acme.store.views.cart.ShoppingCartFragment
-import org.marques999.acme.store.views.product.ProductCatalogFragment
+import org.marques999.acme.store.views.main.MainActivityBadgeListener
 import org.marques999.acme.store.views.main.MainActivityCatalogListener
 import org.marques999.acme.store.views.order.OrderHistoryFragment
-import org.marques999.acme.store.views.register.ProfileFragment
+import org.marques999.acme.store.views.product.ProductCatalogFragment
+import org.marques999.acme.store.views.customer.ProfileFragment
 
-class MainActivity : AppCompatActivity(), MainActivityCatalogListener {
-
-    /**
-     */
-    override fun onPurchase(product: Product) {
-
-        (bottomNavigationAdapter.getFragment(0) as? ShoppingCartFragment)?.let {
-            it.registerPurchase(product)
-            bottomNavigation.currentItem = 0
-        }
-    }
+class MainActivity : AppCompatActivity(), MainActivityBadgeListener, MainActivityCatalogListener {
 
     /**
      */
@@ -44,6 +35,17 @@ class MainActivity : AppCompatActivity(), MainActivityCatalogListener {
 
     /**
      */
+    private lateinit var bottomNavigation: AHBottomNavigation
+    private lateinit var bottomNavigationAdapter: BottomNavigationAdapter
+
+    /**
+     */
+    override fun onUpdateBadge(view: Int, value: Int) {
+        bottomNavigation.setNotification(value.toString(), view)
+    }
+
+    /**
+     */
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
@@ -51,8 +53,14 @@ class MainActivity : AppCompatActivity(), MainActivityCatalogListener {
 
     /**
      */
-    private lateinit var bottomNavigation: AHBottomNavigation
-    private lateinit var bottomNavigationAdapter: BottomNavigationAdapter
+    override fun onPurchase(product: Product) {
+
+        (bottomNavigationAdapter.getFragment(0) as? ShoppingCartFragment)?.let {
+            it.registerPurchase(product)
+            bottomNavigation.currentItem = 0
+            bottomNavigation.restoreBottomNavigation(true)
+        }
+    }
 
     /**
      */
@@ -93,9 +101,9 @@ class MainActivity : AppCompatActivity(), MainActivityCatalogListener {
         main_viewPager.adapter = bottomNavigationAdapter
         bottomNavigation.currentItem = 0
         bottomNavigation.isColored = true
+        bottomNavigation.isTranslucentNavigationEnabled = true
         bottomNavigation.titleState = AHBottomNavigation.TitleState.ALWAYS_SHOW
         bottomNavigation.accentColor = AcmeStore.fetchColor(this, R.color.colorAccent)
-
         bottomNavigation.setColoredModeColors(
             AcmeStore.fetchColor(this, R.color.colorAccent),
             AcmeStore.fetchColor(this, R.color.colorPrimaryDarker)

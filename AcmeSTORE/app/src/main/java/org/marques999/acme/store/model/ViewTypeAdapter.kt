@@ -1,10 +1,10 @@
 package org.marques999.acme.store.model
 
-import android.support.v7.widget.RecyclerView
-
 import android.view.View
 import android.view.ViewGroup
 import android.view.LayoutInflater
+
+import android.support.v7.widget.RecyclerView
 
 interface ViewTypeAdapter {
     fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder

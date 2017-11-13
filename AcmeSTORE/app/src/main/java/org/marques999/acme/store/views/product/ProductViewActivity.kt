@@ -13,8 +13,6 @@ import org.marques999.acme.store.views.BackButtonActivity
 
 import kotlinx.android.synthetic.main.activity_product.*
 
-import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
-
 class ProductViewActivity : BackButtonActivity() {
 
     /**
@@ -23,7 +21,6 @@ class ProductViewActivity : BackButtonActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product)
-        OverScrollDecoratorHelper.setUpOverScroll(productView_scrollView)
 
         intent.getParcelableExtra<Product>(EXTRA_PRODUCT).let {
 

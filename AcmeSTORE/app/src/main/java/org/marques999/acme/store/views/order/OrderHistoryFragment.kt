@@ -1,20 +1,26 @@
 package org.marques999.acme.store.views.order
 
 import android.os.Bundle
-import android.content.Intent
 import android.app.ProgressDialog
+import android.support.v7.widget.LinearLayoutManager
 
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.android.schedulers.AndroidSchedulers
 
+import org.marques999.acme.store.R
+import org.marques999.acme.store.AcmeStore
+import org.marques999.acme.store.AcmeDialogs
+
 import kotlinx.android.synthetic.main.fragment_history.*
 
-import org.marques999.acme.store.*
 import org.marques999.acme.store.model.Order
 import org.marques999.acme.store.api.HttpErrorHandler
-import org.marques999.acme.store.views.main.MainActivityFragment
 
-import android.support.v7.widget.LinearLayoutManager
+import android.content.Intent
+import android.content.Context
+
+import org.marques999.acme.store.views.main.MainActivityFragment
+import org.marques999.acme.store.views.main.MainActivityBadgeListener
 
 class OrderHistoryFragment : MainActivityFragment(R.layout.fragment_history), OrderHistoryListener {
 
@@ -22,6 +28,24 @@ class OrderHistoryFragment : MainActivityFragment(R.layout.fragment_history), Or
      */
     private lateinit var orders: ArrayList<Order>
     private lateinit var progressDialog: ProgressDialog
+
+    /**
+     */
+    private var badgeListener: MainActivityBadgeListener? = null
+
+    /**
+     */
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        badgeListener = context as? MainActivityBadgeListener
+    }
+
+    /**
+     */
+    override fun onDetach() {
+        super.onDetach()
+        badgeListener = null
+    }
 
     /**
      */
@@ -39,6 +63,7 @@ class OrderHistoryFragment : MainActivityFragment(R.layout.fragment_history), Or
                 orders = ArrayList(it)
                 adapter.refreshItems(it)
                 progressDialog.dismiss()
+                badgeListener?.onUpdateBadge(2, it.size)
             }, {
                 progressDialog.dismiss()
                 HttpErrorHandler(context).accept(it)
@@ -100,6 +125,7 @@ class OrderHistoryFragment : MainActivityFragment(R.layout.fragment_history), Or
             onRefresh()
         } else {
             orders = savedInstanceState.getParcelableArrayList(BUNDLE_ORDER)
+            badgeListener?.onUpdateBadge(2, orders.size)
             (orderHistory_container.adapter as OrderHistoryAdapter).refreshItems(orders)
         }
     }

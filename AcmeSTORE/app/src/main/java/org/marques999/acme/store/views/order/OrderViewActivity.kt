@@ -4,15 +4,14 @@ import android.os.Bundle
 import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
 
-import kotlinx.android.synthetic.main.activity_order.*
-
 import org.marques999.acme.store.R
-import org.marques999.acme.store.model.OrderJSON
-import org.marques999.acme.store.model.OrderProduct
 import org.marques999.acme.store.views.BackButtonActivity
 import org.marques999.acme.store.views.product.ProductViewActivity
 
-import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
+import kotlinx.android.synthetic.main.activity_order.*
+
+import org.marques999.acme.store.model.OrderJSON
+import org.marques999.acme.store.model.OrderProduct
 
 class OrderViewActivity : BackButtonActivity(), OrderViewListener {
 
@@ -40,11 +39,6 @@ class OrderViewActivity : BackButtonActivity(), OrderViewListener {
         intent.getParcelableExtra<OrderJSON>(OrderViewActivity.EXTRA_ORDER).let {
             orderView_recyclerView.adapter = OrderViewAdapter(it, this)
         }
-
-        OverScrollDecoratorHelper.setUpOverScroll(
-            orderView_recyclerView,
-            OverScrollDecoratorHelper.ORIENTATION_VERTICAL
-        )
     }
 
     /**
