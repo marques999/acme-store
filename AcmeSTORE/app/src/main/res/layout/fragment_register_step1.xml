@@ -6,7 +6,11 @@
   android:paddingEnd="@dimen/global_largeMargin"
   android:paddingStart="@dimen/global_largeMargin"
   android:paddingTop="@dimen/global_mediumMargin">
-  <android.support.design.widget.TextInputLayout style="@style/global_textInput">
+  <android.support.design.widget.TextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/global_mediumMargin"
+    android:layout_marginTop="@dimen/global_mediumMargin">
     <EditText
       android:id="@+id/registerActivity_name"
       android:layout_width="match_parent"
@@ -14,7 +18,11 @@
       android:hint="@string/customer_name"
       android:inputType="textPersonName" />
   </android.support.design.widget.TextInputLayout>
-  <android.support.design.widget.TextInputLayout style="@style/global_textInput">
+  <android.support.design.widget.TextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/global_mediumMargin"
+    android:layout_marginTop="@dimen/global_mediumMargin">
     <EditText
       android:id="@+id/registerActivity_username"
       android:layout_width="match_parent"
@@ -22,7 +30,11 @@
       android:hint="@string/customer_username"
       android:inputType="textPersonName" />
   </android.support.design.widget.TextInputLayout>
-  <android.support.design.widget.TextInputLayout style="@style/global_textInput">
+  <android.support.design.widget.TextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/global_mediumMargin"
+    android:layout_marginTop="@dimen/global_mediumMargin">
     <EditText
       android:id="@+id/registerActivity_password"
       android:layout_width="match_parent"
@@ -30,7 +42,11 @@
       android:hint="@string/customer_password"
       android:inputType="textPassword" />
   </android.support.design.widget.TextInputLayout>
-  <android.support.design.widget.TextInputLayout style="@style/global_textInput">
+  <android.support.design.widget.TextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/global_mediumMargin"
+    android:layout_marginTop="@dimen/global_mediumMargin">
     <EditText
       android:id="@+id/registerActivity_confirm"
       android:layout_width="match_parent"
@@ -38,7 +54,11 @@
       android:hint="@string/register_confirm"
       android:inputType="textPassword" />
   </android.support.design.widget.TextInputLayout>
-  <android.support.design.widget.TextInputLayout style="@style/global_textInput">
+  <android.support.design.widget.TextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/global_mediumMargin"
+    android:layout_marginTop="@dimen/global_mediumMargin">
     <EditText
       android:id="@+id/registerActivity_address1"
       android:layout_width="match_parent"
@@ -46,7 +66,11 @@
       android:hint="@string/register_address1"
       android:inputType="textPostalAddress" />
   </android.support.design.widget.TextInputLayout>
-  <android.support.design.widget.TextInputLayout style="@style/global_textInput">
+  <android.support.design.widget.TextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/global_mediumMargin"
+    android:layout_marginTop="@dimen/global_mediumMargin">
     <EditText
       android:id="@+id/registerActivity_address2"
       android:layout_width="match_parent"
@@ -54,14 +78,18 @@
       android:hint="@string/register_address2"
       android:inputType="textPostalAddress" />
   </android.support.design.widget.TextInputLayout>
-  <android.support.design.widget.TextInputLayout style="@style/global_textInput">
+  <android.support.design.widget.TextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/global_mediumMargin"
+    android:layout_marginTop="@dimen/global_mediumMargin">
     <EditText
       android:id="@+id/registerActivity_nif"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:hint="@string/register_nif"
-      android:maxLength="9"
-      android:inputType="number" />
+      android:inputType="number"
+      android:maxLength="9" />
   </android.support.design.widget.TextInputLayout>
   <android.support.v7.widget.AppCompatButton
     android:id="@+id/registerActivity_next"

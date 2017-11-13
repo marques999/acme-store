@@ -5,20 +5,22 @@ import android.util.Base64
 import android.content.Intent
 import android.app.ProgressDialog
 
+import org.marques999.acme.store.views.BackButtonActivity
+
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Consumer
+import io.reactivex.schedulers.Schedulers
+
 import java.security.KeyPairGenerator
 
 import org.marques999.acme.store.R
 import org.marques999.acme.store.AcmeStore
 import org.marques999.acme.store.AcmeDialogs
 
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Consumer
-import io.reactivex.schedulers.Schedulers
-
-import org.marques999.acme.store.api.AuthenticationProvider
-import org.marques999.acme.store.api.HttpErrorHandler
-
 import kotlinx.android.synthetic.main.fragment_register_step2.*
+
+import org.marques999.acme.store.api.HttpErrorHandler
+import org.marques999.acme.store.api.AuthenticationProvider
 
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
@@ -29,7 +31,7 @@ import org.marques999.acme.store.model.Customer
 import org.marques999.acme.store.model.CustomerPOST
 import org.marques999.acme.store.model.Authentication
 
-class RegisterActivity : AppCompatActivity(), RegisterStepOneListener, RegisterStepTwoListener {
+class RegisterActivity : BackButtonActivity(), RegisterStepOneListener, RegisterStepTwoListener {
 
     /**
      */
@@ -67,7 +69,7 @@ class RegisterActivity : AppCompatActivity(), RegisterStepOneListener, RegisterS
     /**
      */
     override fun previousPage() {
-        changeFragment(registerStepOne, true)
+        supportFragmentManager.popBackStack()
     }
 
     /**
@@ -112,24 +114,20 @@ class RegisterActivity : AppCompatActivity(), RegisterStepOneListener, RegisterS
         changeFragment(registerStepOne, false)
     }
 
+
     /**
      */
     private fun changeFragment(frag: Fragment, saveInBackstack: Boolean) {
 
         val backStateName = frag.javaClass.name
 
-        if (supportFragmentManager.popBackStackImmediate(backStateName, 0) ||
-            supportFragmentManager.findFragmentByTag(backStateName) != null) {
-            return
-        }
-
         supportFragmentManager.beginTransaction().apply {
 
             setCustomAnimations(
-                R.anim.enter_from_left,
-                R.anim.exit_to_right,
                 R.anim.enter_from_right,
-                R.anim.exit_to_left
+                R.anim.exit_to_left,
+                R.anim.enter_from_left,
+                R.anim.exit_to_right
             )
 
             replace(R.id.registerActivity_content, frag, backStateName)
