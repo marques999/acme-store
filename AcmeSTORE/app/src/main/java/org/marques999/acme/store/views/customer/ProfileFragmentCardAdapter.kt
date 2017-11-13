@@ -34,9 +34,9 @@ class ProfileFragmentCardAdapter : ViewTypeAdapter {
     ) {
 
         fun bind(item: CreditCardJSON) {
-            itemView.profile_cardType.text = item.type
-            itemView.profile_cardNumber.text = item.number
-            itemView.profile_cardValidity.text = AcmeUtils.formatDate(item.validity)
+            itemView.profile_ccType.text = item.type
+            itemView.profile_ccNumber.text = item.number
+            itemView.profile_ccValidity.text = AcmeUtils.formatDate(item.validity)
         }
     }
 }

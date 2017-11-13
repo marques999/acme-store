@@ -20,8 +20,9 @@
   <string name="cart_plus">+</string>
   <string name="cart_scan">SCAN BARCODE</string>
   <string name="cart_total">Sub-Total</string>
-  <string name="customer_address1">Address 1</string>
-  <string name="customer_address2">Address 2</string>
+  <string name="customer_address1">Street</string>
+  <string name="customer_address2">Postal</string>
+  <string name="customer_country">Country</string>
   <string name="customer_logout">LOGOUT</string>
   <string name="customer_name">Full Name</string>
   <string name="customer_nif">NIF</string>

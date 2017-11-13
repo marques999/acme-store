@@ -34,13 +34,14 @@ class ProfileFragmentCustomerAdapter : ViewTypeAdapter {
     ) {
 
         fun bind(item: CustomerJSON) {
-            itemView.profile_customerName.text = item.name
-            itemView.profile_customerNif.text = item.tax_number
-            itemView.profile_customerAddress1.text = item.address1
-            itemView.profile_customerAddress2.text = item.address2
-            itemView.profile_customerUsername.text = item.username
-            itemView.profile_customerCreated.text = AcmeUtils.formatDateTime(item.created_at)
-            itemView.profile_customerUpdated.text = AcmeUtils.formatDateTime(item.updated_at)
+            itemView.profile_name.text = item.name
+            itemView.profile_nif.text = item.tax_number
+            itemView.profile_address1.text = item.address1
+            itemView.profile_address2.text = item.address2
+            itemView.profile_username.text = item.username
+            itemView.profile_country.text = AcmeUtils.formatCountry(item.country)
+            itemView.profile_created.text = AcmeUtils.formatDateTime(item.created_at)
+            itemView.profile_updated.text = AcmeUtils.formatDateTime(item.updated_at)
         }
     }
 }

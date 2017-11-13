@@ -14,7 +14,7 @@
         style="@style/table_row"
         android:layout_marginBottom="@dimen/margin_small">
         <TextView
-          android:id="@+id/profile_cardNumber"
+          android:id="@+id/profile_ccNumber"
           style="@style/table_header" />
       </TableRow>
       <TableRow style="@style/table_row">
@@ -22,7 +22,7 @@
           style="@style/row_header"
           android:text="@string/card_type" />
         <TextView
-          android:id="@+id/profile_cardType"
+          android:id="@+id/profile_ccType"
           style="@style/row_content" />
       </TableRow>
       <TableRow style="@style/table_row">
@@ -30,7 +30,7 @@
           style="@style/row_header"
           android:text="@string/card_validity" />
         <TextView
-          android:id="@+id/profile_cardValidity"
+          android:id="@+id/profile_ccValidity"
           style="@style/row_content" />
       </TableRow>
     </TableLayout>

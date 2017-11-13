@@ -14,7 +14,7 @@
         style="@style/table_row"
         android:layout_marginBottom="@dimen/margin_small">
         <TextView
-          android:id="@+id/profile_customerName"
+          android:id="@+id/profile_name"
           style="@style/table_header" />
       </TableRow>
       <TableRow style="@style/table_row">
@@ -22,7 +22,7 @@
           style="@style/row_header"
           android:text="@string/customer_nif" />
         <TextView
-          android:id="@+id/profile_customerNif"
+          android:id="@+id/profile_nif"
           style="@style/row_content" />
       </TableRow>
       <TableRow style="@style/table_row">
@@ -30,7 +30,7 @@
           style="@style/row_header"
           android:text="@string/customer_username" />
         <TextView
-          android:id="@+id/profile_customerUsername"
+          android:id="@+id/profile_username"
           style="@style/row_content" />
       </TableRow>
       <TableRow style="@style/table_row">
@@ -38,7 +38,7 @@
           style="@style/row_header"
           android:text="@string/customer_address1" />
         <TextView
-          android:id="@+id/profile_customerAddress1"
+          android:id="@+id/profile_address1"
           style="@style/row_content" />
       </TableRow>
       <TableRow style="@style/table_row">
@@ -46,7 +46,15 @@
           style="@style/row_header"
           android:text="@string/customer_address2" />
         <TextView
-          android:id="@+id/profile_customerAddress2"
+          android:id="@+id/profile_address2"
+          style="@style/row_content" />
+      </TableRow>
+      <TableRow style="@style/table_row">
+        <TextView
+          style="@style/row_header"
+          android:text="@string/customer_country" />
+        <TextView
+          android:id="@+id/profile_country"
           style="@style/row_content" />
       </TableRow>
       <TableRow style="@style/table_row">
@@ -54,7 +62,7 @@
           style="@style/row_header"
           android:text="@string/global_created" />
         <TextView
-          android:id="@+id/profile_customerCreated"
+          android:id="@+id/profile_created"
           style="@style/row_content" />
       </TableRow>
       <TableRow style="@style/table_row">
@@ -62,7 +70,7 @@
           style="@style/row_header"
           android:text="@string/global_updated" />
         <TextView
-          android:id="@+id/profile_customerUpdated"
+          android:id="@+id/profile_updated"
           style="@style/row_content" />
       </TableRow>
     </TableLayout>
