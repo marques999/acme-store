@@ -1,22 +1,22 @@
 <resources>
-  <!-- DetailsActivity -->
-  <string name="details_activityTitle">Order information</string>
-  <string name="details_ccDate">(%1$s)</string>
-  <string name="details_ccValidity">Valid\u0020</string>
-  <string name="details_customerTax">NIF: %1$s</string>
-  <string name="details_iconDescription">TODO</string>
-  <string name="details_orderCount">#Products:\u0020</string>
-  <string name="details_orderCreated">Created:\u0020</string>
-  <string name="details_orderQuantity">Quantity: %1$d</string>
-  <string name="details_orderToken">Token:\u0020</string>
-  <string name="details_orderUpdated">Updated:\u0020</string>
-  <string name="details_productName">%1$s %2$s</string>
-  <string name="details_productPhoto">TODO</string>
-  <!-- MainActivity -->
-  <string name="main_activityTitle">AcmePRINTER</string>
-  <string name="main_connectionEstablished">Connection to the store server established successfully!</string>
-  <string name="main_iconDescription">TODO</string>
+  <string name="activity_details">Order information</string>
+  <string name="activity_main">AcmePRINTER</string>
+  <string name="card_type">Type</string>
+  <string name="card_validity">Expires</string>
+  <string name="customer_address1">Street</string>
+  <string name="customer_address2">Postal</string>
+  <string name="customer_nif">NIF</string>
+  <string name="global_todo">TODO</string>
+  <string name="main_connected">Connection to the store server established successfully!</string>
+  <string name="main_install">Launch Play Store and install a QR code scanner activity?</string>
   <string name="main_invalidQr">The code you scanned was recognized as \"%1\$s\", expected \"QR_CODE\".</string>
-  <string name="main_promptInstall">Launch Play Store and install a QR code scanner activity?</string>
-  <string name="main_scanButton">SCAN QR CODE</string>
+  <string name="main_scan">SCAN QR CODE</string>
+  <string name="order_created">Created</string>
+  <string name="order_items">Items</string>
+  <string name="order_token">Token</string>
+  <string name="order_updated">Updated</string>
+  <string name="product_barcode">UPC</string>
+  <string name="product_name">%1$s %2$s</string>
+  <string name="product_price">Price</string>
+  <string name="product_total">Total</string>
 </resources>

@@ -1,13 +1,12 @@
 package org.marques999.acme.printer.views
 
 import android.view.ViewGroup
+import android.support.v4.util.SparseArrayCompat
+import android.support.v7.widget.RecyclerView
 
 import org.marques999.acme.printer.model.Order
 import org.marques999.acme.printer.model.ViewType
 import org.marques999.acme.printer.model.ViewTypeAdapter
-
-import android.support.v4.util.SparseArrayCompat
-import android.support.v7.widget.RecyclerView
 
 class DetailsAdapter(order: Order) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -16,16 +15,15 @@ class DetailsAdapter(order: Order) : RecyclerView.Adapter<RecyclerView.ViewHolde
         order.customer.credit_card,
         order,
         *order.products.toTypedArray()
-    )
+    ).apply {
+        notifyItemRangeChanged(0, size)
+    }
 
-    private val delegateAdapters = SparseArrayCompat<ViewTypeAdapter>()
-
-    init {
-        delegateAdapters.put(ViewType.DETAILS_ORDER, DetailsActivityOrderAdapter())
-        delegateAdapters.put(ViewType.DETAILS_PRODUCT, DetailsActivityProductAdapter())
-        delegateAdapters.put(ViewType.DETAILS_CUSTOMER, DetailsActivityCustomerAdapter())
-        delegateAdapters.put(ViewType.DETAILS_CREDIT_CARD, DetailsActivityCardAdapter())
-        notifyItemRangeChanged(0, items.size)
+    private val delegateAdapters = SparseArrayCompat<ViewTypeAdapter>().apply {
+        put(ViewType.DETAILS_ORDER, DetailsActivityOrderAdapter())
+        put(ViewType.DETAILS_PRODUCT, DetailsActivityProductAdapter())
+        put(ViewType.DETAILS_CUSTOMER, DetailsActivityCustomerAdapter())
+        put(ViewType.DETAILS_CREDIT_CARD, DetailsActivityCardAdapter())
     }
 
     override fun getItemCount(): Int = items.size

@@ -2,76 +2,47 @@
   xmlns:card_view="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  card_view:cardBackgroundColor="@color/cardview_light_background"
-  card_view:cardElevation="@dimen/details_smallElevation"
+  card_view:cardBackgroundColor="@color/colorPrimaryDarker"
+  card_view:cardElevation="@dimen/elevation_medium"
   card_view:cardUseCompatPadding="true">
-
-  <LinearLayout
+  <ImageView
+    android:id="@+id/product_photo"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="@dimen/global_largeMargin">
-
-    <LinearLayout
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="@dimen/global_largeMargin"
-      android:orientation="vertical">
-
-      <ImageView
-        android:id="@+id/product_photo"
-        android:layout_width="@dimen/details_productPhoto"
-        android:layout_height="@dimen/details_productPhoto"
-        android:layout_marginBottom="@dimen/details_innerMargin"
-        android:contentDescription="@string/details_productPhoto" />
-
-      <TextView
-        android:id="@+id/product_price"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textColor="@color/colorAccent" />
-    </LinearLayout>
-
-    <RelativeLayout
-      android:id="@+id/layout_heading"
-      android:layout_width="0dp"
-      android:layout_height="match_parent"
-      android:layout_weight="1"
-      android:orientation="horizontal">
-
+    android:layout_height="match_parent"
+    android:alpha="0.10"
+    android:contentDescription="@string/global_todo"
+    android:scaleType="centerCrop" />
+  <LinearLayout style="@style/card_container">
+    <TextView
+      android:id="@+id/product_quantity"
+      style="@style/card_image"
+      android:gravity="center"
+      android:textDirection="firstStrong"
+      android:textSize="@dimen/font_large"
+      android:textStyle="bold" />
+    <GridLayout style="@style/card_grid">
       <TextView
         android:id="@+id/product_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/global_tinyMargin"
-        android:textColor="@color/colorAccent"
-        android:textSize="@dimen/global_mediumFont" />
-
+        style="@style/card_header"
+        android:textSize="24sp" />
+      <TextView
+        style="@style/card_item"
+        android:text="@string/product_barcode" />
       <TextView
         android:id="@+id/product_barcode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/product_name"
-        android:layout_marginBottom="@dimen/global_mediumMargin"
-        android:textColor="@color/colorAccent"
-        android:textSize="@dimen/global_smallFont"
-        android:textStyle="bold" />
-
+        style="@style/card_description" />
       <TextView
-        android:id="@+id/product_quantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/product_barcode"
-        android:textColor="@color/colorAccent" />
-    </RelativeLayout>
-
-    <TextView
-      android:id="@+id/product_total"
-      android:layout_width="wrap_content"
-      android:layout_height="match_parent"
-      android:layout_marginStart="@dimen/global_mediumMargin"
-      android:textAlignment="textEnd"
-      android:textColor="@color/colorAccent"
-      android:textStyle="bold" />
+        style="@style/card_item"
+        android:text="@string/product_price" />
+      <TextView
+        android:id="@+id/product_price"
+        style="@style/card_description" />
+      <TextView
+        style="@style/card_item"
+        android:text="@string/product_total" />
+      <TextView
+        android:id="@+id/product_total"
+        style="@style/card_description" />
+    </GridLayout>
   </LinearLayout>
 </android.support.v7.widget.CardView>

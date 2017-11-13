@@ -13,4 +13,45 @@
     <item name="android:windowBackground">@color/colorPrimaryDark</item>
     <item name="android:colorButtonNormal">@color/colorAccent</item>
   </style>
+  <style name="card_item">
+    <item name="android:layout_width">@dimen/width_item</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textColor">@color/colorAccent</item>
+    <item name="android:textSize">@dimen/font_medium</item>
+    <item name="android:textStyle">bold</item>
+  </style>
+  <style name="card_description">
+    <item name="android:layout_gravity">fill</item>
+    <item name="android:layout_columnWeight">1</item>
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_marginBottom">@dimen/margin_item</item>
+    <item name="android:textSize">@dimen/font_medium</item>
+  </style>
+  <style name="card_header">
+    <item name="android:layout_gravity">fill</item>
+    <item name="android:layout_columnWeight">1</item>
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_columnSpan">2</item>
+    <item name="android:layout_marginBottom">@dimen/margin_header</item>
+    <item name="android:textSize">@dimen/font_large</item>
+  </style>
+  <style name="card_image">
+    <item name="android:background">@color/colorAccent</item>
+    <item name="android:layout_width">@dimen/width_icon</item>
+    <item name="android:layout_height">match_parent</item>
+    <item name="android:elevation">@dimen/elevation_small</item>
+    <item name="android:padding">@dimen/margin_medium</item>
+  </style>
+  <style name="card_grid">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:padding">@dimen/margin_large</item>
+    <item name="android:columnCount">2</item>
+  </style>
+  <style name="card_container">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+  </style>
 </resources>

@@ -7,14 +7,14 @@ import android.os.Parcelable
 
 class Customer(
     val name: String,
-    val username: String,
+    private val username: String,
     val address1: String,
     val address2: String,
-    val country: String,
+    private val country: String,
     val tax_number: String,
     val credit_card: CreditCard,
-    val created_at: Date,
-    val updated_at: Date
+    private val created_at: Date,
+    private val updated_at: Date
 ) : ViewType, Parcelable {
 
     constructor(parcel: Parcel) : this(

@@ -1,11 +1,10 @@
 package org.marques999.acme.printer
 
+import android.net.Uri
 import android.os.Bundle
 
 import org.marques999.acme.printer.api.HttpErrorHandler
 import org.marques999.acme.printer.views.DetailsActivity
-
-import android.net.Uri
 
 import android.content.Intent
 import android.content.ActivityNotFoundException
@@ -38,19 +37,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mainActivity_scan.setOnClickListener {
+        main_scan.setOnClickListener {
             try {
                 launchQrScanner()
             } catch (ex: ActivityNotFoundException) {
-                AcmeDialogs.buildYesNo(this, R.string.main_promptInstall, launchPlayStore).show()
+                AcmeDialogs.buildYesNo(this, R.string.main_install, launchPlayStore).show()
             }
         }
 
-        mainActivity_scan.isEnabled = (application as AcmePrinter).authenticate(
+        main_scan.isEnabled = (application as AcmePrinter).authenticate(
             this,
             Consumer {
-                mainActivity_scan.isEnabled = true
-                AcmeDialogs.buildOk(this, R.string.main_connectionEstablished).show()
+                main_scan.isEnabled = true
+                AcmeDialogs.buildOk(this, R.string.main_connected).show()
             }
         )
     }

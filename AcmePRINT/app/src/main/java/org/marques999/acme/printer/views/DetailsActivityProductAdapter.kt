@@ -30,19 +30,15 @@ class DetailsActivityProductAdapter : ViewTypeAdapter {
         fun bind(item: OrderProduct) {
 
             itemView.product_barcode.text = item.product.barcode
+            itemView.product_quantity.text =  item.quantity.toString()
             itemView.product_price.text = AcmeUtils.formatCurrency(item.product.price)
 
             itemView.product_total.text = AcmeUtils.formatCurrency(
                 item.product.price * item.quantity
             )
 
-            itemView.product_quantity.text = itemView.context.getString(
-                R.string.details_orderQuantity,
-                item.quantity
-            )
-
             itemView.product_name.text = itemView.context.getString(
-                R.string.details_productName,
+                R.string.product_name,
                 item.product.brand,
                 item.product.name
             )
