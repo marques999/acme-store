@@ -31,6 +31,12 @@
       <TextView
         android:id="@+id/customer_address2"
         style="@style/card_description" />
+      <TextView
+        style="@style/card_item"
+        android:text="@string/customer_country" />
+      <TextView
+        android:id="@+id/customer_country"
+        style="@style/card_description" />
     </GridLayout>
   </LinearLayout>
 </android.support.v7.widget.CardView>

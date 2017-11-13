@@ -5,6 +5,7 @@
   <string name="card_validity">Expires</string>
   <string name="customer_address1">Street</string>
   <string name="customer_address2">Postal</string>
+  <string name="customer_country">Country</string>
   <string name="customer_nif">NIF</string>
   <string name="global_todo">TODO</string>
   <string name="main_connected">Connection to the store server established successfully!</string>

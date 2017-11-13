@@ -10,7 +10,7 @@ class Customer(
     private val username: String,
     val address1: String,
     val address2: String,
-    private val country: String,
+    val country: String,
     val tax_number: String,
     val credit_card: CreditCard,
     private val created_at: Date,
