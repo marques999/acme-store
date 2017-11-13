@@ -105,7 +105,7 @@ class OrderHistoryFragment : MainActivityFragment(R.layout.fragment_history), Or
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        progressDialog = AcmeDialogs.buildProgress(context, R.string.global_progressLoading)
+        progressDialog = AcmeDialogs.buildProgress(context, R.string.global_loading)
     }
 
     /**

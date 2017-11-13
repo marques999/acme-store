@@ -122,7 +122,7 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         shoppingCart = (activity.application as AcmeStore).shoppingCart
-        progressDialog = AcmeDialogs.buildProgress(context, R.string.global_progressLoading)
+        progressDialog = AcmeDialogs.buildProgress(context, R.string.global_loading)
     }
 
     /**
@@ -163,7 +163,7 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
         if (format == "UPC_A") {
             fetchProduct(data.getStringExtra("SCAN_RESULT"))
         } else {
-            AcmeDialogs.buildOk(context, R.string.shoppingCart_invalidQr, format).show()
+            AcmeDialogs.buildOk(context, R.string.cart_invalidQr, format).show()
         }
     }
 
@@ -190,12 +190,12 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
                     "SCAN_MODE", "PRODUCT_MODE"
                 ), 0)
             } catch (ex: ActivityNotFoundException) {
-                AcmeDialogs.buildYesNo(activity, R.string.mainActivity_prompt, launchPlayStore).show()
+                AcmeDialogs.buildYesNo(activity, R.string.main_market, launchPlayStore).show()
             }
         }
 
         shoppingCart_checkout.setOnClickListener {
-            AcmeDialogs.buildYesNo(activity, R.string.shoppingCart_confirm, confirmPurchase).show()
+            AcmeDialogs.buildYesNo(activity, R.string.cart_confirm, confirmPurchase).show()
         }
     }
 }

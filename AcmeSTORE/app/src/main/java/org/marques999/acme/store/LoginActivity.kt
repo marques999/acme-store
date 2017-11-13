@@ -90,7 +90,7 @@ class LoginActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        progressDialog = AcmeDialogs.buildProgress(this, R.string.login_progressDialog)
+        progressDialog = AcmeDialogs.buildProgress(this, R.string.login_progress)
 
         loginActivity_register.setOnClickListener {
 
@@ -122,7 +122,7 @@ class LoginActivity : AppCompatActivity() {
         var formValid = true
 
         if (loginActivity_username.text.toString().isEmpty()) {
-            loginActivity_username.error = generateError(R.string.errorRequired)
+            loginActivity_username.error = generateError(R.string.error_required)
             formValid = false
         }
         else {
@@ -130,7 +130,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         if (loginActivity_password.text.toString().isEmpty()) {
-            loginActivity_password.error = generateError(R.string.errorRequired)
+            loginActivity_password.error = generateError(R.string.error_required)
             formValid = false
         }
         else {

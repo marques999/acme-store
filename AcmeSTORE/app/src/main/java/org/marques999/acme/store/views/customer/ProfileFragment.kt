@@ -65,7 +65,7 @@ class ProfileFragment : MainActivityFragment(R.layout.fragment_profile) {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        progressDialog = AcmeDialogs.buildProgress(context, R.string.login_progressDialog)
+        progressDialog = AcmeDialogs.buildProgress(context, R.string.login_progress)
     }
 
     /**

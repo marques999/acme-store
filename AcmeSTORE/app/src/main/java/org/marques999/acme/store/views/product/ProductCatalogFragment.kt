@@ -56,7 +56,7 @@ class ProductCatalogFragment : MainActivityFragment(R.layout.fragment_catalog), 
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        progressDialog = AcmeDialogs.buildProgress(context, R.string.global_progressLoading)
+        progressDialog = AcmeDialogs.buildProgress(context, R.string.global_loading)
     }
 
     /**

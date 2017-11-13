@@ -22,9 +22,9 @@ object RegisterConstants {
     /**
      */
     private val messageParams = mapOf(
-        R.string.errorNif to NIF_LENGTH,
-        R.string.errorPassword to PASSWORD_MINIMUM,
-        R.string.errorUsername to USERNAME_MINIMUM
+        R.string.error_nif to NIF_LENGTH,
+        R.string.error_password to PASSWORD_MINIMUM,
+        R.string.error_username to USERNAME_MINIMUM
     )
 
     /**

@@ -110,7 +110,7 @@ class RegisterActivity : BackButtonActivity(), RegisterStepOneListener, Register
         acmeInstance = application as AcmeStore
         registerStepOne = RegisterStepOneFragment()
         registerStepTwo = RegisterStepTwoFragment()
-        progressDialog = AcmeDialogs.buildProgress(this, R.string.login_progressDialog)
+        progressDialog = AcmeDialogs.buildProgress(this, R.string.login_progress)
         changeFragment(registerStepOne, false)
     }
 

@@ -2,15 +2,15 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:orientation="vertical">
-  <LinearLayout style="@style/global_buttonGroup">
+  <LinearLayout style="@style/button_group">
     <Button
       android:id="@+id/profile_qrTest"
-      style="@style/global_button"
+      style="@style/button_item"
       android:drawableStart="@drawable/ic_camera_24dp"
       android:text="@string/customer_qrTest" />
     <Button
       android:id="@+id/profile_logout"
-      style="@style/global_button"
+      style="@style/button_item"
       android:drawableStart="@drawable/ic_exit_24dp"
       android:text="@string/customer_logout" />
   </LinearLayout>

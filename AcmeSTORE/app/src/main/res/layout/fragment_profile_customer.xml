@@ -2,68 +2,68 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  app:cardElevation="@dimen/global_cardElevation"
+  app:cardElevation="@dimen/elevation_medium"
   app:cardUseCompatPadding="true">
   <LinearLayout style="@style/table_parent">
     <ImageView
-      style="@style/table_leftContainer"
-      android:contentDescription="@string/global_todoDescription"
+      style="@style/table_left"
+      android:contentDescription="@string/global_todo"
       android:src="@drawable/ic_person_48dp" />
     <TableLayout style="@style/table_rightContainer">
       <TableRow
-        style="@style/global_tableRow"
-        android:layout_marginBottom="@dimen/global_smallMargin">
+        style="@style/table_row"
+        android:layout_marginBottom="@dimen/margin_small">
         <TextView
           android:id="@+id/profile_customerName"
-          style="@style/global_tableHeader" />
+          style="@style/table_header" />
       </TableRow>
-      <TableRow style="@style/global_tableRow">
+      <TableRow style="@style/table_row">
         <TextView
-          style="@style/global_rowHeader"
+          style="@style/row_header"
           android:text="@string/customer_nif" />
         <TextView
           android:id="@+id/profile_customerNif"
-          style="@style/global_rowContent" />
+          style="@style/row_content" />
       </TableRow>
-      <TableRow style="@style/global_tableRow">
+      <TableRow style="@style/table_row">
         <TextView
-          style="@style/global_rowHeader"
+          style="@style/row_header"
           android:text="@string/customer_username" />
         <TextView
           android:id="@+id/profile_customerUsername"
-          style="@style/global_rowContent" />
+          style="@style/row_content" />
       </TableRow>
-      <TableRow style="@style/global_tableRow">
+      <TableRow style="@style/table_row">
         <TextView
-          style="@style/global_rowHeader"
+          style="@style/row_header"
           android:text="@string/customer_address1" />
         <TextView
           android:id="@+id/profile_customerAddress1"
-          style="@style/global_rowContent" />
+          style="@style/row_content" />
       </TableRow>
-      <TableRow style="@style/global_tableRow">
+      <TableRow style="@style/table_row">
         <TextView
-          style="@style/global_rowHeader"
+          style="@style/row_header"
           android:text="@string/customer_address2" />
         <TextView
           android:id="@+id/profile_customerAddress2"
-          style="@style/global_rowContent" />
+          style="@style/row_content" />
       </TableRow>
-      <TableRow style="@style/global_tableRow">
+      <TableRow style="@style/table_row">
         <TextView
-          style="@style/global_rowHeader"
+          style="@style/row_header"
           android:text="@string/global_created" />
         <TextView
           android:id="@+id/profile_customerCreated"
-          style="@style/global_rowContent" />
+          style="@style/row_content" />
       </TableRow>
-      <TableRow style="@style/global_tableRow">
+      <TableRow style="@style/table_row">
         <TextView
-          style="@style/global_rowHeader"
+          style="@style/row_header"
           android:text="@string/global_updated" />
         <TextView
           android:id="@+id/profile_customerUpdated"
-          style="@style/global_rowContent" />
+          style="@style/row_content" />
       </TableRow>
     </TableLayout>
   </LinearLayout>

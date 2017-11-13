@@ -8,7 +8,7 @@
     android:allowBackup="true"
     android:fullBackupContent="true"
     android:icon="@mipmap/ic_launcher"
-    android:label="@string/mainActivity_title"
+    android:label="@string/activity_main"
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
@@ -23,7 +23,7 @@
     </activity>
     <activity
       android:name=".views.product.ProductViewActivity"
-      android:label="@string/product_activity"
+      android:label="@string/activity_product"
       android:parentActivityName=".MainActivity">
       <meta-data
         android:name="android.support.PARENT_ACTIVITY"
@@ -32,7 +32,7 @@
     <activity android:name=".MainActivity" />
     <activity
       android:name=".views.register.RegisterActivity"
-      android:label="@string/register_title"
+      android:label="@string/activity_register"
       android:parentActivityName=".LoginActivity">
       <meta-data
         android:name="android.support.PARENT_ACTIVITY"
@@ -41,7 +41,7 @@
     <activity android:name=".views.order.OrderConfirmActivity" />
     <activity
       android:name=".views.order.OrderViewActivity"
-      android:label="@string/order_title"
+      android:label="@string/activity_order"
       android:parentActivityName=".MainActivity">
       <meta-data
         android:name="android.support.PARENT_ACTIVITY"

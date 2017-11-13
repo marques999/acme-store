@@ -74,7 +74,7 @@ class RegisterStepOneFragment : Fragment() {
         val name = registerActivity_name.text.toString()
 
         if (name.isEmpty()) {
-            registerActivity_name.error = generateError(R.string.errorRequired)
+            registerActivity_name.error = generateError(R.string.error_required)
             formValid = false
         } else {
             registerActivity_name.error = null
@@ -84,11 +84,11 @@ class RegisterStepOneFragment : Fragment() {
 
         when {
             username.isEmpty() -> {
-                registerActivity_username.error = generateError(R.string.errorRequired)
+                registerActivity_username.error = generateError(R.string.error_required)
                 formValid = false
             }
             RegisterConstants.invalidUsername(username) -> {
-                registerActivity_username.error = generateError(R.string.errorUsername)
+                registerActivity_username.error = generateError(R.string.error_username)
                 formValid = false
             }
             else -> {
@@ -100,11 +100,11 @@ class RegisterStepOneFragment : Fragment() {
 
         when {
             password.isEmpty() -> {
-                registerActivity_password.error = generateError(R.string.errorRequired)
+                registerActivity_password.error = generateError(R.string.error_required)
                 formValid = false
             }
             RegisterConstants.invalidPassword(password) -> {
-                registerActivity_password.error = generateError(R.string.errorPassword)
+                registerActivity_password.error = generateError(R.string.error_password)
                 formValid = false
             }
             else -> {
@@ -116,15 +116,15 @@ class RegisterStepOneFragment : Fragment() {
 
         when {
             confirmPassword.isEmpty() -> {
-                registerActivity_confirm.error = generateError(R.string.errorRequired)
+                registerActivity_confirm.error = generateError(R.string.error_required)
                 formValid = false
             }
             RegisterConstants.invalidPassword(confirmPassword) -> {
-                registerActivity_password.error = generateError(R.string.errorPassword)
+                registerActivity_password.error = generateError(R.string.error_password)
                 formValid = false
             }
             confirmPassword != password -> {
-                registerActivity_confirm.error = generateError(R.string.errorMismatch)
+                registerActivity_confirm.error = generateError(R.string.error_mismatch)
                 formValid = false
             }
             else -> {
@@ -135,7 +135,7 @@ class RegisterStepOneFragment : Fragment() {
         val address1 = registerActivity_address1.text.toString()
 
         if (address1.isEmpty()) {
-            registerActivity_address1.error = generateError(R.string.errorRequired)
+            registerActivity_address1.error = generateError(R.string.error_required)
             formValid = false
         } else {
             registerActivity_address1.error = null
@@ -144,7 +144,7 @@ class RegisterStepOneFragment : Fragment() {
         val address2 = registerActivity_address2.text.toString()
 
         if (address2.isEmpty()) {
-            registerActivity_address2.error = generateError(R.string.errorRequired)
+            registerActivity_address2.error = generateError(R.string.error_required)
             formValid = false
         } else {
             registerActivity_address2.error = null
@@ -154,11 +154,11 @@ class RegisterStepOneFragment : Fragment() {
 
         when {
             taxNumber.isEmpty() -> {
-                registerActivity_nif.error = generateError(R.string.errorRequired)
+                registerActivity_nif.error = generateError(R.string.error_required)
                 formValid = false
             }
             RegisterConstants.invalidNif(taxNumber) -> {
-                registerActivity_nif.error = generateError(R.string.errorNif)
+                registerActivity_nif.error = generateError(R.string.error_nif)
                 formValid = false
             }
             else -> {

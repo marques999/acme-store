@@ -2,36 +2,36 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  app:cardElevation="@dimen/global_cardElevation"
+  app:cardElevation="@dimen/elevation_medium"
   app:cardUseCompatPadding="true">
   <LinearLayout style="@style/table_parent">
     <ImageView
-      style="@style/table_leftContainer"
-      android:contentDescription="@string/global_todoDescription"
+      style="@style/table_left"
+      android:contentDescription="@string/global_todo"
       android:src="@drawable/ic_credit_card_48dp" />
     <TableLayout style="@style/table_rightContainer">
       <TableRow
-        style="@style/global_tableRow"
-        android:layout_marginBottom="@dimen/global_smallMargin">
+        style="@style/table_row"
+        android:layout_marginBottom="@dimen/margin_small">
         <TextView
           android:id="@+id/profile_cardNumber"
-          style="@style/global_tableHeader" />
+          style="@style/table_header" />
       </TableRow>
-      <TableRow style="@style/global_tableRow">
+      <TableRow style="@style/table_row">
         <TextView
-          style="@style/global_rowHeader"
-          android:text="@string/customer_ccType" />
+          style="@style/row_header"
+          android:text="@string/card_type" />
         <TextView
           android:id="@+id/profile_cardType"
-          style="@style/global_rowContent" />
+          style="@style/row_content" />
       </TableRow>
-      <TableRow style="@style/global_tableRow">
+      <TableRow style="@style/table_row">
         <TextView
-          style="@style/global_rowHeader"
-          android:text="@string/customer_ccValidity" />
+          style="@style/row_header"
+          android:text="@string/card_validity" />
         <TextView
           android:id="@+id/profile_cardValidity"
-          style="@style/global_rowContent" />
+          style="@style/row_content" />
       </TableRow>
     </TableLayout>
   </LinearLayout>

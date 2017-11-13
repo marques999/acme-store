@@ -4,7 +4,7 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   card_view:cardBackgroundColor="@color/colorPrimaryDarker"
-  card_view:cardElevation="@dimen/global_cardElevation"
+  card_view:cardElevation="@dimen/elevation_medium"
   card_view:cardUseCompatPadding="true">
   <ImageView
     android:id="@+id/orderView_photo"
@@ -15,43 +15,43 @@
   <LinearLayout style="@style/table_parent">
     <TextView
       android:id="@+id/orderView_quantity"
-      style="@style/table_leftContainer"
+      style="@style/table_left"
       android:gravity="center"
       android:textDirection="firstStrong"
-      android:textSize="@dimen/global_largeFont"
+      android:textSize="@dimen/header_large"
       android:textStyle="bold" />
     <TableLayout style="@style/table_rightContainer">
       <TableRow
-        style="@style/global_tableRow"
-        android:layout_marginBottom="@dimen/global_smallMargin">
+        style="@style/table_row"
+        android:layout_marginBottom="@dimen/margin_small">
         <TextView
           android:id="@+id/orderView_product"
-          style="@style/global_tableHeader"
+          style="@style/table_header"
           android:textSize="24sp" />
       </TableRow>
-      <TableRow style="@style/global_tableRow">
+      <TableRow style="@style/table_row">
         <TextView
-          style="@style/global_rowHeader"
+          style="@style/row_header"
           android:text="@string/product_barcode" />
         <TextView
           android:id="@+id/orderView_barcode"
-          style="@style/global_rowContent" />
+          style="@style/row_content" />
       </TableRow>
-      <TableRow style="@style/global_tableRow">
+      <TableRow style="@style/table_row">
         <TextView
-          style="@style/global_rowHeader"
+          style="@style/row_header"
           android:text="@string/product_price" />
         <TextView
           android:id="@+id/orderView_price"
-          style="@style/global_rowContent" />
+          style="@style/row_content" />
       </TableRow>
-      <TableRow style="@style/global_tableRow">
+      <TableRow style="@style/table_row">
         <TextView
-          style="@style/global_rowHeader"
+          style="@style/row_header"
           android:text="@string/product_total" />
         <TextView
           android:id="@+id/orderView_total"
-          style="@style/global_rowContent" />
+          style="@style/row_content" />
       </TableRow>
     </TableLayout>
   </LinearLayout>

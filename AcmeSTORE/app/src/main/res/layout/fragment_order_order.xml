@@ -2,44 +2,44 @@
   xmlns:card_view="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  card_view:cardElevation="@dimen/global_cardElevation"
+  card_view:cardElevation="@dimen/elevation_medium"
   card_view:cardUseCompatPadding="true">
   <LinearLayout style="@style/table_parent">
     <ImageView
-      style="@style/table_leftContainer"
-      android:contentDescription="@string/global_todoDescription"
+      style="@style/table_left"
+      android:contentDescription="@string/global_todo"
       android:src="@drawable/ic_cart_48dp" />
     <TableLayout style="@style/table_rightContainer">
       <TableRow
-        style="@style/global_tableRow"
-        android:layout_marginBottom="@dimen/global_smallMargin">
+        style="@style/table_row"
+        android:layout_marginBottom="@dimen/margin_small">
         <TextView
           android:id="@+id/orderView_orderTotal"
-          style="@style/global_tableHeader" />
+          style="@style/table_header" />
       </TableRow>
-      <TableRow style="@style/global_tableRow">
+      <TableRow style="@style/table_row">
         <TextView
-          style="@style/global_rowHeader"
-          android:text="@string/order_token" />
+          style="@style/row_header"
+          android:text="@string/global_token" />
         <TextView
           android:id="@+id/orderView_token"
-          style="@style/global_rowContent" />
+          style="@style/row_content" />
       </TableRow>
-      <TableRow style="@style/global_tableRow">
+      <TableRow style="@style/table_row">
         <TextView
-          style="@style/global_rowHeader"
+          style="@style/row_header"
           android:text="@string/global_created" />
         <TextView
           android:id="@+id/orderView_createdAt"
-          style="@style/global_rowContent" />
+          style="@style/row_content" />
       </TableRow>
-      <TableRow style="@style/global_tableRow">
+      <TableRow style="@style/table_row">
         <TextView
-          style="@style/global_rowHeader"
+          style="@style/row_header"
           android:text="@string/global_updated" />
         <TextView
           android:id="@+id/orderView_modifiedAt"
-          style="@style/global_rowContent" />
+          style="@style/row_content" />
       </TableRow>
     </TableLayout>
   </LinearLayout>

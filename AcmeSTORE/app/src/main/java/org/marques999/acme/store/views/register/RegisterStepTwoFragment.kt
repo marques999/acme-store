@@ -108,7 +108,7 @@ class RegisterStepTwoFragment : Fragment(), DatePicker.OnDateChangedListener {
 
         registerActivity_ccType.adapter = ArrayAdapter.createFromResource(
             context,
-            R.array.registerActivity_cards,
+            R.array.register_cards,
             android.R.layout.simple_spinner_item
         ).apply {
             setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -129,7 +129,7 @@ class RegisterStepTwoFragment : Fragment(), DatePicker.OnDateChangedListener {
 
         when {
             cardNumber.isEmpty() -> {
-                registerActivity_ccNumber.error = generateError(R.string.errorRequired)
+                registerActivity_ccNumber.error = generateError(R.string.error_required)
                 formValid = false
             }
             creditCardRegex[cardType].matcher(cardNumber).matches() -> {
@@ -138,7 +138,7 @@ class RegisterStepTwoFragment : Fragment(), DatePicker.OnDateChangedListener {
             else -> {
                 formValid = false
                 registerActivity_ccNumber.error = getString(
-                    R.string.errorNumber,
+                    R.string.error_number,
                     registerActivity_ccType.selectedItem.toString()
                 )
             }
@@ -146,7 +146,7 @@ class RegisterStepTwoFragment : Fragment(), DatePicker.OnDateChangedListener {
 
         if (formValid && validity.before(Calendar.getInstance())) {
             formValid = false
-            AcmeDialogs.buildOk(context, R.string.errorExpired).show()
+            AcmeDialogs.buildOk(context, R.string.error_expired).show()
         }
 
         return formValid

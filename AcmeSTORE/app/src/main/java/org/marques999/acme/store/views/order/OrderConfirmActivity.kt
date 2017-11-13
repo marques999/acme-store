@@ -49,7 +49,7 @@ class OrderConfirmActivity : AppCompatActivity() {
     @Throws(WriterException::class)
     private fun encodeQrCode(qrCode: String?): Bitmap {
 
-        val qrDimensions = resources.getDimension(R.dimen.global_qrCode).toInt()
+        val qrDimensions = resources.getDimension(R.dimen.width_qrCode).toInt()
 
         val bitMatrix = MultiFormatWriter().encode(
             qrCode, BarcodeFormat.QR_CODE, qrDimensions, qrDimensions, null

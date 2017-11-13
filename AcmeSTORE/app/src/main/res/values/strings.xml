@@ -1,45 +1,55 @@
 <resources>
-  <!-- Globals -->
-  <string name="global_created">Created</string>
-  <string name="global_progressLoading">Loading…</string>
-  <string name="global_todoDescription">TODO</string>
-  <string name="global_updated">Updated</string>
-  <!-- ActionBar -->
   <string name="actionBar_cart">Shopping Cart</string>
   <string name="actionBar_catalog">Product Catalog</string>
   <string name="actionBar_history">Order History</string>
   <string name="actionBar_profile">My Profile</string>
-  <!-- BottomNavigation -->
-  <string name="bottomNavigation_cart">Cart</string>
-  <string name="bottomNavigation_catalog">Catalog</string>
-  <string name="bottomNavigation_history">History</string>
-  <string name="bottomNavigation_profile">Profile</string>
-  <!-- ProfileFragment -->
+  <string name="activity_main">AcmeSTORE</string>
+  <string name="activity_order">Order information</string>
+  <string name="activity_product">Product information</string>
+  <string name="activity_register">Register customer</string>
+  <string name="card_number">Number</string>
+  <string name="card_type">Type</string>
+  <string name="card_validity">Validity</string>
+  <string name="cart_checkout">CHECKOUT</string>
+  <string name="cart_confirm">Confirm purchase</string>
+  <string name="cart_delete">Delete</string>
+  <string name="cart_invalidQr">The code you scanned was recognized as \"%1\$s\",
+    expected \"UPC_A\".</string>
+  <string name="cart_items">Items</string>
+  <string name="cart_minus">-</string>
+  <string name="cart_plus">+</string>
+  <string name="cart_scan">SCAN BARCODE</string>
+  <string name="cart_total">Sub-Total</string>
   <string name="customer_address1">Address 1</string>
   <string name="customer_address2">Address 2</string>
-  <string name="customer_ccNumber">Number</string>
-  <string name="customer_ccType">Type</string>
-  <string name="customer_ccValidity">Validity</string>
   <string name="customer_logout">LOGOUT</string>
   <string name="customer_name">Full Name</string>
   <string name="customer_nif">NIF</string>
   <string name="customer_password">Password</string>
   <string name="customer_qrTest">GENERATE QR</string>
   <string name="customer_username">Username</string>
-  <!-- LoginActivity -->
-  <string name="login_loginButton">Login</string>
-  <string name="login_progressDialog">Authenticating…</string>
-  <string name="login_registerButton">Don\'t have an account yet? Register!</string>
-  <!-- MainActivity -->
-  <string name="mainActivity_logout">Are you sure you want to terminate your current session and return to the login screen?</string>
-  <string name="mainActivity_prompt">Launch Play Store and install a QR code scanner activity?</string>
-  <string name="mainActivity_refresh">Refresh</string>
-  <string name="mainActivity_title">AcmeSTORE</string>
-  <!-- OrderViewActivity -->
-  <string name="order_title">Order information</string>
-  <string name="order_token">Token</string>
-  <!-- ProductViewActivity -->
-  <string name="product_activity">Product information</string>
+  <string name="error_expired">Your credit card has expired, please double check the expiration date!</string>
+  <string name="error_mismatch">The passwords you entered do not match!</string>
+  <string name="error_nif">The tax number must be exactly %1$d digits long.</string>
+  <string name="error_number">The number you entered is not a valid %1$s card number!</string>
+  <string name="error_password">Password must have at least %1$d alphanumeric characters.</string>
+  <string name="error_required">This field is required.</string>
+  <string name="error_username">Username must be at least %1$d characters long.</string>
+  <string name="global_created">Created</string>
+  <string name="global_loading">Loading…</string>
+  <string name="global_refresh">Refresh</string>
+  <string name="global_todo">TODO</string>
+  <string name="global_token">Token</string>
+  <string name="global_updated">Updated</string>
+  <string name="login_button">Login</string>
+  <string name="login_progress">Authenticating…</string>
+  <string name="login_register">Don\'t have an account yet? Register!</string>
+  <string name="main_logout">Are you sure you want to terminate your current session and return to the login screen?</string>
+  <string name="main_market">Launch Play Store and install a QR code scanner activity?</string>
+  <string name="navigation_cart">Cart</string>
+  <string name="navigation_catalog">Catalog</string>
+  <string name="navigation_history">History</string>
+  <string name="navigation_profile">Profile</string>
   <string name="product_available">Not purchased</string>
   <string name="product_barcode">UPC</string>
   <string name="product_description">Description</string>
@@ -48,39 +58,18 @@
   <string name="product_purchase">Purchase</string>
   <string name="product_purchased">Already on cart</string>
   <string name="product_total">Total</string>
-  <!-- RegisterActivity -->
   <string name="register_address1">Address (street)</string>
   <string name="register_address2">Address (city/post)</string>
-  <string name="register_confirm">Confirm Password</string>
   <string name="register_button">Register</string>
-  <string name="register_next">Next (Payment Method)</string>
-  <string name="register_nif">Tax Number</string>
-  <string name="register_previous">Previous</string>
-  <string name="register_title">Register customer</string>
-  <string-array name="registerActivity_cards">
+  <string-array name="register_cards">
     <item>VISA</item>
     <item>Maestro</item>
     <item>Mastercard</item>
     <item>VISA Electron</item>
     <item>American Express</item>
   </string-array>
-  <!-- RegisterCommon -->
-  <string name="errorExpired">Your credit card has expired, please double check the expiration date!</string>
-  <string name="errorMismatch">The passwords you entered do not match!</string>
-  <string name="errorNif">The tax number must be exactly %1$d digits long.</string>
-  <string name="errorNumber">The number you entered is not a valid %1$s card number!</string>
-  <string name="errorPassword">Password must have at least %1$d alphanumeric characters.</string>
-  <string name="errorRequired">This field is required.</string>
-  <string name="errorUsername">Username must be at least %1$d characters long.</string>
-  <!-- ShoppingCartFragment -->
-  <string name="shoppingCart_checkout">CHECKOUT</string>
-  <string name="shoppingCart_confirm">Confirm purchase</string>
-  <string name="shoppingCart_delete">Delete</string>
-  <string name="shoppingCart_invalidQr">The code you scanned was recognized as \"%1\$s\",
-    expected \"UPC_A\".</string>
-  <string name="shoppingCart_items">Items</string>
-  <string name="shoppingCart_minus">-</string>
-  <string name="shoppingCart_plus">+</string>
-  <string name="shoppingCart_price">Sub-Total</string>
-  <string name="shoppingCart_scan">SCAN BARCODE</string>
+  <string name="register_confirm">Confirm Password</string>
+  <string name="register_next">Next (Payment Method)</string>
+  <string name="register_nif">Tax Number</string>
+  <string name="register_previous">Previous</string>
 </resources>

@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity(), MainActivityBadgeListener, MainActivit
      */
     override fun onBackPressed() {
 
-        AcmeDialogs.buildYesNo(this, R.string.mainActivity_logout,
+        AcmeDialogs.buildYesNo(this, R.string.main_logout,
             DialogInterface.OnClickListener { _, _ ->
                 finish()
             }
@@ -110,25 +110,25 @@ class MainActivity : AppCompatActivity(), MainActivityBadgeListener, MainActivit
         )
 
         bottomNavigation.addItem(AHBottomNavigationItem(
-            R.string.bottomNavigation_cart,
+            R.string.navigation_cart,
             R.drawable.ic_cart_24dp,
             R.color.colorPrimaryDark
         ))
 
         bottomNavigation.addItem(AHBottomNavigationItem(
-            R.string.bottomNavigation_catalog,
+            R.string.navigation_catalog,
             R.drawable.ic_catalog_24dp,
             R.color.colorPrimaryDark
         ))
 
         bottomNavigation.addItem(AHBottomNavigationItem(
-            R.string.bottomNavigation_history,
+            R.string.navigation_history,
             R.drawable.ic_history_24dp,
             R.color.colorPrimaryDark
         ))
 
         bottomNavigation.addItem(AHBottomNavigationItem(
-            R.string.bottomNavigation_profile,
+            R.string.navigation_profile,
             R.drawable.ic_person_24dp,
             R.color.colorPrimaryDark
         ))

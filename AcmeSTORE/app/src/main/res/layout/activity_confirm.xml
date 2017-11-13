@@ -6,9 +6,9 @@
   <ImageView
     android:id="@+id/qrCode_imageView"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/global_qrCode"
+    android:layout_height="@dimen/width_qrCode"
     android:layout_gravity="center"
-    android:padding="@dimen/global_largeMargin" />
+    android:padding="@dimen/margin_large" />
   <TextView
     android:id="@+id/qrCode_textView"
     android:layout_width="match_parent"

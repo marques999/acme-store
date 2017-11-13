@@ -11,13 +11,12 @@
     <android.support.v7.widget.CardView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      card_view:cardElevation="@dimen/global_cardElevation"
-      card_view:cardPreventCornerOverlap="true"
+      card_view:cardElevation="@dimen/elevation_medium"
       card_view:cardUseCompatPadding="true">
       <LinearLayout style="@style/table_parent">
         <ImageView
-          style="@style/table_leftContainer"
-          android:contentDescription="@string/global_todoDescription"
+          style="@style/table_left"
+          android:contentDescription="@string/global_todo"
           android:src="@drawable/ic_information_24dp" />
         <LinearLayout
           style="@style/container_right"
@@ -26,7 +25,7 @@
             android:id="@+id/productView_brand"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/global_smallMargin"
+            android:layout_marginBottom="@dimen/margin_small"
             android:textSize="@dimen/product_brand"
             android:textStyle="bold" />
           <TextView
@@ -42,8 +41,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       card_view:cardBackgroundColor="@color/cardview_light_background"
-      card_view:cardElevation="@dimen/global_cardElevation"
-      card_view:cardPreventCornerOverlap="true"
+      card_view:cardElevation="@dimen/elevation_medium"
       card_view:cardUseCompatPadding="true">
       <LinearLayout
         android:layout_width="wrap_content"
@@ -52,14 +50,14 @@
         <ImageView
           android:id="@+id/productView_photo"
           android:layout_width="match_parent"
-          android:layout_height="@dimen/product_photo"
-          android:layout_margin="@dimen/global_largeMargin"
-          android:contentDescription="@string/global_todoDescription" />
+          android:layout_height="@dimen/width_photo"
+          android:layout_margin="@dimen/margin_large"
+          android:contentDescription="@string/global_todo" />
         <LinearLayout
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:background="@color/colorAccent"
-          android:padding="@dimen/global_largeMargin">
+          android:padding="@dimen/margin_large">
           <TextView
             android:id="@+id/productView_purchase"
             android:layout_width="wrap_content"
@@ -83,13 +81,12 @@
     <android.support.v7.widget.CardView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      card_view:cardElevation="@dimen/global_cardElevation"
-      card_view:cardPreventCornerOverlap="true"
+      card_view:cardElevation="@dimen/elevation_medium"
       card_view:cardUseCompatPadding="true">
       <LinearLayout style="@style/table_parent">
         <ImageView
-          style="@style/table_leftContainer"
-          android:contentDescription="@string/global_todoDescription"
+          style="@style/table_left"
+          android:contentDescription="@string/global_todo"
           android:src="@drawable/ic_barcode_24dp" />
         <LinearLayout
           style="@style/container_right"
@@ -106,13 +103,12 @@
     <android.support.v7.widget.CardView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      card_view:cardElevation="@dimen/global_cardElevation"
-      card_view:cardPreventCornerOverlap="true"
+      card_view:cardElevation="@dimen/elevation_medium"
       card_view:cardUseCompatPadding="true">
       <LinearLayout style="@style/table_parent">
         <ImageView
-          style="@style/table_leftContainer"
-          android:contentDescription="@string/global_todoDescription"
+          style="@style/table_left"
+          android:contentDescription="@string/global_todo"
           android:src="@drawable/ic_description_24dp" />
         <LinearLayout
           style="@style/container_right"

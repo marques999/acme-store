@@ -3,48 +3,48 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:orientation="vertical">
-  <LinearLayout style="@style/global_buttonGroup">
+  <LinearLayout style="@style/button_group">
     <Button
       android:id="@+id/shoppingCart_scan"
-      style="@style/global_button"
+      style="@style/button_item"
       android:drawableStart="@drawable/ic_camera_24dp"
-      android:text="@string/shoppingCart_scan" />
+      android:text="@string/cart_scan" />
     <Button
       android:id="@+id/shoppingCart_checkout"
-      style="@style/global_button"
+      style="@style/button_item"
       android:drawableStart="@drawable/ic_check_24dp"
       android:enabled="false"
-      android:text="@string/shoppingCart_checkout" />
+      android:text="@string/cart_checkout" />
   </LinearLayout>
   <android.support.v7.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="@dimen/global_smallMargin"
-    android:layout_marginStart="@dimen/global_smallMargin"
-    card_view:cardElevation="@dimen/global_cardElevation"
+    android:layout_marginEnd="@dimen/margin_small"
+    android:layout_marginStart="@dimen/margin_small"
+    card_view:cardElevation="@dimen/elevation_medium"
     card_view:cardUseCompatPadding="true">
     <LinearLayout style="@style/table_parent">
       <ImageView
-        style="@style/table_leftContainer"
-        android:contentDescription="@string/global_todoDescription"
+        style="@style/table_left"
+        android:contentDescription="@string/global_todo"
         android:src="@drawable/ic_information_24dp" />
       <TableLayout style="@style/table_rightContainer">
-        <TableRow style="@style/global_tableRow">
+        <TableRow style="@style/table_row">
           <TextView
-            style="@style/global_rowHeader"
-            android:text="@string/shoppingCart_items" />
+            style="@style/row_header"
+            android:text="@string/cart_items" />
           <TextView
             android:id="@+id/cart_quantity"
-            style="@style/global_rowContent"
+            style="@style/row_content"
             android:textAlignment="textEnd" />
         </TableRow>
-        <TableRow style="@style/global_tableRow">
+        <TableRow style="@style/table_row">
           <TextView
-            style="@style/global_rowHeader"
-            android:text="@string/shoppingCart_price" />
+            style="@style/row_header"
+            android:text="@string/cart_total" />
           <TextView
             android:id="@+id/cart_subtotal"
-            style="@style/global_rowContent"
+            style="@style/row_content"
             android:textAlignment="textEnd" />
         </TableRow>
       </TableLayout>

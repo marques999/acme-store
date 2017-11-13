@@ -3,4 +3,4 @@
   android:id="@+id/orderHistory_container"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:layout_margin="@dimen/global_largeMargin" />
+  android:layout_margin="@dimen/margin_large" />
