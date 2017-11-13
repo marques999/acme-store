@@ -2,6 +2,7 @@
   <dimen name="elevation_medium">4dp</dimen>
   <dimen name="elevation_small">2dp</dimen>
   <dimen name="font_medium">16sp</dimen>
+  <dimen name="font_small">12sp</dimen>
   <dimen name="header_large">32sp</dimen>
   <dimen name="header_small">20sp</dimen>
   <dimen name="width_layout">64dp</dimen>

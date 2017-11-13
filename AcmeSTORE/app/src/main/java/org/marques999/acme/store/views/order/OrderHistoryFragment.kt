@@ -2,7 +2,7 @@ package org.marques999.acme.store.views.order
 
 import android.os.Bundle
 import android.app.ProgressDialog
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.GridLayoutManager
 
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -116,7 +116,7 @@ class OrderHistoryFragment : MainActivityFragment(R.layout.fragment_history), Or
 
         orderHistory_container.apply {
             setHasFixedSize(false)
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = GridLayoutManager(context, 2)
             clearOnScrollListeners()
             adapter = OrderHistoryAdapter(this@OrderHistoryFragment)
         }

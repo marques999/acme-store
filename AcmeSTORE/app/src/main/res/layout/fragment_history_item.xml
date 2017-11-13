@@ -1,21 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:card_view="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:orientation="horizontal">
-  <TextView
-    android:id="@+id/orderHistory_token"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+  card_view:cardBackgroundColor="@color/colorAccent"
+  card_view:cardElevation="@dimen/elevation_medium"
+  card_view:cardUseCompatPadding="true">
+  <ImageView
+    android:id="@+id/orderView_photo"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:alpha="0.10"
+    android:contentDescription="@string/global_todo"
+    android:scaleType="fitEnd"
+    android:src="@drawable/ic_cart_48dp" />
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/width_layout"
     android:layout_margin="@dimen/margin_large"
-    android:textSize="@dimen/font_medium"
-    android:textStyle="bold" />
-  <TextView
-    android:id="@+id/orderHistory_date"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin_large"
-    android:layout_weight="1"
-    android:textAlignment="textEnd"
-    android:textSize="@dimen/font_medium" />
-</LinearLayout>
+    android:orientation="vertical">
+    <TextView
+      android:id="@+id/orderHistory_token"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/margin_medium"
+      android:textSize="@dimen/font_medium"
+      android:textStyle="bold" />
+    <TextView
+      android:id="@+id/orderHistory_date"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textSize="@dimen/font_small" />
+  </LinearLayout>
+</android.support.v7.widget.CardView>
