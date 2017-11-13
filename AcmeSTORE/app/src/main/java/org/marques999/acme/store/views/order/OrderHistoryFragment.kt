@@ -133,7 +133,7 @@ class OrderHistoryFragment : MainActivityFragment(R.layout.fragment_history), Or
     /**
      */
     fun registerOrder(order: Order) {
-        orders.add(order)
+        orders.add(0, order)
         mainActivityListener?.onUpdateBadge(BottomNavigationFragments.HISTORY, orders.size)
         (orderHistory_container.adapter as OrderHistoryAdapter).refreshItems(orders)
     }
