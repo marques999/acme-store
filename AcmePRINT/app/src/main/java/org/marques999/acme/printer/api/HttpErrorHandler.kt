@@ -20,9 +20,7 @@ class HttpErrorHandler(private val context: Context) : Consumer<Throwable> {
         .setMessage(message)
         .setPositiveButton(android.R.string.ok, null)
 
-    private val serializer = AcmePrinter.jsonSerializer.adapter(
-        Response::class.java
-    )
+    private val serializer = AcmePrinter.jsonSerializer.adapter(Response::class.java)
 
     override fun accept(throwable: Throwable) {
 

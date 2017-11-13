@@ -4,7 +4,6 @@ import android.view.ViewGroup
 import android.support.v7.widget.RecyclerView
 
 import org.marques999.acme.printer.R
-import org.marques999.acme.printer.AcmeUtils
 import org.marques999.acme.printer.model.Customer
 import org.marques999.acme.printer.model.ViewType
 import org.marques999.acme.printer.model.ViewTypeAdapter
@@ -30,7 +29,6 @@ class DetailsActivityCustomerAdapter : ViewTypeAdapter {
             itemView.customer_nif.text = item.tax_number
             itemView.customer_address1.text = item.address1
             itemView.customer_address2.text = item.address2
-            itemView.customer_country.text = AcmeUtils.formatCountry(item.country)
         }
     }
 }

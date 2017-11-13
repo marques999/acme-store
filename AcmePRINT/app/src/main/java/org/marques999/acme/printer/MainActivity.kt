@@ -2,35 +2,22 @@ package org.marques999.acme.printer
 
 import android.net.Uri
 import android.os.Bundle
-
-import org.marques999.acme.printer.api.HttpErrorHandler
-import org.marques999.acme.printer.views.DetailsActivity
-
-import android.content.Intent
-import android.content.ActivityNotFoundException
-import android.content.DialogInterface
-
-import kotlinx.android.synthetic.main.activity_main.*
+import android.app.AlertDialog
+import android.support.v7.app.AppCompatActivity
 
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.android.schedulers.AndroidSchedulers
 
-import android.support.v7.app.AppCompatActivity
+import android.content.Intent
+import android.content.ActivityNotFoundException
+
+import kotlinx.android.synthetic.main.activity_main.*
+
+import org.marques999.acme.printer.api.HttpErrorHandler
+import org.marques999.acme.printer.views.DetailsActivity
 
 class MainActivity : AppCompatActivity() {
-
-    private val launchPlayStore = DialogInterface.OnClickListener { _, _ ->
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(AcmePrinter.ZXING_URL)))
-    }
-
-    private fun launchQrScanner() = startActivityForResult(
-        Intent(
-            AcmePrinter.ZXING_ACTIVITY
-        ).putExtra(
-            "SCAN_MODE", "QR_CODE_MODE"
-        ), 0
-    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -38,20 +25,31 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         main_scan.setOnClickListener {
+
             try {
-                launchQrScanner()
+                startActivityForResult(Intent(
+                    AcmePrinter.ZXING_ACTIVITY
+                ).putExtra(
+                    "SCAN_MODE", "QR_CODE_MODE"
+                ), 0)
             } catch (ex: ActivityNotFoundException) {
-                AcmeDialogs.buildYesNo(this, R.string.main_install, launchPlayStore).show()
+                AlertDialog.Builder(this).setTitle(
+                    R.string.activity_main
+                ).setMessage(
+                    R.string.main_install
+                ).setNegativeButton(
+                    android.R.string.no, null
+                ).setPositiveButton(android.R.string.yes, { _, _ ->
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(AcmePrinter.ZXING_URL)))
+                }).show()
             }
         }
 
         main_scan.isEnabled = (application as AcmePrinter).authenticate(
-            this,
-            Consumer {
-                main_scan.isEnabled = true
-                AcmeDialogs.buildOk(this, R.string.main_connected).show()
-            }
-        )
+            this, Consumer {
+            main_scan.isEnabled = true
+            AcmeDialogs.buildOk(this, R.string.main_connected).show()
+        })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -74,10 +72,8 @@ class MainActivity : AppCompatActivity() {
                 Consumer {
                     startActivity(Intent(
                         this, DetailsActivity::class.java
-                    ).putExtra(EXTRA_ORDER, it)
-                    )
-                },
-                HttpErrorHandler(this)
+                    ).putExtra(EXTRA_ORDER, it))
+                }, HttpErrorHandler(this)
             )
         } else {
             AcmeDialogs.buildOk(this, R.string.main_invalidQr, format).show()
