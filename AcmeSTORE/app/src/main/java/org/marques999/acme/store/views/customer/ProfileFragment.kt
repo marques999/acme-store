@@ -85,7 +85,7 @@ class ProfileFragment : MainActivityFragment(R.layout.fragment_profile) {
             activity.onBackPressed()
         }
 
-        profile_qrTest.setOnClickListener {
+        profile_edit.setOnClickListener {
             startActivity(Intent(context, OrderConfirmActivity::class.java))
         }
     }

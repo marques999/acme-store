@@ -4,10 +4,10 @@
   android:orientation="vertical">
   <LinearLayout style="@style/button_group">
     <Button
-      android:id="@+id/profile_qrTest"
+      android:id="@+id/profile_edit"
       style="@style/button_item"
-      android:drawableStart="@drawable/ic_camera_24dp"
-      android:text="@string/customer_qrTest" />
+      android:drawableStart="@drawable/ic_edit_24dp"
+      android:text="@string/customer_edit" />
     <Button
       android:id="@+id/profile_logout"
       style="@style/button_item"
