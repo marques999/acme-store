@@ -1,20 +1,14 @@
 <resources>
-  <!-- MainActivity -->
-  <dimen name="global_smallMargin">4dp</dimen>
-  <dimen name="global_mediumFont">16sp</dimen>
-  <dimen name="global_mediumMargin">8dp</dimen>
+  <dimen name="global_cardElevation">4dp</dimen>
   <dimen name="global_largeFont">32sp</dimen>
   <dimen name="global_largeMargin">16dp</dimen>
-  <dimen name="global_cardElevation">4dp</dimen>
-  <!-- ProductViewActivity -->
-  <dimen name="product_photo">360dp</dimen>
+  <dimen name="global_mediumFont">16sp</dimen>
+  <dimen name="global_mediumMargin">8dp</dimen>
+  <dimen name="global_qrCode">280dp</dimen>
+  <dimen name="global_smallMargin">4dp</dimen>
+  <dimen name="login_medium">12dp</dimen>
+  <dimen name="login_large">24dp</dimen>
   <dimen name="product_brand">18sp</dimen>
   <dimen name="product_model">28sp</dimen>
-  <!-- LoginActivity -->
-  <dimen name="login_mediumMargin">12dp</dimen>
-  <dimen name="login_largeMargin">24dp</dimen>
-  <!-- QrCodeActivity -->
-  <dimen name="qrCode_imageView">280dp</dimen>
-  <!-- RegisterActivity -->
-  <dimen name="registerActivity_button">12dp</dimen>
+  <dimen name="product_photo">360dp</dimen>
 </resources>

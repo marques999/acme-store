@@ -2,19 +2,19 @@
   <style name="AppTheme" parent="Theme.AppCompat">
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-    <item name="colorAccent">@color/bottomNavigation_accent</item>
+    <item name="colorAccent">@color/colorNavigation</item>
     <item name="colorButtonNormal">@color/colorAccent</item>
     <item name="android:colorButtonNormal">@color/colorAccent</item>
-    <item name="android:textColorHint">@color/bottomNavigation_iron</item>
+    <item name="android:textColorHint">@color/colorIron</item>
     <item name="android:windowBackground">@color/colorPrimaryDark</item>
   </style>
   <style name="AppTheme.Dark" parent="Theme.AppCompat.NoActionBar">
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-    <item name="colorAccent">@color/bottomNavigation_accent</item>
+    <item name="colorAccent">@color/colorNavigation</item>
     <item name="colorButtonNormal">@color/colorAccent</item>
     <item name="android:colorButtonNormal">@color/colorAccent</item>
-    <item name="android:textColorHint">@color/bottomNavigation_iron</item>
+    <item name="android:textColorHint">@color/colorIron</item>
     <item name="android:windowBackground">@color/colorPrimaryDark</item>
   </style>
   <style name="global_rowHeader">
