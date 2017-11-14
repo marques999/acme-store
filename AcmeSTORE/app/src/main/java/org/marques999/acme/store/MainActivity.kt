@@ -2,6 +2,7 @@ package org.marques999.acme.store
 
 import android.os.Bundle
 import android.content.DialogInterface
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 
 import org.marques999.acme.store.model.Order
@@ -122,11 +123,11 @@ class MainActivity : AppCompatActivity(), MainActivityListener {
         bottomNavigation.currentItem = BottomNavigationFragments.CART
         bottomNavigation.isTranslucentNavigationEnabled = true
         bottomNavigation.titleState = AHBottomNavigation.TitleState.ALWAYS_SHOW
-        bottomNavigation.accentColor = AcmeStore.fetchColor(this, R.color.colorAccent)
+        bottomNavigation.accentColor = ContextCompat.getColor(this, R.color.colorAccent)
 
         bottomNavigation.setColoredModeColors(
-            AcmeStore.fetchColor(this, R.color.colorAccent),
-            AcmeStore.fetchColor(this, R.color.colorPrimaryDarker)
+            ContextCompat.getColor(this, R.color.colorAccent),
+            ContextCompat.getColor(this, R.color.colorPrimaryDarker)
         )
 
         bottomNavigation.addItem(AHBottomNavigationItem(

@@ -13,6 +13,8 @@ import com.google.zxing.MultiFormatWriter
 import java.text.DateFormat
 import java.text.NumberFormat
 
+import android.support.v4.content.ContextCompat
+
 object AcmeUtils {
 
     /**
@@ -52,8 +54,8 @@ object AcmeUtils {
         val width = bitMatrix.width
         val height = bitMatrix.height
         val pixels = IntArray(width * height)
-        val black = AcmeStore.fetchColor(context, android.R.color.black)
-        val white = AcmeStore.fetchColor(context, android.R.color.white)
+        val black = ContextCompat.getColor(context, android.R.color.black)
+        val white = ContextCompat.getColor(context, android.R.color.white)
 
         (0 until height).forEach { y ->
 

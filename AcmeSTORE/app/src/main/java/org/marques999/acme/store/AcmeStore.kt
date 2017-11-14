@@ -42,13 +42,12 @@ class AcmeStore : Application() {
     override fun onCreate() {
         super.onCreate()
         preferences = getSharedPreferences(KEY_PREFERENCES, Context.MODE_PRIVATE)
-        cryptography = CryptographyProvider(DEFAULT_PRIVATE)
-        //preferences.getString(PREF_PRIVATE, DEFAULT_PRIVATE))
     }
 
     /**
      */
     fun initializeApi(username: String, sessionJwt: SessionJwt) {
+        cryptography = CryptographyProvider(preferences.getString(PREF_PRIVATE, DEFAULT_PRIVATE))
         api = AcmeProvider(Session(sessionJwt, username), cryptography)
     }
 
@@ -82,12 +81,11 @@ class AcmeStore : Application() {
 
         val REQUEST_SCAN = 0
         val REQUEST_REGISTER = 1
-
         val ALGORITHM_PKCS = "RSA"
         val ALGORITHM_HASH = "SHA1WithRSA"
-        val SERVER_URL = "http://192.168.1.87:3333/"
         val DEFAULT_USERNAME = "marques999"
         val DEFAULT_PASSWORD = "r0wsauce"
+        val SERVER_URL = "http://192.168.1.87:3333/"
         val ZXING_ACTIVITY = "$ZXING_PACKAGE.SCAN"
         val ZXING_URL = "market://details?id=$ZXING_PACKAGE"
 
@@ -96,10 +94,6 @@ class AcmeStore : Application() {
                 Date::class.java,
                 Rfc3339DateJsonAdapter().nullSafe()
             ).build()
-        }
-
-        fun fetchColor(context: Context, @ColorRes color: Int): Int {
-            return ContextCompat.getColor(context, color)
         }
 
         val DEFAULT_PRIVATE = """-----BEGIN PRIVATE KEY-----
