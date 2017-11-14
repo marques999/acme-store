@@ -1,11 +1,11 @@
 package org.marques999.acme.store
 
 import android.os.Bundle
+import android.view.View
 import android.content.Intent
 import android.app.ProgressDialog
-import android.support.design.widget.TextInputEditText
 import android.support.v7.app.AppCompatActivity
-import android.view.View
+import android.support.design.widget.TextInputEditText
 
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.android.schedulers.AndroidSchedulers

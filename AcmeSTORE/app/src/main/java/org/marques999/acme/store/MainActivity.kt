@@ -1,16 +1,16 @@
 package org.marques999.acme.store
 
-import android.os.Bundle
-import android.content.DialogInterface
-import android.support.v4.content.ContextCompat
-import android.support.v4.view.ViewPager
-import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 
 import org.marques999.acme.store.model.Order
 import org.marques999.acme.store.model.Product
 
-import android.view.Menu
-import android.view.MenuItem
+import android.os.Bundle
+import android.content.DialogInterface
+import android.support.v4.view.ViewPager
+import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
@@ -58,17 +58,13 @@ class MainActivity : AppCompatActivity(), MainActivityListener {
     override fun onNotify(messageId: MainActivityMessage, value: Any) {
 
         if (messageId == MainActivityMessage.PURCHASE && value is Product) {
-
             bottomNavigation.currentItem = BottomNavigationAdapter.CART
-
             (bottomNavigationAdapter.getFragment(
                 BottomNavigationAdapter.CART
             ) as? ShoppingCartFragment)?.registerPurchase(value)
         } else if (messageId == MainActivityMessage.CHECKOUT && value is Order) {
-
             OrderCheckoutDialog.newInstance(value.token).show(supportFragmentManager, "ocd")
             bottomNavigation.currentItem = BottomNavigationAdapter.HISTORY
-
             (bottomNavigationAdapter.getFragment(
                 BottomNavigationAdapter.HISTORY
             ) as? OrderHistoryFragment)?.registerOrder(value)

@@ -7,8 +7,8 @@ import android.support.v7.widget.LinearLayoutManager
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.android.schedulers.AndroidSchedulers
 
-import android.content.Context
 import android.content.Intent
+import android.content.Context
 
 import org.marques999.acme.store.R
 import org.marques999.acme.store.AcmeDialogs
@@ -21,8 +21,8 @@ import android.view.LayoutInflater
 import org.marques999.acme.store.model.Product
 import org.marques999.acme.store.api.HttpErrorHandler
 import org.marques999.acme.store.views.BottomNavigationAdapter
-import org.marques999.acme.store.views.main.MainActivityFragment
 import org.marques999.acme.store.views.main.MainActivityMessage
+import org.marques999.acme.store.views.main.MainActivityFragment
 import org.marques999.acme.store.views.main.MainActivityListener
 
 import kotlinx.android.synthetic.main.fragment_catalog.*

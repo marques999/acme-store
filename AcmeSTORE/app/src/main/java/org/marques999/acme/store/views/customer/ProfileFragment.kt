@@ -3,7 +3,6 @@ package org.marques999.acme.store.views.customer
 import android.os.Bundle
 import android.app.ProgressDialog
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers

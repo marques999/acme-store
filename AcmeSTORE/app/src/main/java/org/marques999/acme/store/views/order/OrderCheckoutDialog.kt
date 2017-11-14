@@ -6,9 +6,9 @@ import android.app.AlertDialog
 import com.google.zxing.WriterException
 
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
-import android.view.LayoutInflater
 import android.widget.ImageView
+import android.view.LayoutInflater
+import android.support.v4.app.DialogFragment
 
 import org.marques999.acme.store.R
 import org.marques999.acme.store.AcmeDialogs

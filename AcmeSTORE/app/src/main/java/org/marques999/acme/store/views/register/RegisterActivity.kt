@@ -5,8 +5,6 @@ import android.util.Base64
 import android.content.Intent
 import android.app.ProgressDialog
 
-import org.marques999.acme.store.views.BackButtonActivity
-
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
@@ -22,6 +20,7 @@ import kotlinx.android.synthetic.main.fragment_register_step2.*
 
 import org.marques999.acme.store.api.HttpErrorHandler
 import org.marques999.acme.store.api.AuthenticationProvider
+import org.marques999.acme.store.views.BackButtonActivity
 
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity

@@ -1,8 +1,12 @@
 package org.marques999.acme.store
 
-import org.marques999.acme.store.model.Authentication
+import android.util.Base64
+import android.app.Application
+
 import org.marques999.acme.store.model.Session
 import org.marques999.acme.store.model.SessionJwt
+import org.marques999.acme.store.model.CustomerCart
+import org.marques999.acme.store.model.Authentication
 
 import java.security.PrivateKey
 
@@ -12,14 +16,10 @@ import org.marques999.acme.store.api.CryptographyProvider
 import android.content.Context
 import android.content.SharedPreferences
 
-import android.app.Application
-import android.util.Base64
-
 import java.util.Date
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Rfc3339DateJsonAdapter
-import org.marques999.acme.store.model.CustomerCart
 
 class AcmeStore : Application() {
 
@@ -45,13 +45,6 @@ class AcmeStore : Application() {
 
     /**
      */
-    fun initializeApi(username: String, sessionJwt: SessionJwt) {
-        cryptography = CryptographyProvider(preferences.getString(PREF_PRIVATE, ""))
-        api = AcmeProvider(Session(sessionJwt, username), cryptography)
-    }
-
-    /**
-     */
     private fun encodeBase64(bytes: ByteArray): String = Base64.encodeToString(
         bytes, Base64.DEFAULT
     )
@@ -60,6 +53,13 @@ class AcmeStore : Application() {
      */
     private fun encodePrivate(privateKey: PrivateKey): String {
         return "$CERTIFICATE_BEGIN\n${encodeBase64(privateKey.encoded)}$CERTIFICATE_END\n"
+    }
+
+    /**
+     */
+    fun initializeApi(username: String, sessionJwt: SessionJwt) {
+        cryptography = CryptographyProvider(preferences.getString(PREF_PRIVATE, ""))
+        api = AcmeProvider(Session(sessionJwt, username), cryptography)
     }
 
     /**

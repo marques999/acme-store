@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.app.ProgressDialog
 import android.support.v7.widget.GridLayoutManager
 
+import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.android.schedulers.AndroidSchedulers
 
@@ -13,16 +14,14 @@ import org.marques999.acme.store.AcmeDialogs
 
 import kotlinx.android.synthetic.main.fragment_history.*
 
+import android.content.Intent
+import android.content.Context
+
 import org.marques999.acme.store.model.Order
 import org.marques999.acme.store.api.HttpErrorHandler
 import org.marques999.acme.store.views.BottomNavigationAdapter
 import org.marques999.acme.store.views.main.MainActivityFragment
 import org.marques999.acme.store.views.main.MainActivityListener
-
-import android.content.Intent
-import android.content.Context
-import io.reactivex.functions.Consumer
-
 
 class OrderHistoryFragment : MainActivityFragment(R.layout.fragment_history), OrderHistoryListener {
 
@@ -62,18 +61,17 @@ class OrderHistoryFragment : MainActivityFragment(R.layout.fragment_history), Or
      */
     override fun onRefresh() {
 
-            progressDialog.show()
+        progressDialog.show()
 
-            (activity.application as AcmeStore).api.getOrders().observeOn(
-                AndroidSchedulers.mainThread()
-            ).subscribeOn(
-                Schedulers.io()
-            ).subscribe(
-                onSuccess(orderHistory_container.adapter as OrderHistoryAdapter),
-                Consumer {
-                progressDialog.dismiss()
-                HttpErrorHandler(context).accept(it)
-            })
+        (activity.application as AcmeStore).api.getOrders().observeOn(
+            AndroidSchedulers.mainThread()
+        ).subscribeOn(
+            Schedulers.io()
+        ).subscribe(
+            onSuccess(orderHistory_container.adapter as OrderHistoryAdapter), Consumer {
+            progressDialog.dismiss()
+            HttpErrorHandler(context).accept(it)
+        })
     }
 
     /**
