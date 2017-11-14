@@ -13,8 +13,7 @@ import android.content.Context
 import android.content.SharedPreferences
 
 import android.app.Application
-import android.support.annotation.ColorRes
-import android.support.v4.content.ContextCompat
+import android.util.Base64
 
 import java.util.Date
 
@@ -47,27 +46,53 @@ class AcmeStore : Application() {
     /**
      */
     fun initializeApi(username: String, sessionJwt: SessionJwt) {
-        cryptography = CryptographyProvider(preferences.getString(PREF_PRIVATE, DEFAULT_PRIVATE))
+        cryptography = CryptographyProvider(preferences.getString(PREF_PRIVATE, ""))
         api = AcmeProvider(Session(sessionJwt, username), cryptography)
     }
 
     /**
      */
-    fun saveCustomer(
+    private fun encodeBase64(bytes: ByteArray): String = Base64.encodeToString(
+        bytes, Base64.DEFAULT
+    )
+
+    /**
+     */
+    private fun encodePrivate(privateKey: PrivateKey): String {
+        return "$CERTIFICATE_BEGIN\n${encodeBase64(privateKey.encoded)}$CERTIFICATE_END\n"
+    }
+
+    /**
+     */
+    fun registerCustomer(
         credentials: Authentication,
         privateKey: PrivateKey
     ) = preferences.edit().apply {
         putString(PREF_USERNAME, credentials.username)
         putString(PREF_PASSWORD, credentials.password)
-        putString(PREF_PRIVATE, cryptography.encodePrivate(privateKey))
+        putString(PREF_PRIVATE, encodePrivate(privateKey))
+    }.apply()
+
+    /**
+     */
+    fun forgetCustomer() = preferences.edit().apply {
+        remove(PREF_USERNAME)
+        remove(PREF_PASSWORD)
+        remove(PREF_PRIVATE)
     }.apply()
 
     /**
      */
     fun loadCustomer() = Authentication(
-        preferences.getString(PREF_USERNAME, DEFAULT_USERNAME),
-        preferences.getString(PREF_PASSWORD, DEFAULT_PASSWORD)
+        preferences.getString(PREF_USERNAME, "guest"),
+        preferences.getString(PREF_PASSWORD, "1234567890")
     )
+
+    /**
+     */
+    fun firstRun() = preferences.run {
+        !(contains(PREF_USERNAME) && contains(PREF_PASSWORD) && contains(PREF_PRIVATE))
+    }
 
     /**
      */
@@ -83,25 +108,15 @@ class AcmeStore : Application() {
         val REQUEST_REGISTER = 1
         val ALGORITHM_PKCS = "RSA"
         val ALGORITHM_HASH = "SHA1WithRSA"
-        val DEFAULT_USERNAME = "marques999"
-        val DEFAULT_PASSWORD = "r0wsauce"
-        val SERVER_URL = "http://192.168.1.87:3333/"
         val ZXING_ACTIVITY = "$ZXING_PACKAGE.SCAN"
+        val SERVER_URL = "http://192.168.1.87:3333/"
         val ZXING_URL = "market://details?id=$ZXING_PACKAGE"
+        val CERTIFICATE_END = "-----END PRIVATE KEY-----"
+        val CERTIFICATE_BEGIN = "-----BEGIN PRIVATE KEY-----"
 
-        val jsonSerializer: Moshi by lazy {
-            Moshi.Builder().add(
-                Date::class.java,
-                Rfc3339DateJsonAdapter().nullSafe()
-            ).build()
-        }
-
-        val DEFAULT_PRIVATE = """-----BEGIN PRIVATE KEY-----
-MIIBAwIBADANBgkqhkiG9w0BAQEFAASB7jCB6wIBAAIvAKCRuhMUuFoJvDVeicvyfyQf9ADQ1qNe
-+dabNSpOkr76FcVTBd+TBe2sEshVefUCAwEAAQIvAI6UuKmG5ai2KlUtzKi4faPDZ/VtfJr2K/5k
-ZNJ+OluJOEoJdQBybA20AfSVoeECGADTP94LefyYf90MyE5mfNFnPL25bOHR/QIYAMKVc+Rg6MEH
-nPD5GqOyfISk4uVCsi1ZAhgAlp437Aja38Ry0DVVKN+f0jLNtxJ54+UCGADAXm6XrrMM+tDObwdG
-JNPzcuuaCekK6QIXLi6uvARBZ1pSlesIht/odAQEZD2IdQw=
------END PRIVATE KEY-----"""
+        val jsonSerializer: Moshi = Moshi.Builder().add(
+            Date::class.java,
+            Rfc3339DateJsonAdapter().nullSafe()
+        ).build()
     }
 }

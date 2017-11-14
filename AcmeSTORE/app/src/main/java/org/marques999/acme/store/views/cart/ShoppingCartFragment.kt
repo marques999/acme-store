@@ -28,11 +28,10 @@ import kotlinx.android.synthetic.main.fragment_cart.*
 import org.marques999.acme.store.api.HttpErrorHandler
 import org.marques999.acme.store.model.Product
 import org.marques999.acme.store.model.CustomerCart
-import org.marques999.acme.store.views.BottomNavigationFragments
+import org.marques999.acme.store.views.BottomNavigationAdapter
 import org.marques999.acme.store.views.main.MainActivityListener
 import org.marques999.acme.store.views.main.MainActivityFragment
 import org.marques999.acme.store.views.main.MainActivityMessage
-import org.marques999.acme.store.views.order.OrderCheckoutDialog
 import org.marques999.acme.store.views.product.ProductViewActivity
 
 class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), ShoppingCartListener {
@@ -95,7 +94,7 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
     override fun onItemChanged() = shoppingCart.calculate().let {
         cart_quantity.text = it.first.toString()
         cart_subtotal.text = AcmeUtils.formatCurrency(it.second)
-        mainActivityListener?.onUpdateBadge(BottomNavigationFragments.CART, shoppingCart.count())
+        mainActivityListener?.onUpdateBadge(BottomNavigationAdapter.CART, shoppingCart.count())
         shoppingCart_checkout.isEnabled = shoppingCart.notEmpty()
     }
 

@@ -16,6 +16,7 @@ import java.security.KeyPairGenerator
 import org.marques999.acme.store.R
 import org.marques999.acme.store.AcmeStore
 import org.marques999.acme.store.AcmeDialogs
+import org.marques999.acme.store.LoginActivity
 
 import kotlinx.android.synthetic.main.fragment_register_step2.*
 
@@ -83,12 +84,9 @@ class RegisterActivity : BackButtonActivity(), RegisterStepOneListener, Register
      */
     private fun onRegisterComplete(authentication: Authentication) = Consumer<Customer> {
 
-        Intent().putExtra(
-            RegisterConstants.EXTRA_USERNAME, authentication.username
-        ).putExtra(
-            RegisterConstants.EXTRA_PASSWORD, authentication.password
-        ).let {
-            (application as AcmeStore).saveCustomer(authentication, keyPair.private)
+        Intent().putExtra(LoginActivity.EXTRA_AUTHENTICATION, authentication).let {
+            progressDialog.dismiss()
+            (application as AcmeStore).registerCustomer(authentication, keyPair.private)
             setResult(AppCompatActivity.RESULT_OK, it)
             finish()
         }
@@ -118,7 +116,7 @@ class RegisterActivity : BackButtonActivity(), RegisterStepOneListener, Register
      */
     private fun changeFragment(frag: Fragment, saveInBackstack: Boolean) {
 
-        val backStateName = frag.javaClass.name
+        val backState = frag.javaClass.name
 
         supportFragmentManager.beginTransaction().apply {
 
@@ -129,10 +127,10 @@ class RegisterActivity : BackButtonActivity(), RegisterStepOneListener, Register
                 R.anim.exit_to_right
             )
 
-            replace(R.id.registerActivity_content, frag, backStateName)
+            replace(R.id.registerActivity_content, frag, backState)
 
             if (saveInBackstack) {
-                addToBackStack(backStateName)
+                addToBackStack(backState)
             }
         }.commit()
     }

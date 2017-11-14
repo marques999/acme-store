@@ -145,8 +145,8 @@ class RegisterStepTwoFragment : Fragment(), DatePicker.OnDateChangedListener {
     /**
      */
     companion object {
-        private val BUNDLE_CARD_TYPE = "org.marques999.acme.bundle.CARD_TYPE"
-        private val BUNDLE_CARD_NUMBER = "org.marques999.acme.bundle.CARD_NUMBER"
-        private val BUNDLE_CARD_VALIDITY = "org.marques999.acme.bundle.CARD_VALIDITY"
+        private val BUNDLE_CARD_TYPE = "org.marques999.acme.bundles.CARD_TYPE"
+        private val BUNDLE_CARD_NUMBER = "org.marques999.acme.bundles.CARD_NUMBER"
+        private val BUNDLE_CARD_VALIDITY = "org.marques999.acme.bundles.CARD_VALIDITY"
     }
 }

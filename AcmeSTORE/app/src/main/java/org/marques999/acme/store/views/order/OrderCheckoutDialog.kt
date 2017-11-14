@@ -55,7 +55,7 @@ class OrderCheckoutDialog : DialogFragment() {
     override fun onStart() {
         super.onStart()
         qrCode = dialog.findViewById(R.id.qrCode)
-        arguments.getString(CHECKOUT_CODE)?.let { encodeQrBitmap(it).start() }
+        arguments.getString(ORDER_TOKEN)?.let { encodeQrBitmap(it).start() }
     }
 
     /**
@@ -65,11 +65,11 @@ class OrderCheckoutDialog : DialogFragment() {
         /**
          */
         fun newInstance(qrCode: String): OrderCheckoutDialog = OrderCheckoutDialog().apply {
-            arguments = Bundle().apply { putString(CHECKOUT_CODE, qrCode) }
+            arguments = Bundle().apply { putString(ORDER_TOKEN, qrCode) }
         }
 
         /**
          */
-        private val CHECKOUT_CODE = "org.marques999.acme.store.BUNDLE.code"
+        private val ORDER_TOKEN = "org.marques999.acme.bundles.ORDER_TOKEN"
     }
 }

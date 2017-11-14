@@ -194,6 +194,6 @@ class RegisterStepOneFragment : Fragment() {
     }
 
     companion object {
-        private val BUNDLE_REGISTER1 = "org.marques999.acme.bundle.REGISTER1"
+        private val BUNDLE_REGISTER1 = "org.marques999.acme.bundles.REGISTER1"
     }
 }

@@ -18,15 +18,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.LayoutInflater
 
-import org.marques999.acme.store.views.BottomNavigationFragments
+import org.marques999.acme.store.model.Product
+import org.marques999.acme.store.api.HttpErrorHandler
+import org.marques999.acme.store.views.BottomNavigationAdapter
 import org.marques999.acme.store.views.main.MainActivityFragment
 import org.marques999.acme.store.views.main.MainActivityMessage
 import org.marques999.acme.store.views.main.MainActivityListener
 
 import kotlinx.android.synthetic.main.fragment_catalog.*
-
-import org.marques999.acme.store.model.Product
-import org.marques999.acme.store.api.HttpErrorHandler
 
 class ProductCatalogFragment : MainActivityFragment(R.layout.fragment_catalog), ProductCatalogListener {
 
@@ -100,7 +99,7 @@ class ProductCatalogFragment : MainActivityFragment(R.layout.fragment_catalog), 
             progressDialog.dismiss()
             products = ArrayList(it)
             initializeRecycler(it)
-            mainActivityListener?.onUpdateBadge(BottomNavigationFragments.CATALOG, it.size)
+            mainActivityListener?.onUpdateBadge(BottomNavigationAdapter.CATALOG, it.size)
         }, {
             progressDialog.dismiss()
             HttpErrorHandler(context).accept(it)
@@ -117,7 +116,7 @@ class ProductCatalogFragment : MainActivityFragment(R.layout.fragment_catalog), 
             onRefresh()
         } else {
             products = savedInstanceState.getParcelableArrayList(BUNDLE_PRODUCTS)
-            mainActivityListener?.onUpdateBadge(BottomNavigationFragments.CATALOG, products.size)
+            mainActivityListener?.onUpdateBadge(BottomNavigationAdapter.CATALOG, products.size)
             initializeRecycler(products)
         }
     }

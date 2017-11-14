@@ -39,4 +39,12 @@ class BottomNavigationAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(f
      */
     fun addFragments(fragment: MainActivityFragment) = fragments.add(fragment)
     fun getFragment(position: Int): MainActivityFragment = registeredFragments[position]
+
+    /**
+     */
+    companion object {
+        val CART = 0
+        val CATALOG = 1
+        val HISTORY = 2
+    }
 }

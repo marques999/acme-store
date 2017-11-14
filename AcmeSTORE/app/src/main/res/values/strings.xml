@@ -74,4 +74,5 @@
   <string name="register_next">Next (Payment Method)</string>
   <string name="register_nif">Tax Number</string>
   <string name="register_previous">Previous</string>
+  <string name="login_reset">Reset</string>
 </resources>

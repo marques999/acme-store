@@ -15,12 +15,14 @@ import kotlinx.android.synthetic.main.fragment_history.*
 
 import org.marques999.acme.store.model.Order
 import org.marques999.acme.store.api.HttpErrorHandler
-import org.marques999.acme.store.views.BottomNavigationFragments
+import org.marques999.acme.store.views.BottomNavigationAdapter
 import org.marques999.acme.store.views.main.MainActivityFragment
 import org.marques999.acme.store.views.main.MainActivityListener
 
 import android.content.Intent
 import android.content.Context
+import io.reactivex.functions.Consumer
+
 
 class OrderHistoryFragment : MainActivityFragment(R.layout.fragment_history), OrderHistoryListener {
 
@@ -49,9 +51,16 @@ class OrderHistoryFragment : MainActivityFragment(R.layout.fragment_history), Or
 
     /**
      */
-    override fun onRefresh() {
+    private fun onSuccess(adapter: OrderHistoryAdapter) = Consumer<List<Order>> {
+        orders = ArrayList(it)
+        adapter.refreshItems(it)
+        progressDialog.dismiss()
+        mainActivityListener?.onUpdateBadge(BottomNavigationAdapter.HISTORY, it.size)
+    }
 
-        (orderHistory_container.adapter as OrderHistoryAdapter).let { adapter ->
+    /**
+     */
+    override fun onRefresh() {
 
             progressDialog.show()
 
@@ -59,16 +68,12 @@ class OrderHistoryFragment : MainActivityFragment(R.layout.fragment_history), Or
                 AndroidSchedulers.mainThread()
             ).subscribeOn(
                 Schedulers.io()
-            ).subscribe({
-                orders = ArrayList(it)
-                adapter.refreshItems(it)
-                progressDialog.dismiss()
-                mainActivityListener?.onUpdateBadge(BottomNavigationFragments.HISTORY, it.size)
-            }, {
+            ).subscribe(
+                onSuccess(orderHistory_container.adapter as OrderHistoryAdapter),
+                Consumer {
                 progressDialog.dismiss()
                 HttpErrorHandler(context).accept(it)
             })
-        }
     }
 
     /**
@@ -125,7 +130,7 @@ class OrderHistoryFragment : MainActivityFragment(R.layout.fragment_history), Or
             onRefresh()
         } else {
             orders = savedInstanceState.getParcelableArrayList(BUNDLE_ORDER)
-            mainActivityListener?.onUpdateBadge(BottomNavigationFragments.HISTORY, orders.size)
+            mainActivityListener?.onUpdateBadge(BottomNavigationAdapter.HISTORY, orders.size)
             (orderHistory_container.adapter as OrderHistoryAdapter).refreshItems(orders)
         }
     }
@@ -134,7 +139,7 @@ class OrderHistoryFragment : MainActivityFragment(R.layout.fragment_history), Or
      */
     fun registerOrder(order: Order) {
         orders.add(0, order)
-        mainActivityListener?.onUpdateBadge(BottomNavigationFragments.HISTORY, orders.size)
+        mainActivityListener?.onUpdateBadge(BottomNavigationAdapter.HISTORY, orders.size)
         (orderHistory_container.adapter as OrderHistoryAdapter).refreshItems(orders)
     }
 

@@ -43,6 +43,6 @@ class ProductViewActivity : BackButtonActivity() {
     /**
      */
     companion object {
-        val EXTRA_PRODUCT = "org.marques999.acme.store.extra.ORDER_PRODUCT"
+        val EXTRA_PRODUCT = "org.marques999.acme.extras.ORDER_PRODUCT"
     }
 }

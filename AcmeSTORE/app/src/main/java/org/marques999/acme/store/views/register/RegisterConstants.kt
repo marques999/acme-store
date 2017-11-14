@@ -1,10 +1,7 @@
 package org.marques999.acme.store.views.register
 
-import android.app.Activity
-import android.support.annotation.StringRes
-import android.support.v4.app.Fragment
-
 import org.marques999.acme.store.R
+import android.support.v4.app.Fragment
 
 object RegisterConstants {
 
@@ -17,11 +14,6 @@ object RegisterConstants {
 
     /**
      */
-    internal val EXTRA_USERNAME = "org.marques999.acme.store.extra.USERNAME"
-    internal val EXTRA_PASSWORD = "org.marques999.acme.store.extra.PASSWORD"
-
-    /**
-     */
     private val messageParams = mapOf(
         R.string.error_nif to NIF_LENGTH,
         R.string.error_card to CARD_MINIMUM,
@@ -31,23 +23,12 @@ object RegisterConstants {
 
     /**
      */
-    fun Activity.generateError(@StringRes resource: Int): String = messageParams[resource].let {
+    fun Fragment.generateError(resourceId: Int): String = messageParams[resourceId].let {
 
         if (it != null) {
-            getString(resource, it)
+            getString(resourceId, it)
         } else {
-            getString(resource)
-        }
-    }
-
-    /**
-     */
-    fun Fragment.generateError(@StringRes resource: Int): String = messageParams[resource].let {
-
-        if (it != null) {
-            getString(resource, it)
-        } else {
-            getString(resource)
+            getString(resourceId)
         }
     }
 

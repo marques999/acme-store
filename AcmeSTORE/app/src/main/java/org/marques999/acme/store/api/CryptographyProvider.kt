@@ -20,21 +20,14 @@ class CryptographyProvider(privatePem: String) {
 
     /**
      */
-    companion object {
-        private val CERTIFICATE_BEGIN = "-----BEGIN PRIVATE KEY-----"
-        private val CERTIFICATE_END = "-----END PRIVATE KEY-----"
-    }
-
-    /**
-     */
     private fun decodePem(privateKey: String): PrivateKey {
 
         val keyContent = privateKey.replace(
             "\\n", ""
         ).replaceFirst(
-            CERTIFICATE_BEGIN, ""
+            AcmeStore.CERTIFICATE_BEGIN, ""
         ).replaceFirst(
-            CERTIFICATE_END, ""
+            AcmeStore.CERTIFICATE_END, ""
         )
 
         return KeyFactory.getInstance(AcmeStore.ALGORITHM_PKCS).generatePrivate(
@@ -44,19 +37,7 @@ class CryptographyProvider(privatePem: String) {
 
     /**
      */
-    private fun encodeBase64(payload: ByteArray) = Base64.encodeToString(
-        payload, Base64.DEFAULT
+    fun signPayload(payload: String): String = Base64.encodeToString(
+        signature.apply { update(payload.toByteArray()) }.sign(), Base64.DEFAULT
     )
-
-    /**
-     */
-    fun signPayload(payload: String): String = encodeBase64(
-        signature.apply { update(payload.toByteArray()) }.sign()
-    )
-
-    /**
-     */
-    fun encodePrivate(privateKey: PrivateKey): String {
-        return "$CERTIFICATE_BEGIN\n${encodeBase64(privateKey.encoded)}$CERTIFICATE_END\n"
-    }
 }

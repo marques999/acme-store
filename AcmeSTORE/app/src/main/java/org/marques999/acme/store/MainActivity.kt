@@ -18,7 +18,6 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import kotlinx.android.synthetic.main.activity_main.*
 
 import org.marques999.acme.store.views.BottomNavigationAdapter
-import org.marques999.acme.store.views.BottomNavigationFragments
 import org.marques999.acme.store.views.cart.ShoppingCartFragment
 import org.marques999.acme.store.views.customer.ProfileFragment
 import org.marques999.acme.store.views.main.MainActivityListener
@@ -58,37 +57,29 @@ class MainActivity : AppCompatActivity(), MainActivityListener {
 
     override fun onNotify(messageId: MainActivityMessage, value: Any) {
 
-        if (messageId == MainActivityMessage.PURCHASE) {
+        if (messageId == MainActivityMessage.PURCHASE && value is Product) {
 
-            bottomNavigation.currentItem = BottomNavigationFragments.CART
+            bottomNavigation.currentItem = BottomNavigationAdapter.CART
 
             (bottomNavigationAdapter.getFragment(
-                BottomNavigationFragments.CART
-            ) as? ShoppingCartFragment)?.let {
-                it.registerPurchase(value as Product)
-            }
-        } else if (messageId == MainActivityMessage.CHECKOUT) {
+                BottomNavigationAdapter.CART
+            ) as? ShoppingCartFragment)?.registerPurchase(value)
+        } else if (messageId == MainActivityMessage.CHECKOUT && value is Order) {
 
-            value as Order
             OrderCheckoutDialog.newInstance(value.token).show(supportFragmentManager, "ocd")
-            bottomNavigation.currentItem = BottomNavigationFragments.HISTORY
+            bottomNavigation.currentItem = BottomNavigationAdapter.HISTORY
 
             (bottomNavigationAdapter.getFragment(
-                BottomNavigationFragments.HISTORY
-            ) as? OrderHistoryFragment)?.let {
-                it.registerOrder(value)
-            }
+                BottomNavigationAdapter.HISTORY
+            ) as? OrderHistoryFragment)?.registerOrder(value)
         }
     }
 
     /**
      */
     override fun onBackPressed() {
-
         AcmeDialogs.buildYesNo(this, R.string.main_logout,
-            DialogInterface.OnClickListener { _, _ ->
-                finish()
-            }
+            DialogInterface.OnClickListener { _, _ -> finish() }
         ).show()
     }
 
@@ -121,7 +112,7 @@ class MainActivity : AppCompatActivity(), MainActivityListener {
         bottomNavigation.isColored = true
         bottomNavigation.isBehaviorTranslationEnabled = false
         bottomNavigation.isTranslucentNavigationEnabled = true
-        bottomNavigation.currentItem = BottomNavigationFragments.CART
+        bottomNavigation.currentItem = BottomNavigationAdapter.CART
         bottomNavigation.titleState = AHBottomNavigation.TitleState.ALWAYS_SHOW
         bottomNavigation.accentColor = ContextCompat.getColor(this, R.color.colorAccent)
 
