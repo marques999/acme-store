@@ -16,7 +16,7 @@ class OrderHistoryAdapter(
 
     /**
      */
-    private val items = ArrayList<Order>()
+    val items = ArrayList<Order>()
 
     /**
      */
@@ -50,10 +50,17 @@ class OrderHistoryAdapter(
 
     /**
      */
+    fun prependItem(order: Order) {
+        items.add(0, order)
+        notifyItemInserted(0)
+    }
+
+    /**
+     */
     fun refreshItems(orders: List<Order>) {
         notifyItemRangeRemoved(0, items.size)
         items.clear()
         items.addAll(orders)
-        notifyItemRangeInserted(0, orders.size)
+        notifyItemRangeInserted(0, items.size)
     }
 }

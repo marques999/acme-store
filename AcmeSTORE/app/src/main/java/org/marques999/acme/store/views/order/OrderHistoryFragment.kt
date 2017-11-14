@@ -28,10 +28,10 @@ class OrderHistoryFragment : MainActivityFragment(R.layout.fragment_history), Or
     /**
      */
     private lateinit var progressDialog: ProgressDialog
+    private lateinit var orderHistory: OrderHistoryAdapter
 
     /**
      */
-    private val orders = ArrayList<Order>()
     private var mainActivityListener: MainActivityListener? = null
 
     /**
@@ -50,11 +50,8 @@ class OrderHistoryFragment : MainActivityFragment(R.layout.fragment_history), Or
 
     /**
      */
-    private fun onSuccess(adapter: OrderHistoryAdapter) = Consumer<List<Order>> {
-        orders.clear()
-        orders.addAll(it)
-        adapter.refreshItems(it)
-        progressDialog.dismiss()
+    private val onFetchOrders = Consumer<List<Order>> {
+        orderHistory.refreshItems(it)
         mainActivityListener?.onUpdateBadge(BottomNavigationAdapter.HISTORY, it.size)
     }
 
@@ -68,8 +65,10 @@ class OrderHistoryFragment : MainActivityFragment(R.layout.fragment_history), Or
             AndroidSchedulers.mainThread()
         ).subscribeOn(
             Schedulers.io()
-        ).subscribe(
-            onSuccess(orderHistory_container.adapter as OrderHistoryAdapter), Consumer {
+        ).subscribe({
+            progressDialog.dismiss()
+            onFetchOrders.accept(it)
+        }, {
             progressDialog.dismiss()
             HttpErrorHandler(context).accept(it)
         })
@@ -79,7 +78,7 @@ class OrderHistoryFragment : MainActivityFragment(R.layout.fragment_history), Or
      */
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
-        outState?.putParcelableArrayList(BUNDLE_ORDER, orders)
+        outState?.putParcelableArrayList(BUNDLE_ORDER, orderHistory.items)
     }
 
     /**
@@ -122,25 +121,22 @@ class OrderHistoryFragment : MainActivityFragment(R.layout.fragment_history), Or
             setHasFixedSize(true)
             layoutManager = GridLayoutManager(context, 2)
             clearOnScrollListeners()
-            adapter = OrderHistoryAdapter(this@OrderHistoryFragment)
+            orderHistory = OrderHistoryAdapter(this@OrderHistoryFragment)
+            adapter = orderHistory
         }
 
         if (savedInstanceState == null) {
             onRefresh()
         } else {
-            orders.clear()
-            orders.addAll(savedInstanceState.getParcelableArrayList(BUNDLE_ORDER))
-            mainActivityListener?.onUpdateBadge(BottomNavigationAdapter.HISTORY, orders.size)
-            (orderHistory_container.adapter as OrderHistoryAdapter).refreshItems(orders)
+            onFetchOrders.accept(savedInstanceState.getParcelableArrayList(BUNDLE_ORDER))
         }
     }
 
     /**
      */
-    fun registerOrder(order: Order) {
-        orders.add(0, order)
-        mainActivityListener?.onUpdateBadge(BottomNavigationAdapter.HISTORY, orders.size)
-        (orderHistory_container.adapter as OrderHistoryAdapter).refreshItems(orders)
+    fun registerOrder(order: Order) = orderHistory.apply {
+        prependItem(order)
+        mainActivityListener?.onUpdateBadge(BottomNavigationAdapter.HISTORY, items.size)
     }
 
     /**
