@@ -34,6 +34,7 @@ class OrderViewOrderAdapter : ViewTypeAdapter {
 
         fun bind(item: OrderJSON) {
             itemView.orderView_token.text = item.token
+            itemView.orderView_items.text = item.count.toString()
             itemView.orderView_orderTotal.text = AcmeUtils.formatCurrency(item.total)
             itemView.orderView_createdAt.text = AcmeUtils.formatDateTime(item.created_at)
             itemView.orderView_modifiedAt.text = AcmeUtils.formatDateTime(item.updated_at)

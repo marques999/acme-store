@@ -5,7 +5,7 @@ import android.os.Parcelable
 
 import java.util.Date
 
-class SessionJwt(val expire: Date, val token: String) : Parcelable {
+class SessionJwt(private val expire: Date, val token: String) : Parcelable {
 
     /**
      */

@@ -74,5 +74,4 @@ object AcmeUtils {
     fun formatDate(value: Date): String = dateFormat.format(value)
     fun formatDateTime(value: Date): String = dateTimeFormat.format(value)
     fun formatCurrency(value: Double): String = currencyFormat.format(value)
-    fun formatCountry(value: String) = Locale("", value).displayCountry ?: "Unknown"
 }

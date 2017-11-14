@@ -22,13 +22,13 @@
   <string name="cart_total">Sub-Total</string>
   <string name="customer_address1">Street</string>
   <string name="customer_address2">Postal</string>
-  <string name="customer_country">Country</string>
   <string name="customer_logout">LOGOUT</string>
   <string name="customer_name">Full Name</string>
   <string name="customer_nif">NIF</string>
   <string name="customer_password">Password</string>
   <string name="customer_edit">UPDATE PROFILE</string>
   <string name="customer_username">Username</string>
+  <string name="error_card">The credit card number must have at least %1$d digits.</string>
   <string name="error_expired">Your credit card has expired, please double check the expiration date!</string>
   <string name="error_mismatch">The passwords you entered do not match!</string>
   <string name="error_nif">The tax number must be exactly %1$d digits long.</string>
@@ -37,6 +37,7 @@
   <string name="error_required">This field is required.</string>
   <string name="error_username">Username must be at least %1$d characters long.</string>
   <string name="global_created">Created</string>
+  <string name="global_items">Items</string>
   <string name="global_loading">Loading…</string>
   <string name="global_refresh">Refresh</string>
   <string name="global_todo">TODO</string>

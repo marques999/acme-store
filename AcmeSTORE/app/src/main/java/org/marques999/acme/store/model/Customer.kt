@@ -10,7 +10,6 @@ class Customer(
     val username: String,
     val address1: String,
     val address2: String,
-    val country: String,
     val tax_number: String,
     val credit_card: CreditCard,
     val created_at: Date,
@@ -20,7 +19,6 @@ class Customer(
     /**
      */
     constructor(parcel: Parcel) : this(
-        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -38,7 +36,6 @@ class Customer(
         parcel.writeString(username)
         parcel.writeString(address1)
         parcel.writeString(address2)
-        parcel.writeString(country)
         parcel.writeString(tax_number)
         parcel.writeParcelable(credit_card, flags)
         parcel.writeLong(created_at.time)

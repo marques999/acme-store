@@ -52,14 +52,6 @@
       <TableRow style="@style/table_row">
         <TextView
           style="@style/row_header"
-          android:text="@string/customer_country" />
-        <TextView
-          android:id="@+id/profile_country"
-          style="@style/row_content" />
-      </TableRow>
-      <TableRow style="@style/table_row">
-        <TextView
-          style="@style/row_header"
           android:text="@string/global_created" />
         <TextView
           android:id="@+id/profile_created"

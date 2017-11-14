@@ -20,6 +20,14 @@
       <TableRow style="@style/table_row">
         <TextView
           style="@style/row_header"
+          android:text="@string/global_items" />
+        <TextView
+          android:id="@+id/orderView_items"
+          style="@style/row_content" />
+      </TableRow>
+      <TableRow style="@style/table_row">
+        <TextView
+          style="@style/row_header"
           android:text="@string/global_token" />
         <TextView
           android:id="@+id/orderView_token"

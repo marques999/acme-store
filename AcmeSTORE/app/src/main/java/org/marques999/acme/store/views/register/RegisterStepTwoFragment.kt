@@ -2,33 +2,28 @@ package org.marques999.acme.store.views.register
 
 import android.os.Bundle
 import android.content.Context
-import android.util.SparseArray
 import android.support.v4.app.Fragment
 
-import kotlinx.android.synthetic.main.fragment_register_step2.*
+import java.util.Calendar
 
 import android.view.View
 import android.view.ViewGroup
 import android.view.LayoutInflater
 
-import org.marques999.acme.store.R
-import org.marques999.acme.store.AcmeDialogs
-import org.marques999.acme.store.views.register.RegisterConstants.generateError
+import kotlinx.android.synthetic.main.fragment_register_step2.*
 
 import android.widget.DatePicker
 import android.widget.ArrayAdapter
 
-import java.util.Calendar
-import java.util.regex.Pattern
+import org.marques999.acme.store.R
+import org.marques999.acme.store.AcmeDialogs
+import org.marques999.acme.store.views.register.RegisterConstants.generateError
 
 class RegisterStepTwoFragment : Fragment(), DatePicker.OnDateChangedListener {
 
     /**
      */
-    private val validity = Calendar.getInstance()
-
-    /**
-     */
+    private var validity = Calendar.getInstance()
     private var stepTwoListener: RegisterStepTwoListener? = null
 
     /**
@@ -41,7 +36,7 @@ class RegisterStepTwoFragment : Fragment(), DatePicker.OnDateChangedListener {
      */
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        stepTwoListener = context as RegisterStepTwoListener
+        stepTwoListener = context as? RegisterStepTwoListener
     }
 
     /**
@@ -63,20 +58,15 @@ class RegisterStepTwoFragment : Fragment(), DatePicker.OnDateChangedListener {
 
     /**
      */
-    companion object {
-        private val amexRegex = Pattern.compile("^3[47][0-9]{1,13}$")
-        private val visaRegex = Pattern.compile("^4[0-9]{2,12}(?:[0-9]{3})?$")
-        private val masterCardRegex = Pattern.compile("^5[1-5][0-9]{1,14}$")
-    }
+    override fun onSaveInstanceState(outState: Bundle?) {
 
-    /**
-     */
-    private val creditCardRegex = SparseArray<Pattern>().apply {
-        put(0, visaRegex)
-        put(1, masterCardRegex)
-        put(2, masterCardRegex)
-        put(3, visaRegex)
-        put(4, amexRegex)
+        super.onSaveInstanceState(outState)
+
+        outState?.apply {
+            putSerializable(BUNDLE_CARD_VALIDITY, validity)
+            putInt(BUNDLE_CARD_TYPE, registerActivity_ccType.selectedItemPosition)
+            putString(BUNDLE_CARD_NUMBER, registerActivity_ccNumber.text.toString())
+        }
     }
 
     /**
@@ -84,6 +74,12 @@ class RegisterStepTwoFragment : Fragment(), DatePicker.OnDateChangedListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
 
         super.onActivityCreated(savedInstanceState)
+
+        savedInstanceState?.apply {
+            validity = getSerializable(BUNDLE_CARD_VALIDITY) as Calendar
+            registerActivity_ccNumber.setText(getString(BUNDLE_CARD_NUMBER))
+            registerActivity_ccType.setSelection(getInt(BUNDLE_CARD_TYPE))
+        }
 
         registerActivity_ccDate.init(
             validity.get(Calendar.YEAR),
@@ -96,13 +92,11 @@ class RegisterStepTwoFragment : Fragment(), DatePicker.OnDateChangedListener {
 
             if (validateForm()) {
 
-                stepTwoListener?.submitCustomer(
-                    mapOf(
-                        "validity" to validity,
-                        "type" to registerActivity_ccType.selectedItem.toString(),
-                        "number" to registerActivity_ccNumber.text.toString()
-                    )
-                )
+                stepTwoListener?.submitCustomer(mapOf(
+                    "validity" to validity,
+                    "type" to registerActivity_ccType.selectedItem.toString(),
+                    "number" to registerActivity_ccNumber.text.toString()
+                ))
             }
         }
 
@@ -125,22 +119,18 @@ class RegisterStepTwoFragment : Fragment(), DatePicker.OnDateChangedListener {
 
         var formValid = true
         val cardNumber = registerActivity_ccNumber.text.toString()
-        val cardType = registerActivity_ccType.selectedItemId.toInt()
 
         when {
             cardNumber.isEmpty() -> {
                 registerActivity_ccNumber.error = generateError(R.string.error_required)
                 formValid = false
             }
-            creditCardRegex[cardType].matcher(cardNumber).matches() -> {
-                registerActivity_ccNumber.error = null
+            RegisterConstants.invalidCard(cardNumber) -> {
+                formValid = false
+                registerActivity_ccNumber.error = generateError(R.string.error_card)
             }
             else -> {
-                formValid = false
-                registerActivity_ccNumber.error = getString(
-                    R.string.error_number,
-                    registerActivity_ccType.selectedItem.toString()
-                )
+                registerActivity_ccNumber.error = null
             }
         }
 
@@ -150,5 +140,13 @@ class RegisterStepTwoFragment : Fragment(), DatePicker.OnDateChangedListener {
         }
 
         return formValid
+    }
+
+    /**
+     */
+    companion object {
+        private val BUNDLE_CARD_TYPE = "org.marques999.acme.bundle.CARD_TYPE"
+        private val BUNDLE_CARD_NUMBER = "org.marques999.acme.bundle.CARD_NUMBER"
+        private val BUNDLE_CARD_VALIDITY = "org.marques999.acme.bundle.CARD_VALIDITY"
     }
 }

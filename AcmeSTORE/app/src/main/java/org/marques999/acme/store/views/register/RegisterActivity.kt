@@ -97,8 +97,8 @@ class RegisterActivity : BackButtonActivity(), RegisterStepOneListener, Register
     /**
      */
     private fun onRegisterFailed(next: Consumer<Throwable>) = Consumer<Throwable> {
-        progressDialog.dismiss()
         registerActivity_register.isEnabled = true
+        progressDialog.dismiss()
         next.accept(it)
     }
 
@@ -113,7 +113,6 @@ class RegisterActivity : BackButtonActivity(), RegisterStepOneListener, Register
         progressDialog = AcmeDialogs.buildProgress(this, R.string.login_progress)
         changeFragment(registerStepOne, false)
     }
-
 
     /**
      */

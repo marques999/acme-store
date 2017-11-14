@@ -10,7 +10,6 @@ class OrderJSON(
     val created_at: Date,
     val customer: Customer,
     val products: List<OrderProduct>,
-    val status: Int,
     val token: String,
     val total: Double,
     val updated_at: Date
@@ -23,7 +22,6 @@ class OrderJSON(
         Date(parcel.readLong()),
         parcel.readParcelable(Customer::class.java.classLoader),
         parcel.createTypedArrayList(OrderProduct),
-        parcel.readInt(),
         parcel.readString(),
         parcel.readDouble(),
         Date(parcel.readLong())
@@ -36,7 +34,6 @@ class OrderJSON(
         parcel.writeLong(created_at.time)
         parcel.writeParcelable(customer, flags)
         parcel.writeTypedList(products)
-        parcel.writeInt(status)
         parcel.writeString(token)
         parcel.writeDouble(total)
         parcel.writeLong(updated_at.time)

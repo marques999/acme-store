@@ -19,16 +19,18 @@ import java.util.ArrayList
 
 class ShoppingCartAdapter(
     private val shoppingCart: CustomerCart,
-    private val listener: ShoppingCartListener
+    private val shoppingCartListener: ShoppingCartListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     /**
      */
-    override fun getItemCount(): Int = hashItems.size
+    override fun getItemCount(): Int = items.size
 
     /**
      */
-    private val hashItems = ArrayList<OrderProduct>(shoppingCart.getProducts())
+    private val items = ArrayList<OrderProduct>(shoppingCart.getProducts()).apply {
+        notifyItemRangeInserted(0, size)
+    }
 
     /**
      */
@@ -39,7 +41,7 @@ class ShoppingCartAdapter(
     /**
      */
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as ShoppingCartViewHolder).bind(hashItems[position])
+        (holder as ShoppingCartViewHolder).bind(items[position])
     }
 
     /**
@@ -55,7 +57,7 @@ class ShoppingCartAdapter(
             itemView.product_container.setOnClickListener {
 
                 shoppingCart[itemBarcode]?.let {
-                    listener.onItemSelected(it.product)
+                    shoppingCartListener.onItemSelected(it.product)
                 }
             }
 
@@ -63,7 +65,7 @@ class ShoppingCartAdapter(
 
                 shoppingCart.delete(itemBarcode)?.let {
                     deleteItem(it)
-                    listener.onItemChanged()
+                    shoppingCartListener.onItemChanged()
                 }
             }
 
@@ -95,8 +97,8 @@ class ShoppingCartAdapter(
      */
     fun clearItems() {
         shoppingCart.checkout()
-        notifyItemRangeRemoved(0, hashItems.size)
-        listener.onItemChanged()
+        notifyItemRangeRemoved(0, items.size)
+        shoppingCartListener.onItemChanged()
     }
 
     /**
@@ -104,8 +106,8 @@ class ShoppingCartAdapter(
     private fun updateItem(barcode: String, delta: Int) {
 
         shoppingCart.update(barcode, delta)?.let {
-            notifyItemChanged(hashItems.indexOf(it))
-            listener.onItemChanged()
+            notifyItemChanged(items.indexOf(it))
+            shoppingCartListener.onItemChanged()
         }
     }
 
@@ -113,8 +115,8 @@ class ShoppingCartAdapter(
      */
     private fun deleteItem(orderProduct: OrderProduct) {
 
-        hashItems.indexOf(orderProduct).let {
-            hashItems.removeAt(it)
+        items.indexOf(orderProduct).let {
+            items.removeAt(it)
             notifyItemRemoved(it)
         }
     }
@@ -128,9 +130,9 @@ class ShoppingCartAdapter(
         }
 
         shoppingCart.insert(product).let {
-            hashItems.add(it)
-            notifyItemInserted(hashItems.lastIndex)
-            listener.onItemChanged()
+            items.add(it)
+            notifyItemInserted(items.lastIndex)
+            shoppingCartListener.onItemChanged()
         }
     }
 }

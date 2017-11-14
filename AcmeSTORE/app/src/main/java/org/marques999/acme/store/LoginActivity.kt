@@ -5,10 +5,8 @@ import android.content.Intent
 import android.app.ProgressDialog
 import android.support.v7.app.AppCompatActivity
 
-import org.marques999.acme.store.model.SessionJwt
 import org.marques999.acme.store.model.Authentication
 
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.android.schedulers.AndroidSchedulers
 
@@ -29,6 +27,12 @@ class LoginActivity : AppCompatActivity() {
 
     /**
      */
+    private fun launchMain() = Intent(this, MainActivity::class.java).run {
+        startActivity(addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+    }
+
+    /**
+     */
     private fun authenticate(
         username: String,
         password: String
@@ -38,39 +42,16 @@ class LoginActivity : AppCompatActivity() {
         AndroidSchedulers.mainThread()
     ).subscribeOn(
         Schedulers.io()
-    ).subscribe(
-        onLoginCompleted(username),
-        onLoginFailed(HttpErrorHandler(this))
-    )
-
-    /**
-     */
-    private fun onLoginCompleted(username: String) = Consumer<SessionJwt> {
-
+    ).subscribe({
         progressDialog.dismiss()
         loginActivity_login.isEnabled = true
         (application as AcmeStore).initializeApi(username, it)
-
-        Intent(this, MainActivity::class.java).let {
-            startActivity(it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
-        }
-    }
-
-    /**
-     */
-    private fun onLoginFailed(next: Consumer<Throwable>) = Consumer<Throwable> {
+        launchMain()
+    }, {
         progressDialog.dismiss()
         loginActivity_login.isEnabled = true
-        next.accept(it)
-    }
-
-    /**
-     */
-    private fun authenticateCustomer() {
-        loginActivity_login.isEnabled = false
-        progressDialog.show()
-        authenticate(loginActivity_username.text.toString(), loginActivity_password.text.toString())
-    }
+        HttpErrorHandler(this).accept(it)
+    })
 
     /**
      */
@@ -92,20 +73,34 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         progressDialog = AcmeDialogs.buildProgress(this, R.string.login_progress)
 
-        loginActivity_register.setOnClickListener {
+        loginActivity_login.setOnClickListener {
 
-            Intent(applicationContext, RegisterActivity::class.java).let {
-                startActivityForResult(
-                    it,
-                    AcmeStore.REQUEST_REGISTER
-                )
+            var formValid = true
+
+            if (loginActivity_username.text.toString().isEmpty()) {
+                loginActivity_username.error = generateError(R.string.error_required)
+                formValid = false
+            } else {
+                loginActivity_username.error = null
+            }
+
+            if (loginActivity_password.text.toString().isEmpty()) {
+                loginActivity_password.error = generateError(R.string.error_required)
+                formValid = false
+            } else {
+                loginActivity_password.error = null
+            }
+
+            if (formValid) {
+                loginActivity_login.isEnabled = false
+                progressDialog.show()
+                authenticate(loginActivity_username.text.toString(), loginActivity_password.text.toString())
             }
         }
 
-        loginActivity_login.setOnClickListener {
-
-            if (validateForm()) {
-                authenticateCustomer()
+        loginActivity_register.setOnClickListener {
+            Intent(applicationContext, RegisterActivity::class.java).let {
+                startActivityForResult(it, AcmeStore.REQUEST_REGISTER)
             }
         }
 
@@ -113,30 +108,5 @@ class LoginActivity : AppCompatActivity() {
             loginActivity_username.setText(it.username)
             loginActivity_password.setText(it.password)
         }
-    }
-
-    /**
-     */
-    private fun validateForm(): Boolean {
-
-        var formValid = true
-
-        if (loginActivity_username.text.toString().isEmpty()) {
-            loginActivity_username.error = generateError(R.string.error_required)
-            formValid = false
-        }
-        else {
-            loginActivity_username.error = null
-        }
-
-        if (loginActivity_password.text.toString().isEmpty()) {
-            loginActivity_password.error = generateError(R.string.error_required)
-            formValid = false
-        }
-        else {
-            loginActivity_password.error = null
-        }
-
-        return formValid
     }
 }

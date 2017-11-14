@@ -42,6 +42,7 @@ class OrderHistoryAdapter(
 
         fun bind(item: Order) {
             itemView.orderHistory_token.text = item.token
+            itemView.orderHistory_total.text = AcmeUtils.formatCurrency(item.total)
             itemView.orderHistory_date.text = AcmeUtils.formatDateTime(item.created_at)
             itemView.setOnClickListener { listener.onItemSelected(item.token) }
         }

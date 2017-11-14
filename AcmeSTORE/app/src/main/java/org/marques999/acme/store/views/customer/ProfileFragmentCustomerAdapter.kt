@@ -39,7 +39,6 @@ class ProfileFragmentCustomerAdapter : ViewTypeAdapter {
             itemView.profile_address1.text = item.address1
             itemView.profile_address2.text = item.address2
             itemView.profile_username.text = item.username
-            itemView.profile_country.text = AcmeUtils.formatCountry(item.country)
             itemView.profile_created.text = AcmeUtils.formatDateTime(item.created_at)
             itemView.profile_updated.text = AcmeUtils.formatDateTime(item.updated_at)
         }

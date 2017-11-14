@@ -142,8 +142,8 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
         ).subscribeOn(
             Schedulers.io()
         ).subscribe({
-            registerPurchase(it)
             progressDialog.dismiss()
+            registerPurchase(it)
         }, {
             progressDialog.dismiss()
             HttpErrorHandler(context).accept(it)
@@ -174,11 +174,11 @@ class ShoppingCartFragment : MainActivityFragment(R.layout.fragment_cart), Shopp
         super.onActivityCreated(savedInstanceState)
 
         shoppingCart_recyclerView.apply {
+            setHasFixedSize(false)
             layoutManager = LinearLayoutManager(context)
             clearOnScrollListeners()
             adapter = ShoppingCartAdapter(shoppingCart, this@ShoppingCartFragment)
             onItemChanged()
-            setHasFixedSize(true)
         }
 
         shoppingCart_scan.setOnClickListener {

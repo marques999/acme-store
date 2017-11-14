@@ -8,7 +8,6 @@ class CustomerJSON : ViewType {
     lateinit var username: String
     lateinit var address1: String
     lateinit var address2: String
-    lateinit var country: String
     lateinit var tax_number: String
     lateinit var credit_card: CreditCardJSON
     lateinit var created_at: java.util.Date
