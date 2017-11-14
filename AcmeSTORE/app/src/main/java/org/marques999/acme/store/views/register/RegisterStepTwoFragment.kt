@@ -58,28 +58,9 @@ class RegisterStepTwoFragment : Fragment(), DatePicker.OnDateChangedListener {
 
     /**
      */
-    override fun onSaveInstanceState(outState: Bundle?) {
-
-        super.onSaveInstanceState(outState)
-
-        outState?.apply {
-            putSerializable(BUNDLE_CARD_VALIDITY, validity)
-            putInt(BUNDLE_CARD_TYPE, registerActivity_ccType.selectedItemPosition)
-            putString(BUNDLE_CARD_NUMBER, registerActivity_ccNumber.text.toString())
-        }
-    }
-
-    /**
-     */
     override fun onActivityCreated(savedInstanceState: Bundle?) {
 
         super.onActivityCreated(savedInstanceState)
-
-        savedInstanceState?.apply {
-            validity = getSerializable(BUNDLE_CARD_VALIDITY) as Calendar
-            registerActivity_ccNumber.setText(getString(BUNDLE_CARD_NUMBER))
-            registerActivity_ccType.setSelection(getInt(BUNDLE_CARD_TYPE))
-        }
 
         registerActivity_ccDate.init(
             validity.get(Calendar.YEAR),
@@ -140,13 +121,5 @@ class RegisterStepTwoFragment : Fragment(), DatePicker.OnDateChangedListener {
         }
 
         return formValid
-    }
-
-    /**
-     */
-    companion object {
-        private val BUNDLE_CARD_TYPE = "org.marques999.acme.bundles.CARD_TYPE"
-        private val BUNDLE_CARD_NUMBER = "org.marques999.acme.bundles.CARD_NUMBER"
-        private val BUNDLE_CARD_VALIDITY = "org.marques999.acme.bundles.CARD_VALIDITY"
     }
 }

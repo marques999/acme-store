@@ -45,34 +45,9 @@ class RegisterStepOneFragment : Fragment() {
 
     /**
      */
-    override fun onSaveInstanceState(outState: Bundle?) {
-
-        super.onSaveInstanceState(outState)
-
-        outState?.putStringArrayList(BUNDLE_REGISTER1, arrayListOf(
-            registerActivity_nif.text.toString(),
-            registerActivity_name.text.toString(),
-            registerActivity_address1.text.toString(),
-            registerActivity_address2.text.toString(),
-            registerActivity_password.text.toString(),
-            registerActivity_username.text.toString()
-        ))
-    }
-
-    /**
-     */
     override fun onActivityCreated(savedInstanceState: Bundle?) {
 
         super.onActivityCreated(savedInstanceState)
-
-        savedInstanceState?.getStringArrayList(BUNDLE_REGISTER1)?.let {
-            registerActivity_nif.setText(it[0])
-            registerActivity_name.setText(it[1])
-            registerActivity_address1.setText(it[2])
-            registerActivity_address2.setText(it[3])
-            registerActivity_password.setText(it[4])
-            registerActivity_username.setText(it[5])
-        }
 
         registerActivity_next.setOnClickListener {
 
@@ -191,9 +166,5 @@ class RegisterStepOneFragment : Fragment() {
         }
 
         return formValid
-    }
-
-    companion object {
-        private val BUNDLE_REGISTER1 = "org.marques999.acme.bundles.REGISTER1"
     }
 }
