@@ -6,14 +6,19 @@
   <android.support.v7.widget.ActionBarContainer
     android:layout_width="match_parent"
     android:layout_height="wrap_content" />
-  <org.marques999.acme.store.views.SwipelessPager
-    android:id="@+id/main_viewPager"
+  <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-  <com.aurelhubert.ahbottomnavigation.AHBottomNavigation
-    android:id="@+id/main_bottomNavigation"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="bottom" />
+    android:layout_height="match_parent">
+    <android.support.v4.view.ViewPager
+      android:id="@+id/main_viewPager"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_above="@+id/main_bottomNavigation"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    <com.aurelhubert.ahbottomnavigation.AHBottomNavigation
+      android:id="@+id/main_bottomNavigation"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true" />
+  </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

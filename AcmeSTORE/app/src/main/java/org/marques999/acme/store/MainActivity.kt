@@ -3,6 +3,7 @@ package org.marques999.acme.store
 import android.os.Bundle
 import android.content.DialogInterface
 import android.support.v4.content.ContextCompat
+import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 
 import org.marques999.acme.store.model.Order
@@ -64,7 +65,6 @@ class MainActivity : AppCompatActivity(), MainActivityListener {
             (bottomNavigationAdapter.getFragment(
                 BottomNavigationFragments.CART
             ) as? ShoppingCartFragment)?.let {
-                bottomNavigation.restoreBottomNavigation(true)
                 it.registerPurchase(value as Product)
             }
         } else if (messageId == MainActivityMessage.CHECKOUT) {
@@ -76,7 +76,6 @@ class MainActivity : AppCompatActivity(), MainActivityListener {
             (bottomNavigationAdapter.getFragment(
                 BottomNavigationFragments.HISTORY
             ) as? OrderHistoryFragment)?.let {
-                bottomNavigation.restoreBottomNavigation(true)
                 it.registerOrder(value)
             }
         }
@@ -120,8 +119,9 @@ class MainActivity : AppCompatActivity(), MainActivityListener {
         bottomNavigationAdapter.addFragments(ProfileFragment())
         main_viewPager.adapter = bottomNavigationAdapter
         bottomNavigation.isColored = true
-        bottomNavigation.currentItem = BottomNavigationFragments.CART
+        bottomNavigation.isBehaviorTranslationEnabled = false
         bottomNavigation.isTranslucentNavigationEnabled = true
+        bottomNavigation.currentItem = BottomNavigationFragments.CART
         bottomNavigation.titleState = AHBottomNavigation.TitleState.ALWAYS_SHOW
         bottomNavigation.accentColor = ContextCompat.getColor(this, R.color.colorAccent)
 
@@ -153,6 +153,16 @@ class MainActivity : AppCompatActivity(), MainActivityListener {
             R.drawable.ic_person_24dp,
             R.color.colorPrimaryDark
         ))
+
+        main_viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+
+            override fun onPageSelected(position: Int) {
+                bottomNavigation.currentItem = position
+            }
+
+            override fun onPageScrollStateChanged(state: Int) = Unit
+            override fun onPageScrolled(position: Int, offset: Float, offsetPixels: Int) = Unit
+        })
 
         bottomNavigation.setOnTabSelectedListener { position, selected ->
 

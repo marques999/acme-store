@@ -115,7 +115,7 @@ class OrderHistoryFragment : MainActivityFragment(R.layout.fragment_history), Or
         super.onActivityCreated(savedInstanceState)
 
         orderHistory_container.apply {
-            setHasFixedSize(false)
+            setHasFixedSize(true)
             layoutManager = GridLayoutManager(context, 2)
             clearOnScrollListeners()
             adapter = OrderHistoryAdapter(this@OrderHistoryFragment)
