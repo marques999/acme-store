@@ -27,11 +27,11 @@ class OrderHistoryFragment : MainActivityFragment(R.layout.fragment_history), Or
 
     /**
      */
-    private lateinit var orders: ArrayList<Order>
     private lateinit var progressDialog: ProgressDialog
 
     /**
      */
+    private val orders = ArrayList<Order>()
     private var mainActivityListener: MainActivityListener? = null
 
     /**
@@ -51,7 +51,8 @@ class OrderHistoryFragment : MainActivityFragment(R.layout.fragment_history), Or
     /**
      */
     private fun onSuccess(adapter: OrderHistoryAdapter) = Consumer<List<Order>> {
-        orders = ArrayList(it)
+        orders.clear()
+        orders.addAll(it)
         adapter.refreshItems(it)
         progressDialog.dismiss()
         mainActivityListener?.onUpdateBadge(BottomNavigationAdapter.HISTORY, it.size)
@@ -127,7 +128,8 @@ class OrderHistoryFragment : MainActivityFragment(R.layout.fragment_history), Or
         if (savedInstanceState == null) {
             onRefresh()
         } else {
-            orders = savedInstanceState.getParcelableArrayList(BUNDLE_ORDER)
+            orders.clear()
+            orders.addAll(savedInstanceState.getParcelableArrayList(BUNDLE_ORDER))
             mainActivityListener?.onUpdateBadge(BottomNavigationAdapter.HISTORY, orders.size)
             (orderHistory_container.adapter as OrderHistoryAdapter).refreshItems(orders)
         }
