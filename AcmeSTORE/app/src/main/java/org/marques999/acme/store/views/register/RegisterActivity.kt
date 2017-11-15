@@ -36,7 +36,12 @@ class RegisterActivity : BackButtonActivity(), RegisterStepOneListener, Register
     /**
      */
     private val customer = HashMap<String, Any>()
-    private val keyPair = KeyPairGenerator.getInstance("RSA").genKeyPair()
+
+    /**
+     */
+    private val keyPair = KeyPairGenerator.getInstance("RSA").apply {
+        initialize(368)
+    }.genKeyPair()
 
     /**
      */
