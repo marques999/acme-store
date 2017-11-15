@@ -109,7 +109,7 @@ class AcmeStore : Application() {
         val ALGORITHM_PKCS = "RSA"
         val ALGORITHM_HASH = "SHA1WithRSA"
         val ZXING_ACTIVITY = "$ZXING_PACKAGE.SCAN"
-        val SERVER_URL = "http://192.168.1.87:3333/"
+        val SERVER_URL = "http://2.80.199.187:3333/"
         val ZXING_URL = "market://details?id=$ZXING_PACKAGE"
         val CERTIFICATE_END = "-----END PRIVATE KEY-----"
         val CERTIFICATE_BEGIN = "-----BEGIN PRIVATE KEY-----"

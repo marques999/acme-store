@@ -19,18 +19,14 @@ object AcmeUtils {
 
     /**
      */
-    private val applicationLocale = Locale("pt", "PT")
-
-    /**
-     */
     private val dateFormat = DateFormat.getDateInstance(
-        DateFormat.MEDIUM, applicationLocale
+        DateFormat.MEDIUM, Locale.getDefault()
     )
 
     /**
      */
     private val dateTimeFormat = DateFormat.getDateTimeInstance(
-        DateFormat.MEDIUM, DateFormat.MEDIUM, applicationLocale
+        DateFormat.MEDIUM, DateFormat.MEDIUM, Locale.getDefault()
     )
 
     /**

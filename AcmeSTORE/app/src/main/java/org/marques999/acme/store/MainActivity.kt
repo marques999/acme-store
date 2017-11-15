@@ -75,7 +75,9 @@ class MainActivity : AppCompatActivity(), MainActivityListener {
      */
     override fun onBackPressed() {
         AcmeDialogs.buildYesNo(this, R.string.main_logout,
-            DialogInterface.OnClickListener { _, _ -> finish() }
+            DialogInterface.OnClickListener { _, _ ->
+                (application as AcmeStore).shoppingCart.checkout()
+                finish() }
         ).show()
     }
 
