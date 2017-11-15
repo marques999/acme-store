@@ -55,7 +55,7 @@ class AcmePrinter : android.app.Application() {
 
     companion object {
 
-        val SERVER_URL = "http://192.168.1.87:3333/"
+        val SERVER_URL = "http://2.80.199.187:3333/"
         val ZXING_ACTIVITY = "com.google.zxing.client.android.SCAN"
         val ZXING_URL = "market://details?id=com.google.zxing.client.android"
 
